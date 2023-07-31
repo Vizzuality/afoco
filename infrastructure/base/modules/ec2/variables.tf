@@ -7,3 +7,8 @@ variable "ec2_instance_name" {
   type        = string
   description = "The name of the EC2 instance"
 }
+
+variable "ec2_ecr_profile" {
+  type        = string
+  description = "The name of the EC2 instance profile"
+}

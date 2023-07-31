@@ -15,5 +15,4 @@ variable "environment" {
 variable "ec2_instance_type" {
   type        = string
   description = "The type of EC2 instance to launch"
-  default     = "t3a.small"
 }

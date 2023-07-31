@@ -13,18 +13,38 @@ data "aws_ami" "latest_ubuntu_lts" {
   }
 }
 
+data "aws_vpc" "default" {
+  default = true
+}
+
 resource "aws_instance" "web" {
   ami           = data.aws_ami.latest_ubuntu_lts.id
   instance_type = var.ec2_instance_type
+
+  root_block_device {
+    volume_size = 8
+  }
+
+  vpc_security_group_ids = [
+    module.ec2_http_sg.security_group_id,
+    module.ec2_ssh_sg.security_group_id
+  ]
+  iam_instance_profile = var.ec2_ecr_profile
+
   tags = {
     Name = var.ec2_instance_name
   }
+
+  key_name                = "${var.ec2_instance_name}-key"
+  monitoring              = true
+  disable_api_termination = false
+  ebs_optimized           = true
 }
 
-module "ssh_sg" {
+module "ec2_ssh_sg" {
   source = "terraform-aws-modules/security-group/aws"
 
-  name        = "dev_ssh_sg"
+  name        = "ec2_ssh_sg"
   description = "Security group for dev SSH access"
   vpc_id      = data.aws_vpc.default.id
 
@@ -32,10 +52,10 @@ module "ssh_sg" {
   ingress_rules       = ["ssh-tcp"]
 }
 
-module "http_sg" {
+module "ec2_http_sg" {
   source = "terraform-aws-modules/security-group/aws"
 
-  name        = "http_sg"
+  name        = "ec2_http_sg"
   description = "Security group for HTTP access"
   vpc_id      = data.aws_vpc.default.id
 
