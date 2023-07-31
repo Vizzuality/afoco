@@ -1,6 +1,10 @@
 module "ecr" {
   source   = "../ecr"
-  ecr_name = "${var.project_name}-${var.environment}-image-repository"
+  ecr_name = "${var.project_name}-${var.environment}"
+  ecr_tags = {
+    project     = var.project_name,
+    environment = var.environment
+  }
 }
 
 module "ec2" {

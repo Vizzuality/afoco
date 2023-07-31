@@ -16,7 +16,7 @@ variable "encrypt_type" {
   default     = "KMS"
 }
 
-variable "tags" {
+variable "ecr_tags" {
   description = "The key-value maps for tagging"
   type        = map(string)
   default     = {}
