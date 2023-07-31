@@ -7,53 +7,41 @@ module "ecr" {
   }
 }
 
-# module "ec2" {
-#   source            = "../ec2"
-#   ec2_instance_type = var.ec2_instance_type
-#   ec2_instance_name = "${var.project_name}-${var.environment}"
-#   ec2_ecr_profile   = module.iam.ec2_ecr_profile
+# TODO: idea is to replace this with elastic beanstalk
+# resource "aws_security_group" "postgresql_access" {
+#   vpc_id      = var.vpc.id
+#   description = "SG allowing access to the Postgres SG"
+
+#   tags = merge(
+#     {
+#       Name = "EC2 SG to access RDS - ${var.environment}"
+#     },
+#     var.tags
+#   )
 # }
 
-# module "iam" {
-#   source       = "../iam"
-#   project_name = var.project_name
-#   environment  = var.environment
+# resource "aws_security_group_rule" "port_forward_postgres" {
+#   type                     = "egress"
+#   from_port                = module.postgresql.port
+#   to_port                  = module.postgresql.port
+#   protocol                 = "-1"
+#   source_security_group_id = module.postgresql.security_group_id
+#   security_group_id        = aws_security_group.postgresql_access.id
 # }
 
-resource "aws_security_group" "postgresql_access" {
-  vpc_id      = var.vpc.id
-  description = "SG allowing access to the Postgres SG"
-
-  tags = merge(
-    {
-      Name = "EC2 SG to access RDS - ${var.environment}"
-    },
-    var.tags
-  )
-}
-
-resource "aws_security_group_rule" "port_forward_postgres" {
-  type                     = "egress"
-  from_port                = module.postgresql.port
-  to_port                  = module.postgresql.port
-  protocol                 = "-1"
-  source_security_group_id = module.postgresql.security_group_id
-  security_group_id        = aws_security_group.postgresql_access.id
-}
-
-module "server" {
-  source                    = "../server"
-  project                   = var.project_name
-  environment               = var.environment
-  region                    = var.aws_region
-  tags                      = var.tags
-  vpc                       = var.vpc
-  user_data                 = var.ec2_user_data
-  site_server_ami           = var.ec2_ami
-  availability_zone         = var.availability_zones[0]
-  security_group_ids        = [aws_security_group.postgresql_access.id]
-  site_server_instance_type = var.ec2_instance_type
-}
+# module "server" {
+#   source                    = "../server"
+#   project                   = var.project_name
+#   environment               = var.environment
+#   region                    = var.aws_region
+#   tags                      = var.tags
+#   vpc                       = var.vpc
+#   user_data                 = var.ec2_user_data
+#   site_server_ami           = var.ec2_ami
+#   availability_zone         = var.availability_zones[0]
+#   security_group_ids        = [aws_security_group.postgresql_access.id]
+#   site_server_instance_type = var.ec2_instance_type
+# }
 
 module "postgresql" {
   source = "../postgresql"
@@ -73,4 +61,23 @@ module "postgresql" {
   vpc_cidr_block              = var.vpc.cidr_block
   availability_zones          = var.availability_zones
   database_name               = var.project_name
+}
+
+module "beanstalk" {
+  source = "../beanstalk"
+  # project_name                 = var.project_name
+  # environment                  = var.environment
+  # domain                       = var.domain
+  application_name             = "${var.project_name}-${var.environment}"
+  application_environment      = "${var.project_name}-${var.environment}-environment"
+  application_deploy_s3_bucket = "${var.project_name}-${var.environment}-beanstalk-deployment"
+  solution_stack_name          = "64bit Amazon Linux 2 v3.6.0 running Docker" # TODO: remove hardcoding, and probably this needs to be multidocker
+  tier                         = "WebServer"
+  # vpc_id                       = data.aws_vpc.default.id
+  # public_subnets               = data.aws_subnets.default.ids # TODO: no idea what I'm doing
+  # elb_public_subnets           = data.aws_subnets.default.ids # TODO: no idea what I'm doing
+  vpc_id             = var.vpc.id
+  public_subnets     = var.subnet_ids
+  elb_public_subnets = var.subnet_ids
+  ec2_instance_type  = var.ec2_instance_type
 }

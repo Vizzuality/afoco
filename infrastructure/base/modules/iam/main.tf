@@ -1,3 +1,4 @@
+# TODO: not sure this will be needed, this was supposed to be for fetching images from ECR onto EC2
 resource "aws_iam_role" "ec2_ecr_role" {
   name = "${var.project_name}-${var.environment}-ec2_ecr_role"
 
