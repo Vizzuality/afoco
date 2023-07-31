@@ -1,23 +1,23 @@
 variable "ecr_name" {
-    description = "The name of the ECR registry"
-    type = any
-    default = null
+  description = "The name of the ECR registry"
+  type        = string
+  default     = null
 }
 
 variable "image_mutability" {
-    description = "Provide image mutability"
-    type = string
-    default = "IMMUTABLE"
+  description = "Provide image mutability"
+  type        = string
+  default     = "IMMUTABLE"
 }
 
 variable "encrypt_type" {
-    description = "Provide type of encryption"
-    type = string
-    default = "KMS"
+  description = "Provide type of encryption"
+  type        = string
+  default     = "KMS"
 }
 
 variable "tags" {
-    description = "The key-value maps for tagging"
-    type = map(string)
-    default = {}
+  description = "The key-value maps for tagging"
+  type        = map(string)
+  default     = {}
 }

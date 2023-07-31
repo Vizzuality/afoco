@@ -1,7 +1,7 @@
 variable "aws_region" {
   type        = string
   description = "AWS region"
-  default     = "ap-northeast-2"
+  default     = "us-east-1"
 }
 
 variable "allowed_account_id" {
@@ -15,8 +15,10 @@ variable "project_name" {
   default     = "vizz"
 }
 
-variable "ecr_name" {
-  description = "The list of ect names to create"
-  type = list(string)
-  default = null
+variable "staging_domain" {
+  type = string
+}
+
+variable "production_domain" {
+  type = string
 }
