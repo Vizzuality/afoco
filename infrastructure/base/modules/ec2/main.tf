@@ -17,6 +17,19 @@ data "aws_vpc" "default" {
   default = true
 }
 
+resource "aws_key_pair" "tf-key-pair" {
+  key_name   = "${var.ec2_instance_name}-key"
+  public_key = tls_private_key.rsa.public_key_openssh
+}
+resource "tls_private_key" "rsa" {
+  algorithm = "RSA"
+  rsa_bits  = 4096
+}
+resource "local_file" "tf-key" {
+  content  = tls_private_key.rsa.private_key_pem
+  filename = "tf-key-pair"
+}
+
 resource "aws_instance" "web" {
   ami           = data.aws_ami.latest_ubuntu_lts.id
   instance_type = var.ec2_instance_type
@@ -35,7 +48,7 @@ resource "aws_instance" "web" {
     Name = var.ec2_instance_name
   }
 
-  key_name                = "${var.ec2_instance_name}-key"
+  key_name                = aws_key_pair.tf-key-pair.key_name
   monitoring              = true
   disable_api_termination = false
   ebs_optimized           = true
