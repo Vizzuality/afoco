@@ -19,9 +19,10 @@
                 "kms:RetireGrant"
             ],
             "Resource": [
-                "arn:aws:dynamodb:*:{accountId}:table/*",
-                "arn:aws:s3:::*",
-                "arn:aws:ecr:::*"
+                "arn:aws:s3:::afoco-tfstate/*",
+                "arn:aws:s3:::afoco-tfstate",
+                "arn:aws:dynamodb:{region}:{accountId}:table/afoco-tfstate-lock",
+                "arn:aws:ecr:{region}:{accountId}:*"
             ]
         }
     ]
