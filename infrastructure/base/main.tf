@@ -17,8 +17,9 @@ provider "aws" {
 }
 
 module "staging" {
-  source       = "./modules/env"
-  domain       = var.staging_domain
-  project_name = var.project_name
-  environment  = "staging"
+  source            = "./modules/env"
+  domain            = var.staging_domain
+  project_name      = var.project_name
+  environment       = "staging"
+  ec2_instance_type = var.ec2_instance_type
 }
