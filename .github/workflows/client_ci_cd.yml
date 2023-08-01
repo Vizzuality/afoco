@@ -11,7 +11,7 @@ jobs:
   deploy:
     name: Deploy Client app
 #    if: (github.head_ref || github.ref_name) == 'main' || (github.head_ref || github.ref_name) == 'staging'
-#    if: (github.head_ref || github.ref_name) == 'staging'
+    if: (github.head_ref || github.ref_name) == 'staging'
     runs-on: ubuntu-latest
 
     steps:
