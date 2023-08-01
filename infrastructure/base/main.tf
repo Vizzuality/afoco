@@ -2,11 +2,11 @@ terraform {
   backend "s3" {
     // TF does not allow vars here.
     // Use output state_bucket or "{var.project_name}-tfstate" from the state project
-    bucket = "afoco-tfstate"
+    bucket = "afoco-terraform-state"
     // Use var.aws_region from the state project
-    region = "us-east-1"
+    region = "ap-northeast-2"
     // Use output state_lock_table or "{var.project_name}-tfstate-lock" from the state project
-    dynamodb_table = "afoco-tfstate-lock"
+    dynamodb_table = "afoco-terraform-state-lock"
     encrypt        = true
     key            = "state"
   }

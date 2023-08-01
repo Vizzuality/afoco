@@ -12,7 +12,7 @@ provider "aws" {
 }
 
 resource "aws_s3_bucket" "state" {
-  bucket = "${var.project_name}-tfstate"
+  bucket = "${var.project_name}-terraform-state"
 }
 
 resource "aws_s3_bucket_ownership_controls" "state" {
@@ -41,7 +41,7 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "state" {
 }
 
 resource "aws_dynamodb_table" "lock" {
-  name           = "${var.project_name}-tfstate-lock"
+  name           = "${var.project_name}-terraform-state-lock"
   read_capacity  = 1
   write_capacity = 1
   hash_key       = "LockID"

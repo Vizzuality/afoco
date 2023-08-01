@@ -7,15 +7,15 @@ module "ecr" {
   }
 }
 
-module "ec2" {
-  source            = "../ec2"
-  ec2_instance_type = var.ec2_instance_type
-  ec2_instance_name = "${var.project_name}-${var.environment}"
-  ec2_ecr_profile   = module.iam.ec2_ecr_profile
-}
+# module "ec2" {
+#   source            = "../ec2"
+#   ec2_instance_type = var.ec2_instance_type
+#   ec2_instance_name = "${var.project_name}-${var.environment}"
+#   ec2_ecr_profile   = module.iam.ec2_ecr_profile
+# }
 
-module "iam" {
-  source       = "../iam"
-  project_name = var.project_name
-  environment  = var.environment
-}
+# module "iam" {
+#   source       = "../iam"
+#   project_name = var.project_name
+#   environment  = var.environment
+# }

@@ -1,7 +1,7 @@
 variable "aws_region" {
   type        = string
   description = "AWS region"
-  default     = "us-east-1"
+  default     = "ap-northeast-2"
 }
 
 variable "allowed_account_id" {
@@ -26,5 +26,4 @@ variable "production_domain" {
 variable "ec2_instance_type" {
   type        = string
   description = "The type of EC2 instance to launch"
-  default     = "t3a.small"
 }

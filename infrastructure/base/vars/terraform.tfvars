@@ -1,4 +1,4 @@
-aws_region         = "us-east-1"
+aws_region         = "ap-northeast-2"
 allowed_account_id = "AWS ACCOUNT ID"
 project_name       = "afoco"
 
@@ -6,4 +6,4 @@ project_name       = "afoco"
 production_domain = "climation.afocosec.org"
 staging_domain    = "climation-staging.afocosec.org"
 
-ec2_instance_type = "t3a.small"
+ec2_instance_type = "t2.small"
