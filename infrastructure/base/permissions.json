@@ -22,7 +22,8 @@
                 "arn:aws:s3:::afoco-tfstate/*",
                 "arn:aws:s3:::afoco-tfstate",
                 "arn:aws:dynamodb:{region}:{accountId}:table/afoco-tfstate-lock",
-                "arn:aws:ecr:{region}:{accountId}:*"
+                "arn:aws:ecr:{region}:{accountId}:*",
+                "arn:aws:kms:::*"
             ]
         }
     ]
