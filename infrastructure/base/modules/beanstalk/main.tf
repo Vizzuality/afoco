@@ -3,41 +3,41 @@
 # SSH access to and from the world
 # HTTP(S) access from the world
 #
-# resource "aws_security_group" "site_server_ssh_security_group" {
-#   vpc_id      = var.vpc.id
-#   name        = "public-ssh-sg-${var.environment}"
-#   description = "Security group for SSH access to and from the world - ${var.environment}"
+resource "aws_security_group" "site_server_ssh_security_group" {
+  vpc_id      = var.vpc.id
+  name        = "public-ssh-sg-${var.environment}"
+  description = "Security group for SSH access to and from the world - ${var.environment}"
 
-#   tags = merge(
-#     {
-#       Name = "EC2 SSH access SG"
-#     },
-#     var.tags
-#   )
+  tags = merge(
+    {
+      Name = "EC2 SSH access SG"
+    },
+    var.tags
+  )
 
-#   lifecycle {
-#     create_before_destroy = true
-#   }
-# }
+  lifecycle {
+    create_before_destroy = true
+  }
+}
 
-# resource "aws_security_group_rule" "ssh_ingress" {
-#   type              = "ingress"
-#   from_port         = 22
-#   to_port           = 22
-#   protocol          = "tcp"
-#   cidr_blocks       = ["0.0.0.0/0"]
-#   security_group_id = aws_security_group.site_server_ssh_security_group.id
-# }
+resource "aws_security_group_rule" "ssh_ingress" {
+  type              = "ingress"
+  from_port         = 22
+  to_port           = 22
+  protocol          = "tcp"
+  cidr_blocks       = ["0.0.0.0/0"]
+  security_group_id = aws_security_group.site_server_ssh_security_group.id
+}
 
-# resource "aws_security_group_rule" "ssh_egress" {
-#   type        = "egress"
-#   from_port   = 22
-#   to_port     = 22
-#   protocol    = "tcp"
-#   cidr_blocks = [var.vpc.cidr_block]
+resource "aws_security_group_rule" "ssh_egress" {
+  type        = "egress"
+  from_port   = 22
+  to_port     = 22
+  protocol    = "tcp"
+  cidr_blocks = [var.vpc.cidr_block]
 
-#   security_group_id = aws_security_group.site_server_ssh_security_group.id
-# }
+  security_group_id = aws_security_group.site_server_ssh_security_group.id
+}
 
 # Create elastic beanstalk application
 
@@ -106,11 +106,11 @@ resource "aws_elastic_beanstalk_environment" "application_environment" {
   #   name      = "EC2UserData"
   #   value     = var.ec2_user_data
   # }
-  # setting {
-  #   namespace = "aws:autoscaling:launchconfiguration"
-  #   name = "SecurityGroups"
-  #   value = aws_security_group.site_server_ssh_security_group.id
-  # }
+  setting {
+    namespace = "aws:autoscaling:launchconfiguration"
+    name      = "SecurityGroups"
+    value     = aws_security_group.site_server_ssh_security_group.id
+  }
   setting {
     namespace = "aws:autoscaling:asg"
     name      = "MinSize"

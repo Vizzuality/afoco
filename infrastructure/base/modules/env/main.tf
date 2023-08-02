@@ -65,20 +65,20 @@ module "postgresql" {
 
 module "beanstalk" {
   source = "../beanstalk"
-  # project_name                 = var.project_name
-  # environment                  = var.environment
-  # domain                       = var.domain
+
+  project                      = var.project_name
+  environment                  = var.environment
+  region                       = var.aws_region
   application_name             = "${var.project_name}-${var.environment}"
   application_environment      = "${var.project_name}-${var.environment}-environment"
   application_deploy_s3_bucket = "${var.project_name}-${var.environment}-beanstalk-deployment"
   solution_stack_name          = "64bit Amazon Linux 2 v3.6.0 running Docker" # TODO: remove hardcoding, and probably this needs to be multidocker
   tier                         = "WebServer"
-  # vpc_id                       = data.aws_vpc.default.id
-  # public_subnets               = data.aws_subnets.default.ids # TODO: no idea what I'm doing
-  # elb_public_subnets           = data.aws_subnets.default.ids # TODO: no idea what I'm doing
-  vpc_id             = var.vpc.id
-  public_subnets     = var.subnet_ids
-  elb_public_subnets = var.subnet_ids
-  ec2_instance_type  = var.ec2_instance_type
-  ec2_user_data = var.ec2_user_data
+  tags                         = var.tags
+  vpc                          = var.vpc
+  vpc_id                       = var.vpc.id
+  public_subnets               = var.subnet_ids
+  elb_public_subnets           = var.subnet_ids
+  ec2_instance_type            = var.ec2_instance_type
+  ec2_user_data                = var.ec2_user_data
 }
