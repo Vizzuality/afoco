@@ -25,3 +25,8 @@ variable "ec2_instance_type" {
   type        = string
   description = "The type of EC2 instance to launch"
 }
+
+variable "ec2_user_data" {
+  type        = string
+  description = "User data script for EC2 instance"
+}

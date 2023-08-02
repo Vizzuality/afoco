@@ -1,3 +1,44 @@
+#
+# Site Server Security Groups
+# SSH access to and from the world
+# HTTP(S) access from the world
+#
+# resource "aws_security_group" "site_server_ssh_security_group" {
+#   vpc_id      = var.vpc.id
+#   name        = "public-ssh-sg-${var.environment}"
+#   description = "Security group for SSH access to and from the world - ${var.environment}"
+
+#   tags = merge(
+#     {
+#       Name = "EC2 SSH access SG"
+#     },
+#     var.tags
+#   )
+
+#   lifecycle {
+#     create_before_destroy = true
+#   }
+# }
+
+# resource "aws_security_group_rule" "ssh_ingress" {
+#   type              = "ingress"
+#   from_port         = 22
+#   to_port           = 22
+#   protocol          = "tcp"
+#   cidr_blocks       = ["0.0.0.0/0"]
+#   security_group_id = aws_security_group.site_server_ssh_security_group.id
+# }
+
+# resource "aws_security_group_rule" "ssh_egress" {
+#   type        = "egress"
+#   from_port   = 22
+#   to_port     = 22
+#   protocol    = "tcp"
+#   cidr_blocks = [var.vpc.cidr_block]
+
+#   security_group_id = aws_security_group.site_server_ssh_security_group.id
+# }
+
 # Create elastic beanstalk application
 
 resource "aws_elastic_beanstalk_application" "application" {
@@ -46,7 +87,9 @@ resource "aws_elastic_beanstalk_environment" "application_environment" {
   setting {
     namespace = "aws:elasticbeanstalk:environment"
     name      = "ServiceRole"
-    value     = aws_iam_instance_profile.beanstalk_service.name
+    # value     = aws_iam_instance_profile.beanstalk_service.name
+    # value = aws_iam_service_linked_role.elasticbeanstalk.name
+    value = "AWSServiceRoleForElasticBeanstalk"
   }
   setting {
     namespace = "aws:autoscaling:launchconfiguration"
@@ -58,6 +101,16 @@ resource "aws_elastic_beanstalk_environment" "application_environment" {
     name      = "InstanceType"
     value     = var.ec2_instance_type
   }
+  # setting {
+  #   namespace = "aws:autoscaling:launchconfiguration"
+  #   name      = "EC2UserData"
+  #   value     = var.ec2_user_data
+  # }
+  # setting {
+  #   namespace = "aws:autoscaling:launchconfiguration"
+  #   name = "SecurityGroups"
+  #   value = aws_security_group.site_server_ssh_security_group.id
+  # }
   setting {
     namespace = "aws:autoscaling:asg"
     name      = "MinSize"
@@ -72,6 +125,21 @@ resource "aws_elastic_beanstalk_environment" "application_environment" {
     namespace = "aws:elasticbeanstalk:healthreporting:system"
     name      = "SystemType"
     value     = "enhanced"
+  }
+  setting {
+    namespace = "aws:elasticbeanstalk:cloudwatch:logs"
+    name      = "StreamLogs"
+    value     = "true"
+  }
+  setting {
+    namespace = "aws:elasticbeanstalk:cloudwatch:logs"
+    name      = "RetentionInDays"
+    value     = "7"
+  }
+  setting {
+    namespace = "aws:elasticbeanstalk:cloudwatch:logs"
+    name      = "DeleteOnTerminate"
+    value     = "false"
   }
 }
 

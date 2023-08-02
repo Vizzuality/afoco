@@ -80,4 +80,5 @@ module "beanstalk" {
   public_subnets     = var.subnet_ids
   elb_public_subnets = var.subnet_ids
   ec2_instance_type  = var.ec2_instance_type
+  ec2_user_data = var.ec2_user_data
 }
