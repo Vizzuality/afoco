@@ -1,7 +1,9 @@
 module "ecr" {
-  source   = "../ecr"
-  ecr_name = "${var.project}-${var.environment}"
-  ecr_tags = {
+  source = "../ecr"
+
+  project     = var.project
+  environment = var.environment
+  tags = {
     project     = var.project,
     environment = var.environment
   }

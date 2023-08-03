@@ -1,13 +1,18 @@
-variable "ecr_name" {
-  description = "The name of the ECR registry"
+
+variable "project" {
   type        = string
-  default     = null
+  description = "Short name of the project, will be used to prefix created resources"
+}
+
+variable "environment" {
+  type        = string
+  description = "Name of the environment, will be used to prefix created resources"
 }
 
 variable "image_mutability" {
   description = "Provide image mutability"
   type        = string
-  default     = "IMMUTABLE"
+  default     = "MUTABLE"
 }
 
 variable "encrypt_type" {
@@ -16,7 +21,7 @@ variable "encrypt_type" {
   default     = "KMS"
 }
 
-variable "ecr_tags" {
+variable "tags" {
   description = "The key-value maps for tagging"
   type        = map(string)
   default     = {}
