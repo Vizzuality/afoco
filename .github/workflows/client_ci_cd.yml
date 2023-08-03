@@ -1,11 +1,11 @@
 name: Client CI/CD
 
 on:
+  workflow_dispatch:
   push:
     paths:
       - 'client/**'
       - '.github/workflows/client*'
-  workflow_dispatch:
 
 jobs:
   deploy:

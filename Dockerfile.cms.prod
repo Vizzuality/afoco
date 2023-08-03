@@ -1,3 +1,4 @@
+# Build all the things
 FROM node:18-alpine as build
 RUN apk update && apk add --no-cache build-base gcc autoconf automake zlib-dev libpng-dev vips-dev > /dev/null 2>&1
 ENV NODE_ENV production
@@ -13,11 +14,12 @@ RUN yarn install
 COPY ./cms .
 RUN yarn build
 
+# Copy only the built files into the final image
 FROM node:18-alpine AS runner
 RUN apk add --no-cache vips-dev
-WORKDIR /app
-
 ENV NODE_ENV production
+
+WORKDIR /app
 
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 strapi
