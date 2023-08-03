@@ -9,7 +9,7 @@ variable "allowed_account_id" {
   description = "AWS account id"
 }
 
-variable "project_name" {
+variable "project" {
   type        = string
   description = "Short name of the project, will be used to prefix created resources"
   default     = "vizz"

@@ -1,6 +1,6 @@
 aws_region         = "ap-northeast-2"
 allowed_account_id = "AWS ACCOUNT ID"
-project_name       = "afoco"
+project            = "afoco"
 
 # domains managed externally
 production_domain = "climation.afocosec.org"

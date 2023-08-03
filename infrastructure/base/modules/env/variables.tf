@@ -7,7 +7,7 @@ variable "domain" {
   type = string
 }
 
-variable "project_name" {
+variable "project" {
   type        = string
   description = "Short name of the project, will be used to prefix created resources"
 }
@@ -30,10 +30,6 @@ variable "subnet_ids" {
 
 variable "availability_zones" {
   type = list(string)
-}
-
-variable "ec2_user_data" {
-  type = string
 }
 
 variable "ec2_ami" {

@@ -16,6 +16,11 @@ output "username" {
   sensitive = true
 }
 
+output "password" {
+  value     = aws_db_instance.postgresql.password
+  sensitive = true
+}
+
 output "host" {
   value = aws_db_instance.postgresql.endpoint
 }

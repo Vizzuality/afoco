@@ -48,7 +48,7 @@ variable "ec2_instance_type" {
   description = "The type of EC2 instance to launch"
 }
 
-variable "ec2_user_data" {
+variable "rds_security_group_id" {
   type        = string
-  description = "User data script for EC2 instance"
+  description = "The security group ID for the RDS instance"
 }

@@ -5,8 +5,8 @@
 #
 resource "aws_security_group" "site_server_ssh_security_group" {
   vpc_id      = var.vpc.id
-  name        = "public-ssh-sg-${var.environment}"
-  description = "Security group for SSH access to and from the world - ${var.environment}"
+  name        = "${var.project}-${var.environment}-public-ssh-sg"
+  description = "Security group for SSH access to and from the world - ${var.project} ${var.environment}"
 
   tags = merge(
     {
@@ -101,15 +101,10 @@ resource "aws_elastic_beanstalk_environment" "application_environment" {
     name      = "InstanceType"
     value     = var.ec2_instance_type
   }
-  # setting {
-  #   namespace = "aws:autoscaling:launchconfiguration"
-  #   name      = "EC2UserData"
-  #   value     = var.ec2_user_data
-  # }
   setting {
     namespace = "aws:autoscaling:launchconfiguration"
     name      = "SecurityGroups"
-    value     = aws_security_group.site_server_ssh_security_group.id
+    value     = join(",", [aws_security_group.site_server_ssh_security_group.id, var.rds_security_group_id])
   }
   setting {
     namespace = "aws:autoscaling:asg"

@@ -100,25 +100,25 @@ EOF
 # }
 
 resource "aws_iam_policy_attachment" "beanstalk_ec2_worker" {
-  name       = "elastic-beanstalk-ec2-worker"
+  name       = "${var.application_name}-elastic-beanstalk-ec2-worker"
   roles      = ["${aws_iam_role.beanstalk_ec2.id}"]
   policy_arn = "arn:aws:iam::aws:policy/AWSElasticBeanstalkWorkerTier"
 }
 
 resource "aws_iam_policy_attachment" "beanstalk_ec2_web" {
-  name       = "elastic-beanstalk-ec2-web"
+  name       = "${var.application_name}-elastic-beanstalk-ec2-web"
   roles      = ["${aws_iam_role.beanstalk_ec2.id}"]
   policy_arn = "arn:aws:iam::aws:policy/AWSElasticBeanstalkWebTier"
 }
 
 resource "aws_iam_policy_attachment" "beanstalk_ec2_container" {
-  name       = "elastic-beanstalk-ec2-container"
+  name       = "${var.application_name}-elastic-beanstalk-ec2-container"
   roles      = ["${aws_iam_role.beanstalk_ec2.id}"]
   policy_arn = "arn:aws:iam::aws:policy/AWSElasticBeanstalkMulticontainerDocker"
 }
 
 resource "aws_iam_policy_attachment" "beanstalk_ec2_ecr" {
-  name       = "elastic-beanstalk-ec2-ecr"
+  name       = "${var.application_name}-elastic-beanstalk-ec2-ecr"
   roles      = ["${aws_iam_role.beanstalk_ec2.id}"]
   policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
 }
