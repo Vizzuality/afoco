@@ -45,14 +45,16 @@ data "aws_ec2_instance_type_offerings" "azs_with_ec2_instance_type_offering" {
 data "aws_availability_zones" "azs_with_ec2_instance_type_offering" {
   filter {
     name   = "zone-id"
-    values = data.aws_ec2_instance_type_offerings.azs_with_ec2_instance_type_offering.locations
+    values = sort(data.aws_ec2_instance_type_offerings.azs_with_ec2_instance_type_offering.locations)
   }
 }
 
 # THIS IS TO FILTER THE SUBNETS BY AVAILABILITY ZONES WITH EC2 INSTANCE TYPE AVAILABILITY
 # so that we know which subnets can be passed to the beanstalk resource without upsetting it
 data "aws_subnets" "subnets_with_ec2_instance_type_offering_map" {
-  for_each = toset(data.aws_ec2_instance_type_offerings.azs_with_ec2_instance_type_offering.locations)
+  for_each = toset(
+    data.aws_ec2_instance_type_offerings.azs_with_ec2_instance_type_offering.locations
+  )
 
   filter {
     name   = "vpc-id"
@@ -66,22 +68,7 @@ data "aws_subnets" "subnets_with_ec2_instance_type_offering_map" {
 }
 
 locals {
-  subnets_with_ec2_instance_type_offering_ids = [for k, v in data.aws_subnets.subnets_with_ec2_instance_type_offering_map : v.ids[0]]
-}
-
-data "aws_ami" "latest-ubuntu-lts" {
-  most_recent = true
-  owners      = ["099720109477"] # Canonical
-
-  filter {
-    name   = "name"
-    values = ["ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-*"]
-  }
-
-  filter {
-    name   = "virtualization-type"
-    values = ["hvm"]
-  }
+  subnets_with_ec2_instance_type_offering_ids = sort([for k, v in data.aws_subnets.subnets_with_ec2_instance_type_offering_map : v.ids[0]])
 }
 
 module "staging" {
@@ -94,7 +81,6 @@ module "staging" {
   subnet_ids         = local.subnets_with_ec2_instance_type_offering_ids
   availability_zones = data.aws_availability_zones.azs_with_ec2_instance_type_offering.names
   ec2_instance_type  = var.ec2_instance_type
-  ec2_ami            = data.aws_ami.latest-ubuntu-lts.id
   rds_engine_version = var.rds_engine_version
   rds_instance_class = var.rds_instance_class
 }
