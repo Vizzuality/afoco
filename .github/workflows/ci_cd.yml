@@ -72,6 +72,7 @@ jobs:
 #          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
       - name: Generate docker compose file
+        working-directory: infrastructure/afoco_source_bundle
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           ECR_REPOSITORY_CLIENT: afoco-${{ steps.extract_branch.outputs.branch == 'main' && 'production' || 'staging' }}-client
@@ -79,7 +80,6 @@ jobs:
           ECR_REPOSITORY_CMS: afoco-${{ steps.extract_branch.outputs.branch == 'main' && 'production' || 'staging' }}-cms
           IMAGE_TAG_CMS: cms-${{ hashFiles('cms/**') }}
         run: |
-          touch docker-compose.yml
           echo "version: '3.3'" > docker-compose.yml
           echo "services:" >> docker-compose.yml
           echo "  client:" >> docker-compose.yml
@@ -91,6 +91,10 @@ jobs:
           echo "    ports:" >> docker-compose.yml
           echo "      - 1337:1337" >> docker-compose.yml
 
+      - name: Generate zip file
+        run: |
+          zip -r afoco_source_bundle.zip infrastructure/afoco_source_bundle
+
       - name: Deploy to Amazon EB
         uses: einaregilsson/beanstalk-deploy@v21
         with:
@@ -99,5 +103,5 @@ jobs:
           application_name: afoco-${{ steps.extract_branch.outputs.branch == 'main' && 'production' || 'staging' }}
           environment_name: afoco-${{ steps.extract_branch.outputs.branch == 'main' && 'production' || 'staging' }}-environment
           region: ap-northeast-2
-          version_label: 12345
-          deployment_package: docker-compose.yml
+          version_label: ${{ github.sha }}
+          deployment_package: afoco_source_bundle.zip
