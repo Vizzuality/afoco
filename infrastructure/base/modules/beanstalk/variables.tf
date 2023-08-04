@@ -47,3 +47,8 @@ variable "rds_security_group_id" {
   type        = string
   description = "The security group ID for the RDS instance"
 }
+
+variable "domain" {
+  type        = string
+  description = "The domain name to use for the environment"
+}

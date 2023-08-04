@@ -67,4 +67,5 @@ module "beanstalk" {
   elb_public_subnets      = var.subnet_ids
   ec2_instance_type       = var.ec2_instance_type
   rds_security_group_id   = aws_security_group.postgresql_access.id
+  domain                  = var.domain
 }

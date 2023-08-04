@@ -137,3 +137,7 @@ resource "aws_elastic_beanstalk_environment" "application_environment" {
     value     = "false"
   }
 }
+
+data "aws_lb" "load_balancer_dns" {
+  arn  = aws_elastic_beanstalk_environment.application_environment.load_balancers[0]
+}
