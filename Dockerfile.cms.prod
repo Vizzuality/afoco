@@ -21,10 +21,13 @@ ENV NODE_ENV production
 
 WORKDIR /app
 
-COPY --from=build --chown=node:node /app/cms ./
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 strapi
+
+COPY --from=build --chown=strapi:nodejs /app/cms ./
 COPY --from=build /app/node_modules ./node_modules
 
-USER node
+USER strapi
 
 EXPOSE 1337
 CMD ["yarn", "start"]
