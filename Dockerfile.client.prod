@@ -23,14 +23,11 @@ ENV NEXT_TELEMETRY_DISABLED 1
 
 WORKDIR /app
 
-RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 nextjs
-
-COPY --from=build --chown=nextjs:nodejs /app/client/.next ./.next
+COPY --from=build --chown=node:node /app/client/.next ./.next
 COPY --from=build /app/node_modules ./node_modules
 COPY --from=build /app/client/package.json ./package.json
 
-USER nextjs
+USER node
 
 EXPOSE 3000
 ENV PORT 3000
