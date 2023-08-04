@@ -57,7 +57,7 @@ resource "aws_elastic_beanstalk_environment" "application_environment" {
   setting {
     namespace = "aws:ec2:vpc"
     name      = "VPCId"
-    value     = var.vpc_id
+    value     = var.vpc.id
   }
   setting {
     namespace = "aws:ec2:vpc"

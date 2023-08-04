@@ -35,13 +35,8 @@ variable "tags" {
 }
 
 variable "vpc" {}
-variable "vpc_id" {}
 variable "public_subnets" {}
 variable "elb_public_subnets" {}
-
-variable "application_deploy_s3_bucket" {
-  type = string
-}
 
 variable "ec2_instance_type" {
   type        = string

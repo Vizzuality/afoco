@@ -1,4 +1,4 @@
-# from https://gist.github.com/tomfa/6fc429af5d598a85e723b3f56f681237
+# most of this is from https://gist.github.com/tomfa/6fc429af5d598a85e723b3f56f681237
 
 # this role might already exist, but then it might not
 # it is created by AWS automatically when you create an environment in the AWS console
@@ -49,32 +49,6 @@ resource "aws_iam_role" "beanstalk_ec2" {
         "Service": "ec2.amazonaws.com"
       },
       "Action": "sts:AssumeRole"
-    }
-  ]
-}
-EOF
-}
-
-resource "aws_iam_role_policy" "beanstalk_ec2_role_policy" {
-  name   = "${var.application_name}-beanstalk-ec2-role-policy"
-  role   = aws_iam_role.beanstalk_ec2.id
-  policy = <<EOF
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Effect": "Allow",
-      "Action": ["s3:ListBucket"],
-      "Resource": ["arn:aws:s3:::${var.application_deploy_s3_bucket}"]
-    },
-    {
-      "Effect": "Allow",
-      "Action": [
-        "s3:PutObject",
-        "s3:GetObject",
-        "s3:DeleteObject"
-      ],
-      "Resource": ["arn:aws:s3:::${var.application_deploy_s3_bucket}/*"]
     }
   ]
 }
