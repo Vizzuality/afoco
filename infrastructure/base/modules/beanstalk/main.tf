@@ -137,22 +137,3 @@ resource "aws_elastic_beanstalk_environment" "application_environment" {
     value     = "false"
   }
 }
-
-resource "aws_s3_bucket" "elasticbeanstalk-deployment" {
-  bucket = var.application_deploy_s3_bucket
-}
-
-resource "aws_s3_bucket_versioning" "elasticbeanstalk-deployment" {
-  bucket = aws_s3_bucket.elasticbeanstalk-deployment.id
-  versioning_configuration {
-    status = "Enabled"
-  }
-}
-
-# TODO: not sure if this can be used to create an automation?
-resource "aws_elastic_beanstalk_application_version" "latest" {
-  name        = aws_elastic_beanstalk_application.application.name
-  application = aws_elastic_beanstalk_application.application.name
-  bucket      = aws_s3_bucket.elasticbeanstalk-deployment.id
-  key         = "Dockerrun.aws.json"
-}
