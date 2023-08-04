@@ -30,9 +30,11 @@ jobs:
           filters: |
             client:
               - 'client/**'
+              - Dockerfile.client.prod
               - '.github/workflows/ci_cd.yml'
             cms:
               - 'cms/**'
+              - Dockerfile.cms.prod
               - '.github/workflows/ci_cd.yml'
 
       - name: Copy env variables to docker
