@@ -92,8 +92,9 @@ jobs:
           echo "      - 1337:1337" >> docker-compose.yml
 
       - name: Generate zip file
+        working-directory: infrastructure/afoco_source_bundle
         run: |
-          zip -r afoco_source_bundle.zip infrastructure/afoco_source_bundle
+          zip -r deploy.zip * .[^.]*
 
       - name: Deploy to Amazon EB
         uses: einaregilsson/beanstalk-deploy@v21
@@ -104,4 +105,4 @@ jobs:
           environment_name: afoco-${{ steps.extract_branch.outputs.branch == 'main' && 'production' || 'staging' }}-environment
           region: ap-northeast-2
           version_label: ${{ github.sha }}
-          deployment_package: afoco_source_bundle.zip
+          deployment_package: infrastructure/afoco_source_bundle/deploy.zip
