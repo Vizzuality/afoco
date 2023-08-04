@@ -47,29 +47,29 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ap-northeast-2
 
-      - name: Login to Amazon ECR
-        id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v1
-
-      - name: Build, tag, and push Client image to Amazon ECR
-        if: steps.changes.outputs.client == 'true'
-        env:
-          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          ECR_REPOSITORY: afoco-${{ steps.extract_branch.outputs.branch == 'main' && 'production' || 'staging' }}-client
-          IMAGE_TAG: client-${{ hashFiles('client/**') }}
-        run: |
-          docker build -f Dockerfile.client.prod -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-
-      - name: Build, tag, and push CMS image to Amazon ECR
-        if: steps.changes.outputs.cms == 'true'
-        env:
-          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          ECR_REPOSITORY: afoco-${{ steps.extract_branch.outputs.branch == 'main' && 'production' || 'staging' }}-cms
-          IMAGE_TAG: cms-${{ hashFiles('cms/**') }}
-        run: |
-          docker build -f Dockerfile.cms.prod -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+#      - name: Login to Amazon ECR
+#        id: login-ecr
+#        uses: aws-actions/amazon-ecr-login@v1
+#
+#      - name: Build, tag, and push Client image to Amazon ECR
+#        if: steps.changes.outputs.client == 'true'
+#        env:
+#          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+#          ECR_REPOSITORY: afoco-${{ steps.extract_branch.outputs.branch == 'main' && 'production' || 'staging' }}-client
+#          IMAGE_TAG: client-${{ hashFiles('client/**') }}
+#        run: |
+#          docker build -f Dockerfile.client.prod -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+#          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+#
+#      - name: Build, tag, and push CMS image to Amazon ECR
+#        if: steps.changes.outputs.cms == 'true'
+#        env:
+#          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+#          ECR_REPOSITORY: afoco-${{ steps.extract_branch.outputs.branch == 'main' && 'production' || 'staging' }}-cms
+#          IMAGE_TAG: cms-${{ hashFiles('cms/**') }}
+#        run: |
+#          docker build -f Dockerfile.cms.prod -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+#          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
       - name: Generate docker compose file
         env:
@@ -99,4 +99,5 @@ jobs:
           application_name: afoco-${{ steps.extract_branch.outputs.branch == 'main' && 'production' || 'staging' }}
           environment_name: afoco-${{ steps.extract_branch.outputs.branch == 'main' && 'production' || 'staging' }}-environment
           region: ap-northeast-2
+          version_label: 12345
           deployment_package: docker-compose.yml
