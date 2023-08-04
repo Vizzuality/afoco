@@ -31,21 +31,6 @@ resource "aws_security_group_rule" "port_forward_postgres" {
   security_group_id        = aws_security_group.postgresql_access.id
 }
 
-# TODO: idea is to replace this with elastic beanstalk, leaving here for reference
-# module "server" {
-#   source                    = "../server"
-#   project                   = var.project
-#   environment               = var.environment
-#   region                    = var.aws_region
-#   tags                      = var.tags
-#   vpc                       = var.vpc
-#   user_data                 = var.ec2_user_data
-#   site_server_ami           = var.ec2_ami
-#   availability_zone         = var.availability_zones[0]
-#   security_group_ids        = [aws_security_group.postgresql_access.id]
-#   site_server_instance_type = var.ec2_instance_type
-# }
-
 module "postgresql" {
   source = "../postgresql"
 
