@@ -1,0 +1,102 @@
+name: Client & CMS CI/CD
+
+on:
+  workflow_dispatch:
+  push:
+
+jobs:
+  deploy:
+    name: Deploy Client app
+    # if: (github.head_ref || github.ref_name) == 'main' || (github.head_ref || github.ref_name) == 'staging'
+    # if: (github.head_ref || github.ref_name) == 'staging'
+    if: (github.head_ref || github.ref_name) == 'infrastructure'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Extract branch name
+        shell: bash
+        run: |
+          echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+          echo "##[set-output name=branch-upper;]$(echo ${GITHUB_REF#refs/heads/} | tr a-z A-Z )"
+        id: extract_branch
+
+      - name: Filter changes
+        uses: dorny/paths-filter@v2
+        id: changes
+        with:
+          filters: |
+            client:
+              - 'client/**'
+              - '.github/workflows/ci_cd.yml'
+            cms:
+              - 'cms/**'
+              - '.github/workflows/ci_cd.yml'
+
+      - name: Copy env variables to docker
+        run: |
+          echo "${{ secrets.CLIENT_STAGE_ENV_FILE }}" > client/.env.local
+          echo "${{ secrets.CMS_STAGE_ENV_FILE }}" > cms/.env.local
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-northeast-2
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Build, tag, and push Client image to Amazon ECR
+        if: steps.changes.outputs.client == 'true'
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: afoco-${{ steps.extract_branch.outputs.branch == 'main' && 'production' || 'staging' }}-client
+          IMAGE_TAG: client-${{ hashFiles('client/**') }}
+        run: |
+          docker build -f Dockerfile.client.prod -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+
+      - name: Build, tag, and push CMS image to Amazon ECR
+        if: steps.changes.outputs.cms == 'true'
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: afoco-${{ steps.extract_branch.outputs.branch == 'main' && 'production' || 'staging' }}-cms
+          IMAGE_TAG: cms-${{ hashFiles('cms/**') }}
+        run: |
+          docker build -f Dockerfile.cms.prod -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+
+      - name: Generate docker compose file
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY_CLIENT: afoco-${{ steps.extract_branch.outputs.branch == 'main' && 'production' || 'staging' }}-client
+          IMAGE_TAG_CLIENT: client-${{ hashFiles('client/**') }}
+          ECR_REPOSITORY_CMS: afoco-${{ steps.extract_branch.outputs.branch == 'main' && 'production' || 'staging' }}-cms
+          IMAGE_TAG_CMS: cms-${{ hashFiles('cms/**') }}
+        run: |
+          touch docker-compose.yml
+          echo "version: '3.3'" > docker-compose.yml
+          echo "services:" >> docker-compose.yml
+          echo "  client:" >> docker-compose.yml
+          echo "    image: $ECR_REGISTRY/$ECR_REPOSITORY_CLIENT:$IMAGE_TAG_CLIENT" >> docker-compose.yml
+          echo "    ports:" >> docker-compose.yml
+          echo "      - 3000:3000" >> docker-compose.yml
+          echo "  cms:" >> docker-compose.yml
+          echo "    image: $ECR_REGISTRY/$ECR_REPOSITORY_CMS:$IMAGE_TAG_CMS" >> docker-compose.yml
+          echo "    ports:" >> docker-compose.yml
+          echo "      - 1337:1337" >> docker-compose.yml
+
+      - name: Deploy to Amazon EB
+        uses: einaregilsson/beanstalk-deploy@v21
+        with:
+          aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          application_name: afoco-${{ steps.extract_branch.outputs.branch == 'main' && 'production' || 'staging' }}
+          environment_name: afoco-${{ steps.extract_branch.outputs.branch == 'main' && 'production' || 'staging' }}-environment
+          region: ap-northeast-2
+          deployment_package: docker-compose.yml
