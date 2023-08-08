@@ -1,7 +1,6 @@
 FROM node:18-alpine
 # Installing libvips-dev for sharp Compatibility
 RUN apk update && apk add --no-cache build-base gcc autoconf automake zlib-dev libpng-dev nasm bash vips-dev
-ENV NODE_ENV=development
 
 WORKDIR /app/
 COPY .yarn ./.yarn
@@ -18,4 +17,4 @@ RUN chown -R node:node /app/cms
 USER node
 RUN ["yarn", "build"]
 EXPOSE 1337
-CMD ["yarn", "dev"]
+ENTRYPOINT ["/app/cms/entrypoint.sh"]

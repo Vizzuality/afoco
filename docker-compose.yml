@@ -23,6 +23,7 @@ services:
       - DATABASE_CLIENT=postgres
       - DATABASE_SSL=false
       - DATABASE_URL=postgres://postgres:postgres@db:5432/cms
+      - NODE_ENV=${NODE_ENV:-development}
     links:
       - db
     depends_on:
@@ -39,6 +40,7 @@ services:
       - ./client/.env.local
     environment:
       - NEXT_PUBLIC_API_URL=http://localhost:1337/api
+      - NODE_ENV=${NODE_ENV:-development}
     links:
       - cms
     volumes:

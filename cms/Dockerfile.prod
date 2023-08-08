@@ -30,4 +30,4 @@ COPY --from=build /app/node_modules ./node_modules
 USER strapi
 
 EXPOSE 1337
-CMD ["yarn", "start"]
+ENTRYPOINT ["/app/entrypoint.sh"]
