@@ -1,4 +1,4 @@
-name: Deploy Client and CMS to Amazon EB
+name: Run deploy
 
 on:
   workflow_dispatch:
@@ -118,6 +118,9 @@ jobs:
     runs-on: ubuntu-22.04
 
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
