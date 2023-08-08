@@ -1,4 +1,4 @@
-name: Client & CMS CI/CD
+name: Deploy Client and CMS to Amazon EB
 
 on:
   workflow_dispatch:
@@ -6,11 +6,11 @@ on:
 
 jobs:
   deploy:
-    name: Deploy Client app
+    name: Deploy apps to Amazon EB
     # if: (github.head_ref || github.ref_name) == 'main' || (github.head_ref || github.ref_name) == 'staging'
     # if: (github.head_ref || github.ref_name) == 'staging'
     if: (github.head_ref || github.ref_name) == 'infrastructure'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     steps:
       - name: Checkout code
