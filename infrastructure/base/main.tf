@@ -87,6 +87,8 @@ module "staging" {
   vpc                = data.aws_vpc.default_vpc
   subnet_ids         = local.subnets_with_ec2_instance_type_offering_ids
   availability_zones = data.aws_availability_zones.azs_with_ec2_instance_type_offering.names
+  beanstalk_platform = var.beanstalk_platform
+  beanstalk_tier     = var.beanstalk_tier
   ec2_instance_type  = var.ec2_instance_type
   rds_engine_version = var.rds_engine_version
   rds_instance_class = var.rds_instance_class

@@ -32,6 +32,16 @@ variable "availability_zones" {
   type = list(string)
 }
 
+variable "beanstalk_platform" {
+  type        = string
+  description = "The Elastic Beanstalk platform to use"
+}
+
+variable "beanstalk_tier" {
+  type        = string
+  description = "The Elastic Beanstalk tier to use"
+}
+
 variable "ec2_instance_type" {
   type        = string
   description = "EC2 instance type for the server"

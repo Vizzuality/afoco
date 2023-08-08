@@ -59,8 +59,8 @@ module "beanstalk" {
   region                  = var.aws_region
   application_name        = "${var.project}-${var.environment}"
   application_environment = "${var.project}-${var.environment}-environment"
-  solution_stack_name     = "64bit Amazon Linux 2 v3.6.0 running Docker"
-  tier                    = "WebServer"
+  solution_stack_name     = var.beanstalk_platform
+  tier                    = var.beanstalk_tier
   tags                    = var.tags
   vpc                     = var.vpc
   public_subnets          = var.subnet_ids

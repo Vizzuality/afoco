@@ -24,6 +24,22 @@ variable "production_domain" {
 }
 
 #
+# Elastic Beanstalk configuration
+# concepts: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/concepts.html
+#
+variable "beanstalk_platform" {
+  type        = string
+  description = "The Elastic Beanstalk platform to use. This needs to be a Docker platform (Linux, not ECS). If upgrade is available please ensure the EC2 AMI and deployment strategy is compatible. https://docs.aws.amazon.com/elasticbeanstalk/latest/platforms/platforms-supported.html#platforms-supported.docker"
+  default     = "64bit Amazon Linux 2 v3.6.0 running Docker"
+}
+
+variable "beanstalk_tier" {
+  type        = string
+  description = "The Elastic Beanstalk tier to use. This needs to be WebServer"
+  default     = "WebServer"
+}
+
+#
 # EC2 configuration
 #
 variable "ec2_instance_type" {

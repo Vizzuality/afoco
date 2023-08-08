@@ -22,10 +22,12 @@ variable "application_environment" {
   default = "myenv"
 }
 variable "solution_stack_name" {
-  type = string
+  type        = string
+  description = "The Elastic Beanstalk platform / solution stack to use"
 }
 variable "tier" {
-  type = string
+  type        = string
+  description = "The Elastic Beanstalk tier to use"
 }
 
 variable "tags" {

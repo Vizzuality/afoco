@@ -45,7 +45,110 @@ resource "aws_elastic_beanstalk_application" "application" {
   name = var.application_name
 }
 
-# Create elastic beanstalk Environment
+# Settings for the elastic beanstalk environment
+
+locals {
+  environment_settings = [
+    {
+      namespace = "aws:ec2:vpc"
+      name      = "VPCId"
+      value     = var.vpc.id
+    },
+    {
+      namespace = "aws:ec2:vpc"
+      name      = "Subnets"
+      value     = join(",", var.public_subnets)
+    },
+    {
+      namespace = "aws:ec2:vpc"
+      name      = "AssociatePublicIpAddress"
+      value     = "True"
+    },
+    {
+      namespace = "aws:ec2:vpc"
+      name      = "ELBScheme"
+      value     = "internet facing"
+    },
+    {
+      namespace = "aws:elasticbeanstalk:environment:process:default"
+      name      = "MatcherHTTPCode"
+      value     = "200"
+    },
+    {
+      namespace = "aws:elasticbeanstalk:environment"
+      name      = "LoadBalancerType"
+      value     = "application"
+    },
+    {
+      namespace = "aws:elasticbeanstalk:environment"
+      name      = "ServiceRole"
+      value     = "AWSServiceRoleForElasticBeanstalk"
+    },
+    {
+      namespace = "aws:autoscaling:launchconfiguration"
+      name      = "IamInstanceProfile"
+      value     = aws_iam_instance_profile.beanstalk_ec2.name
+    },
+    {
+      namespace = "aws:autoscaling:launchconfiguration"
+      name      = "InstanceType"
+      value     = var.ec2_instance_type
+    },
+    {
+      namespace = "aws:autoscaling:launchconfiguration"
+      name      = "SecurityGroups"
+      value     = join(",", [aws_security_group.site_server_ssh_security_group.id, var.rds_security_group_id])
+    },
+    {
+      namespace = "aws:autoscaling:asg"
+      name      = "MinSize"
+      value     = 1
+    },
+    {
+      namespace = "aws:autoscaling:asg"
+      name      = "MaxSize"
+      value     = 2
+    },
+    {
+      namespace = "aws:elasticbeanstalk:healthreporting:system"
+      name      = "SystemType"
+      value     = "enhanced"
+    },
+    {
+      namespace = "aws:elasticbeanstalk:cloudwatch:logs"
+      name      = "StreamLogs"
+      value     = "true"
+    },
+    {
+      namespace = "aws:elasticbeanstalk:cloudwatch:logs"
+      name      = "RetentionInDays"
+      value     = "7"
+    },
+    {
+      namespace = "aws:elasticbeanstalk:cloudwatch:logs"
+      name      = "DeleteOnTerminate"
+      value     = "false"
+    },
+    # NEEDS UNCOMMENTING ONCE CERT VALIDATED
+    # {
+    #   namespace = "aws:elbv2:listener:443"
+    #   name      = "ListenerEnabled"
+    #   value     = var.acm_certificate.arn == "" ? "false" : "true"
+    # },
+    # {
+    #   namespace = "aws:elbv2:listener:443"
+    #   name      = "Protocol"
+    #   value     = "HTTPS"
+    # },
+    # {
+    #   namespace = "aws:elbv2:listener:443"
+    #   name      = "SSLCertificateArns"
+    #   value     = var.acm_certificate.arn
+    # }
+  ]
+}
+
+# Create elastic beanstalk environment
 
 resource "aws_elastic_beanstalk_environment" "application_environment" {
   name                   = var.application_environment
@@ -54,104 +157,14 @@ resource "aws_elastic_beanstalk_environment" "application_environment" {
   tier                   = var.tier
   wait_for_ready_timeout = "20m"
 
-  setting {
-    namespace = "aws:ec2:vpc"
-    name      = "VPCId"
-    value     = var.vpc.id
+  dynamic "setting" {
+    for_each = local.environment_settings
+    content {
+      namespace = setting.value["namespace"]
+      name      = setting.value["name"]
+      value     = setting.value["value"]
+    }
   }
-  setting {
-    namespace = "aws:ec2:vpc"
-    name      = "Subnets"
-    value     = join(",", var.public_subnets)
-  }
-  setting {
-    namespace = "aws:ec2:vpc"
-    name      = "AssociatePublicIpAddress"
-    value     = "True"
-  }
-  setting {
-    namespace = "aws:ec2:vpc"
-    name      = "ELBScheme"
-    value     = "internet facing"
-  }
-  setting {
-    namespace = "aws:elasticbeanstalk:environment:process:default"
-    name      = "MatcherHTTPCode"
-    value     = "200"
-  }
-  setting {
-    namespace = "aws:elasticbeanstalk:environment"
-    name      = "LoadBalancerType"
-    value     = "application"
-  }
-  setting {
-    namespace = "aws:elasticbeanstalk:environment"
-    name      = "ServiceRole"
-    # value     = aws_iam_instance_profile.beanstalk_service.name
-    # value = aws_iam_service_linked_role.elasticbeanstalk.name
-    value = "AWSServiceRoleForElasticBeanstalk"
-  }
-  setting {
-    namespace = "aws:autoscaling:launchconfiguration"
-    name      = "IamInstanceProfile"
-    value     = aws_iam_instance_profile.beanstalk_ec2.name
-  }
-  setting {
-    namespace = "aws:autoscaling:launchconfiguration"
-    name      = "InstanceType"
-    value     = var.ec2_instance_type
-  }
-  setting {
-    namespace = "aws:autoscaling:launchconfiguration"
-    name      = "SecurityGroups"
-    value     = join(",", [aws_security_group.site_server_ssh_security_group.id, var.rds_security_group_id])
-  }
-  setting {
-    namespace = "aws:autoscaling:asg"
-    name      = "MinSize"
-    value     = 1
-  }
-  setting {
-    namespace = "aws:autoscaling:asg"
-    name      = "MaxSize"
-    value     = 2
-  }
-  setting {
-    namespace = "aws:elasticbeanstalk:healthreporting:system"
-    name      = "SystemType"
-    value     = "enhanced"
-  }
-  setting {
-    namespace = "aws:elasticbeanstalk:cloudwatch:logs"
-    name      = "StreamLogs"
-    value     = "true"
-  }
-  setting {
-    namespace = "aws:elasticbeanstalk:cloudwatch:logs"
-    name      = "RetentionInDays"
-    value     = "7"
-  }
-  setting {
-    namespace = "aws:elasticbeanstalk:cloudwatch:logs"
-    name      = "DeleteOnTerminate"
-    value     = "false"
-  }
-  # NEEDS UNCOMMENTING ONCE CERT VALIDATED
-  # setting {
-  #   namespace = "aws:elbv2:listener:443"
-  #   name      = "ListenerEnabled"
-  #   value     = var.acm_certificate.arn == "" ? "false" : "true"
-  # }
-  # setting {
-  #   namespace = "aws:elbv2:listener:443"
-  #   name      = "Protocol"
-  #   value     = "HTTPS"
-  # }
-  # setting {
-  #   namespace = "aws:elbv2:listener:443"
-  #   name      = "SSLCertificateArns"
-  #   value     = var.acm_certificate.arn
-  # }
 }
 
 # NEEDS UNCOMMENTING ONCE CERT VALIDATED
