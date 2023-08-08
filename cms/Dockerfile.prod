@@ -1,6 +1,17 @@
 # Build all the things
-FROM node:18-alpine as build
-RUN apk update && apk add --no-cache build-base gcc autoconf automake zlib-dev libpng-dev vips-dev > /dev/null 2>&1
+FROM node:18.15.0-bullseye-slim as build
+RUN apt-get update -y && \
+    apt-get upgrade -y && \
+    apt-get install -y \
+      build-essential \
+      gcc autoconf \
+      automake \
+      zlib1g-dev \
+      libpng-dev \
+      nasm bash \
+      libvips-dev \
+    && apt-get clean
+
 ENV NODE_ENV production
 
 WORKDIR /app
@@ -15,8 +26,12 @@ COPY ./cms .
 RUN yarn build
 
 # Copy only the built files into the final image
-FROM node:18-alpine AS runner
-RUN apk add --no-cache vips-dev
+FROM node:18.15.0-bullseye-slim AS runner
+RUN apt-get update -y && \
+    apt-get upgrade -y && \
+    apt-get install -y libvips-dev && \
+    apt-get clean
+
 ENV NODE_ENV production
 
 WORKDIR /app

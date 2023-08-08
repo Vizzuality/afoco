@@ -1,6 +1,16 @@
-FROM node:18-alpine
-# Installing libvips-dev for sharp Compatibility
-RUN apk update && apk add --no-cache build-base gcc autoconf automake zlib-dev libpng-dev nasm bash vips-dev
+FROM node:18.15.0-bullseye-slim
+# Install dependencies
+RUN apt-get update -y && \
+    apt-get upgrade -y && \
+    apt-get install -y \
+      build-essential \
+      gcc autoconf \
+      automake \
+      zlib1g-dev \
+      libpng-dev \
+      nasm bash \
+      libvips-dev \
+    && apt-get clean
 
 WORKDIR /app/
 COPY .yarn ./.yarn
