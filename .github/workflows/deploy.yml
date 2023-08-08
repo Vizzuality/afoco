@@ -3,13 +3,19 @@ name: Deploy Client and CMS to Amazon EB
 on:
   workflow_dispatch:
   push:
+    branches:
+      - main
+      - staging
+      - infrastructure
+    paths:
+      - 'client/**'
+      - 'cms/**'
+      - '.github/workflows/*'
+      - 'infrastructure/afoco_source_bundle/**'
 
 jobs:
   deploy:
     name: Deploy apps to Amazon EB
-    # if: (github.head_ref || github.ref_name) == 'main' || (github.head_ref || github.ref_name) == 'staging'
-    # if: (github.head_ref || github.ref_name) == 'staging'
-    if: (github.head_ref || github.ref_name) == 'infrastructure'
     runs-on: ubuntu-22.04
 
     steps:
