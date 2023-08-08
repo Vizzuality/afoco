@@ -30,12 +30,10 @@ jobs:
           filters: |
             client:
               - 'client/**'
-              - Dockerfile.client.prod
-              - '.github/workflows/ci_cd.yml'
+              - '.github/workflows/*'
             cms:
               - 'cms/**'
-              - Dockerfile.cms.prod
-              - '.github/workflows/ci_cd.yml'
+              - '.github/workflows/*'
 
       - name: Copy env variables to docker
         run: |
@@ -60,7 +58,7 @@ jobs:
           ECR_REPOSITORY: afoco-${{ steps.extract_branch.outputs.branch == 'main' && 'production' || 'staging' }}-client
           IMAGE_TAG: client-${{ hashFiles('client/**') }}
         run: |
-          docker build -f Dockerfile.client.prod -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          docker build -f client/Dockerfile.prod -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
       - name: Build, tag, and push CMS image to Amazon ECR
@@ -70,7 +68,7 @@ jobs:
           ECR_REPOSITORY: afoco-${{ steps.extract_branch.outputs.branch == 'main' && 'production' || 'staging' }}-cms
           IMAGE_TAG: cms-${{ hashFiles('cms/**') }}
         run: |
-          docker build -f Dockerfile.cms.prod -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          docker build -f cms/Dockerfile.prod -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
       - name: Generate docker compose file

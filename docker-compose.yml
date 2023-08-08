@@ -14,7 +14,7 @@ services:
   cms:
     build:
       context: .
-      dockerfile: Dockerfile.cms
+      dockerfile: cms/Dockerfile
     ports:
       - '1337:1337'
     env_file:
@@ -32,7 +32,7 @@ services:
   client:
     build:
       context: .
-      dockerfile: Dockerfile.client
+      dockerfile: client/Dockerfile
     ports:
       - '3000:3000'
     env_file:
