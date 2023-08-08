@@ -14,8 +14,8 @@ on:
       - 'infrastructure/afoco_source_bundle/**'
 
 jobs:
-  deploy:
-    name: Deploy apps to Amazon EB
+  build_client_image:
+    name: Build Client image and push to Amazon ECR
     runs-on: ubuntu-22.04
 
     steps:
@@ -37,14 +37,10 @@ jobs:
             client:
               - 'client/**'
               - '.github/workflows/*'
-            cms:
-              - 'cms/**'
-              - '.github/workflows/*'
 
       - name: Copy env variables to docker
         run: |
           echo "${{ secrets.CLIENT_STAGE_ENV_FILE }}" > client/.env.local
-          echo "${{ secrets.CMS_STAGE_ENV_FILE }}" > cms/.env
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -67,6 +63,45 @@ jobs:
           docker build -f client/Dockerfile.prod -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
+  build_cms_image:
+    name: Build CMS image and push to Amazon ECR
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Extract branch name
+        shell: bash
+        run: |
+          echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+          echo "##[set-output name=branch-upper;]$(echo ${GITHUB_REF#refs/heads/} | tr a-z A-Z )"
+        id: extract_branch
+
+      - name: Filter changes
+        uses: dorny/paths-filter@v2
+        id: changes
+        with:
+          filters: |
+            cms:
+              - 'cms/**'
+              - '.github/workflows/*'
+
+      - name: Copy env variables to docker
+        run: |
+          echo "${{ secrets.CMS_STAGE_ENV_FILE }}" > cms/.env
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-northeast-2
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
       - name: Build, tag, and push CMS image to Amazon ECR
         if: steps.changes.outputs.cms == 'true'
         env:
@@ -76,6 +111,23 @@ jobs:
         run: |
           docker build -f cms/Dockerfile.prod -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+
+  deploy:
+    name: Deploy Client and CMS to Amazon EB
+    needs: [build_client_image, build_cms_image]
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-northeast-2
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
 
       - name: Generate docker compose file
         working-directory: infrastructure/afoco_source_bundle
