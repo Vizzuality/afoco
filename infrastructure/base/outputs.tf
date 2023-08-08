@@ -18,8 +18,8 @@ output "staging_beanstalk_environment_settings" {
   value = module.staging.beanstalk_environment_settings
 }
 
-output "staging_beanstalk_lb_dns_name" {
-  value = module.staging.beanstalk_lb_dns_name
+output "staging_beanstalk_environment_cname" {
+  value = module.staging.beanstalk_environment_cname
 }
 
 output "staging_acm_certificate_domain_validation_options" {
@@ -27,4 +27,6 @@ output "staging_acm_certificate_domain_validation_options" {
   value       = module.staging.acm_certificate_domain_validation_options
 }
 
-
+output "staging_acm_certificate_arn" {
+  value = module.staging.acm_certificate_arn
+}

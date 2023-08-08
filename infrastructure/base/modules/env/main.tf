@@ -68,4 +68,5 @@ module "beanstalk" {
   ec2_instance_type       = var.ec2_instance_type
   rds_security_group_id   = aws_security_group.postgresql_access.id
   domain                  = var.domain
+  acm_certificate         = aws_acm_certificate.acm_certificate
 }

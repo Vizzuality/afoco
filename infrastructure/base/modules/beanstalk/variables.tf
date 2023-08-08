@@ -52,3 +52,8 @@ variable "domain" {
   type        = string
   description = "The domain name to use for the environment"
 }
+
+variable "acm_certificate" {
+  type        = any
+  description = "The ACM certificate to use for the environment"
+}
