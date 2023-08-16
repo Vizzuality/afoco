@@ -28,15 +28,6 @@ jobs:
           echo "##[set-output name=branch-upper;]$(echo ${GITHUB_REF#refs/heads/} | tr a-z A-Z )"
         id: extract_branch
 
-      - name: Filter changes
-        uses: dorny/paths-filter@v2
-        id: changes
-        with:
-          filters: |
-            client:
-              - 'client/**'
-              - '.github/workflows/*'
-
       - name: Copy env variables to docker
         env:
           ENVIRONMENT: ${{ steps.extract_branch.outputs.branch == 'main' && 'PROD' || 'STAGE' }}
@@ -55,7 +46,6 @@ jobs:
         uses: aws-actions/amazon-ecr-login@v1
 
       - name: Build, tag, and push Client image to Amazon ECR
-        if: steps.changes.outputs.client == 'true'
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           ECR_REPOSITORY: afoco-${{ steps.extract_branch.outputs.branch == 'main' && 'production' || 'staging' }}-client
@@ -79,15 +69,6 @@ jobs:
           echo "##[set-output name=branch-upper;]$(echo ${GITHUB_REF#refs/heads/} | tr a-z A-Z )"
         id: extract_branch
 
-      - name: Filter changes
-        uses: dorny/paths-filter@v2
-        id: changes
-        with:
-          filters: |
-            cms:
-              - 'cms/**'
-              - '.github/workflows/*'
-
       - name: Copy env variables to docker
         env:
           ENVIRONMENT: ${{ steps.extract_branch.outputs.branch == 'main' && 'PROD' || 'STAGE' }}
@@ -106,7 +87,6 @@ jobs:
         uses: aws-actions/amazon-ecr-login@v1
 
       - name: Build, tag, and push CMS image to Amazon ECR
-        if: steps.changes.outputs.cms == 'true'
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           ECR_REPOSITORY: afoco-${{ steps.extract_branch.outputs.branch == 'main' && 'production' || 'staging' }}-cms
