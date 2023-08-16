@@ -6,6 +6,7 @@ on:
     branches:
       - main
       - staging
+      - refactoring/github-deploy-workflow
     paths:
       - 'client/**'
       - 'cms/**'
