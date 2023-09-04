@@ -19,13 +19,11 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Extract branch name
         shell: bash
-        run: |
-          echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
-          echo "##[set-output name=branch-upper;]$(echo ${GITHUB_REF#refs/heads/} | tr a-z A-Z )"
+        run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
         id: extract_branch
 
       - name: Copy env variables to docker
@@ -60,13 +58,11 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Extract branch name
         shell: bash
-        run: |
-          echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
-          echo "##[set-output name=branch-upper;]$(echo ${GITHUB_REF#refs/heads/} | tr a-z A-Z )"
+        run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
         id: extract_branch
 
       - name: Copy env variables to docker
@@ -102,13 +98,11 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Extract branch name
         shell: bash
-        run: |
-          echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
-          echo "##[set-output name=branch-upper;]$(echo ${GITHUB_REF#refs/heads/} | tr a-z A-Z )"
+        run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
         id: extract_branch
 
       - name: Copy env variables to app folders
@@ -148,6 +142,16 @@ jobs:
           echo "    image: $ECR_REGISTRY/$ECR_REPOSITORY_CMS:$IMAGE_TAG_CMS" >> docker-compose.yml
           echo "    ports:" >> docker-compose.yml
           echo "      - 1337:1337" >> docker-compose.yml
+          echo "  nginx:" >> docker-compose.yml
+          echo "    image: nginx" >> docker-compose.yml
+          echo "    volumes:" >> docker-compose.yml
+          echo "      - ./proxy/conf.d:/etc/nginx/conf.d" >> docker-compose.yml
+          echo "      - \"\${EB_LOG_BASE_DIR}/nginx:/var/log/nginx\"" >> docker-compose.yml
+          echo "    ports:" >> docker-compose.yml
+          echo "      - 80:80" >> docker-compose.yml
+          echo "    depends_on:" >> docker-compose.yml
+          echo "      - cms" >> docker-compose.yml
+          echo "      - client" >> docker-compose.yml
 
       - name: Generate zip file
         working-directory: infrastructure/afoco_source_bundle

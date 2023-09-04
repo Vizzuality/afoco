@@ -6,6 +6,14 @@ output "postgresql_port" {
   value = module.postgresql.port
 }
 
+output "postgresql_username" {
+  value = module.postgresql.username
+}
+
+output "postgresql_password" {
+  value = module.postgresql.password
+}
+
 output "beanstalk_environment_settings" {
   value = module.beanstalk.environment_settings
 }
