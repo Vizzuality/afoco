@@ -1,10 +1,10 @@
 {
   "kind": "collectionType",
-  "collectionName": "layers",
+  "collectionName": "countries",
   "info": {
-    "singularName": "layer",
-    "pluralName": "layers",
-    "displayName": "Layer"
+    "singularName": "country",
+    "pluralName": "countries",
+    "displayName": "Country"
   },
   "options": {
     "draftAndPublish": true
