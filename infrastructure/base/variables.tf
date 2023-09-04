@@ -14,12 +14,29 @@ variable "project" {
   description = "Short name of the project, will be used to prefix created resources"
 }
 
+variable "repo_name" {
+  type        = string
+  description = "Name of the Github repository where the code is hosted"
+}
+
 variable "staging_domain" {
   type = string
 }
 
 variable "production_domain" {
   type = string
+}
+
+variable "ga_tracking_id" {
+  type        = string
+  default     = ""
+  description = "Google Analytics tracking id"
+}
+
+variable "mapbox_api_token" {
+  type        = string
+  default     = ""
+  description = "Mapbox api token"
 }
 
 #
