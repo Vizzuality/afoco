@@ -91,6 +91,11 @@ locals {
     },
     {
       namespace = "aws:autoscaling:launchconfiguration"
+      name      = "RootVolumeSize"
+      value     = var.ec2_disk_size
+    },
+    {
+      namespace = "aws:autoscaling:launchconfiguration"
       name      = "InstanceType"
       value     = var.ec2_instance_type
     },

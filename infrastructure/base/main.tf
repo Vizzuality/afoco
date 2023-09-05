@@ -53,93 +53,30 @@ module "iam" {
   source = "./modules/iam"
 }
 
-resource "random_password" "api_token_salt" {
-  length           = 32
-  special          = true
-  override_special = "!#$%&*()-_=+[]{}<>:?"
-}
-
-resource "random_password" "admin_jwt_secret" {
-  length           = 32
-  special          = true
-  override_special = "!#$%&*()-_=+[]{}<>:?"
-}
-
-resource "random_password" "transfer_token_salt" {
-  length           = 32
-  special          = true
-  override_special = "!#$%&*()-_=+[]{}<>:?"
-}
-
-resource "random_password" "jwt_secret" {
-  length           = 32
-  special          = true
-  override_special = "!#$%&*()-_=+[]{}<>:?"
-}
 
 locals {
   subnets_with_ec2_instance_type_offering_ids = sort([
     for k, v in data.aws_subnets.subnets_with_ec2_instance_type_offering_map : v.ids[0]
   ])
-  staging_cms_env                             = {
-    HOST                = "0.0.0.0"
-    PORT                = 1337
-    APP_KEYS            = "toBeModified1,toBeModified2"
-    API_TOKEN_SALT      = random_password.api_token_salt.result
-    ADMIN_JWT_SECRET    = random_password.admin_jwt_secret.result
-    TRANSFER_TOKEN_SALT = random_password.transfer_token_salt.result
-    JWT_SECRET          = random_password.jwt_secret.result
-    CMS_URL             = "https://${var.staging_domain}/cms/"
-    NODE_ENV            = "development"
-
-    # Database
-    DATABASE_CLIENT                  = "postgres"
-    DATABASE_HOST                    = module.staging.postgresql_host
-    DATABASE_PORT                    = module.staging.postgresql_port
-    DATABASE_NAME                    = "afoco"
-    DATABASE_USERNAME                = module.staging.postgresql_username
-    DATABASE_PASSWORD                = module.staging.postgresql_password
-    DATABASE_SSL                     = true
-    DATABASE_SSL_REJECT_UNAUTHORIZED = false
-  }
-  staging_client_env = {
-    NEXT_PUBLIC_ENVIRONMENT      = development
-    NEXT_PUBLIC_URL              = "https://${var.staging_domain}"
-    NEXT_PUBLIC_API_URL          = "https://${var.staging_domain}/cms/api"
-    NEXT_PUBLIC_MAPBOX_API_TOKEN = var.mapbox_api_token
-    NEXT_PUBLIC_GA_TRACKING_ID   = var.ga_tracking_id
-    RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED = "false"
-  }
 }
-
-module "github_values" {
-  source     = "./modules/github_values"
-  repo_name  = var.repo_name
-  secret_map = {
-    PIPELINE_USER_ACCESS_KEY_ID     = module.iam.pipeline_user_access_key_id
-    PIPELINE_USER_SECRET_ACCESS_KEY = module.iam.pipeline_user_access_key_secret
-    STAGING_CMS_ENV_FILE            = join("\n", [for key, value in local.staging_cms_env : "${key}=${value}"])
-    STAGING_CLIENT_ENV_FILE         = join("\n", [for key, value in local.staging_client_env : "${key}=${value}"])
-    STAGING_DOMAIN                  = var.staging_domain
-  }
-  variable_map = {
-    AWS_REGION = var.aws_region
-  }
-}
-
 
 module "staging" {
-  source             = "./modules/env"
-  domain             = var.staging_domain
-  project            = var.project
-  environment        = "staging"
-  aws_region         = var.aws_region
-  vpc                = data.aws_vpc.default_vpc
-  subnet_ids         = local.subnets_with_ec2_instance_type_offering_ids
-  availability_zones = data.aws_availability_zones.azs_with_ec2_instance_type_offering.names
-  beanstalk_platform = var.beanstalk_platform
-  beanstalk_tier     = var.beanstalk_tier
-  ec2_instance_type  = var.ec2_instance_type
-  rds_engine_version = var.rds_engine_version
-  rds_instance_class = var.rds_instance_class
+  source                          = "./modules/env"
+  domain                          = var.staging_domain
+  project_name                    = var.project
+  repo_name                       = var.repo_name
+  environment                     = "staging"
+  aws_region                      = var.aws_region
+  vpc                             = data.aws_vpc.default_vpc
+  subnet_ids                      = local.subnets_with_ec2_instance_type_offering_ids
+  availability_zones              = data.aws_availability_zones.azs_with_ec2_instance_type_offering.names
+  beanstalk_platform              = var.beanstalk_platform
+  beanstalk_tier                  = var.beanstalk_tier
+  ec2_instance_type               = var.ec2_instance_type
+  rds_engine_version              = var.rds_engine_version
+  rds_instance_class              = var.rds_instance_class
+  mapbox_api_token                = var.mapbox_api_token
+  ga_tracking_id                  = var.ga_tracking_id
+  pipeline_user_access_key_id     = module.iam.pipeline_user_access_key_id
+  pipeline_user_access_key_secret = module.iam.pipeline_user_access_key_secret
 }
