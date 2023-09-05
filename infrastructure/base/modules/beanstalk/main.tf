@@ -100,6 +100,11 @@ locals {
       value     = join(",", [aws_security_group.site_server_ssh_security_group.id, var.rds_security_group_id])
     },
     {
+      namespace = "aws:autoscaling:launchconfiguration"
+      name      = "RootVolumeSize"
+      value     = "32"
+    },
+    {
       namespace = "aws:autoscaling:asg"
       name      = "MinSize"
       value     = 1
