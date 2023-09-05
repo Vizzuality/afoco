@@ -92,13 +92,3 @@ resource "aws_iam_policy" "secrets_postgresql-writer" {
   name   = "${var.project}-${var.environment}-secrets-postgresql-writer"
   policy = data.template_file.secrets_postgresql-writer.rendered
 }
-
-resource "local_file" "username" {
-  content  = aws_db_instance.postgresql.username
-  filename = "rds_username.txt"
-}
-
-resource "local_file" "password" {
-  content  = aws_db_instance.postgresql.password
-  filename = "rds_password.txt"
-}
