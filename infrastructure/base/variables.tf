@@ -9,7 +9,7 @@ variable "allowed_account_id" {
   description = "AWS account id"
 }
 
-variable "project" {
+variable "project_name" {
   type        = string
   description = "Short name of the project, will be used to prefix created resources"
 }
@@ -61,6 +61,12 @@ variable "beanstalk_tier" {
 variable "ec2_instance_type" {
   type        = string
   description = "The type of EC2 instance to launch"
+}
+
+variable "ec2_disk_size" {
+  type        = string
+  default     = "40"
+  description = "The size of the EC2 instance root disk"
 }
 
 #

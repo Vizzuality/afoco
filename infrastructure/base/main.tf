@@ -63,7 +63,7 @@ locals {
 module "staging" {
   source                          = "./modules/env"
   domain                          = var.staging_domain
-  project_name                    = var.project
+  project_name                    = var.project_name
   repo_name                       = var.repo_name
   environment                     = "staging"
   aws_region                      = var.aws_region
@@ -73,6 +73,7 @@ module "staging" {
   beanstalk_platform              = var.beanstalk_platform
   beanstalk_tier                  = var.beanstalk_tier
   ec2_instance_type               = var.ec2_instance_type
+  ec2_disk_size                   = var.ec2_disk_size
   rds_engine_version              = var.rds_engine_version
   rds_instance_class              = var.rds_instance_class
   mapbox_api_token                = var.mapbox_api_token
