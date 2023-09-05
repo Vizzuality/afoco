@@ -1,0 +1,26 @@
+{
+  "kind": "collectionType",
+  "collectionName": "metadata_list_options",
+  "info": {
+    "singularName": "metadata-list-option",
+    "pluralName": "metadata-list-options",
+    "displayName": "MetadataListOption"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "value": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "indicator_field_metadata": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::indicator-field-metadata.indicator-field-metadata",
+      "mappedBy": "metadata_list_options"
+    }
+  }
+}

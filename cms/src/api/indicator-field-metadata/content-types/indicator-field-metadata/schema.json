@@ -1,0 +1,61 @@
+{
+  "kind": "collectionType",
+  "collectionName": "indicator_field_metadatas",
+  "info": {
+    "singularName": "indicator-field-metadata",
+    "pluralName": "indicator-field-metadatas",
+    "displayName": "IndicatorFieldMetadata",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "indicator_type": {
+      "type": "enumeration",
+      "enum": [
+        "location_area",
+        "planted_area",
+        "carbon_area",
+        "species_planted",
+        "survival_rate",
+        "number_seedlings",
+        "community_beneficiaries",
+        "number_officials_trained",
+        "income_level",
+        "livelihood_type",
+        "production",
+        "project_infra"
+      ],
+      "required": true
+    },
+    "field_name": {
+      "type": "string",
+      "required": true
+    },
+    "unit": {
+      "type": "string",
+      "required": true
+    },
+    "data_type": {
+      "type": "enumeration",
+      "enum": [
+        "string",
+        "int",
+        "list"
+      ],
+      "required": true
+    },
+    "using_year": {
+      "type": "boolean",
+      "default": true
+    },
+    "metadata_list_options": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::metadata-list-option.metadata-list-option",
+      "inversedBy": "indicator_field_metadata"
+    }
+  }
+}
