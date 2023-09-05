@@ -28,7 +28,7 @@ jobs:
 
       - name: Copy env variables to docker
         env:
-          ENVIRONMENT: ${{ steps.extract_branch.outputs.branch == 'main' && 'PROD' || 'STAGE' }}
+          ENVIRONMENT: ${{ steps.extract_branch.outputs.branch == 'main' && 'PROD' || 'STAGING' }}
         run: |
           echo "${{ secrets[format('CLIENT_{0}_ENV_FILE', env.ENVIRONMENT)] }}" > client/.env.local
 
@@ -67,7 +67,7 @@ jobs:
 
       - name: Copy env variables to docker
         env:
-          ENVIRONMENT: ${{ steps.extract_branch.outputs.branch == 'main' && 'PROD' || 'STAGE' }}
+          ENVIRONMENT: ${{ steps.extract_branch.outputs.branch == 'main' && 'PROD' || 'STAGING' }}
         run: |
           echo "${{ secrets[format('CMS_{0}_ENV_FILE', env.ENVIRONMENT)] }}" > cms/.env
 
@@ -107,7 +107,7 @@ jobs:
 
       - name: Copy env variables to app folders
         env:
-          ENVIRONMENT: ${{ steps.extract_branch.outputs.branch == 'main' && 'PROD' || 'STAGE' }}
+          ENVIRONMENT: ${{ steps.extract_branch.outputs.branch == 'main' && 'PROD' || 'STAGING' }}
         run: |
           echo "${{ secrets[format('CLIENT_{0}_ENV_FILE', env.ENVIRONMENT)] }}" > client/.env.local
           echo "${{ secrets[format('CMS_{0}_ENV_FILE', env.ENVIRONMENT)] }}" > cms/.env
