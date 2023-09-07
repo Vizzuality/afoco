@@ -51,11 +51,9 @@
       "type": "boolean",
       "default": true
     },
-    "metadata_list_options": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::metadata-list-option.metadata-list-option",
-      "inversedBy": "indicator_field_metadata"
+    "list_of_options": {
+      "type": "json",
+      "default": []
     }
   }
 }
