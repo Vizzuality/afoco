@@ -35,7 +35,8 @@ export function useSyncURLNext(
     pushURL: useCallback(
       (url: string) => {
         const u = decodedQueryParams ? decodeURIComponent(url) : url;
-        return push(u, { shallow: true });
+        // return push(u, { shallow: true });
+        return push(u);
       },
       [decodedQueryParams, push]
     ),
