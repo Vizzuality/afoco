@@ -7,12 +7,6 @@ import FUNCTIONS from '@/lib/utils';
 
 import { ParamsConfig } from '@/types/layers';
 
-import {
-  LegendTypeBasic,
-  LegendTypeChoropleth,
-  LegendTypeGradient,
-} from '@/components/map/legend/item-types';
-
 export const JSON_CONFIGURATION = new JSONConfiguration({
   React,
   classes: Object.assign(
@@ -23,11 +17,7 @@ export const JSON_CONFIGURATION = new JSONConfiguration({
   ),
   functions: FUNCTIONS,
   enumerations: {},
-  reactComponents: {
-    LegendTypeBasic,
-    LegendTypeChoropleth,
-    LegendTypeGradient,
-  },
+  reactComponents: {},
 });
 
 /**
