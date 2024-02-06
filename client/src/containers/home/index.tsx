@@ -1,16 +1,19 @@
 import Datasets from '@/containers/home/datasets';
 import Map from '@/containers/home/map';
-import Sidebar from '@/containers/home/sidebar';
+import Panel from '@/containers/home/panel';
+
+import Sidebar from './sidebar';
 
 export default async function Home() {
   return (
     <>
       <main className="flex min-h-screen flex-col">
         <div className="h-screen w-screen">
+          <Sidebar />
           <Map />
-          <Sidebar>
+          <Panel>
             <Datasets />
-          </Sidebar>
+          </Panel>
         </div>
       </main>
     </>

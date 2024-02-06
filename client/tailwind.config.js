@@ -53,6 +53,7 @@ module.exports = {
           900: '#041310',
         },
         yellow: {
+          50: '#FBF0D4',
           200: '#F5D47F',
           300: '#F2C6553',
           400: '#EFB82A',
@@ -81,6 +82,10 @@ module.exports = {
         xl: '0px 20px 25px -5px #0000001A 0px 10px 10px -5px #0000000A',
         '2xl': '0px 25px 50px -12px #00000040',
         inner: '0px 0px 5px 1px #00000029 inset',
+      },
+      borderRadius: {
+        '4xl': '32px',
+        '8xl': '100px',
       },
       keyframes: {
         'accordion-down': {
