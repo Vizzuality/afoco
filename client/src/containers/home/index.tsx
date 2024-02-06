@@ -1,7 +1,6 @@
 import Datasets from '@/containers/home/datasets';
 import Map from '@/containers/home/map';
 import Sidebar from '@/containers/home/sidebar';
-import SyncStoreHome from '@/containers/home/sync-store';
 
 export default async function Home() {
   return (
@@ -14,8 +13,6 @@ export default async function Home() {
           </Sidebar>
         </div>
       </main>
-
-      <SyncStoreHome />
     </>
   );
 }

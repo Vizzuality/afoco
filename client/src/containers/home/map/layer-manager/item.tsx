@@ -2,7 +2,7 @@
 
 import { useCallback } from 'react';
 
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useAtomValue, useSetAtom } from 'jotai';
 
 import { parseConfig } from '@/lib/json-converter';
 
@@ -22,9 +22,9 @@ interface LayerManagerItemProps extends Required<Pick<LayerResponseDataObject, '
 
 const LayerManagerItem = ({ id, beforeId, settings }: LayerManagerItemProps) => {
   const { data } = useGetLayersId(id);
-  const layersInteractive = useRecoilValue(layersInteractiveAtom);
-  const setLayersInteractive = useSetRecoilState(layersInteractiveAtom);
-  const setLayersInteractiveIds = useSetRecoilState(layersInteractiveIdsAtom);
+  const layersInteractive = useAtomValue(layersInteractiveAtom);
+  const setLayersInteractive = useSetAtom(layersInteractiveAtom);
+  const setLayersInteractiveIds = useSetAtom(layersInteractiveIdsAtom);
 
   const handleAddMapboxLayer = useCallback(
     ({ styles }: Config) => {
@@ -34,11 +34,9 @@ const LayerManagerItem = ({ id, beforeId, settings }: LayerManagerItemProps) => 
 
       if (interaction_config?.enabled) {
         const ids = styles.map((l) => l.id);
-
         if (layersInteractive.includes(id)) {
           return;
         }
-
         setLayersInteractive((prev) => [...prev, id]);
         setLayersInteractiveIds((prev) => [...prev, ...ids]);
       }

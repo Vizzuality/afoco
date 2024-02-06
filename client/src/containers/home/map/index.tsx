@@ -6,7 +6,7 @@ import { LngLatBoundsLike, MapLayerMouseEvent, useMap } from 'react-map-gl';
 
 import dynamic from 'next/dynamic';
 
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useAtomValue, useSetAtom } from 'jotai';
 
 import {
   bboxAtom,
@@ -17,7 +17,7 @@ import {
 } from '@/store';
 
 import { useGetLayers } from '@/types/generated/layer';
-import type { LayerTyped } from '@/types/layers';
+import { LayerTyped } from '@/types/layers';
 import { Bbox } from '@/types/map';
 
 import { MAPBOX_STYLES } from '@/constants/mapbox';
@@ -59,14 +59,14 @@ export default function MapContainer() {
 
   const { [id]: map } = useMap();
 
-  const bbox = useRecoilValue(bboxAtom);
-  const tmpBbox = useRecoilValue(tmpBboxAtom);
-  const layersInteractive = useRecoilValue(layersInteractiveAtom);
-  const layersInteractiveIds = useRecoilValue(layersInteractiveIdsAtom);
+  const bbox = useAtomValue(bboxAtom);
+  const tmpBbox = useAtomValue(tmpBboxAtom);
+  const layersInteractive = useAtomValue(layersInteractiveAtom);
+  const layersInteractiveIds = useAtomValue(layersInteractiveIdsAtom);
 
-  const setBbox = useSetRecoilState(bboxAtom);
-  const setTmpBbox = useSetRecoilState(tmpBboxAtom);
-  const setPopup = useSetRecoilState(popupAtom);
+  const setBbox = useSetAtom(bboxAtom);
+  const setTmpBbox = useSetAtom(tmpBboxAtom);
+  const setPopup = useSetAtom(popupAtom);
 
   const { data: layersInteractiveData } = useGetLayers(
     {
@@ -109,7 +109,6 @@ export default function MapContainer() {
         .map((v: number) => {
           return parseFloat(v.toFixed(2));
         }) as Bbox;
-
       setBbox(b);
       setTmpBbox(null);
     }
@@ -155,6 +154,7 @@ export default function MapContainer() {
           <>
             <Controls className="absolute right-5 top-12 z-40 sm:right-6 sm:top-6">
               <ZoomControl />
+
               <SettingsControl>
                 <MapSettings />
               </SettingsControl>

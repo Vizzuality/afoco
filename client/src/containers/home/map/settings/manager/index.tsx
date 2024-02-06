@@ -2,10 +2,10 @@ import { useCallback, useEffect } from 'react';
 
 import { useMap } from 'react-map-gl';
 
+import { useAtomValue } from 'jotai';
 import { AnyLayer } from 'mapbox-gl';
-import { useRecoilValue } from 'recoil';
 
-import { mapSettingsAtom } from '@/store/index';
+import { mapSettingsAtom } from '@/store';
 
 import { BASEMAPS } from '@/constants/basemaps';
 
@@ -16,7 +16,7 @@ type AnyLayerWithMetadata = AnyLayer & {
 const MapSettingsManager = () => {
   const { default: mapRef } = useMap();
   const loaded = mapRef?.loaded();
-  const { basemap, labels, boundaries, roads } = useRecoilValue(mapSettingsAtom);
+  const { basemap, labels, boundaries, roads } = useAtomValue(mapSettingsAtom);
 
   const handleGroup = useCallback(
     (groups: string[], groupId: string, visible = true) => {

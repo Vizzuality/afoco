@@ -2,7 +2,7 @@
 
 import { Layer } from 'react-map-gl';
 
-import { useRecoilValue } from 'recoil';
+import { useAtomValue } from 'jotai';
 
 import { layersAtom, layersSettingsAtom } from '@/store';
 
@@ -11,8 +11,8 @@ import LayerManagerItem from '@/containers/home/map/layer-manager/item';
 import { DeckMapboxOverlayProvider } from '@/components/map/provider';
 
 const LayerManager = () => {
-  const layers = useRecoilValue(layersAtom);
-  const layersSettings = useRecoilValue(layersSettingsAtom);
+  const layers = useAtomValue(layersAtom);
+  const layersSettings = useAtomValue(layersSettingsAtom);
 
   return (
     <DeckMapboxOverlayProvider>
