@@ -2,7 +2,11 @@
 
 import { useCallback } from 'react';
 
+import { useAtomValue, useSetAtom } from 'jotai';
+
 import { parseConfig } from '@/lib/json-converter';
+
+import { layersInteractiveAtom, layersInteractiveIdsAtom } from '@/store';
 
 import { useGetLayersId } from '@/types/generated/layer';
 import { LayerResponseDataObject } from '@/types/generated/strapi.schemas';
@@ -18,9 +22,9 @@ interface LayerManagerItemProps extends Required<Pick<LayerResponseDataObject, '
 
 const LayerManagerItem = ({ id, beforeId, settings }: LayerManagerItemProps) => {
   const { data } = useGetLayersId(id);
-  // const layersInteractive = useRecoilValue(layersInteractiveAtom);
-  // const setLayersInteractive = useSetRecoilState(layersInteractiveAtom);
-  // const setLayersInteractiveIds = useSetRecoilState(layersInteractiveIdsAtom);
+  const layersInteractive = useAtomValue(layersInteractiveAtom);
+  const setLayersInteractive = useSetAtom(layersInteractiveAtom);
+  const setLayersInteractiveIds = useSetAtom(layersInteractiveIdsAtom);
 
   const handleAddMapboxLayer = useCallback(
     ({ styles }: Config) => {
@@ -29,15 +33,15 @@ const LayerManagerItem = ({ id, beforeId, settings }: LayerManagerItemProps) => 
       const { interaction_config } = data.data.attributes as LayerTyped;
 
       if (interaction_config?.enabled) {
-        // const ids = styles.map((l) => l.id);
-        // if (layersInteractive.includes(id)) {
-        //   return;
-        // }
-        // setLayersInteractive((prev) => [...prev, id]);
-        // setLayersInteractiveIds((prev) => [...prev, ...ids]);
+        const ids = styles.map((l) => l.id);
+        if (layersInteractive.includes(id)) {
+          return;
+        }
+        setLayersInteractive((prev) => [...prev, id]);
+        setLayersInteractiveIds((prev) => [...prev, ...ids]);
       }
     },
-    [data?.data?.attributes, id]
+    [data?.data?.attributes, id, layersInteractive, setLayersInteractive, setLayersInteractiveIds]
   );
 
   const handleRemoveMapboxLayer = useCallback(
@@ -49,11 +53,11 @@ const LayerManagerItem = ({ id, beforeId, settings }: LayerManagerItemProps) => 
       if (interaction_config?.enabled) {
         const ids = styles.map((l) => l.id);
 
-        // setLayersInteractive((prev) => prev.filter((i) => i !== id));
-        // setLayersInteractiveIds((prev) => prev.filter((i) => !ids.includes(i)));
+        setLayersInteractive((prev) => prev.filter((i) => i !== id));
+        setLayersInteractiveIds((prev) => prev.filter((i) => !ids.includes(i)));
       }
     },
-    [data?.data?.attributes, id]
+    [data?.data?.attributes, id, setLayersInteractive, setLayersInteractiveIds]
   );
 
   if (!data?.data?.attributes) return null;

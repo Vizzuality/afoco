@@ -3,8 +3,11 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useMap } from 'react-map-gl';
 
 import type { Feature } from 'geojson';
+import { useAtomValue } from 'jotai';
 
 import { format } from '@/lib/utils/formats';
+
+import { layersInteractiveIdsAtom, popupAtom } from '@/store';
 
 import { useGetLayersId } from '@/types/generated/layer';
 import { LayerTyped } from '@/types/layers';
@@ -20,8 +23,8 @@ const PopupItem = ({ id }: PopupItemProps) => {
 
   const { default: map } = useMap();
 
-  // const popup = useRecoilValue(popupAtom);
-  // const layersInteractiveIds = useRecoilValue(layersInteractiveIdsAtom);
+  const popup = useAtomValue(popupAtom);
+  const layersInteractiveIds = useAtomValue(layersInteractiveIdsAtom);
 
   const { data, isFetching, isFetched, isError, isPlaceholderData } = useGetLayersId(id);
 
@@ -29,36 +32,36 @@ const PopupItem = ({ id }: PopupItemProps) => {
   const source = attributes.config.source;
   const click = attributes.interaction_config.events.find((ev) => ev.type === 'click');
 
-  // const DATA = useMemo(() => {
-  //   if (source.type === 'vector' && rendered && popup && map) {
-  //     const point = map.project(popup.lngLat);
+  const DATA = useMemo(() => {
+    if (source.type === 'vector' && rendered && popup && map) {
+      const point = map.project(popup.lngLat);
 
-  //     // check if the point is outside the canvas
-  //     if (
-  //       point.x < 0 ||
-  //       point.x > map.getCanvas().width ||
-  //       point.y < 0 ||
-  //       point.y > map.getCanvas().height
-  //     ) {
-  //       return DATA_REF.current;
-  //     }
-  //     const query = map.queryRenderedFeatures(point, {
-  //       layers: layersInteractiveIds,
-  //     });
+      // check if the point is outside the canvas
+      if (
+        point.x < 0 ||
+        point.x > map.getCanvas().width ||
+        point.y < 0 ||
+        point.y > map.getCanvas().height
+      ) {
+        return DATA_REF.current;
+      }
+      const query = map.queryRenderedFeatures(point, {
+        layers: layersInteractiveIds,
+      });
 
-  //     const d = query.find((d) => {
-  //       return d.source === source.id;
-  //     })?.properties;
+      const d = query.find((d) => {
+        return d.source === source.id;
+      })?.properties;
 
-  //     DATA_REF.current = d;
+      DATA_REF.current = d;
 
-  //     if (d) {
-  //       return DATA_REF.current;
-  //     }
-  //   }
+      if (d) {
+        return DATA_REF.current;
+      }
+    }
 
-  //   return DATA_REF.current;
-  // }, [popup, source, layersInteractiveIds, map, rendered]);
+    return DATA_REF.current;
+  }, [popup, source, layersInteractiveIds, map, rendered]);
 
   // handle renderer
   const handleMapRender = useCallback(() => {
@@ -86,7 +89,7 @@ const PopupItem = ({ id }: PopupItemProps) => {
           isPlaceholderData={isPlaceholderData}
           skeletonClassName="h-20 w-[250px]"
         >
-          {/* <dl className="space-y-2">
+          <dl className="space-y-2">
             {click &&
               !!DATA &&
               click.values.map((v) => {
@@ -104,7 +107,7 @@ const PopupItem = ({ id }: PopupItemProps) => {
                 );
               })}
             {click && !DATA && <div className="text-xs">No data</div>}
-          </dl> */}
+          </dl>
         </ContentLoader>
       </div>
     </div>
