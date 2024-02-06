@@ -69,10 +69,14 @@ module.exports = {
           900: '#B00000',
         },
       },
-      borderRadius: {
-        lg: 'var(--radius)',
-        md: 'calc(var(--radius) - 2px)',
-        sm: 'calc(var(--radius) - 4px)',
+      boxShadow: {
+        sm: '0px 1px 2px 0px #0000000D',
+        base: '0px 1px 3px 0px #0000001A 0px 1px 2px 0px #0000000F',
+        md: '0px 4px 6px -1px #0000001A 0px 2px 4px -1px #0000000F',
+        lg: '0px 10px 15px -3px #0000001A 0px 4px 6px -2px #0000000D',
+        xl: '0px 20px 25px -5px #0000001A 0px 10px 10px -5px #0000000A',
+        '2xl': '0px 25px 50px -12px #00000040',
+        inner: '0px 0px 5px 1px #00000029 inset',
       },
       keyframes: {
         'accordion-down': {
