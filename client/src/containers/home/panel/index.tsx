@@ -8,7 +8,9 @@ import { cn } from '@/lib/classnames';
 import { sidebarTabAtom } from '@/store';
 import { openAtom } from '@/store';
 
+import Countries from '@/containers/home/countries';
 import Datasets from '@/containers/home/datasets';
+import Projects from '@/containers/home/projects';
 
 import { Button } from '@/components/ui/button';
 
@@ -43,8 +45,8 @@ export default function Panel() {
       </div>
 
       <div className="prose flex grow flex-col overflow-y-auto">
-        {sidebarTab === 'projects' && <Datasets />}
-        {sidebarTab === 'countries' && <Datasets />}
+        {sidebarTab === 'projects' && <Projects />}
+        {sidebarTab === 'countries' && <Countries />}
         {sidebarTab === 'datasets' && <Datasets />}
       </div>
     </div>
