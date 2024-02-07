@@ -4,7 +4,7 @@ import { useAtomValue, useAtom } from 'jotai';
 
 import { layersInteractiveAtom, popupAtom } from '@/store';
 
-import PopupItem from '@/containers/home/map/popup/item';
+import PopupItem from '@/containers/map/popup/item';
 
 const PopupContainer = () => {
   const layersInteractive = useAtomValue(layersInteractiveAtom);

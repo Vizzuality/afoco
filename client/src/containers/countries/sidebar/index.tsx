@@ -9,8 +9,8 @@ import { cn } from '@/lib/classnames';
 
 import { sidebarTabAtom } from '@/store';
 
-import type { SidebarTab } from '@/containers/home/sidebar/constants';
-import { TABS } from '@/containers/home/sidebar/constants';
+import type { SidebarTab } from '@/containers/countries/sidebar/constants';
+import { TABS } from '@/containers/countries/sidebar/constants';
 
 import Icon from '@/components/ui/icon';
 

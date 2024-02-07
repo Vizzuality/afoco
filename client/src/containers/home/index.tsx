@@ -1,7 +1,7 @@
-import Map from '@/containers/home/map';
-import Panel from '@/containers/home/panel';
+import Map from '@/containers/map';
+import Panel from '@/containers/panel';
 
-import Sidebar from './sidebar';
+import Sidebar from '../countries/sidebar';
 
 export default async function Home() {
   return (

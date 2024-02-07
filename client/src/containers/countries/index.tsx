@@ -1,6 +1,6 @@
 'use client';
 
-import CountriesList from '@/containers/home/countries/list';
+import CountriesList from '@/containers/countries/list';
 
 export default function Countries() {
   return (

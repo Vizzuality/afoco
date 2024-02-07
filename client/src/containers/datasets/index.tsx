@@ -1,6 +1,6 @@
 'use client';
 
-import DatasetsList from '@/containers/home/datasets/list';
+import DatasetsList from '@/containers/datasets/list';
 
 export default function Datasets() {
   return (

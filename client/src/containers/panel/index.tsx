@@ -8,9 +8,9 @@ import { cn } from '@/lib/classnames';
 import { sidebarTabAtom } from '@/store';
 import { openAtom } from '@/store';
 
-import Countries from '@/containers/home/countries';
-import Datasets from '@/containers/home/datasets';
-import Projects from '@/containers/home/projects';
+import Countries from '@/containers/countries';
+import Datasets from '@/containers/datasets';
+import Projects from '@/containers/projects';
 
 import { Button } from '@/components/ui/button';
 

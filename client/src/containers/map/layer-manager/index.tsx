@@ -6,7 +6,7 @@ import { useAtomValue } from 'jotai';
 
 import { layersAtom, layersSettingsAtom } from '@/store';
 
-import LayerManagerItem from '@/containers/home/map/layer-manager/item';
+import LayerManagerItem from '@/containers/map/layer-manager/item';
 
 import { DeckMapboxOverlayProvider } from '@/components/map/provider';
 
