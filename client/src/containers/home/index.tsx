@@ -1,4 +1,3 @@
-import Datasets from '@/containers/home/datasets';
 import Map from '@/containers/home/map';
 import Panel from '@/containers/home/panel';
 
@@ -11,9 +10,7 @@ export default async function Home() {
         <div className="h-screen w-screen">
           <Sidebar />
           <Map />
-          <Panel>
-            <Datasets />
-          </Panel>
+          <Panel />
         </div>
       </main>
     </>

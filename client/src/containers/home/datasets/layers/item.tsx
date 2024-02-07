@@ -1,6 +1,6 @@
 'use client';
 
-import { useAtomValue, useSetAtom } from 'jotai';
+import { useAtom } from 'jotai';
 
 import { layersAtom } from '@/store';
 
@@ -9,8 +9,7 @@ import { LayerListResponseDataItem } from '@/types/generated/strapi.schemas';
 import { Switch } from '@/components/ui/switch';
 
 export default function LayersItem({ id, attributes }: Required<LayerListResponseDataItem>) {
-  const layers = useAtomValue(layersAtom);
-  const setLayers = useSetAtom(layersAtom);
+  const [layers, setLayers] = useAtom(layersAtom);
 
   const handleLayerChange = () => {
     if (!id) return;

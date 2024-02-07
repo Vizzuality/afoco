@@ -1,17 +1,19 @@
 'use client';
 
-import { PropsWithChildren } from 'react';
-
-import { useAtom } from 'jotai';
+import { useAtomValue, useAtom } from 'jotai';
 import { ChevronLeft } from 'lucide-react';
 
 import { cn } from '@/lib/classnames';
 
+import { sidebarTabAtom } from '@/store';
 import { openAtom } from '@/store';
+
+import Datasets from '@/containers/home/datasets';
 
 import { Button } from '@/components/ui/button';
 
-export default function Panel({ children }: PropsWithChildren) {
+export default function Panel() {
+  const sidebarTab = useAtomValue(sidebarTabAtom);
   const [open, setOpen] = useAtom(openAtom);
 
   return (
@@ -40,7 +42,11 @@ export default function Panel({ children }: PropsWithChildren) {
         </Button>
       </div>
 
-      <div className="prose flex grow flex-col overflow-y-auto">{children}</div>
+      <div className="prose flex grow flex-col overflow-y-auto">
+        {sidebarTab === 'projects' && <Datasets />}
+        {sidebarTab === 'countries' && <Datasets />}
+        {sidebarTab === 'datasets' && <Datasets />}
+      </div>
     </div>
   );
 }

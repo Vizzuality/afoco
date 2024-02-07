@@ -6,7 +6,7 @@ import { LngLatBoundsLike, MapLayerMouseEvent, useMap } from 'react-map-gl';
 
 import dynamic from 'next/dynamic';
 
-import { useAtomValue, useSetAtom } from 'jotai';
+import { useAtomValue, useSetAtom, useAtom } from 'jotai';
 
 import {
   bboxAtom,
@@ -59,14 +59,13 @@ export default function MapContainer() {
 
   const { [id]: map } = useMap();
 
-  const bbox = useAtomValue(bboxAtom);
-  const tmpBbox = useAtomValue(tmpBboxAtom);
   const layersInteractive = useAtomValue(layersInteractiveAtom);
   const layersInteractiveIds = useAtomValue(layersInteractiveIdsAtom);
 
-  const setBbox = useSetAtom(bboxAtom);
-  const setTmpBbox = useSetAtom(tmpBboxAtom);
   const setPopup = useSetAtom(popupAtom);
+
+  const [bbox, setBbox] = useAtom(bboxAtom);
+  const [tmpBbox, setTmpBbox] = useAtom(tmpBboxAtom);
 
   const { data: layersInteractiveData } = useGetLayers(
     {
