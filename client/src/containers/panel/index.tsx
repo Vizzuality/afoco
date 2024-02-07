@@ -21,30 +21,37 @@ export default function Panel() {
   return (
     <div
       className={cn({
-        'rounded-4xl absolute bottom-0 left-28 top-0 my-2 flex w-full max-w-[400px] flex-col bg-white shadow-lg shadow-md transition-transform duration-500':
+        'rounded-4xl absolute bottom-0 top-0 my-2 flex w-full max-w-[400px] flex-col bg-white shadow-lg shadow-md transition-transform duration-500':
           true,
-        'translate-x-0': open,
-        '-translate-x-full': !open,
+        'left-28 translate-x-0': open,
+        'left-24 -translate-x-full': !open,
       })}
     >
       <div className="absolute left-full top-6 z-10">
         <Button
-          variant="default"
+          variant="ghost"
           size="icon"
+          className="rounded-l-none"
           onClick={() => {
             setOpen(!open);
           }}
         >
           <ChevronLeft
             className={cn({
-              'h-6 w-6 transition-transform': true,
+              'h-4 w-4 transition-transform': true,
               'rotate-180': !open,
             })}
           />
         </Button>
       </div>
 
-      <div className="prose flex grow flex-col overflow-y-auto">
+      <div
+        className={cn({
+          'prose flex grow flex-col overflow-y-auto': true,
+          'opacity-100': open,
+          'opacity-0': !open,
+        })}
+      >
         {sidebarTab === 'projects' && <Projects />}
         {sidebarTab === 'countries' && <Countries />}
         {sidebarTab === 'datasets' && <Datasets />}

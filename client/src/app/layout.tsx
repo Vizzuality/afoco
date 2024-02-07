@@ -5,6 +5,9 @@ import localFont from 'next/font/local';
 
 import Providers from '@/app/layout-providers';
 
+import Panel from '@/containers/panel';
+import Sidebar from '@/containers/sidebar';
+
 const bricolage = localFont({
   src: [
     {
@@ -45,7 +48,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <Providers>
       <html lang="en">
-        <body className={`${bricolage.variable} font-sans`}>{children}</body>
+        <body className={`${bricolage.variable} font-sans`}>
+          <Sidebar />
+          {children}
+          <Panel />
+        </body>
       </html>
     </Providers>
   );
