@@ -7,7 +7,7 @@ import { ChevronLeft } from 'lucide-react';
 
 import { cn } from '@/lib/classnames';
 
-import { dashboardAtom, sidebarTabAtom } from '@/store';
+import { dashboardAtom } from '@/store';
 import { openAtom } from '@/store';
 
 import Countries from '@/containers/countries';
@@ -19,7 +19,6 @@ import ProjectDetailPanel from '@/containers/projects/detail/panel';
 import { Button } from '@/components/ui/button';
 
 export default function Panel() {
-  const sidebarTab = useAtomValue(sidebarTabAtom);
   const dashboard = useAtomValue(dashboardAtom);
   const [open, setOpen] = useAtom(openAtom);
 
@@ -64,9 +63,9 @@ export default function Panel() {
           'opacity-0': !open,
         })}
       >
-        {sidebarTab === 'projects' && pathname === '/' && <Projects />}
-        {sidebarTab === 'countries' && pathname === '/' && <Countries />}
-        {sidebarTab === 'datasets' && pathname === '/' && <Datasets />}
+        {pathname === '/projects' && <Projects />}
+        {pathname === '/countries' && <Countries />}
+        {pathname === '/datasets' && <Datasets />}
         {pathname.includes('/projects/') && <ProjectDetailPanel />}
         {pathname.includes('/countries/') && <CountryDetailPanel />}
       </div>

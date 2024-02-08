@@ -45,6 +45,9 @@ module.exports = {
           DEFAULT: 'hsl(var(--accent))',
           foreground: 'hsl(var(--accent-foreground))',
         },
+        gray: {
+          500: '#9CA3AF',
+        },
         green: {
           200: '#8BB0A8',
           300: '#64968B',

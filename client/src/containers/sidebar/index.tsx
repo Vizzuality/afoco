@@ -25,9 +25,9 @@ export default function Sidebar() {
           <Image src="/images/logo.svg" alt="logo" width={62} height={29} />
         </div>
         <ul className="flex h-full flex-col">
-          {TABS.map(({ name, icon }) => (
+          {TABS.map(({ name, icon, href }) => (
             <Link
-              href="/"
+              href={href}
               key={name}
               className={cn({
                 'rounded-8xl mx-2 mt-2 flex flex-col items-center space-y-1 border border-2 border-transparent py-10 text-center':

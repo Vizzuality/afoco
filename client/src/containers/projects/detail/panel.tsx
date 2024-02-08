@@ -14,7 +14,7 @@ export default function ProjectDetailPanel() {
   const [dashboard, setDashboard] = useAtom(dashboardAtom);
 
   return (
-    <div className="bg-neutral-50 p-6">
+    <div className="h-full rounded-3xl bg-neutral-50 p-6 ">
       <div className="absolute left-0 top-0 w-full">
         <div className="relative">
           <Image
@@ -32,7 +32,7 @@ export default function ProjectDetailPanel() {
       </div>
 
       <Link
-        href="/"
+        href="/projects"
         className="absolute top-6 z-10 flex items-center space-x-3 text-xs text-yellow-900"
       >
         <ArrowLeft className="h-4 w-4 text-yellow-900" />
