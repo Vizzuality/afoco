@@ -2,7 +2,7 @@
 
 import { useCallback } from 'react';
 
-import { useAtomValue, useSetAtom } from 'jotai';
+import { useSetAtom, useAtom } from 'jotai';
 
 import { parseConfig } from '@/lib/json-converter';
 
@@ -22,9 +22,10 @@ interface LayerManagerItemProps extends Required<Pick<LayerResponseDataObject, '
 
 const LayerManagerItem = ({ id, beforeId, settings }: LayerManagerItemProps) => {
   const { data } = useGetLayersId(id);
-  const layersInteractive = useAtomValue(layersInteractiveAtom);
-  const setLayersInteractive = useSetAtom(layersInteractiveAtom);
+
   const setLayersInteractiveIds = useSetAtom(layersInteractiveIdsAtom);
+
+  const [layersInteractive, setLayersInteractive] = useAtom(layersInteractiveAtom);
 
   const handleAddMapboxLayer = useCallback(
     ({ styles }: Config) => {

@@ -19,7 +19,9 @@ type MapSettings = {
 };
 
 // Sidebar and menus
-export const atomOpen = atom<boolean>(true);
+export const openAtom = atom<boolean>(true);
+
+export const sidebarTabAtom = atom<'projects' | 'countries' | 'datasets'>('projects');
 
 // Map viewport
 export const bboxAtom = atom<readonly [number, number, number, number] | null | undefined>(null);

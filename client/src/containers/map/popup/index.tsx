@@ -1,15 +1,16 @@
 import { Popup } from 'react-map-gl';
 
-import { useAtomValue, useSetAtom } from 'jotai';
+import { useAtomValue, useAtom } from 'jotai';
 
 import { layersInteractiveAtom, popupAtom } from '@/store';
 
-import PopupItem from '@/containers/home/map/popup/item';
+import PopupItem from '@/containers/map/popup/item';
 
 const PopupContainer = () => {
-  const popup = useAtomValue(popupAtom);
-  const setPopup = useSetAtom(popupAtom);
   const layersInteractive = useAtomValue(layersInteractiveAtom);
+
+  const [popup, setPopup] = useAtom(popupAtom);
+
   const lys = [...layersInteractive].reverse();
 
   if (!popup) return null;

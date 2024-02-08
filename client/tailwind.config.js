@@ -20,6 +20,9 @@ module.exports = {
       fontFamily: {
         sans: ['var(--font-bricolage)'],
       },
+      fontSize: {
+        '2xs': '0.625rem',
+      },
       colors: {
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
@@ -53,8 +56,10 @@ module.exports = {
           900: '#041310',
         },
         yellow: {
+          50: '#FBF0D4',
+          100: '#F8E2AA',
           200: '#F5D47F',
-          300: '#F2C6553',
+          300: '#F2C655',
           400: '#EFB82A',
           500: '#ECAA00',
           600: '#D48D00',
@@ -81,6 +86,10 @@ module.exports = {
         xl: '0px 20px 25px -5px #0000001A 0px 10px 10px -5px #0000000A',
         '2xl': '0px 25px 50px -12px #00000040',
         inner: '0px 0px 5px 1px #00000029 inset',
+      },
+      borderRadius: {
+        '4xl': '32px',
+        '8xl': '100px',
       },
       keyframes: {
         'accordion-down': {
