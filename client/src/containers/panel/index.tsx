@@ -1,5 +1,7 @@
 'use client';
 
+import { usePathname } from 'next/navigation';
+
 import { useAtomValue, useAtom } from 'jotai';
 import { ChevronLeft } from 'lucide-react';
 
@@ -9,8 +11,10 @@ import { sidebarTabAtom } from '@/store';
 import { openAtom } from '@/store';
 
 import Countries from '@/containers/countries';
+import CountryDetailPanel from '@/containers/countries/detail/panel';
 import Datasets from '@/containers/datasets';
 import Projects from '@/containers/projects';
+import ProjectDetailPanel from '@/containers/projects/detail/panel';
 
 import { Button } from '@/components/ui/button';
 
@@ -18,10 +22,12 @@ export default function Panel() {
   const sidebarTab = useAtomValue(sidebarTabAtom);
   const [open, setOpen] = useAtom(openAtom);
 
+  const pathname = usePathname();
+
   return (
     <div
       className={cn({
-        'rounded-4xl absolute bottom-0 top-0 my-2 flex w-full max-w-[400px] flex-col bg-white shadow-lg shadow-md transition-transform duration-500':
+        'rounded-4xl absolute bottom-0 top-0 my-2 flex w-full max-w-[400px] flex-col bg-white shadow-md transition-transform duration-500':
           true,
         'left-28 translate-x-0': open,
         'left-24 -translate-x-full': !open,
@@ -52,9 +58,11 @@ export default function Panel() {
           'opacity-0': !open,
         })}
       >
-        {sidebarTab === 'projects' && <Projects />}
-        {sidebarTab === 'countries' && <Countries />}
-        {sidebarTab === 'datasets' && <Datasets />}
+        {sidebarTab === 'projects' && pathname === '/' && <Projects />}
+        {sidebarTab === 'countries' && pathname === '/' && <Countries />}
+        {sidebarTab === 'datasets' && pathname === '/' && <Datasets />}
+        {pathname.includes('/projects/') && <ProjectDetailPanel />}
+        {pathname.includes('/countries/') && <CountryDetailPanel />}
       </div>
     </div>
   );

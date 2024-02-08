@@ -21,6 +21,8 @@ type MapSettings = {
 // Sidebar and menus
 export const openAtom = atom<boolean>(true);
 
+export const dashboardAtom = atom<boolean>(false);
+
 export const sidebarTabAtom = atom<'projects' | 'countries' | 'datasets'>('projects');
 
 // Map viewport
