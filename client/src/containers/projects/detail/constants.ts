@@ -2,7 +2,16 @@ import AREA_SVG from '@/svgs/dashboard/planted-area.svg';
 import SEEDS_SVG from '@/svgs/dashboard/planted-seeds.svg';
 import TRAINING_SVG from '@/svgs/dashboard/training-activities.svg';
 
-export const OVERVIEW_RESUME_ITEMS = [
+export const PANEL_OVERVIEW_ITEMS = [
+  { title: 'Status', value: 'Ongoing' },
+  { title: 'Priority Areas', value: 'Climate change adaptation' },
+  { title: 'Location', value: 'West Nousa, Indonesia' },
+  { title: 'Duration', value: '2021-2024' },
+  { title: 'Donors', value: 'Korea Forest Service' },
+  { title: 'Investment', value: 'USD 800K' },
+];
+
+export const DASHBOARD_OVERVIEW_RESUME_ITEMS = [
   {
     title: 'Planted area',
     value: '10',

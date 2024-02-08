@@ -5,7 +5,7 @@ import { Info, X } from 'lucide-react';
 
 import { dashboardAtom } from '@/store';
 
-import { OVERVIEW_RESUME_ITEMS } from '@/containers/projects/detail/constants';
+import { DASHBOARD_OVERVIEW_RESUME_ITEMS } from '@/containers/projects/detail/constants';
 
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
@@ -28,7 +28,7 @@ export default function ProjectDashboard() {
         </button>
       </div>
       <div className="mb-6 flex space-x-6">
-        {OVERVIEW_RESUME_ITEMS.map(({ title, icon, value, unit }) => (
+        {DASHBOARD_OVERVIEW_RESUME_ITEMS.map(({ title, icon, value, unit }) => (
           <div
             key={title}
             className="flex w-1/3 items-center space-x-6 rounded-xl bg-white p-4 text-sm text-green-800 shadow-sm"

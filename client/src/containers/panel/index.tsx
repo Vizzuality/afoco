@@ -1,7 +1,5 @@
 'use client';
 
-import { usePathname } from 'next/navigation';
-
 import { useAtomValue, useAtom } from 'jotai';
 import { ChevronLeft } from 'lucide-react';
 
@@ -10,19 +8,11 @@ import { cn } from '@/lib/classnames';
 import { dashboardAtom } from '@/store';
 import { openAtom } from '@/store';
 
-import Countries from '@/containers/countries';
-import CountryDetailPanel from '@/containers/countries/detail/panel';
-import Datasets from '@/containers/datasets';
-import Projects from '@/containers/projects';
-import ProjectDetailPanel from '@/containers/projects/detail/panel';
-
 import { Button } from '@/components/ui/button';
 
-export default function Panel() {
+export default function Panel({ children }: { children: React.ReactNode }) {
   const dashboard = useAtomValue(dashboardAtom);
   const [open, setOpen] = useAtom(openAtom);
-
-  const pathname = usePathname();
 
   return (
     <div
@@ -63,11 +53,7 @@ export default function Panel() {
           'opacity-0': !open,
         })}
       >
-        {pathname === '/projects' && <Projects />}
-        {pathname === '/countries' && <Countries />}
-        {pathname === '/datasets' && <Datasets />}
-        {pathname.includes('/projects/') && <ProjectDetailPanel />}
-        {pathname.includes('/countries/') && <CountryDetailPanel />}
+        {children}
       </div>
     </div>
   );

@@ -9,12 +9,12 @@ export default function CountryDetailPanel() {
     <div className="p-6">
       <Link
         href="/countries"
-        className="absolute top-6 z-10 flex items-center space-x-3 text-xs text-yellow-900"
+        className="absolute top-8 z-10 flex items-center space-x-3 rounded px-2 py-1 text-xs text-yellow-900 transition-all hover:bg-yellow-100"
       >
         <ArrowLeft className="h-4 w-4 text-yellow-900" />
         <p>Back</p>
       </Link>
-      <div className="mt-10 flex space-x-2">
+      <div className="mt-16 flex space-x-2">
         <Image
           src="/images/countries/placeholder.png"
           alt="Country Flag"
