@@ -19,7 +19,7 @@ export default function Sidebar() {
   const [sidebarTab, setSidebarTab] = useAtom(sidebarTabAtom);
 
   return (
-    <div className="rounded-8xl absolute bottom-0 left-4 top-0 z-10 my-2 w-20 bg-yellow-700 py-10 text-xs text-yellow-50">
+    <div className="rounded-8xl absolute bottom-0 left-4 top-0 z-20 my-2 w-20 bg-yellow-700 py-10 text-xs text-yellow-50">
       <div className="h-[88%]">
         <div className="flex flex-col items-center pb-12">
           <Image src="/images/logo.svg" alt="logo" width={62} height={29} />
