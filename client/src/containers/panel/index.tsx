@@ -7,7 +7,7 @@ import { ChevronLeft } from 'lucide-react';
 
 import { cn } from '@/lib/classnames';
 
-import { sidebarTabAtom } from '@/store';
+import { dashboardAtom, sidebarTabAtom } from '@/store';
 import { openAtom } from '@/store';
 
 import Countries from '@/containers/countries';
@@ -20,6 +20,7 @@ import { Button } from '@/components/ui/button';
 
 export default function Panel() {
   const sidebarTab = useAtomValue(sidebarTabAtom);
+  const dashboard = useAtomValue(dashboardAtom);
   const [open, setOpen] = useAtom(openAtom);
 
   const pathname = usePathname();
@@ -33,7 +34,12 @@ export default function Panel() {
         'left-24 -translate-x-full': !open,
       })}
     >
-      <div className="absolute left-full top-6 z-10">
+      <div
+        className={cn({
+          'absolute left-full top-6 z-10': true,
+          hidden: dashboard,
+        })}
+      >
         <Button
           variant="ghost"
           size="icon"

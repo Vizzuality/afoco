@@ -40,7 +40,7 @@ const bricolage = localFont({
 });
 
 export const metadata = {
-  title: 'AFOCO',
+  title: 'AFoCO',
   description: '',
 };
 

@@ -14,7 +14,7 @@ export default function ProjectDetailPanel() {
   const [dashboard, setDashboard] = useAtom(dashboardAtom);
 
   return (
-    <div className="bg-decoration-neutral-50 p-6">
+    <div className="bg-neutral-50 p-6">
       <div className="absolute left-0 top-0 w-full">
         <div className="relative">
           <Image
