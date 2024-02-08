@@ -1,12 +1,16 @@
 import '@/styles/globals.css';
 import '@/styles/mapbox.css';
 
+import dynamic from 'next/dynamic';
 import localFont from 'next/font/local';
 
 import Providers from '@/app/layout-providers';
 
-import Panel from '@/containers/panel';
 import Sidebar from '@/containers/sidebar';
+
+const Map = dynamic(() => import('@/containers/map'), {
+  ssr: false,
+});
 
 const bricolage = localFont({
   src: [
@@ -40,7 +44,7 @@ const bricolage = localFont({
 });
 
 export const metadata = {
-  title: 'AFOCO',
+  title: 'AFoCO',
   description: '',
 };
 
@@ -49,9 +53,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <Providers>
       <html lang="en">
         <body className={`${bricolage.variable} font-sans`}>
-          <Sidebar />
-          {children}
-          <Panel />
+          <div className="relative h-screen w-screen">
+            <Sidebar />
+            {children}
+            <Map />
+          </div>
         </body>
       </html>
     </Providers>

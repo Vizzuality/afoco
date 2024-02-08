@@ -2,6 +2,8 @@
 
 import { PropsWithChildren, useState } from 'react';
 
+import { MapProvider } from 'react-map-gl';
+
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import { TooltipProvider } from '@/components/ui/tooltip';
@@ -11,7 +13,9 @@ export default function Providers({ children }: PropsWithChildren) {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <TooltipProvider>{children}</TooltipProvider>
+      <MapProvider>
+        <TooltipProvider>{children}</TooltipProvider>
+      </MapProvider>
     </QueryClientProvider>
   );
 }

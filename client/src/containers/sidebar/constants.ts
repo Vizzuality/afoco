@@ -5,7 +5,7 @@ import PROJECTS_SVG from '@/svgs/sidebar/projects.svg';
 export type SidebarTab = 'projects' | 'countries' | 'datasets';
 
 export const TABS = [
-  { name: 'projects', icon: PROJECTS_SVG },
-  { name: 'countries', icon: COUNTRIES_SVG },
-  { name: 'datasets', icon: DATASETS_SVG },
+  { name: 'projects', icon: PROJECTS_SVG, href: '/projects' },
+  { name: 'countries', icon: COUNTRIES_SVG, href: '/countries' },
+  { name: 'datasets', icon: DATASETS_SVG, href: '/datasets' },
 ];

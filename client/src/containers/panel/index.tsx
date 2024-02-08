@@ -5,29 +5,30 @@ import { ChevronLeft } from 'lucide-react';
 
 import { cn } from '@/lib/classnames';
 
-import { sidebarTabAtom } from '@/store';
+import { dashboardAtom } from '@/store';
 import { openAtom } from '@/store';
-
-import Countries from '@/containers/countries';
-import Datasets from '@/containers/datasets';
-import Projects from '@/containers/projects';
 
 import { Button } from '@/components/ui/button';
 
-export default function Panel() {
-  const sidebarTab = useAtomValue(sidebarTabAtom);
+export default function Panel({ children }: { children: React.ReactNode }) {
+  const dashboard = useAtomValue(dashboardAtom);
   const [open, setOpen] = useAtom(openAtom);
 
   return (
     <div
       className={cn({
-        'rounded-4xl absolute bottom-0 top-0 my-2 flex w-full max-w-[400px] flex-col bg-white shadow-lg shadow-md transition-transform duration-500':
+        'rounded-4xl absolute bottom-0 top-0 z-10 my-2 flex w-full max-w-[400px] flex-col bg-white shadow-md transition-transform duration-500':
           true,
         'left-28 translate-x-0': open,
         'left-24 -translate-x-full': !open,
       })}
     >
-      <div className="absolute left-full top-6 z-10">
+      <div
+        className={cn({
+          'absolute left-full top-6 z-10': true,
+          hidden: dashboard,
+        })}
+      >
         <Button
           variant="ghost"
           size="icon"
@@ -52,9 +53,7 @@ export default function Panel() {
           'opacity-0': !open,
         })}
       >
-        {sidebarTab === 'projects' && <Projects />}
-        {sidebarTab === 'countries' && <Countries />}
-        {sidebarTab === 'datasets' && <Datasets />}
+        {children}
       </div>
     </div>
   );

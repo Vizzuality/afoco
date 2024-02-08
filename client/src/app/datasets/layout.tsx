@@ -1,13 +1,13 @@
 'use client';
 
-import CountryDetailPanel from '@/containers/countries/detail/panel';
+import Datasets from '@/containers/datasets';
 import Panel from '@/containers/panel';
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div>
       <Panel>
-        <CountryDetailPanel />
+        <Datasets />
       </Panel>
       {children}
     </div>

@@ -15,7 +15,7 @@ export const env = createEnv({
    */
   client: {
     NEXT_PUBLIC_ENVIRONMENT: z.enum(['development', 'staging', 'production']),
-    NEXT_PUBLIC_URL: z.string().url(),
+    NEXT_PUBLIC_URL: z.string().url().optional(),
     NEXT_PUBLIC_API_URL: z.string().url(),
     NEXT_PUBLIC_MAPBOX_API_TOKEN: z.string(),
     NEXT_PUBLIC_GA_TRACKING_ID: z.string().optional(),

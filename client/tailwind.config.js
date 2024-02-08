@@ -45,6 +45,9 @@ module.exports = {
           DEFAULT: 'hsl(var(--accent))',
           foreground: 'hsl(var(--accent-foreground))',
         },
+        gray: {
+          500: '#9CA3AF',
+        },
         green: {
           200: '#8BB0A8',
           300: '#64968B',
@@ -80,10 +83,10 @@ module.exports = {
       },
       boxShadow: {
         sm: '0px 1px 2px 0px #0000000D',
-        base: '0px 1px 3px 0px #0000001A 0px 1px 2px 0px #0000000F',
-        md: '0px 4px 6px -1px #0000001A 0px 2px 4px -1px #0000000F',
-        lg: '0px 10px 15px -3px #0000001A 0px 4px 6px -2px #0000000D',
-        xl: '0px 20px 25px -5px #0000001A 0px 10px 10px -5px #0000000A',
+        base: '0px 1px 3px 0px #0000001A, 0px 1px 2px 0px #0000000F',
+        md: '0px 4px 6px -1px #0000001A, 0px 2px 4px -1px #0000000F',
+        lg: '0px 10px 15px -3px #0000001A, 0px 4px 6px -2px #0000000D',
+        xl: '0px 20px 25px -5px #0000001A, 0px 10px 10px -5px #0000000A',
         '2xl': '0px 25px 50px -12px #00000040',
         inner: '0px 0px 5px 1px #00000029 inset',
       },

@@ -1,13 +1,17 @@
 'use client';
 
-import { useParams } from 'next/navigation';
+import { useAtomValue } from 'jotai';
+
+import { dashboardAtom } from '@/store';
+
+import ProjectDashboard from '@/containers/projects/detail/dashboard';
 
 export default function ProjectDetail() {
-  const { slug } = useParams();
+  const dashboard = useAtomValue(dashboardAtom);
 
   return (
-    <div className="flex h-screen items-center justify-center text-3xl text-yellow-900">
-      Detail of project {slug}
+    <div className="flex grid h-screen grid-cols-12 items-center justify-center text-3xl text-yellow-900">
+      {dashboard && <ProjectDashboard />}
     </div>
   );
 }
