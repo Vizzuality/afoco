@@ -37,14 +37,11 @@ export default function Sidebar() {
             >
               <div className="relative">
                 <Image
-                  src={icon}
+                  src={sidebarTab === name ? icon.selected : icon.default}
                   alt={name}
                   width={24}
                   height={24}
-                  className={cn({
-                    'h-6 w-6 fill-current text-yellow-50': true,
-                    'text-white': sidebarTab === name,
-                  })}
+                  className="h-6 w-6"
                 />
                 <div
                   className={cn({
