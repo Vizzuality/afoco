@@ -28,7 +28,7 @@ export default function Sidebar() {
               href={href}
               key={name}
               className={cn({
-                'rounded-8xl mx-2 mt-2 flex flex-col items-center space-y-1 border border-2 border-transparent py-10 text-center':
+                'rounded-8xl mx-2 mt-2 flex flex-col items-center space-y-1 border-2 border-transparent py-10 text-center':
                   true,
                 'bg-yellow-600': sidebarTab === name,
                 'hover:border-yellow-50': sidebarTab !== name,

@@ -1,11 +1,12 @@
 import { Metadata } from 'next';
 
-import CountryDetail from '@/containers/countries/detail';
+import CountryDetailPanel from '@/containers/countries/detail/panel';
 
 export const metadata: Metadata = {
-  title: 'AFoCO',
+  title: 'AFoCO | Country detail',
+  description: '',
 };
 
-export default function Country() {
-  return <CountryDetail />;
+export default function CountryPage() {
+  return <CountryDetailPanel />;
 }

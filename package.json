@@ -15,5 +15,8 @@
   },
   "engines": {
     "node": "18.x"
+  },
+  "dependencies": {
+    "@deck.gl/core": "^8.9.34"
   }
 }
