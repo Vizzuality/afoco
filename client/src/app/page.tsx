@@ -7,9 +7,7 @@ export default async function HomePage() {
 
   return (
     <Hydrate state={dehydratedState}>
-      {/* <Providers>
-        <Home />
-      </Providers> */}
+      <div></div>
     </Hydrate>
   );
 }
