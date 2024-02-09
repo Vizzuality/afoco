@@ -13,8 +13,6 @@ import { sidebarTabAtom } from '@/store';
 import type { SidebarTab } from '@/containers/sidebar/constants';
 import { TABS } from '@/containers/sidebar/constants';
 
-import Icon from '@/components/ui/icon';
-
 export default function Sidebar() {
   const [sidebarTab, setSidebarTab] = useAtom(sidebarTabAtom);
 

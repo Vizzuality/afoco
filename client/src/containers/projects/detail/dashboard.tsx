@@ -11,7 +11,6 @@ import { DASHBOARD_OVERVIEW_RESUME_ITEMS } from '@/containers/projects/detail/co
 
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
-import Icon from '@/components/ui/icon';
 
 export default function ProjectDashboard() {
   const [infoOpen, setInfoOpen] = useState(false);
