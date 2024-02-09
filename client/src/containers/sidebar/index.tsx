@@ -38,11 +38,14 @@ export default function Sidebar() {
               onClick={() => setSidebarTab(name as SidebarTab)}
             >
               <div className="relative">
-                <Icon
-                  icon={icon}
+                <Image
+                  src={icon}
+                  alt={name}
+                  width={24}
+                  height={24}
                   className={cn({
-                    'h-6 w-6 stroke-yellow-50': true,
-                    'stroke-white': sidebarTab === name,
+                    'h-6 w-6 fill-current text-yellow-50': true,
+                    'text-white': sidebarTab === name,
                   })}
                 />
                 <div
