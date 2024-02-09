@@ -1,5 +1,3 @@
-'use client';
-
 import ProjectItem from '@/containers/projects/item';
 
 export default function ProjectsList() {

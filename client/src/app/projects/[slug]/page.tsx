@@ -1,11 +1,12 @@
 import { Metadata } from 'next';
 
-import ProjectDetail from '@/containers/projects/detail';
-
 export const metadata: Metadata = {
-  title: 'AFoCO',
+  title: 'AFoCO | Project Detail',
+  description: '',
 };
 
-export default function Project() {
-  return <ProjectDetail />;
+import ProjectDetailPanel from '@/containers/projects/detail/panel';
+
+export default function ProjectDetailPage() {
+  return <ProjectDetailPanel />;
 }

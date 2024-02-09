@@ -10,7 +10,7 @@ export default function ProjectDetail() {
   const dashboard = useAtomValue(dashboardAtom);
 
   return (
-    <div className="flex grid h-screen grid-cols-12 items-center justify-center text-3xl text-yellow-900">
+    <div className="grid h-screen grid-cols-12 items-center justify-center text-3xl text-yellow-900">
       {dashboard && <ProjectDashboard />}
     </div>
   );

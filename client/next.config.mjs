@@ -9,17 +9,12 @@ const nextConfig = {
   async redirects() {
     return [
       {
-       source: '/',
+        source: '/',
         destination: '/projects',
         permanent: true,
       },
-    ]
+    ];
   },
 };
-
-
-
-
-
 
 export default nextConfig;
