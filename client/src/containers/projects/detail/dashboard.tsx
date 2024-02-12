@@ -1,5 +1,7 @@
 import { useState } from 'react';
 
+import Image from 'next/image';
+
 import { useSetAtom } from 'jotai';
 import { Info, X } from 'lucide-react';
 
@@ -9,7 +11,6 @@ import { DASHBOARD_OVERVIEW_RESUME_ITEMS } from '@/containers/projects/detail/co
 
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
-import Icon from '@/components/ui/icon';
 
 export default function ProjectDashboard() {
   const [infoOpen, setInfoOpen] = useState(false);
@@ -33,8 +34,8 @@ export default function ProjectDashboard() {
             key={title}
             className="flex w-1/3 items-center space-x-6 rounded-xl bg-white p-4 text-sm text-green-800 shadow-sm"
           >
-            <div className="flex h-14 w-14 items-center justify-center rounded-full border border-green-400">
-              <Icon icon={icon} className="h-8 w-8" />
+            <div className="flex h-14 w-14 items-center justify-center rounded-full border border-green-400 bg-green-200/10">
+              <Image src={icon} alt={title} width={32} height={32} />
             </div>
             <div className="flex flex-col">
               <div className="flex items-end space-x-0.5">

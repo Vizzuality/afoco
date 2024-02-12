@@ -6,34 +6,20 @@ const nextConfig = {
   images: {
     domains: ['api.mapbox.com'],
   },
-  webpack(config) {
-    config.module.rules.push({
-      test: /\.svg$/,
-      use: [
-        {
-          loader: 'svg-sprite-loader',
-        },
-        {
-          loader: 'svgo-loader',
-          options: {
-            plugins: [
-              {
-                name: 'preset-default',
-                params: {
-                  overrides: {
-                    convertColors: { shorthex: false },
-                    convertPathData: false,
-                  },
-                },
-              },
-            ],
-          },
-        },
-      ],
-    });
-
-    return config;
+  async redirects() {
+    return [
+      {
+       source: '/',
+        destination: '/projects',
+        permanent: true,
+      },
+    ]
   },
 };
+
+
+
+
+
 
 export default nextConfig;

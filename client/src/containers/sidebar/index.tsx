@@ -13,8 +13,6 @@ import { sidebarTabAtom } from '@/store';
 import type { SidebarTab } from '@/containers/sidebar/constants';
 import { TABS } from '@/containers/sidebar/constants';
 
-import Icon from '@/components/ui/icon';
-
 export default function Sidebar() {
   const [sidebarTab, setSidebarTab] = useAtom(sidebarTabAtom);
 
@@ -38,12 +36,12 @@ export default function Sidebar() {
               onClick={() => setSidebarTab(name as SidebarTab)}
             >
               <div className="relative">
-                <Icon
-                  icon={icon}
-                  className={cn({
-                    'h-6 w-6 stroke-yellow-50': true,
-                    'stroke-white': sidebarTab === name,
-                  })}
+                <Image
+                  src={sidebarTab === name ? icon.selected : icon.default}
+                  alt={name}
+                  width={24}
+                  height={24}
+                  className="h-6 w-6"
                 />
                 <div
                   className={cn({
