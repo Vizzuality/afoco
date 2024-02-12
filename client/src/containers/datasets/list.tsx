@@ -1,24 +1,34 @@
 'use client';
 
-import { DatasetListResponseDataItem } from '@/types/generated/strapi.schemas';
+// import { DatasetListResponseDataItem } from '@/types/generated/strapi.schemas';
 
-import { useDatasetsGroups } from '@/hooks/datasets';
+// import { useDatasetsGroups } from '@/hooks/datasets';
 
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from '@/components/ui/accordion';
-import ContentLoader from '@/components/ui/loader';
+// import {
+//   Accordion,
+//   AccordionContent,
+//   AccordionItem,
+//   AccordionTrigger,
+// } from '@/components/ui/accordion';
+// import ContentLoader from '@/components/ui/loader';
 
 import DatasetsItem from './item';
+import { MOCK_LAYERS } from './mock';
 
 export default function DatasetsList() {
-  const { groups, isFetching, isFetched, isPlaceholderData, isError } = useDatasetsGroups();
+  // const { groups, isFetching, isFetched, isPlaceholderData, isError } = useDatasetsGroups();
 
   return (
-    <ContentLoader
+    <>
+      <h3 className="text-xs text-gray-500">Activate data layers on the map</h3>
+      <div className="flex flex-col">
+        {MOCK_LAYERS.map((l) => {
+          if (!l.id || !l.attributes) return null;
+          return <DatasetsItem key={l.id} {...l} />;
+        })}
+      </div>
+    </>
+    /* <ContentLoader
       data={groups}
       isFetching={isFetching}
       isFetched={isFetched}
@@ -42,6 +52,6 @@ export default function DatasetsList() {
           );
         })}
       </Accordion>
-    </ContentLoader>
+    </ContentLoader> */
   );
 }
