@@ -75,8 +75,8 @@ export default function ProjectDashboard() {
                   </div>
                   <div className="flex w-full px-6 pb-4">
                     <Button
-                      variant="default"
-                      size="sm"
+                      variant="primary"
+                      size="small"
                       className="ml-auto w-12"
                       onClick={() => setInfoOpen(false)}
                     >

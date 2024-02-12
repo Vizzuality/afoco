@@ -31,8 +31,8 @@ export default function Panel({ children }: { children: React.ReactNode }) {
       >
         <Button
           variant="ghost"
-          size="icon"
-          className="rounded-l-none"
+          size="small"
+          className="rounded-l-none bg-yellow-100 px-1"
           onClick={() => {
             setOpen(!open);
           }}
