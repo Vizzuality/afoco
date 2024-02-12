@@ -1,8 +1,12 @@
-'use client';
-
-import { createContext, PropsWithChildren, useCallback, useContext, useMemo, useRef } from 'react';
-
-import { useControl } from 'react-map-gl';
+import React, {
+  createContext,
+  PropsWithChildren,
+  useCallback,
+  useContext,
+  useMemo,
+  useRef,
+  useEffect,
+} from 'react';
 
 import { MapboxOverlay, MapboxOverlayProps } from '@deck.gl/mapbox/typed';
 
@@ -11,49 +15,45 @@ interface DeckMapboxOverlayContext {
   removeLayer: (id: string) => void;
 }
 
-const Context = createContext<DeckMapboxOverlayContext>({
-  addLayer: () => {
-    console.info('addLayer');
-  },
-  removeLayer: () => {
-    console.info('removeLayer');
-  },
-});
+const Context = createContext<DeckMapboxOverlayContext | null>(null);
 
-function useMapboxOverlay(
-  props: MapboxOverlayProps & {
-    interleaved?: boolean;
-  }
-) {
-  const overlay = useControl<MapboxOverlay>(() => new MapboxOverlay(props));
-  overlay.setProps(props);
+function useMapboxOverlay(props: MapboxOverlayProps) {
+  const overlayRef = useRef<MapboxOverlay | null>(null);
 
-  return overlay;
+  useEffect(() => {
+    if (!overlayRef.current) {
+      overlayRef.current = new MapboxOverlay(props);
+    } else {
+      overlayRef.current.setProps(props);
+    }
+  }, [props]);
+
+  return overlayRef.current;
 }
 
-export const DeckMapboxOverlayProvider = ({ children }: PropsWithChildren) => {
+export const DeckMapboxOverlayProvider: React.FC<PropsWithChildren<NonNullable<unknown>>> = ({
+  children,
+}) => {
   const layersRef = useRef<any[]>([]);
 
   const OVERLAY = useMapboxOverlay({
-    interleaved: true,
+    layers: layersRef.current,
   });
 
   const addLayer = useCallback(
     (layer: any) => {
-      const newLayers = [...layersRef.current.filter((l) => l.id !== layer.id), layer];
-
+      const newLayers = layersRef.current.filter((l) => l.id !== layer.id).concat(layer);
       layersRef.current = newLayers;
-      return OVERLAY.setProps({ layers: newLayers });
+      OVERLAY?.setProps({ layers: newLayers });
     },
     [OVERLAY]
   );
 
   const removeLayer = useCallback(
     (id: string) => {
-      const newLayers = [...layersRef.current.filter((l) => l.id !== id)];
-
+      const newLayers = layersRef.current.filter((l) => l.id !== id);
       layersRef.current = newLayers;
-      OVERLAY.setProps({ layers: newLayers });
+      OVERLAY?.setProps({ layers: newLayers });
     },
     [OVERLAY]
   );
@@ -66,17 +66,13 @@ export const DeckMapboxOverlayProvider = ({ children }: PropsWithChildren) => {
     [addLayer, removeLayer]
   );
 
-  return (
-    <Context.Provider key="deck-mapbox-provider" value={context}>
-      {children}
-    </Context.Provider>
-  );
+  return <Context.Provider value={context}>{children}</Context.Provider>;
 };
 
 export const useDeckMapboxOverlayContext = () => {
   const context = useContext(Context);
 
-  if (!context) {
+  if (context === null) {
     throw new Error('useDeckMapboxOverlayContext must be used within a DeckMapboxOverlayProvider');
   }
 

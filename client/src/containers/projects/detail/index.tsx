@@ -8,9 +8,10 @@ import ProjectDashboard from '@/containers/projects/detail/dashboard';
 
 export default function ProjectDetail() {
   const dashboard = useAtomValue(dashboardAtom);
+  console.log('holi', dashboard);
 
   return (
-    <div className="grid h-screen grid-cols-12 items-center justify-center text-3xl text-yellow-900">
+    <div className="flex grid h-screen grid-cols-12 items-center justify-center text-3xl text-yellow-900">
       {dashboard && <ProjectDashboard />}
     </div>
   );

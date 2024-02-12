@@ -1776,29 +1776,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@deck.gl/core@npm:^8.9.34":
-  version: 8.9.34
-  resolution: "@deck.gl/core@npm:8.9.34"
-  dependencies:
-    "@babel/runtime": ^7.0.0
-    "@loaders.gl/core": ^3.4.13
-    "@loaders.gl/images": ^3.4.13
-    "@luma.gl/constants": ^8.5.21
-    "@luma.gl/core": ^8.5.21
-    "@luma.gl/webgl": ^8.5.21
-    "@math.gl/core": ^3.6.2
-    "@math.gl/sun": ^3.6.2
-    "@math.gl/web-mercator": ^3.6.2
-    "@probe.gl/env": ^3.5.0
-    "@probe.gl/log": ^3.5.0
-    "@probe.gl/stats": ^3.5.0
-    gl-matrix: ^3.0.0
-    math.gl: ^3.6.2
-    mjolnir.js: ^2.7.0
-  checksum: 1e8eac69a7bcac0a376adeaa750a429351579a2b566154c0541a48df6c3225130677b86eef63d3bcda0db2c088660f7d74bcb925e562651ca7d675cab2b23063
-  languageName: node
-  linkType: hard
-
 "@deck.gl/extensions@npm:8.9.19":
   version: 8.9.19
   resolution: "@deck.gl/extensions@npm:8.9.19"
@@ -2792,18 +2769,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@loaders.gl/core@npm:^3.4.13":
-  version: 3.4.14
-  resolution: "@loaders.gl/core@npm:3.4.14"
-  dependencies:
-    "@babel/runtime": ^7.3.1
-    "@loaders.gl/loader-utils": 3.4.14
-    "@loaders.gl/worker-utils": 3.4.14
-    "@probe.gl/log": ^4.0.1
-  checksum: 4769017434a387e1c5da1ab934d26837b14a166237e61dfea19633c83cbe3fd42c9bcf0c3108cda60f32c680fb767cd3c8d8a91d2ee811d49b40b22494c1a223
-  languageName: node
-  linkType: hard
-
 "@loaders.gl/core@npm:^3.4.2":
   version: 3.4.4
   resolution: "@loaders.gl/core@npm:3.4.4"
@@ -2861,26 +2826,6 @@ __metadata:
   dependencies:
     "@loaders.gl/loader-utils": 3.4.4
   checksum: 4ca986eeff8d1f7a0520e4c150db0704857d0498e857e6a924553b6eed8559d32e44f350ee08aa779fa644902c9cad94f7b155cbc81e61df4b753fad17b46353
-  languageName: node
-  linkType: hard
-
-"@loaders.gl/images@npm:^3.4.13":
-  version: 3.4.14
-  resolution: "@loaders.gl/images@npm:3.4.14"
-  dependencies:
-    "@loaders.gl/loader-utils": 3.4.14
-  checksum: bb4049fa6a0739079597bc6d52e389440703fcf61c6e1c8f797dfa5c7404a24e04dc744e08d22c1d8333e4da040451572a3df9b980766beadb9bfa17a5f47234
-  languageName: node
-  linkType: hard
-
-"@loaders.gl/loader-utils@npm:3.4.14":
-  version: 3.4.14
-  resolution: "@loaders.gl/loader-utils@npm:3.4.14"
-  dependencies:
-    "@babel/runtime": ^7.3.1
-    "@loaders.gl/worker-utils": 3.4.14
-    "@probe.gl/stats": ^4.0.1
-  checksum: fde4e3a6626678bede49afc3feba92d8766975b7e3c6f9af1b23d5b6e638fbfee19cb231c500c7ed67f07a854ed9a8984dd9cb4f41a5409ace4ee3e990d6b699
   languageName: node
   linkType: hard
 
@@ -2988,15 +2933,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@loaders.gl/worker-utils@npm:3.4.14":
-  version: 3.4.14
-  resolution: "@loaders.gl/worker-utils@npm:3.4.14"
-  dependencies:
-    "@babel/runtime": ^7.3.1
-  checksum: 18b874f9c0eaa1f5a37cd5ef6be183cb758c6e953caac9ac6666be3f09eeb5ce0c59ba7f2c5c0f21278883b7be6ee336889fec7cc31e64ea6cf37767a949e394
-  languageName: node
-  linkType: hard
-
 "@loaders.gl/worker-utils@npm:3.4.4":
   version: 3.4.4
   resolution: "@loaders.gl/worker-utils@npm:3.4.4"
@@ -3025,13 +2961,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@luma.gl/constants@npm:8.5.21, @luma.gl/constants@npm:^8.5.21":
-  version: 8.5.21
-  resolution: "@luma.gl/constants@npm:8.5.21"
-  checksum: 2ac0eb0fb368d8a4722f140917de45100af7adde776c5be40935c86c996491e9145464f3dd5be69294a839fa145b456df828425a93f071bf68bf62c1f79c376f
-  languageName: node
-  linkType: hard
-
 "@luma.gl/core@npm:^8.5.20":
   version: 8.5.20
   resolution: "@luma.gl/core@npm:8.5.20"
@@ -3043,20 +2972,6 @@ __metadata:
     "@luma.gl/shadertools": 8.5.20
     "@luma.gl/webgl": 8.5.20
   checksum: 76385087c94ab2e8a3fc0d1dbe252f133921bb4b960030594cbf495cdcf777018de4c8bfc9ef1e445959b2697872a77f77f74c48e10f60d27665cca3515b1ce6
-  languageName: node
-  linkType: hard
-
-"@luma.gl/core@npm:^8.5.21":
-  version: 8.5.21
-  resolution: "@luma.gl/core@npm:8.5.21"
-  dependencies:
-    "@babel/runtime": ^7.0.0
-    "@luma.gl/constants": 8.5.21
-    "@luma.gl/engine": 8.5.21
-    "@luma.gl/gltools": 8.5.21
-    "@luma.gl/shadertools": 8.5.21
-    "@luma.gl/webgl": 8.5.21
-  checksum: f45e3d825868a54fc3cf06e0f61d6618b45b1862c402b4c46aa4e8f00b79515fcea6c2d36f5b0b5c8d8bb684849bfcae735e36c54a3720aa6a80d6a81f3f2331
   languageName: node
   linkType: hard
 
@@ -3074,23 +2989,6 @@ __metadata:
     "@probe.gl/stats": ^3.5.0
     "@types/offscreencanvas": ^2019.7.0
   checksum: fa1c60da8d1bec3df594d688f460a81523355fe1929a91d48bb6a16db6bb6a0eff2656f2016b8f47b63cd881b324f6564c05b1a588f9e9158494eb4e75383d9f
-  languageName: node
-  linkType: hard
-
-"@luma.gl/engine@npm:8.5.21":
-  version: 8.5.21
-  resolution: "@luma.gl/engine@npm:8.5.21"
-  dependencies:
-    "@babel/runtime": ^7.0.0
-    "@luma.gl/constants": 8.5.21
-    "@luma.gl/gltools": 8.5.21
-    "@luma.gl/shadertools": 8.5.21
-    "@luma.gl/webgl": 8.5.21
-    "@math.gl/core": ^3.5.0
-    "@probe.gl/env": ^3.5.0
-    "@probe.gl/stats": ^3.5.0
-    "@types/offscreencanvas": ^2019.7.0
-  checksum: a161f6f638a7c9e9522b5d731e9e50b3646037b5320f55b6e52104984a05204a8bc1561b05014cc4094c61e41f3e74b4b7019c46dc55a39202f836c4dacc033c
   languageName: node
   linkType: hard
 
@@ -3125,19 +3023,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@luma.gl/gltools@npm:8.5.21":
-  version: 8.5.21
-  resolution: "@luma.gl/gltools@npm:8.5.21"
-  dependencies:
-    "@babel/runtime": ^7.0.0
-    "@luma.gl/constants": 8.5.21
-    "@probe.gl/env": ^3.5.0
-    "@probe.gl/log": ^3.5.0
-    "@types/offscreencanvas": ^2019.7.0
-  checksum: 1f647bde5141f37110f6e089636a26b450b66323a90ea91064ce7b5712843c5f066bd75b74488dd2fb9f39407279268171b799d6486c3a83e39614f9ee4a3aef
-  languageName: node
-  linkType: hard
-
 "@luma.gl/shadertools@npm:8.5.20, @luma.gl/shadertools@npm:^8.5.20":
   version: 8.5.20
   resolution: "@luma.gl/shadertools@npm:8.5.20"
@@ -3145,16 +3030,6 @@ __metadata:
     "@babel/runtime": ^7.0.0
     "@math.gl/core": ^3.5.0
   checksum: 6b5cf16dcca99eed275e85bcc3a02b48f6c3cfd8f7568745313eb817b7b5c00ccbc4429ee97f390749894fff32d32766982733ab50881f255cc9aa7b9dfaeca3
-  languageName: node
-  linkType: hard
-
-"@luma.gl/shadertools@npm:8.5.21":
-  version: 8.5.21
-  resolution: "@luma.gl/shadertools@npm:8.5.21"
-  dependencies:
-    "@babel/runtime": ^7.0.0
-    "@math.gl/core": ^3.5.0
-  checksum: ef641f152177a2ba0942ac8e79875dedfd1779211bf507d20ab82413a43181ab162092c66d67041e029b70b1d210ddaa3d6d5839de62324c8442540ecf413fd1
   languageName: node
   linkType: hard
 
@@ -3168,19 +3043,6 @@ __metadata:
     "@probe.gl/env": ^3.5.0
     "@probe.gl/stats": ^3.5.0
   checksum: 0ee90c70d42753ab0c885cd4636aa095080c13b3c34a022489ac6f5b757e5cec67c52fa55502f8d771d00692e0db2b13e95714881f632a8a572c5c5153334939
-  languageName: node
-  linkType: hard
-
-"@luma.gl/webgl@npm:8.5.21, @luma.gl/webgl@npm:^8.5.21":
-  version: 8.5.21
-  resolution: "@luma.gl/webgl@npm:8.5.21"
-  dependencies:
-    "@babel/runtime": ^7.0.0
-    "@luma.gl/constants": 8.5.21
-    "@luma.gl/gltools": 8.5.21
-    "@probe.gl/env": ^3.5.0
-    "@probe.gl/stats": ^3.5.0
-  checksum: e89e084d917f4a7ce58ba2f63e7d5599956be90bcdfef23ef8e350706741cd9ce92d8d7a998c98d9e9705a61002ccc609782b72f31195038e0e8c4589cd920f1
   languageName: node
   linkType: hard
 
@@ -7005,8 +6867,6 @@ __metadata:
 "afoco@workspace:.":
   version: 0.0.0-use.local
   resolution: "afoco@workspace:."
-  dependencies:
-    "@deck.gl/core": ^8.9.34
   languageName: unknown
   linkType: soft
 
