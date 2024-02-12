@@ -4,6 +4,8 @@ import Link from 'next/link';
 
 import { ArrowLeft } from 'lucide-react';
 
+import { PANEL_OVERVIEW_ITEMS, RESUME_ITEMS } from '@/containers/countries/detail/constants';
+
 export default function CountryDetailPanel() {
   return (
     <div className="p-6">
@@ -28,6 +30,42 @@ export default function CountryDetailPanel() {
         Lorem ipsum dolor sit amet consectetur. Vel odio tellus egestas et. Tellus et mattis magnis
         sit.
       </p>
+      <div className="flex flex-col justify-center">
+        {PANEL_OVERVIEW_ITEMS.map(({ title, value, note }) => (
+          <div
+            key={title}
+            className="flex justify-between border-b-2 border-dotted border-green-50 py-4"
+          >
+            <p className="text-xs font-medium uppercase text-gray-500">{title}</p>
+            <p className="text-sm text-yellow-900">
+              {value} <span className="text-2xs text-gray-500">({note})</span>
+            </p>
+          </div>
+        ))}
+        <div className="grid grid-cols-2 grid-rows-2 gap-2 py-4">
+          {RESUME_ITEMS.map(({ title, icon, value, unit }) => (
+            <div
+              key={title}
+              className="relative flex items-center space-x-6 rounded-xl bg-white p-4 text-sm text-green-800 shadow-sm"
+            >
+              <div className="flex flex-col">
+                <div className="flex items-end space-x-0.5">
+                  <p className="text-2xl font-extrabold text-green-400">{value}</p>
+                  {unit && <p className="mb-0.5 text-base font-normal text-green-400">{unit}</p>}
+                </div>
+                <p>{title}</p>
+              </div>
+              <Image
+                src={icon}
+                alt={title}
+                width={24}
+                height={34}
+                className="absolute right-4 top-4"
+              />
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }

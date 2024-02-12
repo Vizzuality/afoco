@@ -17,7 +17,7 @@ export default function Panel({ children }: { children: React.ReactNode }) {
   return (
     <div
       className={cn({
-        'rounded-4xl absolute bottom-0 top-0 z-10 my-2 flex w-full max-w-[400px] flex-col bg-white shadow-md transition-transform duration-500':
+        'rounded-4xl bg-background absolute bottom-0 top-0 z-10 my-2 flex w-full max-w-[400px] flex-col shadow-md transition-transform duration-500':
           true,
         'left-[106px] translate-x-0': open,
         'left-24 -translate-x-full': !open,
