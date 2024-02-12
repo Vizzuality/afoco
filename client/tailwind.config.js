@@ -94,6 +94,9 @@ module.exports = {
         '4xl': '32px',
         '8xl': '100px',
       },
+      dropShadow: {
+        thumb: '0px 1px 2px rgba(0, 0, 0, 0.06), 0px 1px 3px rgba(0, 0, 0, 0.10)',
+      },
       keyframes: {
         'accordion-down': {
           from: { height: 0 },
