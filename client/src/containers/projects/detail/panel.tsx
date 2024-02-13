@@ -3,21 +3,11 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { Dialog, DialogContent, DialogTrigger } from '@radix-ui/react-dialog';
-import { useAtom } from 'jotai';
-import { ArrowLeft, ChevronRight } from 'lucide-react';
-
-import { dashboardAtom } from '@/store';
+import { ArrowLeft } from 'lucide-react';
 
 import { PANEL_OVERVIEW_ITEMS } from '@/containers/projects/detail/constants';
 
-import { Button } from '@/components/ui/button';
-
-import ProjectDashboard from './dashboard';
-
 export default function ProjectDetailPanel() {
-  const [dashboard, setDashboard] = useAtom(dashboardAtom);
-
   return (
     <div className="no-scrollbar h-full overflow-x-hidden rounded-3xl bg-neutral-50 p-6 pb-40">
       <div className="absolute left-0 top-0 w-full">
@@ -106,7 +96,7 @@ export default function ProjectDetailPanel() {
           </p>
         </div>
       </div>
-      <Dialog>
+      {/* <Dialog>
         <DialogTrigger asChild>
           <Button
             variant="default"
@@ -124,7 +114,7 @@ export default function ProjectDetailPanel() {
         <DialogContent onCloseAutoFocus={(e) => e.preventDefault()}>
           <ProjectDashboard />
         </DialogContent>
-      </Dialog>
+      </Dialog> */}
     </div>
   );
 }
