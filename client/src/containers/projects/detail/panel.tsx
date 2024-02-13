@@ -106,16 +106,14 @@ export default function ProjectDetailPanel() {
           </p>
         </div>
       </div>
-      <Dialog>
-        <DialogTrigger asChild>
-          <Button
-            variant="primary"
-            className="group fixed bottom-6 right-6 space-x-2"
-            size="base"
-            onClick={() => {
-              setDashboard(!dashboard);
-            }}
-          >
+
+      {/* <Dialog>
+        <DialogTrigger
+          onClick={() => {
+            setDashboard(!dashboard);
+          }}
+        >
+          <Button variant="primary" className="group fixed bottom-6 right-6 space-x-2" size="base">
             <p className="w-36">{dashboard ? 'Hide dashboard' : 'Show dashboard'}</p>
             <ChevronRight className="h-4 w-4 text-yellow-900 group-hover:text-yellow-50" />
           </Button>
@@ -124,7 +122,7 @@ export default function ProjectDetailPanel() {
         <DialogContent>
           <ProjectDashboard />
         </DialogContent>
-      </Dialog>
+      </Dialog> */}
     </div>
   );
 }
