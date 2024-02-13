@@ -5,9 +5,7 @@ import { useMap } from 'react-map-gl';
 import { useAtomValue } from 'jotai';
 import { AnyLayer } from 'mapbox-gl';
 
-import { mapSettingsAtom } from '@/store';
-
-import { BASEMAPS } from '@/constants/basemaps';
+import { basemapAtom } from '@/store';
 
 type AnyLayerWithMetadata = AnyLayer & {
   metadata: Record<string, unknown>;
@@ -16,7 +14,7 @@ type AnyLayerWithMetadata = AnyLayer & {
 const MapSettingsManager = () => {
   const { default: mapRef } = useMap();
   const loaded = mapRef?.loaded();
-  const { basemap, labels, boundaries, roads } = useAtomValue(mapSettingsAtom);
+  const basemap = useAtomValue(basemapAtom);
 
   const handleGroup = useCallback(
     (groups: string[], groupId: string, visible = true) => {
@@ -61,16 +59,8 @@ const MapSettingsManager = () => {
   );
 
   const handleStyleLoad = useCallback(() => {
-    const B = BASEMAPS.find((b) => b.value === basemap);
-
     handleGroup(['basemap'], basemap);
-    handleGroup(['labels'], labels);
-
-    if (B) {
-      handleGroup(['boundaries'], B.settings.boundaries, boundaries);
-      handleGroup(['roads'], B.settings.roads, roads);
-    }
-  }, [basemap, labels, boundaries, roads, handleGroup]);
+  }, [basemap, handleGroup]);
 
   // * handle style load
   useEffect(() => {
@@ -86,16 +76,8 @@ const MapSettingsManager = () => {
   useEffect(() => {
     if (!mapRef) return;
 
-    const B = BASEMAPS.find((b) => b.value === basemap);
-
     handleGroup(['basemap'], basemap);
-    handleGroup(['labels'], labels);
-
-    if (B) {
-      handleGroup(['boundaries'], B.settings.boundaries, boundaries);
-      handleGroup(['roads'], B.settings.roads, roads);
-    }
-  }, [mapRef, loaded, basemap, labels, boundaries, roads, handleGroup]);
+  }, [mapRef, loaded, basemap, handleGroup]);
 
   return null;
 };

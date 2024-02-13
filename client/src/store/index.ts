@@ -11,12 +11,7 @@ type LayerSettings = Record<string, Settings>;
 
 type EmptyObject = Record<string, never>;
 
-type MapSettings = {
-  basemap: string;
-  labels: string;
-  boundaries: boolean;
-  roads: boolean;
-};
+type Basemap = 'basemap-light' | 'basemap-satellite';
 
 // Sidebar and menus
 export const openAtom = atom<boolean>(true);
@@ -41,12 +36,7 @@ export const layersSettingsAtom = atom<LayerSettings | EmptyObject>({});
 
 export const popupAtom = atom<MapLayerMouseEvent | null>(null);
 
-export const mapSettingsAtom = atom<MapSettings>({
-  basemap: 'basemap-light',
-  labels: 'labels-dark',
-  boundaries: false,
-  roads: false,
-});
+export const basemapAtom = atom<Basemap>('basemap-light');
 
 export const DEFAULT_SETTINGS = {
   expand: true,

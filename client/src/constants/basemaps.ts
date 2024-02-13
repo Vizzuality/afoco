@@ -2,22 +2,12 @@ export const BASEMAPS = [
   {
     label: 'Clean',
     value: 'basemap-light',
-    preview: `/images/map/light.jpeg`,
-    settings: {
-      labels: 'labels-dark',
-      boundaries: 'boundaries-dark',
-      roads: 'roads-dark',
-    },
+    ['switch-preview']: '/images/map/satellite.jpeg',
   },
   {
     label: 'Satellite',
     value: 'basemap-satellite',
-    preview: `/images/map/satellite.jpeg`,
-    settings: {
-      labels: 'labels-light',
-      boundaries: 'boundaries-light',
-      roads: 'roads-light',
-    },
+    ['switch-preview']: '/images/map/light.jpeg',
   },
 ];
 
