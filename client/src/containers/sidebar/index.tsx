@@ -2,19 +2,16 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
-import { useAtom } from 'jotai';
 import { HelpCircle } from 'lucide-react';
 
 import { cn } from '@/lib/classnames';
 
-import { sidebarTabAtom } from '@/store';
-
-import type { SidebarTab } from '@/containers/sidebar/constants';
 import { TABS } from '@/containers/sidebar/constants';
 
 export default function Sidebar() {
-  const [sidebarTab, setSidebarTab] = useAtom(sidebarTabAtom);
+  const pathname = usePathname();
 
   return (
     <div className="rounded-8xl absolute bottom-0 left-4 top-0 z-20 my-2 w-20 bg-yellow-700 py-10 text-xs text-yellow-50">
@@ -30,14 +27,13 @@ export default function Sidebar() {
               className={cn({
                 'rounded-8xl mx-2 mt-2 flex flex-col items-center space-y-1 border-2 border-transparent py-10 text-center':
                   true,
-                'bg-yellow-600': sidebarTab === name,
-                'hover:border-yellow-50': sidebarTab !== name,
+                'bg-yellow-600': pathname.includes(name),
+                'hover:border-yellow-50': !pathname.includes(name),
               })}
-              onClick={() => setSidebarTab(name as SidebarTab)}
             >
               <div className="relative">
                 <Image
-                  src={sidebarTab === name ? icon.selected : icon.default}
+                  src={pathname.includes(name) ? icon.selected : icon.default}
                   alt={name}
                   width={24}
                   height={24}
@@ -47,7 +43,7 @@ export default function Sidebar() {
                   className={cn({
                     'absolute bottom-1 left-4 h-4 w-4 rounded-full bg-yellow-300 text-xs font-semibold text-yellow-700':
                       true,
-                    'bg-yellow-300 text-white': sidebarTab === name,
+                    'bg-yellow-300 text-white': pathname.includes(name),
                   })}
                 >
                   2
