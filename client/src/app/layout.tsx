@@ -6,6 +6,7 @@ import localFont from 'next/font/local';
 
 import Providers from '@/app/layout-providers';
 
+import Panel from '@/containers/panel';
 import Sidebar from '@/containers/sidebar';
 
 const Map = dynamic(() => import('@/containers/map'), {
@@ -55,7 +56,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <body className={`${bricolage.variable} font-sans`}>
           <div className="relative h-screen w-screen">
             <Sidebar />
-            {children}
+            <Panel>{children}</Panel>
             <Map />
           </div>
         </body>

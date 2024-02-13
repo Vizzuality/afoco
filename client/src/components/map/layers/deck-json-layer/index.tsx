@@ -7,6 +7,11 @@ import { LayerProps } from '@/types/layers';
 
 import { useDeckMapboxOverlayContext } from '@/components/map/provider';
 
+// interface DeckLayerConfig {
+//   clone: (props: { id: string; beforeId: string | undefined }) => DeckLayerConfig;
+//   [key: string]: unknown;
+// }
+
 export type DeckJsonLayerProps<T> = LayerProps &
   Partial<T> & {
     config: any;

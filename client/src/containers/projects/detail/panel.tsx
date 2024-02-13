@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
+import { Dialog, DialogContent, DialogTrigger } from '@radix-ui/react-dialog';
 import { useAtom } from 'jotai';
 import { ArrowLeft, ChevronRight } from 'lucide-react';
 
@@ -11,6 +12,8 @@ import { dashboardAtom } from '@/store';
 import { PANEL_OVERVIEW_ITEMS } from '@/containers/projects/detail/constants';
 
 import { Button } from '@/components/ui/button';
+
+import ProjectDashboard from './dashboard';
 
 export default function ProjectDetailPanel() {
   const [dashboard, setDashboard] = useAtom(dashboardAtom);
@@ -103,18 +106,25 @@ export default function ProjectDetailPanel() {
           </p>
         </div>
       </div>
+      <Dialog>
+        <DialogTrigger asChild>
+          <Button
+            variant="default"
+            className="group fixed bottom-6 right-6 space-x-2"
+            size="lg"
+            onClick={() => {
+              setDashboard(!dashboard);
+            }}
+          >
+            <p className="w-36">{dashboard ? 'Hide dashboard' : 'Show dashboard'}</p>
+            <ChevronRight className="h-4 w-4 text-yellow-900 group-hover:text-yellow-50" />
+          </Button>
+        </DialogTrigger>
 
-      <Button
-        variant="default"
-        className="group fixed bottom-6 right-6 space-x-2"
-        size="lg"
-        onClick={() => {
-          setDashboard(!dashboard);
-        }}
-      >
-        <p className="w-36">{dashboard ? 'Hide dashboard' : 'Show dashboard'}</p>
-        <ChevronRight className="h-4 w-4 text-yellow-900 group-hover:text-yellow-50" />
-      </Button>
+        <DialogContent onCloseAutoFocus={(e) => e.preventDefault()}>
+          <ProjectDashboard />
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

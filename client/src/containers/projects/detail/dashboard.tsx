@@ -17,7 +17,7 @@ export default function ProjectDashboard() {
   const setDashboard = useSetAtom(dashboardAtom);
 
   return (
-    <div className="absolute bottom-2 right-6 top-2 z-10 box-content w-7/12 rounded-3xl bg-neutral-50 px-6 py-8 shadow-md">
+    <div className="absolute bottom-0 left-[405px] top-0 z-10 box-content rounded-3xl bg-neutral-50 px-6 py-8 shadow-md">
       <div>
         <h3 className="mb-4 text-xl font-extrabold text-gray-400">Overview</h3>
         <button
