@@ -99,9 +99,9 @@ export default function ProjectDetailPanel() {
       {/* <Dialog>
         <DialogTrigger asChild>
           <Button
-            variant="default"
+            variant="primary"
             className="group fixed bottom-6 right-6 space-x-2"
-            size="lg"
+            size="base"
             onClick={() => {
               setDashboard(!dashboard);
             }}
@@ -111,7 +111,7 @@ export default function ProjectDetailPanel() {
           </Button>
         </DialogTrigger>
 
-        <DialogContent onCloseAutoFocus={(e) => e.preventDefault()}>
+        <DialogContent>
           <ProjectDashboard />
         </DialogContent>
       </Dialog> */}
