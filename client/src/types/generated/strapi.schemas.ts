@@ -1153,6 +1153,7 @@ export type DatasetUpdatedBy = {
 
 export interface Dataset {
   title: string;
+  description?: string;
   dataset_group?: DatasetDatasetGroup;
   layers?: DatasetLayers;
   metadata?: DocumentationMetadataComponent;
@@ -1571,7 +1572,7 @@ export type DatasetListResponseMeta = {
 };
 
 export interface DatasetListResponseDataItem {
-  id?: number;
+  id?: string;
   attributes?: Dataset;
 }
 

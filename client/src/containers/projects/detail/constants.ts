@@ -1,6 +1,6 @@
-import AREA_SVG from '@/svgs/dashboard/planted-area.svg';
-import SEEDS_SVG from '@/svgs/dashboard/planted-seeds.svg';
-import TRAINING_SVG from '@/svgs/dashboard/training-activities.svg';
+import AREA_SVG from '@/svgs/ui/planted-area.svg';
+import SEEDS_SVG from '@/svgs/ui/planted-seeds.svg';
+import TRAINING_SVG from '@/svgs/ui/training-activities.svg';
 
 export const PANEL_OVERVIEW_ITEMS = [
   { title: 'Status', value: 'Ongoing' },
