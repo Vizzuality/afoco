@@ -6,7 +6,6 @@ export const metadata: Metadata = {
 };
 
 import Panel from '@/containers/panel';
-import ProjectDashboard from '@/containers/projects/detail/dashboard';
 import ProjectDetailPanel from '@/containers/projects/detail/panel';
 
 export default function ProjectDetailPage() {
@@ -15,7 +14,6 @@ export default function ProjectDetailPage() {
       <Panel>
         <ProjectDetailPanel />
       </Panel>
-      <ProjectDashboard />
     </>
   );
 }
