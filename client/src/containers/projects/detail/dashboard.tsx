@@ -19,7 +19,7 @@ export default function ProjectDashboard() {
 
   return (
     dashboard && (
-      <div className="absolute bottom-0 right-4 top-0 z-50 my-2 box-content w-7/12 w-full rounded-3xl bg-neutral-50 px-6 py-8 shadow-md">
+      <div className="z-50 box-content h-full w-full rounded-3xl bg-neutral-50 px-6 py-8 shadow-md">
         <div>
           <h3 className="mb-4 text-xl font-extrabold text-gray-400">Overview</h3>
           <button
@@ -91,19 +91,19 @@ export default function ProjectDashboard() {
               </Dialog>
             </div>
           </div>
-          <div className="rounded-xl bg-white bg-white p-4 shadow-sm">
+          <div className="rounded-xl bg-white p-4 shadow-sm">
             <div className="flex items-center justify-between">
               <h3 className="text-lg text-green-800">Funding in USD</h3>
               <Info className="h-5 w-5 text-green-800" />
             </div>
           </div>
-          <div className="rounded-xl bg-white bg-white p-4 shadow-sm">
+          <div className="rounded-xl bg-white p-4 shadow-sm">
             <div className="flex items-center justify-between">
               <h3 className="text-lg text-green-800">Trained people per year</h3>
               <Info className="h-5 w-5 text-green-800" />
             </div>
           </div>
-          <div className="rounded-xl bg-white bg-white p-4 shadow-sm">
+          <div className="rounded-xl bg-white p-4 shadow-sm">
             <div className="flex items-center justify-between">
               <h3 className="text-xl text-green-800">Community beneficiaries</h3>
               <Info className="h-5 w-5 text-green-800" />

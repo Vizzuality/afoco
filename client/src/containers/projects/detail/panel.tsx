@@ -118,7 +118,7 @@ export default function ProjectDetailPanel() {
             <ChevronRight className="h-4 w-4 text-yellow-900 group-hover:text-yellow-50" />
           </Button>
         </DrawerTrigger>
-        <DrawerContent>
+        <DrawerContent className="left-[512px] w-[calc(100vw-584px)]">
           <ProjectDashboard />
         </DrawerContent>
       </Drawer>
