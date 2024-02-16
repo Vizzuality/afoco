@@ -8,7 +8,13 @@ import { cn } from '@/lib/classnames';
 
 const Popover = PopoverPrimitive.Root;
 
-const PopoverTrigger = PopoverPrimitive.Trigger;
+const PopoverTrigger = React.forwardRef<
+  React.ComponentPropsWithoutRef<typeof PopoverPrimitive.Trigger> & { className?: string }
+>(({ className, ...props }) => (
+  <PopoverPrimitive.Trigger className={cn('', className)} {...props} />
+));
+
+PopoverTrigger.displayName = PopoverPrimitive.Trigger.displayName;
 
 const PopoverContent = React.forwardRef<
   React.ElementRef<typeof PopoverPrimitive.Content>,
