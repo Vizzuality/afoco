@@ -3,11 +3,21 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { ArrowLeft } from 'lucide-react';
+import { useAtom } from 'jotai';
+import { ArrowLeft, ChevronRight } from 'lucide-react';
+
+import { dashboardAtom } from '@/store';
 
 import { PANEL_OVERVIEW_ITEMS } from '@/containers/projects/detail/constants';
 
+import { Button } from '@/components/ui/button';
+import { Drawer, DrawerContent, DrawerTrigger } from '@/components/ui/drawer';
+
+import ProjectDashboard from './dashboard';
+
 export default function ProjectDetailPanel() {
+  const [dashboard, setDashboard] = useAtom(dashboardAtom);
+
   return (
     <div className="no-scrollbar h-full overflow-x-hidden rounded-3xl bg-neutral-50 p-6 pb-40">
       <div className="absolute left-0 top-0 w-full">
@@ -96,23 +106,22 @@ export default function ProjectDetailPanel() {
           </p>
         </div>
       </div>
-
-      {/* <Dialog>
-        <DialogTrigger
-          onClick={() => {
-            setDashboard(!dashboard);
-          }}
-        >
-          <Button variant="primary" className="group fixed bottom-6 right-6 space-x-2" size="base">
+      <Drawer>
+        <DrawerTrigger asChild>
+          <Button
+            variant="primary"
+            className="group fixed bottom-6 right-6 z-50 space-x-2"
+            size="base"
+            onClick={() => setDashboard(!dashboard)}
+          >
             <p className="w-36">{dashboard ? 'Hide dashboard' : 'Show dashboard'}</p>
             <ChevronRight className="h-4 w-4 text-yellow-900 group-hover:text-yellow-50" />
           </Button>
-        </DialogTrigger>
-
-        <DialogContent>
+        </DrawerTrigger>
+        <DrawerContent className="left-[512px] w-[calc(100vw-584px)]">
           <ProjectDashboard />
-        </DialogContent>
-      </Dialog> */}
+        </DrawerContent>
+      </Drawer>
     </div>
   );
 }

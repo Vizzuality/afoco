@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 
 import Datasets from '@/containers/datasets';
+import Panel from '@/containers/panel';
 
 export const metadata: Metadata = {
   title: 'AFoCO | Datasets',
@@ -8,5 +9,9 @@ export const metadata: Metadata = {
 };
 
 export default function DatasetsPage() {
-  return <Datasets />;
+  return (
+    <Panel>
+      <Datasets />
+    </Panel>
+  );
 }
