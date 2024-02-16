@@ -56,8 +56,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <body className={`${bricolage.variable} font-sans`}>
           <div className="relative h-screen w-screen">
             <Sidebar />
+            <Panel>{children}</Panel>
             <Map />
-            {children}
           </div>
         </body>
       </html>

@@ -5,15 +5,8 @@ export const metadata: Metadata = {
   description: '',
 };
 
-import Panel from '@/containers/panel';
 import ProjectDetailPanel from '@/containers/projects/detail/panel';
 
 export default function ProjectDetailPage() {
-  return (
-    <>
-      <Panel>
-        <ProjectDetailPanel />
-      </Panel>
-    </>
-  );
+  return <ProjectDetailPanel />;
 }
