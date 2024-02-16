@@ -36,12 +36,13 @@ export default function DatasetsItem(props: Required<DatasetListResponseDataItem
               'bg-yellow-50': infoOpen,
             })}
             onClick={() => setInfoOpen(true)}
+            data-cy={`info-${props.id}-button`}
           >
             <Info className="h-4 w-4 text-black" strokeWidth={1} />
           </DialogTrigger>
 
           {infoOpen && (
-            <DialogContent className="p-0">
+            <DialogContent className="p-0" data-cy={`info-${props.id}-dialog`}>
               <h3 className="px-6 pt-4 text-xl font-medium text-green-900">
                 {props.attributes.title}
               </h3>
@@ -61,6 +62,7 @@ export default function DatasetsItem(props: Required<DatasetListResponseDataItem
               </div>
               <div className="flex w-full px-6 pb-4">
                 <Button
+                  data-cy={`info-${props.id}-dialog-close`}
                   variant="primary"
                   size="base"
                   className="ml-auto w-12"

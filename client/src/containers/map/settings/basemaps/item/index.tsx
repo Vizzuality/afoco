@@ -27,7 +27,12 @@ const BasemapItem = ({ label, value, preview }: BasemapItemProps) => {
 
   return (
     <div className="flex w-full items-center justify-between space-x-8">
-      <button className="group grow" type="button" onClick={handleToggleBasemap}>
+      <button
+        className="group grow"
+        type="button"
+        onClick={handleToggleBasemap}
+        data-cy={`${value}`}
+      >
         <div className="space-y-2">
           <div
             className={cn({

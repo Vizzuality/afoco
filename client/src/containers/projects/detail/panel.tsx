@@ -106,19 +106,20 @@ export default function ProjectDetailPanel() {
           </p>
         </div>
       </div>
-      <Drawer>
+      <Drawer open={dashboard}>
         <DrawerTrigger asChild>
           <Button
             variant="primary"
             className="group fixed bottom-6 right-6 z-50 space-x-2"
             size="base"
+            data-cy="project-dashboard-button"
             onClick={() => setDashboard(!dashboard)}
           >
             <p className="w-36">{dashboard ? 'Hide dashboard' : 'Show dashboard'}</p>
             <ChevronRight className="h-4 w-4 text-yellow-900 group-hover:text-yellow-50" />
           </Button>
         </DrawerTrigger>
-        <DrawerContent className="left-[512px] w-[calc(100vw-584px)]">
+        <DrawerContent className="left-[514px] w-[calc(100vw-570px)]">
           <ProjectDashboard />
         </DrawerContent>
       </Drawer>

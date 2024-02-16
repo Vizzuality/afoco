@@ -18,12 +18,15 @@ export default function ProjectDashboard() {
   const setDashboard = useSetAtom(dashboardAtom);
 
   return (
-    <div className="z-50 box-content h-full w-full rounded-3xl bg-neutral-50 px-6 py-8 shadow-md">
+    <div
+      data-cy="project-dashboard"
+      className="z-50 box-content h-full w-full rounded-3xl bg-neutral-50 px-6 py-8 shadow-md"
+    >
       <div>
         <h3 className="mb-4 text-xl font-extrabold text-gray-400">Overview</h3>
         <button
           onClick={() => setDashboard(false)}
-          className="focus:ring-ring absolute right-6 top-9 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:pointer-events-none"
+          className="focus:ring-ring absolute -right-6 top-9 z-50 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:pointer-events-none"
         >
           <X className="h-4 w-4 text-yellow-400" />
           <span className="sr-only">Close</span>

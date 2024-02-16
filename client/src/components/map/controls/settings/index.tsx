@@ -34,6 +34,7 @@ export const SettingsControl: FC<SettingsControlProps> = ({
                 })}
                 aria-label="Map settings"
                 type="button"
+                data-cy="map-settings-button"
               >
                 <Settings className="h-full w-full" />
               </button>

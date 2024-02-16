@@ -133,6 +133,7 @@ export default function MapContainer() {
     <div className="absolute left-0 top-0 h-screen w-screen">
       <Map
         id={id}
+        data-cy="map"
         initialViewState={{
           ...initialViewState,
           ...(bbox && {
