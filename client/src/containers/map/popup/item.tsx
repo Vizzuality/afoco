@@ -15,7 +15,7 @@ import { LayerTyped } from '@/types/layers';
 import ContentLoader from '@/components/ui/loader';
 
 export interface PopupItemProps {
-  id: number;
+  id: string;
 }
 const PopupItem = ({ id }: PopupItemProps) => {
   const [rendered, setRendered] = useState(false);
@@ -25,8 +25,8 @@ const PopupItem = ({ id }: PopupItemProps) => {
 
   const popup = useAtomValue(popupAtom);
   const layersInteractiveIds = useAtomValue(layersInteractiveIdsAtom);
-
-  const { data, isFetching, isFetched, isError, isPlaceholderData } = useGetLayersId(id);
+  // TODO: change strapi schema id to string
+  const { data, isFetching, isFetched, isError, isPlaceholderData } = useGetLayersId(Number(id));
 
   const attributes = data?.data?.attributes as LayerTyped;
   const source = attributes.config.source;

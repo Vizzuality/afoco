@@ -45,7 +45,7 @@ export interface LegendProps extends PropsWithChildren {
 }
 
 export interface LegendItemProps extends LegendItemEvents {
-  id: number;
+  id: string;
   name?: string;
   className?: string;
 
