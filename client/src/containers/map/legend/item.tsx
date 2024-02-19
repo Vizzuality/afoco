@@ -48,8 +48,8 @@ const getSettingsManager = (data: LayerTyped = {} as LayerTyped): SettingsManage
 
 const MapLegendItem = ({ id, ...props }: MapLegendItemProps) => {
   const layersSettings = useAtomValue(layersSettingsAtom);
-
-  const { data, isError, isFetched, isFetching, isPlaceholderData } = useGetLayersId(id);
+  // TODO: change strapi schema id to string
+  const { data, isError, isFetched, isFetching, isPlaceholderData } = useGetLayersId(Number(id));
 
   const attributes = data?.data?.attributes as LayerTyped;
   const legend_config = attributes?.legend_config;
