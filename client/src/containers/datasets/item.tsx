@@ -1,6 +1,9 @@
 'use client';
 
+import { useAtomValue } from 'jotai';
 import { Info } from 'lucide-react';
+
+import { layersAtom } from '@/store';
 
 import { DatasetListResponseDataItem } from '@/types/generated/strapi.schemas';
 
@@ -11,14 +14,14 @@ import { Dialog, DialogClose, DialogContent, DialogTrigger } from '@/components/
 import { Switch } from '@/components/ui/switch';
 
 export default function DatasetsItem(props: Required<DatasetListResponseDataItem>) {
-  const mockedLayersSelected = ['projects', 'tree-cover', 'soil-carbon-density'];
+  const layers = useAtomValue(layersAtom);
 
   return (
     <div className="flex flex-col space-y-1.5 border-b py-2">
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-2">
           <Switch
-            checked={mockedLayersSelected.includes(props.id)}
+            checked={layers.includes(props.id)}
             onCheckedChange={() => console.info(`set layer ${props.id}`)}
           />
           <h3 className="text-sm">{props.attributes.title}</h3>
