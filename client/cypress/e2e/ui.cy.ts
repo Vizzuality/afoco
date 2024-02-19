@@ -2,6 +2,7 @@ describe('navigation', () => {
   it('is redirect to project page', () => {
     cy.visit('/').url().should('be.equal', 'http://localhost:3000/projects');
   });
+
   it('dashboard switch on project detail page', () => {
     cy.visit('/');
     cy.get('a[data-cy="project-item-link"]').first().click();
@@ -10,12 +11,14 @@ describe('navigation', () => {
     cy.get('button[data-cy="project-dashboard-button"]').click();
     cy.get('[data-cy="project-dashboard"]').should('not.exist');
   });
+
   it('access to country detail page', () => {
     cy.visit('/');
     cy.get('a[data-cy="sidebar-tab-countries"]').click();
     cy.get('a[data-cy="country-item-link"]').first().click();
     cy.get('[data-cy="country-detail-name"]').should('exist');
   });
+
   it('access and click on datasets', () => {
     cy.visit('/');
     cy.get('a[data-cy="sidebar-tab-datasets"]').click().wait(1000);
@@ -34,6 +37,7 @@ describe('map', () => {
     cy.get('button[data-cy="basemap-satellite"]').click();
     // Todo: We would need to check if basemap is in the url
   });
+
   it('drags', () => {
     cy.visit('/');
     const map = cy.get('#default').wait(8000);
