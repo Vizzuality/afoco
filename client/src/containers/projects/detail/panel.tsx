@@ -3,10 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { useAtom } from 'jotai';
 import { ArrowLeft, ChevronRight } from 'lucide-react';
-
-import { dashboardAtom } from '@/store';
 
 import { PANEL_OVERVIEW_ITEMS } from '@/containers/projects/detail/constants';
 
@@ -16,8 +13,6 @@ import { Drawer, DrawerContent, DrawerTrigger } from '@/components/ui/drawer';
 import ProjectDashboard from './dashboard';
 
 export default function ProjectDetailPanel() {
-  const [dashboard, setDashboard] = useAtom(dashboardAtom);
-
   return (
     <div className="no-scrollbar h-full overflow-x-hidden rounded-3xl bg-neutral-50 p-6 pb-40">
       <div className="absolute left-0 top-0 w-full">
@@ -107,18 +102,19 @@ export default function ProjectDetailPanel() {
         </div>
       </div>
       <Drawer>
-        <DrawerTrigger asChild>
+        <DrawerTrigger asChild className="group">
           <Button
             variant="primary"
-            className="group fixed bottom-6 right-6 z-50 space-x-2"
+            className="fixed bottom-6 right-6 z-50 w-48 space-x-2"
             size="base"
-            onClick={() => setDashboard(!dashboard)}
+            data-cy="project-dashboard-button"
           >
-            <p className="w-36">{dashboard ? 'Hide dashboard' : 'Show dashboard'}</p>
+            <p className="block group-data-[state=open]:hidden">{'Show dashboard'}</p>
+            <p className="block group-data-[state=closed]:hidden">{'Hide dashboard'}</p>
             <ChevronRight className="h-4 w-4 text-yellow-900 group-hover:text-yellow-50" />
           </Button>
         </DrawerTrigger>
-        <DrawerContent className="left-[512px] w-[calc(100vw-584px)]">
+        <DrawerContent className="left-[514px] w-[calc(100vw-570px)]">
           <ProjectDashboard />
         </DrawerContent>
       </Drawer>

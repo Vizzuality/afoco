@@ -1,0 +1,36 @@
+name: Cypress Tests
+
+on:
+  push:
+    paths:
+      - 'client/**'
+      - '.github/workflows/testing-e2e.yml'
+
+  workflow_dispatch:
+
+jobs:
+  cypress-run:
+    runs-on: ubuntu-22.04
+    defaults:
+      run:
+        working-directory: ${{github.workspace}}/client
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Use Node.js 18.13
+        uses: actions/setup-node@v3
+        with:
+          node-version-file: 'client/.nvmrc'
+          cache: 'yarn'
+          cache-dependency-path: client/yarn.lock
+
+      - name: Install dependencies
+        run: yarn install --immutable
+
+      - name: Cypress run
+        uses: cypress-io/github-action@v6
+        with:
+          build: yarn build
+          start: yarn start
+          command: "yarn cypress:open"

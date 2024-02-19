@@ -27,6 +27,7 @@ export default function Sidebar() {
             <Link
               href={href}
               key={name}
+              data-cy={`sidebar-tab-${name}`}
               className={cn({
                 'rounded-8xl mx-2 mt-2 flex flex-col items-center space-y-1 border-2 border-transparent py-10 text-center':
                   true,
