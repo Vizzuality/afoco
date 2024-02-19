@@ -17,7 +17,7 @@ import {
   layersInteractiveIdsAtom,
   popupAtom,
   tmpBboxAtom,
-} from '@/store';
+} from '@/store/map';
 
 import { useGetLayers } from '@/types/generated/layer';
 import { LayerTyped } from '@/types/layers';

@@ -7,7 +7,7 @@ import { useAtomValue } from 'jotai';
 
 import { format } from '@/lib/utils/formats';
 
-import { layersInteractiveIdsAtom, popupAtom } from '@/store';
+import { layersInteractiveIdsAtom, popupAtom } from '@/store/map';
 
 import { useGetLayersId } from '@/types/generated/layer';
 import { LayerTyped } from '@/types/layers';

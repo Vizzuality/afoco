@@ -9,8 +9,6 @@ import { useSyncLayers } from '@/hooks/datasets/sync-query';
 import Legend from '@/components/map/legend';
 import { Button } from '@/components/ui/button';
 
-import MapLegendItem from './item';
-
 const MapLegends = ({ className = '' }) => {
   const [layers] = useSyncLayers();
 

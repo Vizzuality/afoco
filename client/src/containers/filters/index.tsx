@@ -7,8 +7,9 @@ import { Filter } from 'lucide-react';
 
 import { useSyncFilters } from '@/hooks/datasets/sync-query';
 
-import FiltersContent from '@/containers/filters/content';
 import type { FiltersType, FilterSettings } from '@/containers/filters/types';
+
+import FiltersContent from '@/containers/filters/content';
 
 import { Button } from '@/components/ui/button';
 import { Combobox } from '@/components/ui/combobox';
