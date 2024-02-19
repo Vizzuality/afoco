@@ -9,19 +9,20 @@ import { parseConfig } from '@/lib/json-converter';
 import { layersInteractiveAtom, layersInteractiveIdsAtom } from '@/store';
 
 import { useGetLayersId } from '@/types/generated/layer';
-import { LayerResponseDataObject } from '@/types/generated/strapi.schemas';
 import { Config, LayerTyped } from '@/types/layers';
 
 import DeckJsonLayer from '@/components/map/layers/deck-json-layer';
 import MapboxLayer from '@/components/map/layers/mapbox-layer';
 
-interface LayerManagerItemProps extends Required<Pick<LayerResponseDataObject, 'id'>> {
+interface LayerManagerItemProps {
+  id: string;
   beforeId: string;
   settings: Record<string, unknown>;
 }
 
 const LayerManagerItem = ({ id, beforeId, settings }: LayerManagerItemProps) => {
-  const { data } = useGetLayersId(id);
+  // TODO: change strapi schema id to string
+  const { data } = useGetLayersId(Number(id));
 
   const setLayersInteractiveIds = useSetAtom(layersInteractiveIdsAtom);
 

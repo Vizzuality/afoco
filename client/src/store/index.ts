@@ -33,7 +33,7 @@ export const tmpBboxAtom = atom<readonly [number, number, number, number] | null
 // Map layers
 export const layersAtom = atom<readonly string[]>(['projects']);
 
-export const layersInteractiveAtom = atom<number[]>([]);
+export const layersInteractiveAtom = atom<string[]>([]);
 
 export const layersInteractiveIdsAtom = atom<string[]>([]);
 
