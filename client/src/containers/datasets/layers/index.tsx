@@ -1,11 +1,16 @@
-'use client';
+// 'use client';
 
-import LayersList from '@/containers/datasets/layers/list';
+import { ProjectsLayer } from './projects/layer';
 
-export default function Layers({ datasetId }: { datasetId: number }) {
-  return (
-    <div>
-      <LayersList datasetId={datasetId} />
-    </div>
-  );
-}
+// import LayersList from '@/containers/datasets/layers/list';
+
+// export default function Layers({ datasetId }: { datasetId: number }) {
+//   return (
+//     <div>
+//       <LayersList datasetId={datasetId} />
+//     </div>
+//   );
+// }
+export const LAYERS = {
+  projects: ProjectsLayer,
+};
