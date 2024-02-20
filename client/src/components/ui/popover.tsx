@@ -10,9 +10,7 @@ const Popover = PopoverPrimitive.Root;
 
 const PopoverTrigger = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof PopoverPrimitive.Trigger>
->(({ ...props }) => (
-  <PopoverPrimitive.Trigger className="popover-menu-trigger flex-1" {...props} />
-));
+>(({ ...props }) => <PopoverPrimitive.Trigger className=" flex-1" {...props} />);
 
 PopoverTrigger.displayName = PopoverPrimitive.Trigger.displayName;
 
