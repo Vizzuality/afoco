@@ -1,5 +1,7 @@
 # AFOCO
 
+![afoco](https://github.com/Vizzuality/afoco/assets/33252015/f1b59ec2-b53e-4db4-85c7-b67ffca0dd79)
+
 Asian Forest Cooperation Organization (AFoCO) is a treaty-based intergovernmental organization that promotes cooperation towards achieving the shared SDGs and regional and global forestry objectives. Through action-oriented practices, AFoCO aims to contribute to the global goals of increasing forest cover and implementing the Paris Agreement on climate change.
 The ongoing project seeks to develop a map-based platform aimed at assisting AFoCO users and partners in enhancing their forest management practices across various project sites spanning 14 countries.
 
