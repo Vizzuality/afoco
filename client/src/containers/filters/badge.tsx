@@ -32,7 +32,6 @@ export default function FiltersBadge({
           ...filtersSettings,
           [category]: filterSettingsCategory.filter((f) => f !== filterValue),
         };
-
         setFiltersToURL(filtersUpdate);
       } else if (
         typeof filterSettingsCategory === 'string' &&

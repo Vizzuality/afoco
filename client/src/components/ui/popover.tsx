@@ -8,11 +8,7 @@ import { cn } from '@/lib/classnames';
 
 const Popover = PopoverPrimitive.Root;
 
-const PopoverTrigger = React.forwardRef<
-  React.ComponentPropsWithoutRef<typeof PopoverPrimitive.Trigger>
->(({ ...props }) => <PopoverPrimitive.Trigger className=" flex-1" {...props} />);
-
-PopoverTrigger.displayName = PopoverPrimitive.Trigger.displayName;
+const PopoverTrigger = PopoverPrimitive.Trigger;
 
 const PopoverContent = React.forwardRef<
   React.ElementRef<typeof PopoverPrimitive.Content>,
