@@ -8,17 +8,6 @@
         "coordinates": [39.797222, 47.115858]
       },
       "properties": {
-        "scalerank": 8,
-        "featurecla": "Airport",
-        "type": "mid",
-        "name": "Rostov S.W.",
-        "abbrev": null,
-        "location": "runway",
-        "gps_code": null,
-        "iata_code": null,
-        "wikipedia": null,
-        "natlscale": 10,
-        "cartodb_id": 239,
         "created_at": "2014-10-19T00:00:00Z",
         "updated_at": "2014-10-19T00:00:00Z"
       }
@@ -30,17 +19,6 @@
         "coordinates": [103.986414, 1.356161]
       },
       "properties": {
-        "scalerank": 2,
-        "featurecla": "Airport",
-        "type": "major",
-        "name": "Singapore Changi",
-        "abbrev": "SIN",
-        "location": "terminal",
-        "gps_code": "WSSS",
-        "iata_code": "SIN",
-        "wikipedia": "http://en.wikipedia.org/wiki/Singapore_Changi_Airport",
-        "natlscale": 150,
-        "cartodb_id": 832,
         "created_at": "2014-10-19T00:00:00Z",
         "updated_at": "2014-10-19T00:00:00Z"
       }
@@ -52,17 +30,6 @@
         "coordinates": [120.209733, 22.950668]
       },
       "properties": {
-        "scalerank": 8,
-        "featurecla": "Airport",
-        "type": "military mid",
-        "name": "Tainan",
-        "abbrev": "TNN",
-        "location": "ramp",
-        "gps_code": "RCNN",
-        "iata_code": "TNN",
-        "wikipedia": "http://en.wikipedia.org/wiki/Tainan_Airport",
-        "natlscale": 10,
-        "cartodb_id": 34,
         "created_at": "2014-10-19T00:00:00Z",
         "updated_at": "2014-10-19T00:00:00Z"
       }
@@ -74,17 +41,6 @@
         "coordinates": [104.845028, 11.552645]
       },
       "properties": {
-        "scalerank": 4,
-        "featurecla": "Airport",
-        "type": "major",
-        "name": "Pochentong",
-        "abbrev": "PNH",
-        "location": "terminal",
-        "gps_code": "VDPP",
-        "iata_code": "PNH",
-        "wikipedia": "http://en.wikipedia.org/wiki/Phnom_Penh_International_Airport",
-        "natlscale": 50,
-        "cartodb_id": 725,
         "created_at": "2014-10-19T00:00:00Z",
         "updated_at": "2014-10-19T00:00:00Z"
       }
@@ -96,17 +52,6 @@
         "coordinates": [2.3838, 6.358247]
       },
       "properties": {
-        "scalerank": 4,
-        "featurecla": "Airport",
-        "type": "mid",
-        "name": "Cotonou Cadjehon",
-        "abbrev": "COO",
-        "location": "terminal",
-        "gps_code": "DBBB",
-        "iata_code": "COO",
-        "wikipedia": "http://en.wikipedia.org/wiki/Cadjehoun_Airport",
-        "natlscale": 50,
-        "cartodb_id": 661,
         "created_at": "2014-10-19T00:00:00Z",
         "updated_at": "2014-10-19T00:00:00Z"
       }
@@ -118,17 +63,6 @@
         "coordinates": [-130.445587, 54.292]
       },
       "properties": {
-        "scalerank": 4,
-        "featurecla": "Airport",
-        "type": "mid",
-        "name": "Prince Rupert",
-        "abbrev": "YPR",
-        "location": "terminal",
-        "gps_code": "CYPR",
-        "iata_code": "YPR",
-        "wikipedia": "http://en.wikipedia.org/wiki/Prince_Rupert_Airport",
-        "natlscale": 50,
-        "cartodb_id": 758,
         "created_at": "2014-10-19T00:00:00Z",
         "updated_at": "2014-10-19T00:00:00Z"
       }
@@ -140,17 +74,6 @@
         "coordinates": [31.016249, 27.050816]
       },
       "properties": {
-        "scalerank": 6,
-        "featurecla": "Airport",
-        "type": "mid",
-        "name": "Asyut",
-        "abbrev": "ATZ",
-        "location": "terminal",
-        "gps_code": "HEAT",
-        "iata_code": "ATZ",
-        "wikipedia": "http://en.wikipedia.org/wiki/Assiut_Airport",
-        "natlscale": 20,
-        "cartodb_id": 427,
         "created_at": "2014-10-19T00:00:00Z",
         "updated_at": "2014-10-19T00:00:00Z"
       }
@@ -162,17 +85,6 @@
         "coordinates": [-165.441642, 64.507221]
       },
       "properties": {
-        "scalerank": 4,
-        "featurecla": "Airport",
-        "type": "mid",
-        "name": "Nome",
-        "abbrev": "OME",
-        "location": "terminal",
-        "gps_code": "PAOM",
-        "iata_code": "OME",
-        "wikipedia": "http://en.wikipedia.org/wiki/Nome_Airport",
-        "natlscale": 50,
-        "cartodb_id": 717,
         "created_at": "2014-10-19T00:00:00Z",
         "updated_at": "2014-10-19T00:00:00Z"
       }
@@ -184,17 +96,6 @@
         "coordinates": [48.747107, 31.343159]
       },
       "properties": {
-        "scalerank": 9,
-        "featurecla": "Airport",
-        "type": "mid",
-        "name": "Ahwaz",
-        "abbrev": "AWZ",
-        "location": "terminal",
-        "gps_code": "OIAW",
-        "iata_code": "AWZ",
-        "wikipedia": "http://en.wikipedia.org/wiki/Ahwaz_Airport",
-        "natlscale": 8,
-        "cartodb_id": 4,
         "created_at": "2014-10-19T00:00:00Z",
         "updated_at": "2014-10-19T00:00:00Z"
       }
@@ -206,17 +107,6 @@
         "coordinates": [75.758483, 31.432942]
       },
       "properties": {
-        "scalerank": 9,
-        "featurecla": "Airport",
-        "type": "military mid",
-        "name": "Adampur",
-        "abbrev": "VIAX",
-        "location": "runway",
-        "gps_code": "VIAX",
-        "iata_code": null,
-        "wikipedia": null,
-        "natlscale": 8,
-        "cartodb_id": 24,
         "created_at": "2014-10-19T00:00:00Z",
         "updated_at": "2014-10-19T00:00:00Z"
       }
@@ -228,17 +118,6 @@
         "coordinates": [83.223522, 17.727958]
       },
       "properties": {
-        "scalerank": 8,
-        "featurecla": "Airport",
-        "type": "mid",
-        "name": "Vishakapatnam",
-        "abbrev": "VTZ",
-        "location": "terminal",
-        "gps_code": "VEVZ",
-        "iata_code": "VTZ",
-        "wikipedia": "http://en.wikipedia.org/wiki/Visakhapatnam_Airport",
-        "natlscale": 10,
-        "cartodb_id": 39,
         "created_at": "2014-10-19T00:00:00Z",
         "updated_at": "2014-10-19T00:00:00Z"
       }
@@ -250,17 +129,6 @@
         "coordinates": [77.038894, 11.030142]
       },
       "properties": {
-        "scalerank": 8,
-        "featurecla": "Airport",
-        "type": "mid",
-        "name": "Coimbatore",
-        "abbrev": "CJB",
-        "location": "terminal",
-        "gps_code": "VOCB",
-        "iata_code": "CJB",
-        "wikipedia": "http://en.wikipedia.org/wiki/Coimbatore_Airport",
-        "natlscale": 10,
-        "cartodb_id": 78,
         "created_at": "2014-10-19T00:00:00Z",
         "updated_at": "2014-10-19T00:00:00Z"
       }
@@ -272,17 +140,6 @@
         "coordinates": [114.246947, 30.601714]
       },
       "properties": {
-        "scalerank": 6,
-        "featurecla": "Airport",
-        "type": "military mid",
-        "name": "Wang-Chia Tun Airbase",
-        "abbrev": "ZHHH",
-        "location": "runway",
-        "gps_code": null,
-        "iata_code": null,
-        "wikipedia": null,
-        "natlscale": 20,
-        "cartodb_id": 532,
         "created_at": "2014-10-19T00:00:00Z",
         "updated_at": "2014-10-19T00:00:00Z"
       }
@@ -294,17 +151,6 @@
         "coordinates": [-49.173709, -25.536]
       },
       "properties": {
-        "scalerank": 4,
-        "featurecla": "Airport",
-        "type": "mid",
-        "name": "Afonso Pena Int'l",
-        "abbrev": "CWB",
-        "location": "terminal",
-        "gps_code": "SBCT",
-        "iata_code": "CWB",
-        "wikipedia": "http://en.wikipedia.org/wiki/Afonso_Pena_International_Airport",
-        "natlscale": 50,
-        "cartodb_id": 785,
         "created_at": "2014-10-19T00:00:00Z",
         "updated_at": "2014-10-19T00:00:00Z"
       }
@@ -316,22 +162,10 @@
         "coordinates": [81.740378, 21.185987]
       },
       "properties": {
-        "scalerank": 6,
-        "featurecla": "Airport",
-        "type": "mid",
-        "name": "Raipur",
-        "abbrev": "RPR",
-        "location": "terminal",
-        "gps_code": "VARP",
-        "iata_code": "RPR",
-        "wikipedia": "http://en.wikipedia.org/wiki/Raipur_Airport",
-        "natlscale": 20,
-        "cartodb_id": 501,
         "created_at": "2014-10-19T00:00:00Z",
         "updated_at": "2014-10-19T00:00:00Z"
       }
     },
-
     {
       "type": "Feature",
       "geometry": {
@@ -339,24 +173,10 @@
         "coordinates": [101.446569, 0.464601]
       },
       "properties": {
-        "scalerank": 9,
-        "featurecla": "Airport",
-        "type": "mid",
-        "name": "Simpang Tiga",
-        "abbrev": "PKU",
-        "location": "terminal",
-        "gps_code": "WIBB",
-        "iata_code": "PKU",
-        "wikipedia": "http://en.wikipedia.org/wiki/Sultan_Syarif_Qasim_II_International_Airport",
-        "natlscale": 8,
-        "cartodb_id": 15,
         "created_at": "2014-10-19T00:00:00Z",
         "updated_at": "2014-10-19T00:00:00Z"
       }
     },
-
-
-
     {
       "type": "Feature",
       "geometry": {
@@ -364,24 +184,9 @@
         "coordinates": [128.662989, 38.058782]
       },
       "properties": {
-        "scalerank": 7,
-        "featurecla": "Airport",
-        "type": "mid",
-        "name": "Yangyang Int'l",
-        "abbrev": "YNY",
-        "location": "terminal",
-        "gps_code": "RKNY",
-        "iata_code": "YNY",
-        "wikipedia": "http://en.wikipedia.org/wiki/Yangyang_International_Airport",
-        "natlscale": 15,
-        "cartodb_id": 398,
         "created_at": "2014-10-19T00:00:00Z",
         "updated_at": "2014-10-19T00:00:00Z"
       }
     }
-
-
-
-
   ]
 }
