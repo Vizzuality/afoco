@@ -129,21 +129,44 @@ export default function MapContainer() {
         setPopup(p);
       }
 
-      e.features ?? push(`/projects/${e.features[0].properties.slug}`);
+      if (e.features && e.features[0]) {
+        push(`/projects/${e.features[0].properties.slug}`);
+      }
     },
     [layersInteractive, layersInteractiveData, setPopup, push]
   );
 
+  let hoveredStateId: string | null = null;
   const handleMouseMove = useCallback(
     (e: MapLayerMouseEvent) => {
       if (e.features && e.features[0] && map) {
         setCursor('pointer');
+
+        if (hoveredStateId !== null) {
+          map?.setFeatureState(
+            {
+              source: 'jsx-source-1',
+              id: hoveredStateId,
+            },
+            { hover: false }
+          );
+        }
       }
+      hoveredStateId = 'projects';
       if (e.features && !e.features[0]) {
         setCursor('grab');
+        if (hoveredStateId === null) {
+          map?.setFeatureState(
+            {
+              source: 'jsx-source-1',
+              id: hoveredStateId,
+            },
+            { hover: true }
+          );
+        }
       }
     },
-    [setCursor, map]
+    [setCursor, map, hoveredStateId]
   );
 
   return (
