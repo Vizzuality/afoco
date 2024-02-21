@@ -3,7 +3,7 @@ import { MapLayerMouseEvent } from 'mapbox-gl';
 
 type Settings = {
   opacity: number;
-  visibility: boolean;
+  visibility: 'none' | 'visible';
   expand: boolean;
 };
 
@@ -25,7 +25,7 @@ export type LayerId =
   | 'biomass-density'
   | 'net-forest-carbon-flux'
   | 'oil-carbon-density'
-  | 'land-degragation';
+  | 'land-degradation';
 
 // Sidebar and menus
 export const openAtom = atom<boolean>(true);

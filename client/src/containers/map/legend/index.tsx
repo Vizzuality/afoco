@@ -6,6 +6,8 @@ import { cn } from '@/lib/classnames';
 
 import { layersSettingsAtom, layersAtom, DEFAULT_SETTINGS } from '@/store';
 
+import { LayerSettings } from '@/types/layers';
+
 import MapLegendItem from '@/containers/map/legend/item';
 
 import Legend from '@/components/map/legend';
@@ -40,7 +42,7 @@ const MapLegends = ({ className = '' }) => {
   );
 
   const handleChangeVisibility = useCallback(
-    (id: string, visibility: boolean) =>
+    (id: string, visibility: LayerSettings['visibility']) =>
       setLayersSettings((prev) => ({
         ...prev,
         [id]: {
@@ -68,17 +70,17 @@ const MapLegends = ({ className = '' }) => {
 
   const ITEMS = useMemo(() => {
     return layers.map((layer) => {
-      const settings = layersSettings[layer] ?? { opacity: 1, visibility: true, expand: true };
+      const settings = layersSettings[layer] ?? { opacity: 1, visibility: 'visible', expand: true };
 
       return (
         <MapLegendItem
           id={layer}
           key={layer}
           settings={settings}
-          onChangeOpacity={(opacity: number) => {
+          onChangeOpacity={(opacity: LayerSettings['opacity']) => {
             handleChangeOpacity(layer, opacity);
           }}
-          onChangeVisibility={(visibility: boolean) => {
+          onChangeVisibility={(visibility: LayerSettings['visibility']) => {
             handleChangeVisibility(layer, visibility);
           }}
           onChangeExpand={(expand: boolean) => {

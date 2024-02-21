@@ -14,6 +14,12 @@ export type ParamsConfigValue = {
   default: unknown;
 };
 
+export interface LayerSettings {
+  opacity: number;
+  visibility: 'none' | 'visible';
+  [key: string]: unknown;
+}
+
 export type ParamsConfig = Record<string, ParamsConfigValue>[];
 
 export type LegendConfig = {
@@ -41,6 +47,8 @@ export type LayerProps = {
   zIndex?: number;
   onAdd?: (props: Config) => void;
   onRemove?: (props: Config) => void;
+  beforeId: string;
+  settings: LayerSettings;
 };
 
 export type LayerTyped = Layer & {
