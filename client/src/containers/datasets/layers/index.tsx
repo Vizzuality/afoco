@@ -1,11 +1,12 @@
-'use client';
+import type { LayerProps } from '@/types/layers';
 
-import LayersList from '@/containers/datasets/layers/list';
+import { ProjectsLayer } from './projects/layer';
 
-export default function Layers({ datasetId }: { datasetId: number }) {
-  return (
-    <div>
-      <LayersList datasetId={datasetId} />
-    </div>
-  );
-}
+type LayersIndex = {
+  [key: string]: React.ComponentType<LayerProps>;
+};
+
+// Define the LAYERS object with the explicit type
+export const LAYERS: LayersIndex = {
+  projects: ProjectsLayer,
+};

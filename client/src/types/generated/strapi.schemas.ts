@@ -642,7 +642,7 @@ export type LayerListResponseMeta = {
 };
 
 export interface LayerListResponseDataItem {
-  id?: number;
+  id?: string;
   attributes?: Layer;
 }
 

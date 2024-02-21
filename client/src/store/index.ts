@@ -3,7 +3,7 @@ import { MapLayerMouseEvent } from 'mapbox-gl';
 
 type Settings = {
   opacity: number;
-  visibility: boolean;
+  visibility: 'none' | 'visible';
   expand: boolean;
 };
 
@@ -18,6 +18,15 @@ type MapSettings = {
   roads: boolean;
 };
 
+export type LayerId =
+  | 'projects'
+  | 'tree-cover'
+  | 'net-forest-carbon-flux'
+  | 'biomass-density'
+  | 'net-forest-carbon-flux'
+  | 'oil-carbon-density'
+  | 'land-degradation';
+
 // Sidebar and menus
 export const openAtom = atom<boolean>(true);
 
@@ -31,9 +40,9 @@ export const bboxAtom = atom<readonly [number, number, number, number] | null | 
 export const tmpBboxAtom = atom<readonly [number, number, number, number] | null>(null);
 
 // Map layers
-export const layersAtom = atom<readonly number[]>([]);
+export const layersAtom = atom<readonly string[]>(['projects']);
 
-export const layersInteractiveAtom = atom<number[]>([]);
+export const layersInteractiveAtom = atom<string[]>([]);
 
 export const layersInteractiveIdsAtom = atom<string[]>([]);
 

@@ -91,7 +91,8 @@ export const LegendItemToolbar: React.FC<LegendItemToolbarProps> = ({
                   'pointer-events-none': popoverOpen,
                 })}
                 onClick={() => {
-                  if (onChangeVisibility) onChangeVisibility(!visibility);
+                  if (onChangeVisibility)
+                    onChangeVisibility(visibility === 'none' ? 'visible' : 'none');
                 }}
               >
                 <LegendItemButton Icon={visibility ? Eye : EyeOff} />
