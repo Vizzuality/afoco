@@ -18,13 +18,13 @@ Requirements:
 
 ## Project implementation
 
-This platform is built upon []()
+This platform is built upon [https://github.com/Vizzuality/front-end-scaffold](https://github.com/Vizzuality/front-end-scaffold)
 
 - [React](https://reactjs.org/) as a UI library
 - [Next.js](https://nextjs.org/) as a framework
 - [Tailwind CSS](https://tailwindcss.com/) as a styles framework
 - Reusable components such as forms, modals, icons, and other most use components
-- [Jotai](https://jotai.org/) 
+- [Jotai](https://jotai.org/)
 - [Typescript](https://www.typescriptlang.org/) already configured
 - git workflow and hooks
 - editorconfig and code style based on [Airbnb](https://github.com/airbnb/javascript)
@@ -48,6 +48,9 @@ yarn client dev
 
 You can access a hot-reloaded version of the app on [http://localhost:3000](http://localhost:3000).
 
+## Testing
+
+To run e2e tests: `yarn cypress:open` and choose e2e configuration
 
 ## Deploy on Vercel
 
