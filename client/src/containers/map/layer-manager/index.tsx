@@ -6,7 +6,7 @@ import { useAtomValue } from 'jotai';
 
 import { layersAtom, layersSettingsAtom } from '@/store';
 
-import LayerManagerItem from '@/containers/map/layer-manager/item';
+import { LAYERS } from '@/containers/datasets/layers';
 
 import { DeckMapboxOverlayProvider } from '@/components/map/provider';
 
@@ -39,13 +39,16 @@ const LayerManager = () => {
           The first item will always be at the top of the layers stack
         */}
         {layers.map((l, i) => {
+          const LayerComponent = LAYERS[l];
+
           const beforeId = i === 0 ? 'custom-layers' : `${layers[i - 1]}-layer`;
+
           return (
-            <LayerManagerItem
-              key={l}
+            <LayerComponent
               id={l}
+              key={l}
               beforeId={beforeId}
-              settings={layersSettings[l] ?? { opacity: 1, visibility: true, expand: true }}
+              settings={layersSettings[l] ?? { opacity: 1, visibility: true }}
             />
           );
         })}

@@ -7,8 +7,6 @@ import LayersItem from '@/containers/datasets/layers/item';
 
 import ContentLoader from '@/components/ui/loader';
 
-import { ProjectsLayer } from './projects/layer';
-
 export default function LayersList({ datasetId }: { datasetId: number }) {
   const { data, isFetching, isFetched, isPlaceholderData, isError } = useGetLayers({
     filters: {

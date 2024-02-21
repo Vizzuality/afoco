@@ -40,7 +40,7 @@ export const MOCK_LAYERS = [
     },
   },
   {
-    id: 'Land Degradation',
+    id: 'land-degradation',
     attributes: {
       title: 'Land Degradation',
       description:

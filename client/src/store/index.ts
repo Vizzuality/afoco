@@ -18,6 +18,15 @@ type MapSettings = {
   roads: boolean;
 };
 
+type Layer =
+  | 'projects'
+  | 'tree-cover'
+  | 'net-forest-carbon-flux'
+  | 'biomass-density'
+  | 'net-forest-carbon-flux'
+  | 'oil-carbon-density'
+  | 'land-degragation';
+
 // Sidebar and menus
 export const openAtom = atom<boolean>(true);
 
@@ -31,7 +40,7 @@ export const bboxAtom = atom<readonly [number, number, number, number] | null | 
 export const tmpBboxAtom = atom<readonly [number, number, number, number] | null>(null);
 
 // Map layers
-export const layersAtom = atom<readonly string[]>(['projects']);
+export const layersAtom = atom<readonly Layer[]>(['projects']);
 
 export const layersInteractiveAtom = atom<string[]>([]);
 
