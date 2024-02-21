@@ -17,6 +17,8 @@ type MapSettings = {
   roads: boolean;
 };
 
+type Cursor = 'pointer' | 'grab';
+
 export type LayerId =
   | 'projects'
   | 'tree-cover'
@@ -43,7 +45,7 @@ export const layersAtom = atom<readonly string[]>(['projects']);
 
 export const layersInteractiveAtom = atom<string[]>([]);
 
-export const layersInteractiveIdsAtom = atom<string[]>([]);
+export const layersInteractiveIdsAtom = atom<string[]>(['projects']);
 
 export const layersSettingsAtom = atom<LayerSettings | EmptyObject>({});
 
@@ -56,4 +58,8 @@ export const mapSettingsAtom = atom<MapSettings>({
   roads: false,
 });
 
-export const DEFAULT_SETTINGS = {};
+export const cursorAtom = atom<Cursor>('grab');
+
+export const DEFAULT_SETTINGS = {
+  expand: true,
+};

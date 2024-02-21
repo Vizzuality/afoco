@@ -45,8 +45,8 @@ export type InteractionConfig = {
 export type LayerProps = {
   id?: string;
   zIndex?: number;
-  onAdd?: (props: Config) => void;
-  onRemove?: (props: Config) => void;
+  onAdd?: () => void;
+  onRemove?: (ids: string[]) => void;
   beforeId: string;
   settings: LayerSettings;
 };

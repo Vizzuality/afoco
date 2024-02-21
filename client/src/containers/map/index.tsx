@@ -5,11 +5,13 @@ import { useCallback, useMemo } from 'react';
 import { LngLatBoundsLike, MapLayerMouseEvent, useMap } from 'react-map-gl';
 
 import dynamic from 'next/dynamic';
+import { useRouter } from 'next/navigation';
 
 import { useAtomValue, useSetAtom, useAtom } from 'jotai';
 
 import {
   bboxAtom,
+  cursorAtom,
   layersInteractiveAtom,
   layersInteractiveIdsAtom,
   popupAtom,
@@ -56,9 +58,11 @@ export default function MapContainer() {
   const { id, initialViewState, minZoom, maxZoom } = DEFAULT_PROPS;
 
   const { [id]: map } = useMap();
+  const { push } = useRouter();
 
   const layersInteractive = useAtomValue(layersInteractiveAtom);
   const layersInteractiveIds = useAtomValue(layersInteractiveIdsAtom);
+  const [cursor, setCursor] = useAtom(cursorAtom);
 
   const setPopup = useSetAtom(popupAtom);
 
@@ -122,11 +126,24 @@ export default function MapContainer() {
         })
       ) {
         const p = Object.assign({}, e, { features: e.features ?? [] });
-
         setPopup(p);
       }
+
+      e.features ?? push(`/projects/${e.features[0].properties.slug}`);
     },
-    [layersInteractive, layersInteractiveData, setPopup]
+    [layersInteractive, layersInteractiveData, setPopup, push]
+  );
+
+  const handleMouseMove = useCallback(
+    (e: MapLayerMouseEvent) => {
+      if (e.features && e.features[0] && map) {
+        setCursor('pointer');
+      }
+      if (e.features && !e.features[0]) {
+        setCursor('grab');
+      }
+    },
+    [setCursor, map]
   );
 
   return (
@@ -141,12 +158,14 @@ export default function MapContainer() {
           }),
         }}
         bounds={tmpBounds}
+        cursor={cursor}
         minZoom={minZoom}
         maxZoom={maxZoom}
         mapStyle="mapbox://styles/layer-manager/clj8fgofm000t01pjcu21agsd?fresh=true"
         interactiveLayerIds={layersInteractiveIds}
         onClick={handleMapClick}
         onMapViewStateChange={handleMapViewStateChange}
+        onMouseMove={handleMouseMove}
       >
         {() => (
           <>
