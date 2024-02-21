@@ -1,5 +1,3 @@
-'use client';
-
 import { Layer } from 'react-map-gl';
 
 import { useAtomValue } from 'jotai';
