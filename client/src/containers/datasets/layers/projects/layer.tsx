@@ -1,6 +1,8 @@
-import { Layer, LayerProps, Source } from 'react-map-gl';
+import { Layer, Source } from 'react-map-gl';
 
 import { GeoJSONSourceRaw, GeoJSONSourceOptions, CircleLayer } from 'mapbox-gl';
+
+import type { LayerProps } from '@/types/layers';
 
 import mockData from './mock.json';
 
@@ -11,18 +13,7 @@ const SOURCE: GeoJSONSourceRaw & GeoJSONSourceOptions = {
   data: GEOJSON,
 };
 
-type Settings = {
-  opacity: number;
-  visibility: boolean;
-};
-
-export const ProjectsLayer = ({
-  beforeId,
-  settings,
-}: {
-  beforeId: LayerProps['beforeId'];
-  settings: Settings;
-}) => {
+export const ProjectsLayer = ({ beforeId, settings }: LayerProps) => {
   const LAYERS: CircleLayer[] = [
     {
       id: 'points_shadow',

@@ -1,25 +1,12 @@
-import type { LayerProps } from 'react-map-gl';
-
-import type { LayerId } from '@/store';
+import type { LayerProps } from '@/types/layers';
 
 import { ProjectsLayer } from './projects/layer';
 
-type ComponentProps = {
-  beforeId: string;
-  settings: {
-    opacity: number;
-    visibility: boolean;
-  };
-  id?: string;
-  onAdd?: (ids: LayerProps['id'][]) => void;
-  onRemove?: (ids: LayerProps['id'][]) => void;
-  zIndex?: number;
+type LayersIndex = {
+  [key: string]: React.ComponentType<LayerProps>;
 };
 
-type LayerIndex = Readonly<{
-  [key: LayerId]: ComponentProps;
-}>;
-
-export const LAYERS: LayerIndex = {
+// Define the LAYERS object with the explicit type
+export const LAYERS: LayersIndex = {
   projects: ProjectsLayer,
 };

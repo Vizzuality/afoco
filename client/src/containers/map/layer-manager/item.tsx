@@ -10,6 +10,7 @@ import { layersInteractiveAtom, layersInteractiveIdsAtom } from '@/store';
 
 import { useGetLayersId } from '@/types/generated/layer';
 import { Config, LayerTyped } from '@/types/layers';
+import type { LayerSettings } from '@/types/layers';
 
 import DeckJsonLayer from '@/components/map/layers/deck-json-layer';
 import MapboxLayer from '@/components/map/layers/mapbox-layer';
@@ -17,7 +18,7 @@ import MapboxLayer from '@/components/map/layers/mapbox-layer';
 interface LayerManagerItemProps {
   id: string;
   beforeId: string;
-  settings: Record<string, unknown>;
+  settings: LayerSettings;
 }
 
 const LayerManagerItem = ({ id, beforeId, settings }: LayerManagerItemProps) => {
@@ -84,6 +85,7 @@ const LayerManagerItem = ({ id, beforeId, settings }: LayerManagerItemProps) => 
         config={c}
         onAdd={handleAddMapboxLayer}
         onRemove={handleRemoveMapboxLayer}
+        settings={settings}
       />
     );
   }
@@ -97,7 +99,7 @@ const LayerManagerItem = ({ id, beforeId, settings }: LayerManagerItemProps) => 
       settings,
     });
 
-    return <DeckJsonLayer id={`${id}-layer`} beforeId={beforeId} config={c} />;
+    return <DeckJsonLayer id={`${id}-layer`} beforeId={beforeId} config={c} settings={settings} />;
   }
 };
 

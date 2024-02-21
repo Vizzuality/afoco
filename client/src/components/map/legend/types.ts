@@ -4,6 +4,8 @@ import { DraggableAttributes } from '@dnd-kit/core';
 import { SyntheticListeners } from '@dnd-kit/core/dist/hooks/utilities';
 import { LucideIcon } from 'lucide-react';
 
+import { LayerSettings } from '@/types/layers';
+
 type Sortable = {
   enabled: boolean;
   handle?: boolean;
@@ -11,20 +13,20 @@ type Sortable = {
 };
 
 type OnChangeOrder = (id: string[]) => void;
-type OnChangeOpacity = (opacity: number) => void;
-type OnChangeVisibility = (visibility: boolean) => void;
+type OnChangeOpacity = (opacity: LayerSettings['opacity']) => void;
+type OnChangeVisibility = (visibility: LayerSettings['visibility']) => void;
 type OnChangeExpand = (expand: boolean) => void;
 type OnChangeColumn = (column: string) => void;
 
 export type Settings = Record<string, unknown> & {
   opacity?: number;
-  visibility?: boolean;
+  visibility?: 'visible' | 'none';
   expand?: boolean;
 };
 
 export type SettingsManager = {
-  opacity?: boolean;
-  visibility?: boolean;
+  opacity?: LayerSettings['opacity'];
+  visibility?: LayerSettings['visibility'];
   expand?: boolean;
   info?: boolean;
 };
