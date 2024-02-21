@@ -21,7 +21,6 @@ export const ProjectsLayer = ({
   settings,
 }: {
   beforeId: LayerProps['beforeId'];
-  id: LayerProps['id'];
   settings: Settings;
 }) => {
   const LAYERS: CircleLayer[] = [
