@@ -130,40 +130,51 @@ export default function MapContainer() {
       }
 
       if (e.features && e.features[0]) {
-        push(`/projects/${e.features[0].properties.slug}`);
+        push(`/projects/${e.features[0].properties?.slug}`);
       }
     },
     [layersInteractive, layersInteractiveData, setPopup, push]
   );
 
-  let hoveredStateId: string | null = null;
+  let hoveredStateId: undefined | string = undefined;
   const handleMouseMove = useCallback(
     (e: MapLayerMouseEvent) => {
+      const ProjectsLayer = e?.features && e?.features.find(({ layer }) => layer.id === 'projects');
+
+      // *ON MOUSE ENTER
       if (e.features && e.features[0] && map) {
         setCursor('pointer');
 
-        if (hoveredStateId !== null) {
+        if (hoveredStateId !== undefined) {
           map?.setFeatureState(
             {
-              source: 'jsx-source-1',
+              source: 'projects',
               id: hoveredStateId,
             },
             { hover: false }
           );
         }
       }
-      hoveredStateId = 'projects';
-      if (e.features && !e.features[0]) {
+      hoveredStateId = ProjectsLayer?.layer.id;
+      map?.setFeatureState(
+        {
+          source: 'projects',
+          id: hoveredStateId,
+        },
+        { hover: true }
+      );
+
+      // *ON MOUSE LEAVE
+      if (!ProjectsLayer) {
         setCursor('grab');
-        if (hoveredStateId === null) {
-          map?.setFeatureState(
-            {
-              source: 'jsx-source-1',
-              id: hoveredStateId,
-            },
-            { hover: true }
-          );
-        }
+        map?.setFeatureState(
+          {
+            source: 'projects',
+            id: hoveredStateId,
+          },
+          { hover: false }
+        );
+        hoveredStateId = undefined;
       }
     },
     [setCursor, map, hoveredStateId]
