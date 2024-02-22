@@ -5,7 +5,7 @@ import { JSONConfiguration, JSONConverter } from '@deck.gl/json/typed';
 
 import FUNCTIONS from '@/lib/utils';
 
-import { ParamsConfig } from '@/types/layers';
+import { LayerSettings, ParamsConfig } from '@/types/layers';
 
 import {
   LegendTypeBasic,
@@ -64,7 +64,7 @@ export const getParams = ({ params_config, settings = {} }: GetParamsProps) => {
 interface ParseConfigurationProps {
   config: unknown;
   params_config: unknown;
-  settings: Record<string, unknown>;
+  settings: Partial<LayerSettings>;
 }
 export const parseConfig = <T>({
   config,

@@ -66,3 +66,12 @@ export type LayerTyped = Layer & {
   legend_config: LegendConfig;
   interaction_config: InteractionConfig;
 };
+
+export type LayerId =
+  | 'projects'
+  | 'tree-cover'
+  | 'net-forest-carbon-flux'
+  | 'biomass-density'
+  | 'net-forest-carbon-flux'
+  | 'oil-carbon-density'
+  | 'land-degradation';

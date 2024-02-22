@@ -6,7 +6,7 @@ import { X } from 'lucide-react';
 
 import { useSyncFilters } from '@/hooks/datasets/sync-query';
 
-import type { FilterSettings, FiltersType, FilterValues } from '@/containers/filters/types';
+import type { FiltersType, FilterValues } from '@/containers/filters/types';
 
 import { CATEGORIES_FILTERS_DICTIONARY } from './constants';
 

@@ -60,7 +60,7 @@ export interface LegendItemProps extends LegendItemEvents {
 
   // settings
   // I extends Dataset['id'] so you can get the correct setting depending on the dataset id
-  settings?: Settings;
+  settings?: LayerSettings;
   settingsManager?: SettingsManager;
 }
 
@@ -69,7 +69,7 @@ export interface LegendItemToolbarProps extends LegendItemEvents {
   // components
   info?: string;
   // settings
-  settings?: Settings;
+  settings?: LayerSettings;
   settingsManager?: SettingsManager;
 }
 
