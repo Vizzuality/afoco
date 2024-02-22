@@ -13,12 +13,11 @@ export default function LayersItem({ id, attributes }: Required<LayerListRespons
 
   const handleLayerChange = () => {
     if (!id) return;
-    // Toogle layers if they exist
+
     if (layers.includes(id)) {
       return setLayers(layers.filter((l) => l !== id));
     }
 
-    // Add layers if they don't exist
     if (!layers.includes(id)) {
       return setLayers([id, ...layers]);
     }
