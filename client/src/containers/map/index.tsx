@@ -136,41 +136,39 @@ export default function MapContainer() {
     [layersInteractive, layersInteractiveData, setPopup, push]
   );
 
-  let hoveredStateId: null | string | undefined | number = null;
+  let hoveredStateId: string | null = null;
   const handleMouseMove = useCallback(
     (e: MapLayerMouseEvent) => {
       const ProjectsLayer = e?.features && e?.features.find(({ layer }) => layer.id === 'projects');
 
       // *ON MOUSE ENTER
-      if (ProjectsLayer) {
-        if (e.features && e.features[0] && map) {
-          setCursor('pointer');
+      if (e.features && e.features[0] && map) {
+        setCursor('pointer');
+      }
 
-          if (hoveredStateId !== null) {
-            map?.setFeatureState(
-              {
-                source: 'projects',
-                id: hoveredStateId,
-              },
-              { hover: true }
-            );
-          }
-        }
-
-        if (hoveredStateId === null) {
-          hoveredStateId = ProjectsLayer?.layer.id;
+      if (ProjectsLayer && map) {
+        if (hoveredStateId !== null) {
           map?.setFeatureState(
             {
               source: 'projects',
               id: hoveredStateId,
             },
-            { hover: true }
+            { hover: false }
           );
         }
+
+        hoveredStateId = ProjectsLayer?.id as string;
+        map?.setFeatureState(
+          {
+            source: 'projects',
+            id: hoveredStateId,
+          },
+          { hover: true }
+        );
       }
 
       // *ON MOUSE LEAVE
-      if (!ProjectsLayer && hoveredStateId !== null) {
+      if (!ProjectsLayer) {
         setCursor('grab');
 
         map?.setFeatureState(
