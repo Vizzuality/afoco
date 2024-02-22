@@ -168,7 +168,7 @@ export default function MapContainer() {
       }
 
       // *ON MOUSE LEAVE
-      if (!ProjectsLayer) {
+      if (!ProjectsLayer && map && hoveredStateId) {
         setCursor('grab');
 
         map?.setFeatureState(

@@ -40,6 +40,10 @@ export function useLayers({
         duration: 300,
         delay: 0,
       },
+      transition: {
+        duration: 300,
+        delay: 0,
+      },
       layout: {
         visibility: visibility,
       },
