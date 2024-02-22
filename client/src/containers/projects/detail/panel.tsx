@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
+import { notFound, useParams } from 'next/navigation';
 
 import { ArrowLeft, ChevronRight } from 'lucide-react';
 
@@ -13,6 +14,13 @@ import { Drawer, DrawerContent, DrawerTrigger } from '@/components/ui/drawer';
 import ProjectDashboard from './dashboard';
 
 export default function ProjectDetailPanel() {
+  const params = useParams<{ slug: string }>();
+
+  // TODO: We will need to fetch data and check if slug exists
+  if (!params.slug) {
+    return notFound();
+  }
+
   return (
     <div className="no-scrollbar h-full overflow-x-hidden rounded-3xl bg-neutral-50 p-6 pb-40">
       <div className="absolute left-0 top-0 w-full">
