@@ -33,6 +33,7 @@
     "@radix-ui/react-tooltip": "^1.0.6",
     "@t3-oss/env-nextjs": "0.4.1",
     "@tanstack/react-query": "^4.29.18",
+    "@turf/bbox": "6.5.0",
     "@types/node": "20.3.1",
     "@types/react": "18.2.12",
     "@types/react-dom": "18.2.5",

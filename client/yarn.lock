@@ -39,6 +39,7 @@ __metadata:
     "@radix-ui/react-tooltip": ^1.0.6
     "@t3-oss/env-nextjs": 0.4.1
     "@tanstack/react-query": ^4.29.18
+    "@turf/bbox": 6.5.0
     "@types/d3-array": 3.0.5
     "@types/node": 20.3.1
     "@types/react": 18.2.12
@@ -2192,6 +2193,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@turf/bbox@npm:6.5.0":
+  version: 6.5.0
+  resolution: "@turf/bbox@npm:6.5.0"
+  dependencies:
+    "@turf/helpers": ^6.5.0
+    "@turf/meta": ^6.5.0
+  checksum: 537be56ae0c5ad44e71a691717b35745e947e19a6bd9f20fdac2ab4318caf98cd88472d7dbf576e8b32ead5da034d273ffb3f4559d6d386820ddcb88a1f7fedd
+  languageName: node
+  linkType: hard
+
 "@turf/boolean-clockwise@npm:^5.1.5":
   version: 5.1.5
   resolution: "@turf/boolean-clockwise@npm:5.1.5"
@@ -2218,6 +2229,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@turf/helpers@npm:^6.5.0":
+  version: 6.5.0
+  resolution: "@turf/helpers@npm:6.5.0"
+  checksum: d57f746351357838c654e0a9b98be3285a14b447504fd6d59753d90c6d437410bb24805d61c65b612827f07f6c2ade823bb7e56e41a1a946217abccfbd64c117
+  languageName: node
+  linkType: hard
+
 "@turf/invariant@npm:^5.1.5":
   version: 5.2.0
   resolution: "@turf/invariant@npm:5.2.0"
@@ -2233,6 +2251,15 @@ __metadata:
   dependencies:
     "@turf/helpers": ^5.1.5
   checksum: f2946bfc2283c34ca5e590027180edc950e9602702ea55a147003a86d33c72533ac4574043a4ee31b4ed38bcc5cdbb995368fc5a0a12d38a615bda811ec28969
+  languageName: node
+  linkType: hard
+
+"@turf/meta@npm:^6.5.0":
+  version: 6.5.0
+  resolution: "@turf/meta@npm:6.5.0"
+  dependencies:
+    "@turf/helpers": ^6.5.0
+  checksum: c6bb936aa92bf3365e87a50dc65f248e070c5767a36fac390754c00c89bf2d1583418686ab19a10332bfa9340b8cac6aaf2c55dad7f5fcf77f1a2dda75ccf363
   languageName: node
   linkType: hard
 

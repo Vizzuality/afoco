@@ -1,12 +1,13 @@
 'use client';
 
-import { useCallback, useMemo } from 'react';
+import { useCallback, useEffect, useMemo } from 'react';
 
 import { LngLatBoundsLike, MapLayerMouseEvent, useMap } from 'react-map-gl';
 
 import dynamic from 'next/dynamic';
-import { useRouter } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 
+import bbox from '@turf/bbox';
 import { useAtomValue, useSetAtom, useAtom } from 'jotai';
 
 import {
@@ -59,6 +60,7 @@ export default function MapContainer() {
 
   const { [id]: map } = useMap();
   const { push } = useRouter();
+  const params = useParams<{ country: string; slug: string }>();
 
   const layersInteractive = useAtomValue(layersInteractiveAtom);
   const layersInteractiveIds = useAtomValue(layersInteractiveIdsAtom);
@@ -66,7 +68,7 @@ export default function MapContainer() {
 
   const setPopup = useSetAtom(popupAtom);
 
-  const [bbox, setBbox] = useAtom(bboxAtom);
+  const [bboxA, setBbox] = useAtom(bboxAtom);
   const [tmpBbox, setTmpBbox] = useAtom(tmpBboxAtom);
 
   const { data: layersInteractiveData } = useGetLayers(
@@ -101,6 +103,12 @@ export default function MapContainer() {
     }
   }, [tmpBbox]); // eslint-disable-line react-hooks/exhaustive-deps
 
+  useEffect(() => {
+    if (!params.slug && !params.country && map && initialViewState && initialViewState.bounds) {
+      map.fitBounds(initialViewState.bounds, { padding: 100 });
+    }
+  }, [params.slug, params.country, map, tmpBbox, setBbox, initialViewState]);
+
   const handleMapViewStateChange = useCallback(() => {
     if (map) {
       const b = map
@@ -129,11 +137,13 @@ export default function MapContainer() {
         setPopup(p);
       }
 
-      if (e.features && e.features[0]) {
+      if (e.features && e.features[0] && map) {
         push(`/projects/${e.features[0].properties?.slug}`);
+        const bboxTurf = bbox(e.features[0]) as LngLatBoundsLike;
+        map.fitBounds(bboxTurf, { padding: 100, maxZoom: 6 });
       }
     },
-    [layersInteractive, layersInteractiveData, setPopup, push]
+    [layersInteractive, layersInteractiveData, setPopup, push, map]
   );
 
   let hoveredStateId: string | null = null;
@@ -191,8 +201,8 @@ export default function MapContainer() {
         data-cy="map"
         initialViewState={{
           ...initialViewState,
-          ...(bbox && {
-            bounds: bbox as LngLatBoundsLike,
+          ...(bboxA && {
+            bounds: bboxA as LngLatBoundsLike,
           }),
         }}
         bounds={tmpBounds}
