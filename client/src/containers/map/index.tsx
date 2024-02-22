@@ -136,37 +136,43 @@ export default function MapContainer() {
     [layersInteractive, layersInteractiveData, setPopup, push]
   );
 
-  let hoveredStateId: undefined | string = undefined;
+  let hoveredStateId: null | string | undefined | number = null;
   const handleMouseMove = useCallback(
     (e: MapLayerMouseEvent) => {
       const ProjectsLayer = e?.features && e?.features.find(({ layer }) => layer.id === 'projects');
 
       // *ON MOUSE ENTER
-      if (e.features && e.features[0] && map) {
-        setCursor('pointer');
+      if (ProjectsLayer) {
+        if (e.features && e.features[0] && map) {
+          setCursor('pointer');
 
-        if (hoveredStateId !== undefined) {
+          if (hoveredStateId !== null) {
+            map?.setFeatureState(
+              {
+                source: 'projects',
+                id: hoveredStateId,
+              },
+              { hover: true }
+            );
+          }
+        }
+
+        if (hoveredStateId === null) {
+          hoveredStateId = ProjectsLayer?.layer.id;
           map?.setFeatureState(
             {
               source: 'projects',
               id: hoveredStateId,
             },
-            { hover: false }
+            { hover: true }
           );
         }
       }
-      hoveredStateId = ProjectsLayer?.layer.id;
-      map?.setFeatureState(
-        {
-          source: 'projects',
-          id: hoveredStateId,
-        },
-        { hover: true }
-      );
 
       // *ON MOUSE LEAVE
-      if (!ProjectsLayer) {
+      if (!ProjectsLayer && hoveredStateId !== null) {
         setCursor('grab');
+
         map?.setFeatureState(
           {
             source: 'projects',
@@ -174,7 +180,7 @@ export default function MapContainer() {
           },
           { hover: false }
         );
-        hoveredStateId = undefined;
+        hoveredStateId = null;
       }
     },
     [setCursor, map, hoveredStateId]
