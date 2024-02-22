@@ -1,20 +1,18 @@
-import { useCallback, useMemo } from 'react';
+import { useCallback } from 'react';
 
-import { useAtom } from 'jotai';
+import { useAtom, useAtomValue } from 'jotai';
 
 import { cn } from '@/lib/classnames';
 
-import { layersSettingsAtom, layersAtom, DEFAULT_SETTINGS } from '@/store';
-
-import { LayerSettings } from '@/types/layers';
-
-import MapLegendItem from '@/containers/map/legend/item';
+import { layersSettingsAtom, layersAtom } from '@/store';
 
 import Legend from '@/components/map/legend';
 
+import MapLegendItem from './item';
+
 const MapLegends = ({ className = '' }) => {
   const [layers, setLayers] = useAtom(layersAtom);
-  const [layersSettings, setLayersSettings] = useAtom(layersSettingsAtom);
+  const layersSettings = useAtomValue(layersSettingsAtom);
 
   const handleChangeOrder = useCallback(
     (order: string[]) => {
@@ -28,79 +26,7 @@ const MapLegends = ({ className = '' }) => {
     [layers, setLayers]
   );
 
-  const handleChangeOpacity = useCallback(
-    (id: string, opacity: number) =>
-      setLayersSettings((prev) => ({
-        ...prev,
-        [id]: {
-          ...DEFAULT_SETTINGS,
-          ...prev[id],
-          opacity,
-        },
-      })),
-    [setLayersSettings]
-  );
-
-  const handleChangeVisibility = useCallback(
-    (id: string, visibility: LayerSettings['visibility']) =>
-      setLayersSettings((prev) => ({
-        ...prev,
-        [id]: {
-          ...DEFAULT_SETTINGS,
-          ...prev[id],
-          visibility,
-        },
-      })),
-    [setLayersSettings]
-  );
-
-  const handleChangeExpand = useCallback(
-    (id: string, expand: boolean) =>
-      setLayersSettings((prev) => ({
-        ...prev,
-        [id]: {
-          ...prev[id],
-          expand,
-        },
-      })),
-    [setLayersSettings]
-  );
-
   const sortable = layers?.length > 1;
-
-  const ITEMS = useMemo(() => {
-    return layers.map((layer) => {
-      const settings = layersSettings[layer] ?? { opacity: 1, visibility: 'visible', expand: true };
-
-      return (
-        <MapLegendItem
-          id={layer}
-          key={layer}
-          settings={settings}
-          onChangeOpacity={(opacity: LayerSettings['opacity']) => {
-            handleChangeOpacity(layer, opacity);
-          }}
-          onChangeVisibility={(visibility: LayerSettings['visibility']) => {
-            handleChangeVisibility(layer, visibility);
-          }}
-          onChangeExpand={(expand: boolean) => {
-            handleChangeExpand(layer, expand);
-          }}
-          sortable={{
-            enabled: sortable,
-            handle: layers.length > 1,
-          }}
-        />
-      );
-    });
-  }, [
-    layers,
-    layersSettings,
-    sortable,
-    handleChangeOpacity,
-    handleChangeVisibility,
-    handleChangeExpand,
-  ]);
 
   return (
     <div className="absolute bottom-16 right-6 z-10 w-full max-w-xs">
@@ -115,7 +41,10 @@ const MapLegends = ({ className = '' }) => {
         }}
         onChangeOrder={handleChangeOrder}
       >
-        {ITEMS}
+        {layers.map((layer) => {
+          const settings = layersSettings[layer] ?? { opacity: 1, visibility: 'visible' };
+          return <MapLegendItem key={layer} id={layer} settings={settings} />;
+        })}
       </Legend>
     </div>
   );

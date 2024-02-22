@@ -4,7 +4,6 @@ import { MapLayerMouseEvent } from 'mapbox-gl';
 type Settings = {
   opacity: number;
   visibility: 'none' | 'visible';
-  expand: boolean;
 };
 
 type LayerSettings = Record<string, Settings>;
@@ -57,6 +56,4 @@ export const mapSettingsAtom = atom<MapSettings>({
   roads: false,
 });
 
-export const DEFAULT_SETTINGS = {
-  expand: true,
-};
+export const DEFAULT_SETTINGS = {};

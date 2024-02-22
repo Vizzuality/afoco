@@ -90,6 +90,7 @@ module.exports = {
         xl: '0px 20px 25px -5px #0000001A, 0px 10px 10px -5px #0000000A',
         '2xl': '0px 25px 50px -12px #00000040',
         inner: '0px 0px 5px 1px #00000029 inset',
+        legend: '0px 0px 10px 0px rgba(193, 186, 186, 0.25)',
       },
       borderRadius: {
         '4xl': '32px',

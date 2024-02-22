@@ -55,7 +55,7 @@ export interface LegendItemProps extends LegendItemEvents {
   info?: string;
 
   // sortable
-  sortable: Sortable;
+  sortable?: Sortable;
   listeners?: SyntheticListeners;
   attributes?: DraggableAttributes;
 
