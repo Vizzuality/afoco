@@ -74,7 +74,9 @@ const MapLegendItem = ({ id, settings }: MapLegendItemProps) => {
                   <PaintBucket size={12} />
                 </div>
               </TooltipTrigger>
-              <TooltipContent sideOffset={0}>Opacity</TooltipContent>
+              <TooltipContent sideOffset={0} className="font-light">
+                Opacity
+              </TooltipContent>
             </Tooltip>
           </PopoverTrigger>
           <PopoverContent sideOffset={2} side="top" align="end" className="w-56 rounded bg-white">
@@ -95,7 +97,7 @@ const MapLegendItem = ({ id, settings }: MapLegendItemProps) => {
               {settings?.visibility === 'visible' ? <Eye size={12} /> : <EyeOff size={12} />}
             </button>
           </TooltipTrigger>
-          <TooltipContent sideOffset={0}>
+          <TooltipContent sideOffset={0} className="font-light">
             {settings?.visibility === 'visible' ? 'Hide Layer' : 'Show Layer'}
           </TooltipContent>
         </Tooltip>
@@ -105,7 +107,9 @@ const MapLegendItem = ({ id, settings }: MapLegendItemProps) => {
               <XCircle size={12} />
             </button>
           </TooltipTrigger>
-          <TooltipContent sideOffset={0}>Remove Layer</TooltipContent>
+          <TooltipContent sideOffset={0} className="font-light">
+            Remove Layer
+          </TooltipContent>
         </Tooltip>
       </div>
     </div>
