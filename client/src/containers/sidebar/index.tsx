@@ -3,18 +3,19 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { useAtom } from 'jotai';
+import { useAtom, useAtomValue } from 'jotai';
 import { HelpCircle } from 'lucide-react';
 
 import { cn } from '@/lib/classnames';
 
-import { sidebarTabAtom } from '@/store';
+import { layersAtom, sidebarTabAtom } from '@/store';
 
 import type { SidebarTab } from '@/containers/sidebar/constants';
 import { TABS } from '@/containers/sidebar/constants';
 
 export default function Sidebar() {
   const [sidebarTab, setSidebarTab] = useAtom(sidebarTabAtom);
+  const layers = useAtomValue(layersAtom);
 
   return (
     <div className="rounded-8xl absolute bottom-0 left-4 top-0 z-20 my-2 w-20 bg-yellow-700 py-10 text-xs text-yellow-50">
@@ -44,15 +45,41 @@ export default function Sidebar() {
                   height={24}
                   className="h-6 w-6"
                 />
-                <div
-                  className={cn({
-                    'absolute bottom-1 left-4 h-4 w-4 rounded-full bg-yellow-300 text-xs font-semibold text-yellow-700':
-                      true,
-                    'bg-yellow-300 text-white': sidebarTab === name,
-                  })}
-                >
-                  2
-                </div>
+                {name === 'datasets' && layers.length > 0 && (
+                  <div
+                    className={cn({
+                      'absolute bottom-1 left-4 h-4 w-4 rounded-full bg-yellow-300 text-xs font-semibold text-yellow-700':
+                        true,
+                      'bg-yellow-300 text-white': sidebarTab === name,
+                    })}
+                  >
+                    {layers.length}
+                  </div>
+                )}
+
+                {name === 'projects' && (
+                  <div
+                    className={cn({
+                      'absolute bottom-1 left-4 h-4 w-4 rounded-full bg-yellow-300 text-xs font-semibold text-yellow-700':
+                        true,
+                      'bg-yellow-300 text-white': sidebarTab === name,
+                    })}
+                  >
+                    12
+                  </div>
+                )}
+
+                {name === 'countries' && (
+                  <div
+                    className={cn({
+                      'absolute bottom-1 left-4 h-4 w-4 rounded-full bg-yellow-300 text-xs font-semibold text-yellow-700':
+                        true,
+                      'bg-yellow-300 text-white': sidebarTab === name,
+                    })}
+                  >
+                    2
+                  </div>
+                )}
               </div>
               <p className="capitalize">{name}</p>
             </Link>
