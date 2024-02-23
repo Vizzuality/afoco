@@ -60,6 +60,8 @@ export const mapSettingsAtom = atom<MapSettings>({
 
 export const cursorAtom = atom<Cursor>('grab');
 
+export const hoveredProjectAtom = atom<string | null>(null);
+
 export const DEFAULT_SETTINGS = {
   expand: true,
 };

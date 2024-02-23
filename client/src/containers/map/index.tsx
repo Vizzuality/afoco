@@ -13,6 +13,7 @@ import { useAtomValue, useSetAtom, useAtom } from 'jotai';
 import {
   bboxAtom,
   cursorAtom,
+  hoveredProjectAtom,
   layersInteractiveAtom,
   layersInteractiveIdsAtom,
   popupAtom,
@@ -64,6 +65,7 @@ export default function MapContainer() {
 
   const layersInteractive = useAtomValue(layersInteractiveAtom);
   const layersInteractiveIds = useAtomValue(layersInteractiveIdsAtom);
+  const setHoveredProject = useSetAtom(hoveredProjectAtom);
   const [cursor, setCursor] = useAtom(cursorAtom);
 
   const setPopup = useSetAtom(popupAtom);
@@ -154,6 +156,8 @@ export default function MapContainer() {
       // *ON MOUSE ENTER
       if (e.features && e.features[0] && map) {
         setCursor('pointer');
+
+        setHoveredProject(e.features[0].properties?.ID);
       }
 
       if (ProjectsLayer && map) {
@@ -180,6 +184,7 @@ export default function MapContainer() {
       // *ON MOUSE LEAVE
       if (!ProjectsLayer && map && hoveredStateId) {
         setCursor('grab');
+        setHoveredProject(null);
 
         map?.setFeatureState(
           {
