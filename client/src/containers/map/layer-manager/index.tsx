@@ -1,3 +1,5 @@
+'use client';
+
 import { Layer } from 'react-map-gl';
 
 import { useSyncLayers } from '@/hooks/datasets/sync-query';

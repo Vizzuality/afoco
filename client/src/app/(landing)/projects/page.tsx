@@ -15,8 +15,6 @@ export default function Projects() {
       <div className="space-y-5 p-5">
         <h2 className="text-3xl font-normal">Projects</h2>
         <Filters />
-
-        <Filters />
         <ProjectsList />
       </div>
     </Panel>
