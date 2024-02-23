@@ -10,6 +10,8 @@ import { layersSettingsAtom, DEFAULT_SETTINGS, layersAtom } from '@/store';
 import { LEGENDS } from '@/containers/datasets/layers';
 
 import { LegendItemProps } from '@/components/map/legend/types';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { Slider } from '@/components/ui/slider';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 
 type MapLegendItemProps = LegendItemProps;
@@ -64,17 +66,26 @@ const MapLegendItem = ({ id, settings }: MapLegendItemProps) => {
         <p className="text-xs capitalize">{id}</p>
       </div>
       <div className="flex space-x-px">
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <button
-              onClick={() => handleChangeOpacity(0.7)}
-              className="rounded-full p-1.5 hover:bg-yellow-100"
-            >
-              <PaintBucket size={12} />
-            </button>
-          </TooltipTrigger>
-          <TooltipContent sideOffset={0}>Opacity</TooltipContent>
-        </Tooltip>
+        <Popover>
+          <PopoverTrigger>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <div className="rounded-full p-1.5 hover:bg-yellow-100">
+                  <PaintBucket size={12} />
+                </div>
+              </TooltipTrigger>
+              <TooltipContent sideOffset={0}>Opacity</TooltipContent>
+            </Tooltip>
+          </PopoverTrigger>
+          <PopoverContent sideOffset={2} side="top" align="end" className="w-56 rounded bg-white">
+            <Slider
+              max={1}
+              step={0.1}
+              defaultValue={[settings?.opacity || 1]}
+              onValueChange={(op: number[]) => handleChangeOpacity(op[0])}
+            />
+          </PopoverContent>
+        </Popover>
         <Tooltip>
           <TooltipTrigger asChild>
             <button

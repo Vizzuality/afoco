@@ -1,50 +1,31 @@
 import { Layer, Source } from 'react-map-gl';
 
-import { GeoJSONSourceRaw, GeoJSONSourceOptions, CircleLayer } from 'mapbox-gl';
+import { GeoJSONSourceRaw, GeoJSONSourceOptions } from 'mapbox-gl';
 
 import type { LayerProps } from '@/types/layers';
 
+import { useLayers } from './hooks';
 import mockData from './mock.json';
 
 const GEOJSON = mockData as GeoJSON.FeatureCollection;
 
-const SOURCE: GeoJSONSourceRaw & GeoJSONSourceOptions = {
+const SOURCE: GeoJSONSourceRaw & GeoJSONSourceOptions & { id: string } = {
   type: 'geojson',
   data: GEOJSON,
+  id: 'projects',
+  promoteId: 'ID',
 };
 
 export const ProjectsLayer = ({ beforeId, settings }: LayerProps) => {
-  const LAYERS: CircleLayer[] = [
-    {
-      id: 'points_shadow',
-      type: 'circle',
-      paint: {
-        'circle-radius': 32,
-        'circle-color': '#ccc',
-        'circle-blur': 1,
-      },
-    },
-    {
-      id: 'projects',
-      type: 'circle',
-      paint: {
-        'circle-stroke-color': '#ffffff',
-        'circle-stroke-width': 9,
-        'circle-radius': 10,
-        'circle-color': '#176252',
-      },
-      layout: {
-        visibility: settings.visibility ? 'visible' : 'none',
-      },
-    },
-  ];
-
+  const LAYERS = useLayers({
+    settings,
+  });
   if (!SOURCE || !LAYERS.length) return null;
 
   return (
     <Source {...SOURCE}>
       {LAYERS.map((LAYER) => (
-        <Layer {...LAYER} key={LAYER.id} beforeId={beforeId} />
+        <Layer {...LAYER} key={LAYER.id} beforeId={beforeId} id={LAYER.id} />
       ))}
     </Source>
   );
