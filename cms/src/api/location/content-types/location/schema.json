@@ -29,6 +29,12 @@
       },
       "type": "customField",
       "customField": "plugin::postgis.map"
+    },
+    "projects": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::project.project",
+      "mappedBy": "locations"
     }
   }
 }

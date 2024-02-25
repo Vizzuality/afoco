@@ -15,6 +15,15 @@
     "name": {
       "type": "string",
       "required": true
+    },
+    "country_population": {
+      "type": "integer"
+    },
+    "country_deforestation": {
+      "type": "integer"
+    },
+    "country_economy": {
+      "type": "integer"
     }
   }
 }

@@ -1,0 +1,7 @@
+/**
+ * country-indicator-field router
+ */
+
+import { factories } from '@strapi/strapi';
+
+export default factories.createCoreRouter('api::country-indicator-field.country-indicator-field');

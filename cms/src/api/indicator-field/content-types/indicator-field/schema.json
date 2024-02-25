@@ -4,7 +4,8 @@
   "info": {
     "singularName": "indicator-field",
     "pluralName": "indicator-fields",
-    "displayName": "IndicatorField"
+    "displayName": "ProjectIndicatorField",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -22,11 +23,6 @@
       "relation": "oneToOne",
       "target": "api::project.project",
       "required": true
-    },
-    "location": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::location.location"
     },
     "value": {
       "type": "json",
