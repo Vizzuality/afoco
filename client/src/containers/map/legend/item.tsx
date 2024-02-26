@@ -1,95 +1,118 @@
 'use-client';
-import { ReactElement, createElement, isValidElement, useMemo } from 'react';
 
-import { useAtomValue } from 'jotai';
+import { useCallback } from 'react';
 
-import { parseConfig } from '@/lib/json-converter';
+import { useAtom, useSetAtom } from 'jotai';
+import { Eye, EyeOff, PaintBucket, XCircle } from 'lucide-react';
 
-import { layersSettingsAtom } from '@/store';
+import { layersSettingsAtom, DEFAULT_SETTINGS, layersAtom } from '@/store';
 
-import { useGetLayersId } from '@/types/generated/layer';
-import { LayerTyped, LegendConfig } from '@/types/layers';
-import { LegendType } from '@/types/map';
+import { LEGENDS } from '@/containers/datasets/layers';
 
-import LegendItem from '@/components/map/legend/item';
-import {
-  LegendTypeBasic,
-  LegendTypeChoropleth,
-  LegendTypeGradient,
-} from '@/components/map/legend/item-types';
-import { LegendItemProps, LegendTypeProps, SettingsManager } from '@/components/map/legend/types';
-import ContentLoader from '@/components/ui/loader';
-
-const LEGEND_TYPES: Record<LegendType, React.FC<LegendTypeProps>> = {
-  basic: LegendTypeBasic,
-  choropleth: LegendTypeChoropleth,
-  gradient: LegendTypeGradient,
-};
+import { LegendItemProps } from '@/components/map/legend/types';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { Slider } from '@/components/ui/slider';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 
 type MapLegendItemProps = LegendItemProps;
 
-const getSettingsManager = (data: LayerTyped = {} as LayerTyped): SettingsManager => {
-  const { params_config, legend_config } = data;
+const MapLegendItem = ({ id, settings }: MapLegendItemProps) => {
+  const setLayersSettings = useSetAtom(layersSettingsAtom);
+  const [layers, setLayers] = useAtom(layersAtom);
 
-  if (!params_config?.length) return {};
-  const p = params_config.reduce((acc: Record<string, boolean>, { key }) => {
-    if (!key) return acc;
-    return {
-      ...acc,
-      [`${key}`]: true,
-    };
-  }, {});
+  const handleChangeOpacity = useCallback(
+    (opacity: number) =>
+      setLayersSettings((prev) => ({
+        ...prev,
+        [id]: {
+          ...DEFAULT_SETTINGS,
+          ...prev[id],
+          opacity,
+        },
+      })),
+    [id, setLayersSettings]
+  );
 
-  return {
-    ...p,
-    expand: !!legend_config && !!legend_config.type,
+  const handleChangeVisibility = useCallback(
+    () =>
+      setLayersSettings((prev) => ({
+        ...prev,
+        [id]: {
+          ...DEFAULT_SETTINGS,
+          ...prev[id],
+          visibility: settings?.visibility === 'visible' ? 'none' : 'visible',
+        },
+      })),
+    [id, settings, setLayersSettings]
+  );
+
+  const handleRemoveLayer = () => {
+    if (!id) return;
+
+    if (layers.includes(id)) {
+      return setLayers(layers.filter((l) => l !== id));
+    }
   };
-};
-
-const MapLegendItem = ({ id, ...props }: MapLegendItemProps) => {
-  const layersSettings = useAtomValue(layersSettingsAtom);
-  // TODO: change strapi schema id to string
-  const { data, isError, isFetched, isFetching, isPlaceholderData } = useGetLayersId(Number(id));
-
-  const attributes = data?.data?.attributes as LayerTyped;
-  const legend_config = attributes?.legend_config;
-  const params_config = attributes?.params_config;
-  const settingsManager = getSettingsManager(attributes);
-
-  const LEGEND_COMPONENT = useMemo(() => {
-    const l = parseConfig<LegendConfig | ReactElement | null>({
-      config: legend_config,
-      params_config,
-      settings: layersSettings[id] ?? {},
-    });
-
-    if (!l) return null;
-
-    if (isValidElement(l)) {
-      return l;
-    }
-
-    if (!isValidElement(l) && 'items' in l) {
-      const { type, ...props } = l;
-      return createElement(LEGEND_TYPES[type], props);
-    }
-
-    return null;
-  }, [id, legend_config, params_config, layersSettings]);
+  const LegendDetailComponent = LEGENDS[id];
 
   return (
-    <ContentLoader
-      skeletonClassName="h-10"
-      data={data?.data}
-      isFetching={isFetching}
-      isFetched={isFetched}
-      isPlaceholderData={isPlaceholderData}
-      isError={isError}
+    <div
+      key={id}
+      className="shadow-legend flex w-full items-center justify-between rounded bg-white px-4 py-2"
+      id={id}
     >
-      <LegendItem id={id} name={attributes?.title} settingsManager={settingsManager} {...props}>
-        {LEGEND_COMPONENT}
-      </LegendItem>
-    </ContentLoader>
+      <div className="flex items-center space-x-2">
+        <LegendDetailComponent />
+        <p className="text-xs capitalize">{id}</p>
+      </div>
+      <div className="flex space-x-px">
+        <Popover>
+          <PopoverTrigger>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <div className="rounded-full p-1.5 hover:bg-yellow-100">
+                  <PaintBucket size={12} />
+                </div>
+              </TooltipTrigger>
+              <TooltipContent sideOffset={0} className="font-light">
+                Opacity
+              </TooltipContent>
+            </Tooltip>
+          </PopoverTrigger>
+          <PopoverContent sideOffset={2} side="top" align="end" className="w-56 rounded bg-white">
+            <Slider
+              max={1}
+              step={0.1}
+              defaultValue={[settings?.opacity || 1]}
+              onValueChange={(op: number[]) => handleChangeOpacity(op[0])}
+            />
+          </PopoverContent>
+        </Popover>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <button
+              onClick={handleChangeVisibility}
+              className="rounded-full p-1.5 hover:bg-yellow-100"
+            >
+              {settings?.visibility === 'visible' ? <Eye size={12} /> : <EyeOff size={12} />}
+            </button>
+          </TooltipTrigger>
+          <TooltipContent sideOffset={0} className="font-light">
+            {settings?.visibility === 'visible' ? 'Hide Layer' : 'Show Layer'}
+          </TooltipContent>
+        </Tooltip>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <button onClick={handleRemoveLayer} className="rounded-full p-1.5 hover:bg-yellow-100">
+              <XCircle size={12} />
+            </button>
+          </TooltipTrigger>
+          <TooltipContent sideOffset={0} className="font-light">
+            Remove Layer
+          </TooltipContent>
+        </Tooltip>
+      </div>
+    </div>
   );
 };
 

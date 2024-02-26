@@ -1,20 +1,23 @@
-import { useCallback, useMemo } from 'react';
+import { useCallback, useState } from 'react';
 
-import { useAtom } from 'jotai';
+import { useAtom, useAtomValue } from 'jotai';
+import { ChevronsLeft, ChevronsRight } from 'lucide-react';
 
 import { cn } from '@/lib/classnames';
 
-import { layersSettingsAtom, layersAtom, DEFAULT_SETTINGS } from '@/store';
-
-import { LayerSettings } from '@/types/layers';
-
-import MapLegendItem from '@/containers/map/legend/item';
+import { layersSettingsAtom, layersAtom } from '@/store';
 
 import Legend from '@/components/map/legend';
+import { Button } from '@/components/ui/button';
+
+import MapLegendItem from './item';
 
 const MapLegends = ({ className = '' }) => {
   const [layers, setLayers] = useAtom(layersAtom);
-  const [layersSettings, setLayersSettings] = useAtom(layersSettingsAtom);
+  const layersSettings = useAtomValue(layersSettingsAtom);
+
+  const [openLegend, setOpenLegend] = useState(true);
+  const handleOpenLegend = useCallback(() => setOpenLegend((prev) => !prev), []);
 
   const handleChangeOrder = useCallback(
     (order: string[]) => {
@@ -28,95 +31,36 @@ const MapLegends = ({ className = '' }) => {
     [layers, setLayers]
   );
 
-  const handleChangeOpacity = useCallback(
-    (id: string, opacity: number) =>
-      setLayersSettings((prev) => ({
-        ...prev,
-        [id]: {
-          ...DEFAULT_SETTINGS,
-          ...prev[id],
-          opacity,
-        },
-      })),
-    [setLayersSettings]
-  );
-
-  const handleChangeVisibility = useCallback(
-    (id: string, visibility: LayerSettings['visibility']) =>
-      setLayersSettings((prev) => ({
-        ...prev,
-        [id]: {
-          ...DEFAULT_SETTINGS,
-          ...prev[id],
-          visibility,
-        },
-      })),
-    [setLayersSettings]
-  );
-
-  const handleChangeExpand = useCallback(
-    (id: string, expand: boolean) =>
-      setLayersSettings((prev) => ({
-        ...prev,
-        [id]: {
-          ...prev[id],
-          expand,
-        },
-      })),
-    [setLayersSettings]
-  );
-
   const sortable = layers?.length > 1;
 
-  const ITEMS = useMemo(() => {
-    return layers.map((layer) => {
-      const settings = layersSettings[layer] ?? { opacity: 1, visibility: 'visible', expand: true };
-
-      return (
-        <MapLegendItem
-          id={layer}
-          key={layer}
-          settings={settings}
-          onChangeOpacity={(opacity: LayerSettings['opacity']) => {
-            handleChangeOpacity(layer, opacity);
-          }}
-          onChangeVisibility={(visibility: LayerSettings['visibility']) => {
-            handleChangeVisibility(layer, visibility);
-          }}
-          onChangeExpand={(expand: boolean) => {
-            handleChangeExpand(layer, expand);
-          }}
+  return (
+    <div className="absolute bottom-6 right-6 z-10 flex w-full max-w-[285px] space-x-2">
+      {openLegend && (
+        <Legend
+          className={cn(
+            'max-h-[calc(100vh_-_theme(space.16)_-_theme(space.6)_-_theme(space.48))]',
+            className
+          )}
           sortable={{
             enabled: sortable,
-            handle: layers.length > 1,
+            handle: true,
           }}
-        />
-      );
-    });
-  }, [
-    layers,
-    layersSettings,
-    sortable,
-    handleChangeOpacity,
-    handleChangeVisibility,
-    handleChangeExpand,
-  ]);
-
-  return (
-    <div className="absolute bottom-16 right-6 z-10 w-full max-w-xs">
-      <Legend
-        className={cn(
-          'max-h-[calc(100vh_-_theme(space.16)_-_theme(space.6)_-_theme(space.48))]',
-          className
-        )}
-        sortable={{
-          enabled: sortable,
-          handle: true,
-        }}
-        onChangeOrder={handleChangeOrder}
+          onChangeOrder={handleChangeOrder}
+        >
+          {layers.map((layer) => {
+            const settings = layersSettings[layer] ?? { opacity: 1, visibility: 'visible' };
+            return <MapLegendItem key={layer} id={layer} settings={settings} />;
+          })}
+        </Legend>
+      )}
+      <Button
+        variant="primary"
+        size="base"
+        className="ml-auto mt-auto h-8 w-8 rounded-full p-0"
+        onClick={handleOpenLegend}
       >
-        {ITEMS}
-      </Legend>
+        {openLegend ? <ChevronsRight size={12} /> : <ChevronsLeft size={12} />}
+      </Button>
     </div>
   );
 };
