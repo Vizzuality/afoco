@@ -2,7 +2,7 @@
 
 import { useCallback, Suspense } from 'react';
 
-import flatten from 'lodash/flatten';
+import flatten from 'lodash-es/flatten';
 import { Filter } from 'lucide-react';
 
 import { useSyncFilters } from '@/hooks/datasets/sync-query';
