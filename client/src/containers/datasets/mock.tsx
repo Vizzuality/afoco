@@ -11,7 +11,7 @@ export const MOCK_LAYERS = [
     id: 'tree-cover',
     attributes: {
       title: 'Tree Cover',
-      description: 'Displaying Tree cover with 30%canopy density.',
+      description: 'Displaying Tree cover with 30% canopy density.',
       info: 'Lorem ipsum dolor sit amet consectetur. Ac in vel mauris lectus in. Cras tellus aliquam amet quisque. Amet ut mi sed purus. Nulla adipiscing commodo lectus sed vehicula. Convallis etiam placerat imperdiet nunc tempus sit. Mi non habitant blandit cursus ullamcorper vitae. Aliquet donec egestas vitae tincidunt nunc amet ultricies. Cras blandit mattis etiam erat. Iaculis tellus euismod enim integer. Lorem ipsum dolor sit amet consectetur. Ac in vel mauris lectus in. Cras tellus aliquam amet quisque. Amet ut mi sed purus. Nulla adipiscing commodo lectus sed vehicula. Convallis etiam placerat imperdiet nunc tempus sit. Mi non habitant blandit cursus ullamcorper vitae. Aliquet donec egestas vitae tincidunt nunc amet ultricies. Cras blandit mattis etiam erat. Iaculis tellus euismod enim integer.',
     },
   },
