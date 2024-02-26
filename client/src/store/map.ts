@@ -3,13 +3,10 @@ import { MapLayerMouseEvent } from 'mapbox-gl';
 
 import type { LayerSettings } from '@/types/layers';
 import type { MapSettings } from '@/types/map';
-import type { EmptyObject } from '@/types';
 
-type Settings = {
-  opacity: number;
-  visibility: 'none' | 'visible';
-};
-
+interface LayersSettingsMap {
+  [id: string]: LayerSettings;
+}
 
 // Map viewport
 export const bboxAtom = atom<readonly [number, number, number, number] | null | undefined>(null);
@@ -23,7 +20,7 @@ export const layersInteractiveAtom = atom<string[]>([]);
 
 export const layersInteractiveIdsAtom = atom<string[]>([]);
 
-export const layersSettingsAtom = atom<LayerSettings | EmptyObject>({});
+export const layersSettingsAtom = atom<LayersSettingsMap>({});
 
 export const popupAtom = atom<MapLayerMouseEvent | null>(null);
 

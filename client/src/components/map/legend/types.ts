@@ -4,7 +4,7 @@ import { DraggableAttributes } from '@dnd-kit/core';
 import { SyntheticListeners } from '@dnd-kit/core/dist/hooks/utilities';
 import { LucideIcon } from 'lucide-react';
 
-import { LayerSettings } from '@/types/layers';
+import type { LayerSettings } from '@/types/layers';
 
 type Sortable = {
   enabled: boolean;

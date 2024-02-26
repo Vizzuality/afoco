@@ -1,3 +1,5 @@
+'use client';
+
 import { Layer, Source } from 'react-map-gl';
 
 import { GeoJSONSourceRaw, GeoJSONSourceOptions } from 'mapbox-gl';

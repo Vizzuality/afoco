@@ -7,8 +7,7 @@ import { ChevronLeft } from 'lucide-react';
 
 import { cn } from '@/lib/classnames';
 
-import { dashboardAtom, hoveredProjectAtom } from '@/store';
-import { openAtom } from '@/store';
+import { openAtom, dashboardAtom, hoveredProjectAtom } from '@/store';
 
 import { Button } from '@/components/ui/button';
 

@@ -10,9 +10,10 @@ import { useParams, useRouter } from 'next/navigation';
 import bbox from '@turf/bbox';
 import { useAtomValue, useSetAtom, useAtom } from 'jotai';
 
+import { hoveredProjectAtom } from '@/store';
+
 import {
   bboxAtom,
-  hoveredProjectAtom,
   layersInteractiveAtom,
   layersInteractiveIdsAtom,
   popupAtom,

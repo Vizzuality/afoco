@@ -9,8 +9,9 @@ import { LayerSettings } from '@/types/layers';
 import { useSyncLayers } from '@/hooks/datasets/sync-query';
 
 import { LEGENDS } from '@/containers/datasets/layers';
+import type { LayerSettings } from '@/types/layers';
+import type { LegendItemProps } from '@/components/map/legend/types';
 
-import { LegendItemProps } from '@/components/map/legend/types';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Slider } from '@/components/ui/slider';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
