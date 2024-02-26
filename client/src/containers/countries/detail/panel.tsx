@@ -1,12 +1,19 @@
 'use client';
 import Image from 'next/image';
 import Link from 'next/link';
+import { notFound, useParams } from 'next/navigation';
 
 import { ArrowLeft } from 'lucide-react';
 
 import { PANEL_OVERVIEW_ITEMS, RESUME_ITEMS } from '@/containers/countries/detail/constants';
 
 export default function CountryDetailPanel() {
+  const params = useParams<{ country: string }>();
+
+  // TODO: We will need to fetch data and check if slug exists
+  if (!params.country) {
+    return notFound();
+  }
   return (
     <div className="p-6">
       <Link

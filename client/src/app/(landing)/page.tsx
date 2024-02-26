@@ -1,6 +1,6 @@
 import Hydrate from '@/lib/react-query/hydrate';
 
-import { prefetchQueries } from './prefetch';
+import { prefetchQueries } from '../prefetch';
 
 export default async function HomePage() {
   const dehydratedState = await prefetchQueries();
