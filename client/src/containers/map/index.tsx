@@ -156,7 +156,6 @@ export default function MapContainer() {
       // *ON MOUSE ENTER
       if (e.features && e.features[0] && map) {
         setCursor('pointer');
-
         setHoveredProject(e.features[0].properties?.ID);
       }
 
@@ -182,8 +181,12 @@ export default function MapContainer() {
       }
 
       // *ON MOUSE LEAVE
-      if (!ProjectsLayer && map && hoveredStateId) {
+
+      if (e.features?.length === 0) {
         setCursor('grab');
+      }
+
+      if (!ProjectsLayer && map && hoveredStateId) {
         setHoveredProject(null);
 
         map?.setFeatureState(
