@@ -2,19 +2,36 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { notFound, useParams } from 'next/navigation';
+import { notFound, useParams, useSearchParams } from 'next/navigation';
 
-import { ArrowLeft, ChevronRight } from 'lucide-react';
+import { Tooltip } from '@radix-ui/react-tooltip';
+import { useAtom } from 'jotai';
+import { ArrowLeft, ChevronRight, Share as Download, X } from 'lucide-react';
+import * as qs from 'qs';
+
+import { dashboardAtom } from '@/store';
 
 import { PANEL_OVERVIEW_ITEMS } from '@/containers/projects/detail/constants';
+import Share from '@/containers/share';
 
 import { Button } from '@/components/ui/button';
-import { Drawer, DrawerContent, DrawerTrigger } from '@/components/ui/drawer';
+import { Drawer, DrawerClose, DrawerContent, DrawerTrigger } from '@/components/ui/drawer';
+import { TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 
 import ProjectDashboard from './dashboard';
 
 export default function ProjectDetailPanel() {
   const params = useParams<{ slug: string }>();
+  const searchParams = useSearchParams();
+  const layersParams = searchParams.get('layers');
+  const filtersParams = searchParams.get('filters');
+
+  const [dashboard, setDashboard] = useAtom(dashboardAtom);
+
+  const queryParams = qs.stringify(
+    { layers: layersParams, filters: filtersParams },
+    { encode: false, addQueryPrefix: true, skipNulls: true }
+  );
 
   // TODO: We will need to fetch data and check if slug exists
   if (!params.slug) {
@@ -38,14 +55,29 @@ export default function ProjectDetailPanel() {
           </h2>
         </div>
       </div>
+      <div className="absolute left-6 right-6 top-4 z-10 flex justify-between">
+        <Link
+          href={`/projects${queryParams}`}
+          className="flex items-center space-x-3 rounded px-2 py-1 text-xs text-yellow-900 transition-all hover:bg-yellow-100"
+        >
+          <ArrowLeft className="h-4 w-4 text-yellow-900" />
+          <p>Back</p>
+        </Link>
+        <div className="flex items-center space-x-2">
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button variant="ghost" className="rounded-full">
+                <Download className="rotate-180 text-yellow-900" size={18} />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent side={'left'} sideOffset={20}>
+              <p className="text-sm text-yellow-900">Download project</p>
+            </TooltipContent>
+          </Tooltip>
 
-      <Link
-        href="/projects"
-        className="absolute top-8 z-10 flex items-center space-x-3 rounded px-2 py-1 text-xs text-yellow-900 transition-all hover:bg-yellow-100"
-      >
-        <ArrowLeft className="h-4 w-4 text-yellow-900" />
-        <p>Back</p>
-      </Link>
+          <Share />
+        </div>
+      </div>
       <div className="flex flex-col space-y-8">
         <p className="mt-72 pt-2 text-sm text-gray-500">
           The project will introduce innovative solutions for sustainable management practices and
@@ -116,6 +148,7 @@ export default function ProjectDetailPanel() {
             className="fixed bottom-6 right-6 z-50 w-48 space-x-2"
             size="base"
             data-cy="project-dashboard-button"
+            onClick={() => setDashboard(!dashboard)}
           >
             <p className="block group-data-[state=open]:hidden">{'Show dashboard'}</p>
             <p className="block group-data-[state=closed]:hidden">{'Hide dashboard'}</p>
@@ -124,6 +157,13 @@ export default function ProjectDetailPanel() {
         </DrawerTrigger>
         <DrawerContent className="left-[514px] w-[calc(100vw-570px)]">
           <ProjectDashboard />
+          <DrawerClose
+            className="focus:ring-ring absolute -right-6 top-9 z-50 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:pointer-events-none"
+            onClick={() => setDashboard(false)}
+          >
+            <X className="h-4 w-4 text-yellow-400" />
+            <span className="sr-only">Close</span>
+          </DrawerClose>
         </DrawerContent>
       </Drawer>
     </div>

@@ -18,10 +18,9 @@ type OnChangeVisibility = (visibility: LayerSettings['visibility']) => void;
 type OnChangeExpand = (expand: boolean) => void;
 type OnChangeColumn = (column: string) => void;
 
-export type Settings = Record<string, unknown> & {
-  opacity?: number;
-  visibility?: 'visible' | 'none';
-  expand?: boolean;
+export type Settings = {
+  opacity?: LayerSettings['opacity'];
+  visibility?: LayerSettings['visibility'];
 };
 
 export type SettingsManager = {

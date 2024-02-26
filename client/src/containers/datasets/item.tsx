@@ -1,35 +1,39 @@
 'use client';
 
-import { useAtom } from 'jotai';
+import { useCallback } from 'react';
+
 import { Info } from 'lucide-react';
 
-import { layersAtom } from '@/store';
-
 import { DatasetListResponseDataItem } from '@/types/generated/strapi.schemas';
+import { LayerId } from '@/types/layers';
 
-// import Layers from '@/containers/datasets/layers';
+import { useSyncLayers } from '@/hooks/datasets/sync-query';
 
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogClose, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import { Switch } from '@/components/ui/switch';
 
 export default function DatasetsItem(props: Required<DatasetListResponseDataItem>) {
-  const [layers, setLayers] = useAtom(layersAtom);
+  const [layers, setLayersToURL] = useSyncLayers();
 
-  const handleLayerChange = () => {
-    if (layers.includes(props.id)) {
-      return setLayers(layers.filter((l) => l !== props.id));
+  const handleLayerChange = useCallback(() => {
+    if (!layers.some((l) => l.id === props.id)) {
+      setLayersToURL([...layers, { id: props.id as LayerId, opacity: 1, visibility: 'visible' }]);
     }
+    if (layers.some((l) => l.id === props.id)) {
+      const newLayers = layers.filter((l) => l.id !== props.id);
+      setLayersToURL(newLayers);
+    }
+  }, [layers, props.id, setLayersToURL]);
 
-    if (!layers.includes(props.id)) {
-      return setLayers([props.id, ...layers]);
-    }
-  };
   return (
     <div className="flex flex-col space-y-1.5 border-b py-2">
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-2">
-          <Switch checked={layers.includes(props.id)} onCheckedChange={handleLayerChange} />
+          <Switch
+            checked={layers.some((l) => l.id === props.id)}
+            onCheckedChange={handleLayerChange}
+          />
           <h3 className="text-sm">{props.attributes.title}</h3>
         </div>
         <Dialog>
@@ -76,8 +80,6 @@ export default function DatasetsItem(props: Required<DatasetListResponseDataItem
       <div>
         <p className="ml-10 mr-5 text-xs leading-4 text-gray-500">{props.attributes.description}</p>
       </div>
-
-      {/* <Layers datasetId={props.id} /> */}
     </div>
   );
 }

@@ -14,10 +14,8 @@ type LegendIndex = {
 // Define the LAYERS object with the explicit type
 export const LAYERS: LayersIndex = {
   projects: ProjectsLayer,
-  'tree-cover': ProjectsLayer,
 };
 
 export const LEGENDS: LegendIndex = {
   projects: ProjectsLegend,
-  'tree-cover': ProjectsLegend,
 };

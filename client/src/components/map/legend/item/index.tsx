@@ -30,8 +30,6 @@ export const LegendItem: React.FC<PropsWithChildren & LegendItemProps> = ({
   onChangeVisibility,
   onChangeExpand,
 }) => {
-  const { expand } = settings || {};
-
   const validChildren = useMemo(() => {
     const chldn = Children.map(children, (Child) => {
       return isValidElement(Child);
@@ -39,10 +37,8 @@ export const LegendItem: React.FC<PropsWithChildren & LegendItemProps> = ({
     return chldn && chldn.some((c) => !!c);
   }, [children]);
 
-  const acordionState = expand ? `${id}` : undefined;
-
   return (
-    <Accordion type="single" value={acordionState} asChild>
+    <Accordion type="single" asChild>
       <AccordionItem value={`${id}`} asChild>
         <div
           className={cn({

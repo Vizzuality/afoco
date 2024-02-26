@@ -11,7 +11,7 @@ import DeckJsonLayer from '@/components/map/layers/deck-json-layer';
 interface LayerManagerItemProps {
   id: string;
   beforeId: string;
-  settings: LayerSettings;
+  settings: { opacity: LayerSettings['opacity']; visibility: LayerSettings['visibility'] };
 }
 
 const LayerManagerItem = ({ id, beforeId, settings }: LayerManagerItemProps) => {

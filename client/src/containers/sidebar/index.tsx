@@ -2,20 +2,34 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 
-import { useAtom, useAtomValue } from 'jotai';
+import { useAtom } from 'jotai';
 import { HelpCircle } from 'lucide-react';
+import * as qs from 'qs';
 
 import { cn } from '@/lib/classnames';
 
-import { layersAtom, sidebarTabAtom } from '@/store';
+import { sidebarTabAtom } from '@/store';
+
+import { useSyncLayers } from '@/hooks/datasets/sync-query';
 
 import type { SidebarTab } from '@/containers/sidebar/constants';
 import { TABS } from '@/containers/sidebar/constants';
 
 export default function Sidebar() {
+  const searchParams = useSearchParams();
+
+  const layersParams = searchParams.get('layers');
+  const filtersParams = searchParams.get('filters');
+
   const [sidebarTab, setSidebarTab] = useAtom(sidebarTabAtom);
-  const layers = useAtomValue(layersAtom);
+  const [layers] = useSyncLayers();
+
+  const queryParams = qs.stringify(
+    { layers: layersParams, filters: filtersParams },
+    { encode: false, addQueryPrefix: true, skipNulls: true }
+  );
 
   return (
     <div className="rounded-8xl absolute bottom-0 left-4 top-0 z-20 my-2 w-20 bg-yellow-700 py-10 text-xs text-yellow-50">
@@ -26,7 +40,7 @@ export default function Sidebar() {
         <ul className="flex h-full flex-col">
           {TABS.map(({ name, icon, href }) => (
             <Link
-              href={href}
+              href={`${href}${queryParams}`}
               key={name}
               data-cy={`sidebar-tab-${name}`}
               className={cn({
