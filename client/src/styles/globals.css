@@ -71,5 +71,9 @@
         -ms-overflow-style: none;  /* IE and Edge */
         scrollbar-width: none;  /* Firefox */
     }
-
+    
+    .popover-menu-content {
+      width: var(--radix-popover-trigger-width);
+      max-height: var(--radix-popover-content-available-height);
+    }
 }
