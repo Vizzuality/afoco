@@ -51,7 +51,7 @@ const FiltersCheckbox = ({
   return (
     <div className="flex flex-col space-y-2">
       <span className="font-extrabold leading-5">{title}</span>
-      <div className="flex flex-wrap items-center gap-2">
+      <div className="flex flex-wrap items-center gap-2 text-gray-900">
         {options.map(({ id, label }) => (
           <div key={id} className="flex items-center space-x-2 pr-2 last:pr-0">
             <Checkbox
@@ -88,7 +88,10 @@ export default function FiltersContent() {
         <span className="font-extrabold leading-5">Country</span>
         <Combobox
           placeholder="Search country"
-          options={[{ label: 'Spain', value: 'Spain' }]}
+          options={[
+            { label: 'Spain', value: 'Spain' },
+            { label: 'Bhutan', value: 'bhutan' },
+          ]}
           onClick={handleSingleValueChange}
         />
       </div>

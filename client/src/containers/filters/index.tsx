@@ -32,7 +32,7 @@ export default function Filters() {
 
   const filtersSettingsParsed = flatten(
     Object.entries(filtersSettings as FilterSettings)?.map((filter) => {
-      if (!Array.isArray(filter[1])) return [];
+      if (!Array.isArray(filter[1])) return [{ [filter[0]]: filter[1] }];
       if (filter[0] === 'intervention' && filter[1].length === INTERVENTION_TYPES.length) {
         return [];
       }
@@ -63,7 +63,7 @@ export default function Filters() {
             </DialogTrigger>
 
             <DialogContent>
-              <DialogHeader className="text-xl font-semibold leading-7">
+              <DialogHeader className="text-xl font-semibold leading-7 text-green-900">
                 <DialogTitle>Filters</DialogTitle>
               </DialogHeader>
               <FiltersContent />
@@ -91,7 +91,7 @@ export default function Filters() {
                 </li>
               ))}
             </ul>
-            {hasMoreThanThree && <span>and {remainingFiltersCount} more</span>}
+            {hasMoreThanThree && <p>and {remainingFiltersCount} more</p>}
           </div>
         )}
       </div>

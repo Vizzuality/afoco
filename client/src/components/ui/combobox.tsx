@@ -29,6 +29,8 @@ export function Combobox({
 }) {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState('');
+  const selectedOptionLabel = options.find((option) => option.value === value)?.label;
+
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
@@ -41,8 +43,14 @@ export function Combobox({
           <div className="flex w-full items-center space-x-2">
             {icon && <Search size={20} />}
 
-            <span className="max-w-[200px] overflow-hidden truncate text-ellipsis text-xs text-gray-500">
-              {value ? options.find((option) => option.value === value)?.label : placeholder}
+            <span
+              className={cn({
+                'max-w-[200px] cursor-pointer overflow-hidden truncate text-ellipsis text-xs text-gray-500':
+                  true,
+                'text-gray-900': selectedOptionLabel,
+              })}
+            >
+              {value ? selectedOptionLabel : placeholder}
             </span>
           </div>
         </Button>
@@ -57,7 +65,7 @@ export function Combobox({
                 key={option.value}
                 value={option.value}
                 onSelect={(currentValue) => {
-                  setValue(currentValue === value ? '' : currentValue);
+                  setValue(option.value);
                   setOpen(false);
                   if (onClick) {
                     onClick(currentValue);
