@@ -1,15 +1,18 @@
 'use client';
 
-import { useCallback, useMemo } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { LngLatBoundsLike, MapLayerMouseEvent, useMap } from 'react-map-gl';
 
 import dynamic from 'next/dynamic';
+import { useParams, useRouter } from 'next/navigation';
 
+import bbox from '@turf/bbox';
 import { useAtomValue, useSetAtom, useAtom } from 'jotai';
 
 import {
   bboxAtom,
+  hoveredProjectAtom,
   layersInteractiveAtom,
   layersInteractiveIdsAtom,
   popupAtom,
@@ -56,13 +59,17 @@ export default function MapContainer() {
   const { id, initialViewState, minZoom, maxZoom } = DEFAULT_PROPS;
 
   const { [id]: map } = useMap();
+  const { push } = useRouter();
+  const params = useParams<{ country: string; slug: string }>();
 
   const layersInteractive = useAtomValue(layersInteractiveAtom);
   const layersInteractiveIds = useAtomValue(layersInteractiveIdsAtom);
+  const setHoveredProject = useSetAtom(hoveredProjectAtom);
+  const [cursor, setCursor] = useState<'grab' | 'pointer'>('grab');
 
   const setPopup = useSetAtom(popupAtom);
 
-  const [bbox, setBbox] = useAtom(bboxAtom);
+  const [bboxA, setBbox] = useAtom(bboxAtom);
   const [tmpBbox, setTmpBbox] = useAtom(tmpBboxAtom);
 
   const { data: layersInteractiveData } = useGetLayers(
@@ -97,6 +104,12 @@ export default function MapContainer() {
     }
   }, [tmpBbox]); // eslint-disable-line react-hooks/exhaustive-deps
 
+  useEffect(() => {
+    if (!params.slug && !params.country && map && initialViewState && initialViewState.bounds) {
+      map.fitBounds(initialViewState.bounds, { padding: 100 });
+    }
+  }, [params.slug, params.country, map, tmpBbox, setBbox, initialViewState]);
+
   const handleMapViewStateChange = useCallback(() => {
     if (map) {
       const b = map
@@ -122,11 +135,70 @@ export default function MapContainer() {
         })
       ) {
         const p = Object.assign({}, e, { features: e.features ?? [] });
-
         setPopup(p);
       }
+
+      if (e.features && e.features[0] && map) {
+        push(`/projects/${e.features[0].properties?.slug}`);
+        const bboxTurf = bbox(e.features[0]) as LngLatBoundsLike;
+        map.fitBounds(bboxTurf, { padding: 100, maxZoom: 6 });
+      }
     },
-    [layersInteractive, layersInteractiveData, setPopup]
+    [layersInteractive, layersInteractiveData, setPopup, push, map]
+  );
+
+  let hoveredStateId: string | null = null;
+  const handleMouseMove = useCallback(
+    (e: MapLayerMouseEvent) => {
+      const ProjectsLayer = e?.features && e?.features.find(({ layer }) => layer.id === 'projects');
+
+      // *ON MOUSE ENTER
+      if (e.features && e.features[0] && map) {
+        setCursor('pointer');
+        setHoveredProject(e.features[0].properties?.ID);
+      }
+
+      if (ProjectsLayer && map) {
+        if (hoveredStateId !== null) {
+          map?.setFeatureState(
+            {
+              source: 'projects',
+              id: hoveredStateId,
+            },
+            { hover: false }
+          );
+        }
+
+        hoveredStateId = ProjectsLayer?.id as string;
+        map?.setFeatureState(
+          {
+            source: 'projects',
+            id: hoveredStateId,
+          },
+          { hover: true }
+        );
+      }
+
+      // *ON MOUSE LEAVE
+
+      if (e.features?.length === 0) {
+        setCursor('grab');
+      }
+
+      if (!ProjectsLayer && map && hoveredStateId) {
+        setHoveredProject(null);
+
+        map?.setFeatureState(
+          {
+            source: 'projects',
+            id: hoveredStateId,
+          },
+          { hover: false }
+        );
+        hoveredStateId = null;
+      }
+    },
+    [setCursor, map, hoveredStateId]
   );
 
   return (
@@ -136,17 +208,19 @@ export default function MapContainer() {
         data-cy="map"
         initialViewState={{
           ...initialViewState,
-          ...(bbox && {
-            bounds: bbox as LngLatBoundsLike,
+          ...(bboxA && {
+            bounds: bboxA as LngLatBoundsLike,
           }),
         }}
         bounds={tmpBounds}
+        cursor={cursor}
         minZoom={minZoom}
         maxZoom={maxZoom}
         mapStyle="mapbox://styles/layer-manager/clj8fgofm000t01pjcu21agsd?fresh=true"
         interactiveLayerIds={layersInteractiveIds}
         onClick={handleMapClick}
         onMapViewStateChange={handleMapViewStateChange}
+        onMouseMove={handleMouseMove}
       >
         {() => (
           <>

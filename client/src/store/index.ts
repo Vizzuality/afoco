@@ -43,7 +43,7 @@ export const layersAtom = atom<readonly string[]>(['projects']);
 
 export const layersInteractiveAtom = atom<string[]>([]);
 
-export const layersInteractiveIdsAtom = atom<string[]>([]);
+export const layersInteractiveIdsAtom = atom<string[]>(['projects']);
 
 export const layersSettingsAtom = atom<LayerSettings | EmptyObject>({});
 
@@ -56,4 +56,8 @@ export const mapSettingsAtom = atom<MapSettings>({
   roads: false,
 });
 
-export const DEFAULT_SETTINGS = {};
+export const hoveredProjectAtom = atom<string | null>(null);
+
+export const DEFAULT_SETTINGS = {
+  expand: true,
+};

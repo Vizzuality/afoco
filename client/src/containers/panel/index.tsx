@@ -1,18 +1,29 @@
 'use client';
 
+import { useEffect, useRef } from 'react';
+
 import { useAtomValue, useAtom } from 'jotai';
 import { ChevronLeft } from 'lucide-react';
 
 import { cn } from '@/lib/classnames';
 
-import { dashboardAtom } from '@/store';
+import { dashboardAtom, hoveredProjectAtom } from '@/store';
 import { openAtom } from '@/store';
 
 import { Button } from '@/components/ui/button';
 
 export default function Panel({ children }: { children: React.ReactNode }) {
   const dashboard = useAtomValue(dashboardAtom);
+  const hoveredProject = useAtomValue(hoveredProjectAtom);
   const [open, setOpen] = useAtom(openAtom);
+
+  const scrollRef = useRef(null);
+
+  useEffect(() => {
+    if (!hoveredProject) return;
+    const element = document.getElementById(hoveredProject);
+    element?.scrollIntoView({ behavior: 'smooth' });
+  }, [hoveredProject]);
 
   return (
     <div
@@ -47,8 +58,9 @@ export default function Panel({ children }: { children: React.ReactNode }) {
       </div>
 
       <div
+        ref={scrollRef}
         className={cn({
-          'prose flex grow flex-col overflow-y-auto': true,
+          'prose no-scrollbar my-1 flex grow flex-col overflow-y-auto': true,
           'opacity-100': open,
           'opacity-0': !open,
         })}
