@@ -18,12 +18,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Use Node.js 18.13
+      - name: Use Node.js 18.17
         uses: actions/setup-node@v3
         with:
-          node-version-file: 'client/.nvmrc'
+          node-version-file: '.nvmrc'
           cache: 'yarn'
-          cache-dependency-path: client/yarn.lock
+          cache-dependency-path: yarn.lock
 
       - name: Install dependencies
         run: yarn install --immutable
@@ -33,4 +33,10 @@ jobs:
         with:
           build: yarn build
           start: yarn start
-          command: "yarn cypress:open"
+          command: "yarn test:e2e"
+          working-directory: client
+          install: false
+        env:
+          NEXT_PUBLIC_MAPBOX_API_TOKEN: ${{ secrets.NEXT_PUBLIC_MAPBOX_API_TOKEN }}
+          NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
+          NODE_ENV: production

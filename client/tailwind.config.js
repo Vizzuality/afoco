@@ -46,6 +46,7 @@ module.exports = {
           foreground: 'hsl(var(--accent-foreground))',
         },
         gray: {
+          100: '#F3F4F6',
           500: '#9CA3AF',
         },
         green: {
