@@ -34,17 +34,9 @@ export default function Filters() {
     Object.entries(filtersSettings as FilterSettings)?.map((filter) => {
       if (!Array.isArray(filter[1])) return [];
       if (filter[0] === 'intervention' && filter[1].length === INTERVENTION_TYPES.length) {
-        setFiltersToURL({
-          ...filtersSettings,
-          intervention: [],
-        });
         return [];
       }
       if (filter[0] !== 'intervention' && filter[1].length === AREAS.length) {
-        setFiltersToURL({
-          ...filtersSettings,
-          [filter[0]]: [],
-        });
         return [];
       }
       return filter[1].map((f) => ({ [filter[0]]: f }));
@@ -87,7 +79,7 @@ export default function Filters() {
           </Dialog>
         </div>
         {filtersToDisplay && !!filtersToDisplay.length && (
-          <div className="text-xs text-gray-500">
+          <div className="space-y-2 text-xs text-gray-500">
             <span className="-tracking-wide">Filtered by</span>
             <ul className="flex flex-wrap gap-2">
               {filtersToDisplay.map((filter) => (
