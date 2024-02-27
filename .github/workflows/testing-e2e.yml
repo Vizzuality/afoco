@@ -33,9 +33,10 @@ jobs:
         with:
           build: yarn build
           start: yarn start
-          command: "yarn cypress:open"
+          command: "yarn test:e2e"
           working-directory: client
           install: false
         env:
           NEXT_PUBLIC_MAPBOX_API_TOKEN: ${{ secrets.NEXT_PUBLIC_MAPBOX_API_TOKEN }}
-          NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_MAPBOX_API_TOKEN }}
+          NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
+          NODE_ENV: production
