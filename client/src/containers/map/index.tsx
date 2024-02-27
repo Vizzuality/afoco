@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useMemo } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { LngLatBoundsLike, MapLayerMouseEvent, useMap } from 'react-map-gl';
 
@@ -12,7 +12,6 @@ import { useAtomValue, useSetAtom, useAtom } from 'jotai';
 
 import {
   bboxAtom,
-  cursorAtom,
   hoveredProjectAtom,
   layersInteractiveAtom,
   layersInteractiveIdsAtom,
@@ -66,7 +65,7 @@ export default function MapContainer() {
   const layersInteractive = useAtomValue(layersInteractiveAtom);
   const layersInteractiveIds = useAtomValue(layersInteractiveIdsAtom);
   const setHoveredProject = useSetAtom(hoveredProjectAtom);
-  const [cursor, setCursor] = useAtom(cursorAtom);
+  const [cursor, setCursor] = useState<'grab' | 'pointer'>('grab');
 
   const setPopup = useSetAtom(popupAtom);
 

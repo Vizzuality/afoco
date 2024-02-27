@@ -17,8 +17,6 @@ type MapSettings = {
   roads: boolean;
 };
 
-type Cursor = 'pointer' | 'grab';
-
 export type LayerId =
   | 'projects'
   | 'tree-cover'
@@ -57,8 +55,6 @@ export const mapSettingsAtom = atom<MapSettings>({
   boundaries: false,
   roads: false,
 });
-
-export const cursorAtom = atom<Cursor>('grab');
 
 export const hoveredProjectAtom = atom<string | null>(null);
 
