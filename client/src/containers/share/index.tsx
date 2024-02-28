@@ -1,5 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 
+import { FacebookShareButton, LinkedinShareButton, TwitterShareButton } from 'react-share';
+
 import { usePathname } from 'next/navigation';
 
 import { Facebook, Twitter, Linkedin, Mail, Share2 } from 'lucide-react';
@@ -62,38 +64,47 @@ export default function Share() {
           </div>
           <div className="flex space-x-4 pt-6">
             <Button variant="primary" className="rounded-full">
-              <a
-                className="flex flex-row hover:underline"
-                type="button"
-                role="button"
-                href={`https://www.facebook.com/sharer/sharer.php?href=${currentUrl}`}
-                rel="noreferrer"
-                target="_blank"
+              <FacebookShareButton
+                url={currentUrl}
+                title="AFoCO"
+                aria-label="facebook twitter"
+                data-testid="facebook-twitter-button"
               >
                 <Facebook className="fill-white text-white" size={16} />
-              </a>
+              </FacebookShareButton>
+            </Button>
+
+            <Button variant="primary" className="rounded-full">
+              <TwitterShareButton
+                url={currentUrl}
+                title="AFoCO"
+                aria-label="share twitter"
+                data-testid="share-twitter-button"
+              >
+                <Twitter className="fill-white text-white" size={16} />
+              </TwitterShareButton>
+            </Button>
+
+            <Button variant="primary" className="rounded-full">
+              <LinkedinShareButton
+                url={currentUrl}
+                title="AFoCO"
+                className="align-baseline"
+                aria-label="share in linkedin"
+                data-testid="share-linkedin-button"
+              >
+                <Linkedin className="fill-white text-white" size={16} />
+              </LinkedinShareButton>
             </Button>
 
             <Button variant="primary" className="rounded-full">
               <a
-                className="flex flex-row hover:underline"
-                type="button"
-                role="button"
-                href={`https://twitter.com/intent/tweet?url=${currentUrl}`}
-                rel="noreferrer"
                 target="_blank"
-                data-size="large"
+                rel="noopener noreferrer"
+                href={`mailto:contact@afoco.com?subject=I want to share this AFoCO link with you&body=${currentUrl}`}
               >
-                <Twitter className="fill-white text-white" size={16} />
+                <Mail className="fill-white text-yellow-400" size={16} />
               </a>
-            </Button>
-
-            <Button variant="primary" className="rounded-full">
-              <Linkedin className="fill-white text-white" size={16} />
-            </Button>
-
-            <Button variant="primary" className="rounded-full">
-              <Mail className="fill-white text-yellow-400" size={16} />
             </Button>
           </div>
         </div>
