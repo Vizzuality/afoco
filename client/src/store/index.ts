@@ -1,12 +1,7 @@
 import { atom } from 'jotai';
 import { MapLayerMouseEvent } from 'mapbox-gl';
 
-type MapSettings = {
-  basemap: string;
-  labels: string;
-  boundaries: boolean;
-  roads: boolean;
-};
+import type { MapSettings } from '@/types/map';
 
 // Sidebar and menus
 export const openAtom = atom<boolean>(true);

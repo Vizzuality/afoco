@@ -24,7 +24,6 @@ import { LayerTyped } from '@/types/layers';
 import { Bbox } from '@/types/map';
 
 import Popup from '@/containers/map/popup';
-import MapSettings from '@/containers/map/settings';
 import MapSettingsManager from '@/containers/map/settings/manager';
 
 import Map from '@/components/map';
@@ -226,10 +225,7 @@ export default function MapContainer() {
           <>
             <Controls className="absolute right-5 top-12 z-40 sm:right-6 sm:top-6">
               <ZoomControl />
-
-              <SettingsControl>
-                <MapSettings />
-              </SettingsControl>
+              <SettingsControl />
             </Controls>
 
             <LayerManager />

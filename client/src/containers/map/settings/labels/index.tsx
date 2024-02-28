@@ -1,8 +1,6 @@
 import { useCallback } from 'react';
 
-import { useAtomValue, useSetAtom } from 'jotai';
-
-import { mapSettingsAtom } from '@/store';
+import { useSyncBasemap } from '@/hooks/datasets/sync-query';
 
 import { LABELS } from '@/constants/basemaps';
 
@@ -10,8 +8,8 @@ import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 
 const Labels = () => {
-  const { labels } = useAtomValue(mapSettingsAtom);
-  const setMapSettings = useSetAtom(mapSettingsAtom);
+  const [mapSettings, setMapSettings] = useSyncBasemap();
+  const { labels } = mapSettings;
 
   const handleChange = useCallback(
     (v: string) => {
@@ -24,14 +22,15 @@ const Labels = () => {
   );
 
   return (
-    <RadioGroup value={labels} onValueChange={handleChange} className="gap-3">
+    <RadioGroup
+      value={labels}
+      onValueChange={handleChange}
+      className="flex justify-between space-x-4"
+    >
       {LABELS.map((l) => (
         <div key={l.slug} className="group flex cursor-pointer items-center space-x-2">
           <RadioGroupItem value={l.slug} id={l.slug} />
-          <Label
-            className="cursor-pointer font-light transition-colors group-hover:text-slate-400"
-            htmlFor={l.slug}
-          >
+          <Label className="cursor-pointer text-sm font-light leading-5" htmlFor={l.slug}>
             {l.label}
           </Label>
         </div>

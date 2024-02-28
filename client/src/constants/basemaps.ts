@@ -1,6 +1,6 @@
 export const BASEMAPS = [
   {
-    label: 'Clean',
+    label: 'Light',
     value: 'basemap-light',
     preview: `/images/map/light.jpeg`,
     settings: {

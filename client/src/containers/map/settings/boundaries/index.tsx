@@ -1,15 +1,13 @@
 import { useCallback } from 'react';
 
-import { useAtomValue, useSetAtom } from 'jotai';
+import { useSyncBasemap } from '@/hooks/datasets/sync-query';
 
-import { mapSettingsAtom } from '@/store';
-
-import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
+import { Switch } from '@/components/ui/switch';
 
 const Boundaries = () => {
-  const { boundaries } = useAtomValue(mapSettingsAtom);
-  const setMapSettings = useSetAtom(mapSettingsAtom);
+  const [mapSettings, setMapSettings] = useSyncBasemap();
+  const { boundaries } = mapSettings || null;
 
   const handleChange = useCallback(
     (v: boolean) => {
@@ -23,12 +21,9 @@ const Boundaries = () => {
 
   return (
     <div className="group flex grow items-center space-x-2">
-      <Checkbox id="boundaries-checkbox" checked={boundaries} onCheckedChange={handleChange} />
+      <Switch checked={!!boundaries} onCheckedChange={handleChange} />
 
-      <Label
-        className="cursor-pointer font-light transition-colors group-hover:text-slate-400"
-        htmlFor="boundaries-checkbox"
-      >
+      <Label className="text-sm leading-5" htmlFor="boundaries-checkbox">
         Boundaries
       </Label>
     </div>

@@ -12,3 +12,10 @@ export type Legend = {
   items?: { color: string; value: string }[];
   intersections?: { id: number; color: string }[];
 };
+
+export type MapSettings = {
+  basemap: string;
+  labels: string;
+  boundaries: boolean;
+  roads: boolean;
+};

@@ -2,11 +2,9 @@ import { useCallback } from 'react';
 
 import Image from 'next/image';
 
-import { useAtomValue, useSetAtom } from 'jotai';
-
 import { cn } from '@/lib/classnames';
 
-import { mapSettingsAtom } from '@/store/index';
+import { useSyncBasemap } from '@/hooks/datasets/sync-query';
 
 export interface BasemapItemProps {
   label: string;
@@ -15,8 +13,8 @@ export interface BasemapItemProps {
 }
 
 const BasemapItem = ({ label, value, preview }: BasemapItemProps) => {
-  const { basemap } = useAtomValue(mapSettingsAtom);
-  const setMapSettings = useSetAtom(mapSettingsAtom);
+  const [basemapSettings, setMapSettings] = useSyncBasemap();
+  const { basemap } = basemapSettings;
 
   const handleToggleBasemap = useCallback(() => {
     setMapSettings((prev) => ({
@@ -36,21 +34,23 @@ const BasemapItem = ({ label, value, preview }: BasemapItemProps) => {
         <div className="space-y-2">
           <div
             className={cn({
-              'shrink-0 overflow-hidden rounded transition-opacity': true,
-              'group-hover:opacity-75 group-active:outline group-active:outline-2 group-active:outline-slate-400':
+              'h-[77px] w-[77px] overflow-hidden rounded transition-opacity group-hover:opacity-75 group-active:outline group-active:outline-2 group-active:outline-slate-400':
                 true,
-              'outline outline-2 outline-slate-500 group-hover:opacity-100 group-active:outline-slate-500':
+              'h-[95px] w-[95px] overflow-hidden outline outline-2 outline-yellow-400 group-hover:opacity-100 group-active:outline-yellow-400':
                 value === basemap,
             })}
           >
-            <Image src={preview} alt={label} width={96} height={64} className="w-full rounded" />
+            <Image
+              src={preview}
+              alt={label}
+              width={value === basemap ? 95 : 77}
+              height={value === basemap ? 95 : 77}
+            />
           </div>
 
           <span
             className={cn({
-              'block text-sm font-light text-slate-500 transition-colors': true,
-              'group-hover:text-slate-400': true,
-              'group-hover:text-slate-500': value === basemap,
+              'text-sm font-light leading-5': true,
             })}
           >
             {label}
