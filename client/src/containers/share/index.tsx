@@ -66,7 +66,7 @@ export default function Share() {
                 className="flex flex-row hover:underline"
                 type="button"
                 role="button"
-                href={`https://www.facebook.com/sharer/sharer.php?u=${currentUrl}`}
+                href={`https://www.facebook.com/sharer/sharer.php?href=${currentUrl}`}
                 rel="noreferrer"
                 target="_blank"
               >
@@ -82,6 +82,7 @@ export default function Share() {
                 href={`https://twitter.com/intent/tweet?url=${currentUrl}`}
                 rel="noreferrer"
                 target="_blank"
+                data-size="large"
               >
                 <Twitter className="fill-white text-white" size={16} />
               </a>
