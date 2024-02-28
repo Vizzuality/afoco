@@ -1,15 +1,10 @@
 import { useCallback, useEffect, useState } from 'react';
 
-import {
-  EmailShareButton,
-  FacebookShareButton,
-  LinkedinShareButton,
-  TwitterShareButton,
-} from 'react-share';
+import { EmailShareButton, FacebookShareButton, TwitterShareButton } from 'react-share';
 
 import { useParams, usePathname } from 'next/navigation';
 
-import { Facebook, Twitter, Linkedin, Mail, Share2 } from 'lucide-react';
+import { Facebook, Twitter, Mail, Share2 } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
@@ -90,15 +85,6 @@ export default function Share() {
               >
                 <Twitter className="fill-white text-white" size={16} />
               </TwitterShareButton>
-            </Button>
-
-            <Button variant="primary" className="rounded-full">
-              <a
-                href={`https://www.linkedin.com/shareArticle?mini=true&url=${currentUrl}`}
-                target="_blank"
-              >
-                <Linkedin className="fill-white text-white" size={16} />
-              </a>
             </Button>
 
             <Button variant="primary" className="rounded-full">
