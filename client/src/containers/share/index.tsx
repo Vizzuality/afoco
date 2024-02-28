@@ -10,7 +10,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip
 
 export default function Share() {
   const pathname = usePathname();
-  console.log(pathname);
+
   const [currentUrl, setCurrentUrl] = useState<string>('');
 
   const [shareLinkBtnText, setShareLinkBtnText] = useState('Copy');
@@ -62,7 +62,16 @@ export default function Share() {
           </div>
           <div className="flex space-x-4 pt-6">
             <Button variant="primary" className="rounded-full">
-              <Facebook className="fill-white text-white" size={16} />
+              <a
+                className="flex flex-row hover:underline"
+                type="button"
+                role="button"
+                href={`https://www.facebook.com/sharer/sharer.php?u=${currentUrl}`}
+                rel="noreferrer"
+                target="_blank"
+              >
+                <Facebook className="fill-white text-white" size={16} />
+              </a>
             </Button>
 
             <Button variant="primary" className="rounded-full">
