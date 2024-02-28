@@ -1,8 +1,13 @@
 import { useCallback, useEffect, useState } from 'react';
 
-import { FacebookShareButton, LinkedinShareButton, TwitterShareButton } from 'react-share';
+import {
+  EmailShareButton,
+  FacebookShareButton,
+  LinkedinShareButton,
+  TwitterShareButton,
+} from 'react-share';
 
-import { usePathname } from 'next/navigation';
+import { useParams, usePathname } from 'next/navigation';
 
 import { Facebook, Twitter, Linkedin, Mail, Share2 } from 'lucide-react';
 
@@ -11,6 +16,8 @@ import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 
 export default function Share() {
+  const params = useParams<{ country: string; slug: string }>();
+
   const pathname = usePathname();
 
   const [currentUrl, setCurrentUrl] = useState<string>('');
@@ -66,7 +73,7 @@ export default function Share() {
             <Button variant="primary" className="rounded-full">
               <FacebookShareButton
                 url={currentUrl}
-                title="AFoCO"
+                title={`${params?.country || params?.slug || 'AFoCO'}`}
                 aria-label="facebook twitter"
                 data-testid="facebook-twitter-button"
               >
@@ -77,7 +84,7 @@ export default function Share() {
             <Button variant="primary" className="rounded-full">
               <TwitterShareButton
                 url={currentUrl}
-                title="AFoCO"
+                title={`${params?.country || params?.slug || 'AFoCO'}`}
                 aria-label="share twitter"
                 data-testid="share-twitter-button"
               >
@@ -86,25 +93,25 @@ export default function Share() {
             </Button>
 
             <Button variant="primary" className="rounded-full">
-              <LinkedinShareButton
-                url={currentUrl}
-                title="AFoCO"
-                className="align-baseline"
-                aria-label="share in linkedin"
-                data-testid="share-linkedin-button"
+              <a
+                href={`https://www.linkedin.com/shareArticle?mini=true&url=${currentUrl}`}
+                target="_blank"
               >
                 <Linkedin className="fill-white text-white" size={16} />
-              </LinkedinShareButton>
+              </a>
             </Button>
 
             <Button variant="primary" className="rounded-full">
-              <a
-                target="_blank"
-                rel="noopener noreferrer"
-                href={`mailto:contact@afoco.com?subject=I want to share this AFoCO link with you&body=${currentUrl}`}
+              <EmailShareButton
+                url={currentUrl}
+                title={`${params?.country || params?.slug || 'AFoCO'}`}
+                subject={'I want to share this AFoCO link with you'}
+                body={''}
+                aria-label="share email"
+                data-testid="share-email-button"
               >
                 <Mail className="fill-white text-yellow-400" size={16} />
-              </a>
+              </EmailShareButton>
             </Button>
           </div>
         </div>
