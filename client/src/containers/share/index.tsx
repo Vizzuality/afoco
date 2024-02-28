@@ -10,6 +10,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip
 
 export default function Share() {
   const pathname = usePathname();
+  console.log(pathname);
   const [currentUrl, setCurrentUrl] = useState<string>('');
 
   const [shareLinkBtnText, setShareLinkBtnText] = useState('Copy');
@@ -41,7 +42,9 @@ export default function Share() {
             </div>
           </TooltipTrigger>
           <TooltipContent side={'left'} sideOffset={14}>
-            <p className="text-sm text-yellow-900">Share project</p>
+            <p className="text-sm text-yellow-900">
+              {pathname.includes('countries') ? 'Share country' : 'Share project'}
+            </p>
           </TooltipContent>
         </Tooltip>
       </DialogTrigger>
