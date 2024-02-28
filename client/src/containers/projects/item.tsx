@@ -2,8 +2,10 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 
 import { useAtomValue } from 'jotai';
+import * as qs from 'qs';
 
 import { cn } from '@/lib/classnames';
 
@@ -11,10 +13,18 @@ import { hoveredProjectAtom } from '@/store';
 
 export default function ProjectItem({ id }: { id: string }) {
   const hoveredProject = useAtomValue(hoveredProjectAtom);
+  const searchParams = useSearchParams();
+  const layersParams = searchParams.get('layers');
+  const filtersParams = searchParams.get('filters');
+
+  const queryParams = qs.stringify(
+    { layers: layersParams, filters: filtersParams },
+    { encode: false, addQueryPrefix: true, skipNulls: true }
+  );
 
   return (
     <Link
-      href={'/projects/indonesia-landscape'}
+      href={`/projects/indonesia-landscape${queryParams}`}
       data-cy="project-item-link"
       className={cn({
         'flex space-x-4 rounded-lg border border-gray-100 bg-white py-2 pl-2 pr-4 shadow-sm transition-all duration-300 hover:border-yellow-500':

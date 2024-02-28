@@ -1,14 +1,23 @@
 'use client';
 import Image from 'next/image';
 import Link from 'next/link';
-import { notFound, useParams } from 'next/navigation';
+import { notFound, useParams, useSearchParams } from 'next/navigation';
 
 import { ArrowLeft } from 'lucide-react';
+import * as qs from 'qs';
 
 import { PANEL_OVERVIEW_ITEMS, RESUME_ITEMS } from '@/containers/countries/detail/constants';
 
 export default function CountryDetailPanel() {
   const params = useParams<{ country: string }>();
+  const searchParams = useSearchParams();
+  const layersParams = searchParams.get('layers');
+  const filtersParams = searchParams.get('filters');
+
+  const queryParams = qs.stringify(
+    { layers: layersParams, filters: filtersParams },
+    { encode: false, addQueryPrefix: true, skipNulls: true }
+  );
 
   // TODO: We will need to fetch data and check if slug exists
   if (!params.country) {
@@ -17,7 +26,7 @@ export default function CountryDetailPanel() {
   return (
     <div className="p-6">
       <Link
-        href="/countries"
+        href={`/countries${queryParams}`}
         className="absolute top-8 z-10 flex items-center space-x-3 rounded px-2 py-1 text-xs text-yellow-900 transition-all hover:bg-yellow-100"
       >
         <ArrowLeft className="h-4 w-4 text-yellow-900" />

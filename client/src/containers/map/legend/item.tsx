@@ -2,10 +2,11 @@
 
 import { useCallback } from 'react';
 
-import { useAtom, useSetAtom } from 'jotai';
 import { Eye, EyeOff, PaintBucket, XCircle } from 'lucide-react';
 
-import { layersSettingsAtom, DEFAULT_SETTINGS, layersAtom } from '@/store';
+import { LayerSettings } from '@/types/layers';
+
+import { useSyncLayers } from '@/hooks/datasets/sync-query';
 
 import { LEGENDS } from '@/containers/datasets/layers';
 
@@ -17,42 +18,39 @@ import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip
 type MapLegendItemProps = LegendItemProps;
 
 const MapLegendItem = ({ id, settings }: MapLegendItemProps) => {
-  const setLayersSettings = useSetAtom(layersSettingsAtom);
-  const [layers, setLayers] = useAtom(layersAtom);
+  const [layers, setLayersToURL] = useSyncLayers();
 
   const handleChangeOpacity = useCallback(
-    (opacity: number) =>
-      setLayersSettings((prev) => ({
-        ...prev,
-        [id]: {
-          ...DEFAULT_SETTINGS,
-          ...prev[id],
-          opacity,
-        },
-      })),
-    [id, setLayersSettings]
+    (opacity: number) => {
+      const layerToUpdate = layers.map((ly) => {
+        if (ly.id === id) {
+          return { ...ly, opacity };
+        }
+        return ly;
+      });
+      setLayersToURL(layerToUpdate);
+    },
+    [id, layers, setLayersToURL]
   );
 
-  const handleChangeVisibility = useCallback(
-    () =>
-      setLayersSettings((prev) => ({
-        ...prev,
-        [id]: {
-          ...DEFAULT_SETTINGS,
-          ...prev[id],
-          visibility: settings?.visibility === 'visible' ? 'none' : 'visible',
-        },
-      })),
-    [id, settings, setLayersSettings]
-  );
+  const handleChangeVisibility = useCallback(() => {
+    const layerToUpdate = layers.map((ly) => {
+      if (ly.id === id) {
+        return { ...ly, visibility: settings?.visibility === 'visible' ? 'none' : 'visible' };
+      }
+      return ly;
+    }) as LayerSettings[];
+    setLayersToURL(layerToUpdate);
+  }, [id, settings, layers, setLayersToURL]);
 
   const handleRemoveLayer = () => {
     if (!id) return;
-
-    if (layers.includes(id)) {
-      return setLayers(layers.filter((l) => l !== id));
+    if (layers.some((l) => l.id === id)) {
+      const newLayers = layers.filter((l) => l.id !== id);
+      setLayersToURL(newLayers);
     }
   };
+
   const LegendDetailComponent = LEGENDS[id];
 
   return (

@@ -1,16 +1,13 @@
 import { Layer } from 'react-map-gl';
 
-import { useAtomValue } from 'jotai';
-
-import { layersAtom, layersSettingsAtom } from '@/store';
+import { useSyncLayers } from '@/hooks/datasets/sync-query';
 
 import { LAYERS } from '@/containers/datasets/layers';
 
 import { DeckMapboxOverlayProvider } from '@/components/map/provider';
 
 const LayerManager = () => {
-  const layers = useAtomValue(layersAtom);
-  const layersSettings = useAtomValue(layersSettingsAtom);
+  const [layers] = useSyncLayers();
 
   return (
     <DeckMapboxOverlayProvider>
@@ -23,8 +20,8 @@ const LayerManager = () => {
           const beforeId = i === 0 ? 'custom-layers' : `${layers[i - 1]}-layer`;
           return (
             <Layer
-              id={`${l}-layer`}
-              key={l}
+              id={`${l.id}-layer`}
+              key={l.id}
               type="background"
               layout={{ visibility: 'none' }}
               beforeId={beforeId}
@@ -37,18 +34,12 @@ const LayerManager = () => {
           The first item will always be at the top of the layers stack
         */}
         {layers.map((l, i) => {
-          const LayerComponent = LAYERS[l];
+          const LayerComponent = LAYERS[l.id];
 
           const beforeId = i === 0 ? 'custom-layers' : `${layers[i - 1]}-layer`;
+          const settings = { opacity: l.opacity, visibility: l.visibility };
 
-          return (
-            <LayerComponent
-              id={l}
-              key={l}
-              beforeId={beforeId}
-              settings={layersSettings[l] ?? { opacity: 1, visibility: 'visible' }}
-            />
-          );
+          return <LayerComponent id={l.id} key={l.id} beforeId={beforeId} settings={settings} />;
         })}
       </>
     </DeckMapboxOverlayProvider>

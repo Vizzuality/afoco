@@ -1,11 +1,11 @@
 import { CircleLayer } from 'mapbox-gl';
 
-import { Settings } from '@/components/map/legend/types';
+import { LayerSettings } from '@/types/layers';
 
 export function useLayers({
-  settings: { visibility = 'visible', opacity = 1 },
+  settings: { opacity = 1, visibility = 'visible' },
 }: {
-  settings: Settings;
+  settings: { opacity: LayerSettings['opacity']; visibility: LayerSettings['visibility'] };
 }) {
   return [
     {
