@@ -3,14 +3,18 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { notFound, useParams, useSearchParams } from 'next/navigation';
 
-import { ArrowLeft, Download } from 'lucide-react';
+import { ArrowLeft, Download, ExternalLink, Info } from 'lucide-react';
 import * as qs from 'qs';
 
+import BubbleChart from '@/containers/charts/bubble';
+import PieChart from '@/containers/charts/pie';
 import { PANEL_OVERVIEW_ITEMS, RESUME_ITEMS } from '@/containers/countries/detail/constants';
 import Share from '@/containers/share';
 
 import { Button } from '@/components/ui/button';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
+
+import { communityBeneficiaries, funding, seedsPlanted, usefulLinks } from './mock';
 
 export default function CountryDetailPanel() {
   const params = useParams<{ country: string }>();
@@ -100,6 +104,66 @@ export default function CountryDetailPanel() {
               />
             </div>
           ))}
+        </div>
+
+        <div className="flex flex-col space-y-2">
+          <div className="w-full rounded-xl bg-white p-4 shadow-sm">
+            <div className="flex items-center justify-between pb-6">
+              <h3 className="text-base text-green-800">Funding</h3>
+              <Info className="text-green-800" size={20} />
+            </div>
+            <div className="h-44">
+              <PieChart data={funding} />
+            </div>
+          </div>
+
+          <div className="w-full rounded-xl bg-white p-4 shadow-sm">
+            <div className="flex items-center justify-between pb-6">
+              <h3 className="text-base text-green-800">Seeds planted</h3>
+              <Info className="text-green-800" size={20} />
+            </div>
+            <div className="space-y-2">
+              {seedsPlanted.map(({ name, value }) => (
+                <div key={name} className="flex items-center space-x-4 text-sm">
+                  <p className="w-20 truncate">{name}</p>
+
+                  <div className="w-56">
+                    <div className="h-2 rounded-3xl bg-[#70CCB0]" style={{ width: value * 0.5 }} />
+                  </div>
+
+                  <p className="w-10 text-right font-extrabold">{value}</p>
+                </div>
+              ))}
+              <div>
+                <p className="text-right text-xs text-gray-500">Total</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="w-full rounded-xl bg-white p-4 shadow-sm">
+            <div className="flex items-center justify-between pb-8">
+              <h3 className="text-base text-green-800">Community beneficiaries</h3>
+              <Info className="h-5 w-5 text-green-800" />
+            </div>
+            <BubbleChart data={communityBeneficiaries} />
+          </div>
+          <div className="flex flex-col space-y-2 pb-8 pt-4">
+            <h3 className="text-base text-green-800">Useful links</h3>
+            {usefulLinks.map(({ title, description, link }) => (
+              <div
+                key={title}
+                className="flex w-full flex-col space-y-2 rounded-xl bg-white p-2 shadow-sm"
+              >
+                <div className="flex w-full items-center justify-between">
+                  <h4 className="text-sm text-yellow-900">{title}</h4>
+                  <a href={link} target="_blank" rel="noreferrer">
+                    <ExternalLink size={16} className="text-yellow-900" />
+                  </a>
+                </div>
+                <p className="mr-6 text-xs text-gray-500">{description}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>

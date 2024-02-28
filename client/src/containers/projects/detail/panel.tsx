@@ -158,7 +158,7 @@ export default function ProjectDetailPanel() {
         <DrawerContent className="left-[514px] w-[calc(100vw-570px)]">
           <ProjectDashboard />
           <DrawerClose
-            className="focus:ring-ring absolute -right-6 top-9 z-50 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:pointer-events-none"
+            className="focus:ring-ring absolute -right-6 top-7 z-50 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:pointer-events-none"
             onClick={() => setDashboard(false)}
           >
             <X className="h-4 w-4 text-yellow-400" />
