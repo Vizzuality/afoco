@@ -26,10 +26,10 @@ export default function Sidebar() {
   const [sidebarTab, setSidebarTab] = useAtom(sidebarTabAtom);
   const [layers] = useSyncLayers();
 
-  const queryParams = qs.stringify(
-    { layers: layersParams, filters: filtersParams },
-    { encode: false, addQueryPrefix: true, skipNulls: true }
-  );
+  // const queryParams = qs.stringify(
+  //   { layers: layersParams, filters: filtersParams },
+  //   { encode: false, addQueryPrefix: true, skipNulls: true }
+  // );
 
   return (
     <div className="rounded-8xl absolute bottom-0 left-4 top-0 z-20 my-2 w-20 bg-yellow-700 py-10 text-xs text-yellow-50">
@@ -40,7 +40,11 @@ export default function Sidebar() {
         <ul className="flex h-full flex-col">
           {TABS.map(({ name, icon, href }) => (
             <Link
-              href={`${href}${queryParams}`}
+              // href={`${href}${queryParams}`}
+              href={{
+                pathname: href,
+                query: { layers: layersParams, filters: filtersParams },
+              }}
               key={name}
               data-cy={`sidebar-tab-${name}`}
               className={cn({

@@ -75,7 +75,16 @@ export default function Share() {
             </Button>
 
             <Button variant="primary" className="rounded-full">
-              <Twitter className="fill-white text-white" size={16} />
+              <a
+                className="flex flex-row hover:underline"
+                type="button"
+                role="button"
+                href={`https://twitter.com/intent/tweet?url=${currentUrl}`}
+                rel="noreferrer"
+                target="_blank"
+              >
+                <Twitter className="fill-white text-white" size={16} />
+              </a>
             </Button>
 
             <Button variant="primary" className="rounded-full">
