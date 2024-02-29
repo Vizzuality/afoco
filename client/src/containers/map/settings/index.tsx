@@ -11,7 +11,7 @@ const SettingsHeading = ({ children }: { children: string }) => {
 
 const MapSettings = ({ onClose }: { onClose: () => void }) => {
   return (
-    <div>
+    <div data-cy="map-settings-content">
       <div className="flex justify-between px-6 py-4">
         <h3 className="text-xl font-semibold leading-7 text-green-900">Map settings</h3>
         <button type="button" aria-label="close-settings" onClick={onClose}>
@@ -19,7 +19,7 @@ const MapSettings = ({ onClose }: { onClose: () => void }) => {
         </button>
       </div>
       <div className="h-0.5 bg-gray-100" />
-      <div className="p-6">
+      <div className="space-y-6 p-6">
         <div className="space-y-3">
           <SettingsHeading>Types</SettingsHeading>
           <Basemaps />

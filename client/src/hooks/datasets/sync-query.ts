@@ -16,7 +16,7 @@ export const useSyncBasemap = () =>
     'basemap-settings',
     parseAsJson<MapSettings>().withDefault({
       basemap: 'basemap-light',
-      labels: 'labels-dark',
+      labels: 'dark',
       boundaries: false,
       roads: false,
     })

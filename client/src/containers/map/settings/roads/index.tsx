@@ -20,7 +20,7 @@ const Roads = () => {
   );
 
   return (
-    <div className="group flex grow items-center space-x-2">
+    <div className="group flex grow items-center space-x-2" data-cy="map-settings-roads-switcher">
       <Switch checked={!!roads} onCheckedChange={handleChange} />
 
       <Label className="text-sm leading-5" htmlFor="roads-checkbox">

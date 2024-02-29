@@ -24,14 +24,14 @@ const BasemapItem = ({ label, value, preview }: BasemapItemProps) => {
   }, [value, setMapSettings]);
 
   return (
-    <div className="flex w-full items-center justify-between space-x-8">
+    <div className="flex h-[123px] w-[95px]">
       <button
         className="group grow"
         type="button"
         onClick={handleToggleBasemap}
         data-cy={`${value}`}
       >
-        <div className="space-y-2">
+        <div className="flex h-full flex-col items-center justify-between">
           <div
             className={cn({
               'h-[77px] w-[77px] overflow-hidden rounded transition-opacity group-hover:opacity-75 group-active:outline group-active:outline-2 group-active:outline-slate-400':

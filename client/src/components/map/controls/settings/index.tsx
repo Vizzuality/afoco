@@ -14,10 +14,7 @@ import { CONTROL_BUTTON_STYLES } from '../constants';
 
 import type { SettingsControlProps } from './types';
 
-export const SettingsControl: FC<SettingsControlProps> = ({
-  className,
-  children,
-}: SettingsControlProps) => {
+export const SettingsControl: FC<SettingsControlProps> = ({ className }: SettingsControlProps) => {
   const [popoverOpen, setPopoverOpen] = useState(false);
 
   return (
