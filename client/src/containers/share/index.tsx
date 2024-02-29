@@ -40,7 +40,7 @@ export default function Share() {
     <Dialog>
       <DialogTrigger>
         <Tooltip>
-          <TooltipTrigger asChild>
+          <TooltipTrigger asChild data-cy="share-tooltip-button">
             <div className="flex h-8 w-8 items-center justify-center rounded-full hover:bg-yellow-100">
               <Share2 className="text-yellow-900" size={18} />
             </div>
@@ -60,7 +60,13 @@ export default function Share() {
             <div className="bg-background flex h-10 rounded-md border px-3 py-2 text-sm text-gray-900">
               <p className="w-[410px] truncate">{currentUrl}</p>
             </div>
-            <Button variant="primary" size="base" className="w-20" onClick={copyShareLink}>
+            <Button
+              variant="primary"
+              size="base"
+              className="w-20"
+              onClick={copyShareLink}
+              data-cy="share-link-button"
+            >
               {shareLinkBtnText}
             </Button>
           </div>
