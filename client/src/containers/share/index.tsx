@@ -75,8 +75,9 @@ export default function Share() {
               <FacebookShareButton
                 url={currentUrl}
                 title={`${params?.country || params?.slug || 'AFoCO'}`}
-                aria-label="facebook twitter"
-                data-testid="facebook-twitter-button"
+                aria-label="share facebook"
+                data-testid="share-facebook-button"
+                data-cy="share-facebook-button"
               >
                 <Facebook className="fill-white text-white" size={16} />
               </FacebookShareButton>
@@ -88,12 +89,13 @@ export default function Share() {
                 title={`${params?.country || params?.slug || 'AFoCO'}`}
                 aria-label="share twitter"
                 data-testid="share-twitter-button"
+                data-cy="share-twitter-button"
               >
                 <Twitter className="fill-white text-white" size={16} />
               </TwitterShareButton>
             </Button>
 
-            <Button variant="primary" className="rounded-full">
+            <Button variant="primary" className="rounded-full" data-cy="email-share-button">
               <EmailShareButton
                 url={currentUrl}
                 title={`${params?.country || params?.slug || 'AFoCO'}`}
