@@ -20,11 +20,12 @@ const Boundaries = () => {
   );
 
   return (
-    <div
-      className="group flex grow items-center space-x-2"
-      data-cy="map-settings-boundaries-switcher"
-    >
-      <Switch checked={!!boundaries} onCheckedChange={handleChange} />
+    <div className="group flex grow items-center space-x-2">
+      <Switch
+        checked={!!boundaries}
+        onCheckedChange={handleChange}
+        data-cy="map-settings-boundaries-switcher"
+      />
 
       <Label className="text-sm leading-5" htmlFor="boundaries-checkbox">
         Boundaries

@@ -95,7 +95,9 @@ describe('Map - settings. Updates URL accordingly on basemap selection', () => {
 
 describe('Map - settings. Updates URL accordingly on layers selection', () => {
   it('Updates URL on roads layer selection', () => {
-    cy.visit('/');
+    cy.visit(
+      '/projects?basemap-settings={"basemap":"basemap-light","labels":"light","boundaries":false,"roads":false}'
+    );
     cy.get('[data-cy="map-settings-button"]').click();
     cy.get('[data-cy="map-settings-content"]').should('be.visible');
     cy.get('[data-cy="map-settings-labels"]').should('be.visible');
@@ -103,45 +105,46 @@ describe('Map - settings. Updates URL accordingly on layers selection', () => {
     // Roads layer should be off by default
     cy.url().should((url) => {
       const decodedUrl = decodeURIComponent(url);
-      expect(decodedUrl).to.include('"roads":"false"');
+      expect(decodedUrl).to.include('"roads":false');
     });
 
-    cy.get('[data-cy="map-settings-boundaries-switcher"]').click();
+    cy.get('[data-cy="map-settings-roads-switcher"]').click();
     cy.url().should((url) => {
       const decodedUrl = decodeURIComponent(url);
-      expect(decodedUrl).to.include('"roads":"true"');
+      expect(decodedUrl).to.include('"roads":true');
     });
 
-    cy.get('[data-cy="map-settings-boundaries-switcher"]').click();
+    cy.get('[data-cy="map-settings-roads-switcher"]').click();
     cy.url().should((url) => {
       const decodedUrl = decodeURIComponent(url);
-      expect(decodedUrl).to.include('"roads":"false"');
+      expect(decodedUrl).to.include('"roads":false');
     });
   });
+
   it('Updates URL on boundaries boundaries selection', () => {
-    cy.visit('/');
+    cy.visit(
+      '/projects?basemap-settings={"basemap":"basemap-light","labels":"light","boundaries":false,"roads":false}'
+    );
     cy.get('[data-cy="map-settings-button"]').click();
     cy.get('[data-cy="map-settings-content"]').should('be.visible');
     cy.get('[data-cy="map-settings-labels"]').should('be.visible');
 
-    cy.get('[data-cy="map-settings-button"]').click();
-
     // Boundaries layer should be off by default
     cy.url().should((url) => {
       const decodedUrl = decodeURIComponent(url);
-      expect(decodedUrl).to.include('"boundaries":"false"');
+      expect(decodedUrl).to.include('"boundaries":false');
     });
 
     cy.get('[data-cy="map-settings-boundaries-switcher"]').click();
     cy.url().should((url) => {
       const decodedUrl = decodeURIComponent(url);
-      expect(decodedUrl).to.include('"boundaries":"true"');
+      expect(decodedUrl).to.include('"boundaries":true');
     });
 
     cy.get('[data-cy="map-settings-boundaries-switcher"]').click();
     cy.url().should((url) => {
       const decodedUrl = decodeURIComponent(url);
-      expect(decodedUrl).to.include('"boundaries":"false"');
+      expect(decodedUrl).to.include('"boundaries":false');
     });
   });
 });
