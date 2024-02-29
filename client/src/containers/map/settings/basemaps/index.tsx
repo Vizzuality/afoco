@@ -4,7 +4,7 @@ import BasemapItem from './item';
 
 const Basemaps = () => {
   return (
-    <ul className="flex justify-start space-x-6">
+    <ul className="ml-3 flex space-x-8">
       {BASEMAPS.map((b) => (
         <li key={b.value}>
           <BasemapItem {...b} />

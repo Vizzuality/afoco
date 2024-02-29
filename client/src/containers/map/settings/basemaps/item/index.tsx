@@ -24,7 +24,7 @@ const BasemapItem = ({ label, value, preview }: BasemapItemProps) => {
   }, [value, setMapSettings]);
 
   return (
-    <div className="flex h-[123px] w-[95px]">
+    <div className="mt-4 flex">
       <button
         className="group grow"
         type="button"
@@ -34,9 +34,9 @@ const BasemapItem = ({ label, value, preview }: BasemapItemProps) => {
         <div className="flex h-full flex-col items-center justify-between">
           <div
             className={cn({
-              'h-[77px] w-[77px] overflow-hidden rounded transition-opacity group-hover:opacity-75 group-active:outline group-active:outline-2 group-active:outline-slate-400':
+              'mb-5 h-[77px] w-[77px] overflow-hidden rounded shadow-lg transition-opacity group-hover:opacity-75 group-active:outline group-active:outline-2 group-active:outline-slate-400':
                 true,
-              'h-[95px] w-[95px] overflow-hidden outline outline-2 outline-yellow-400 group-hover:opacity-100 group-active:outline-yellow-400':
+              'scale-125 overflow-hidden outline outline-2 outline-yellow-400 group-hover:opacity-100 group-active:outline-yellow-400':
                 value === basemap,
             })}
           >

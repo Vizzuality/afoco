@@ -40,7 +40,7 @@ export const SettingsControl: FC<SettingsControlProps> = ({ className }: Setting
           </button>
         </PopoverTrigger>
 
-        <PopoverContent side="left" align="start" className="min-w-max bg-white p-0">
+        <PopoverContent side="left" align="start" className="min-w-max rounded-3xl bg-white p-0">
           <MapSettings onClose={() => setPopoverOpen(false)} />
         </PopoverContent>
       </Popover>
