@@ -6,6 +6,8 @@ import { Check, Search } from 'lucide-react';
 
 import { cn } from '@/lib/classnames';
 
+import { FiltersType } from '@/containers/filters/types';
+
 import { Button } from '@/components/ui/button';
 import {
   Command,
@@ -18,11 +20,13 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 
 export function Combobox({
   icon,
+  type,
   placeholder = 'Search',
   options,
   onClick,
 }: {
   icon?: boolean;
+  type?: FiltersType;
   placeholder: string;
   options: Record<string, string>[];
   onClick?: (e: string) => void;
@@ -64,6 +68,7 @@ export function Combobox({
               <CommandItem
                 key={option.value}
                 value={option.value}
+                data-cy={`filter-${type}-${option.value}`}
                 onSelect={(currentValue) => {
                   setValue(option.value);
                   setOpen(false);

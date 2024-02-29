@@ -56,7 +56,12 @@ export default function Filters() {
           <Combobox placeholder="Search project" options={PROJECTS} icon />
           <Dialog>
             <DialogTrigger aria-label="Show filters" asChild>
-              <Button variant="outline" size="base" className="space-x-2">
+              <Button
+                variant="outline"
+                size="base"
+                className="space-x-2"
+                data-cy="show-filters-btn"
+              >
                 <Filter className="stroke-[1.5px]" />
                 <span>Filters</span>
               </Button>
@@ -68,7 +73,7 @@ export default function Filters() {
               </DialogHeader>
               <FiltersContent />
               <DialogFooter>
-                <button type="button" onClick={handleResetFilters}>
+                <button type="button" onClick={handleResetFilters} data-cy="clear-filters-button">
                   Clear all
                 </button>
                 <Button variant="primary" size="base" onClick={handleResetFilters}>
@@ -91,7 +96,7 @@ export default function Filters() {
                 </li>
               ))}
             </ul>
-            {hasMoreThanThree && <p>and {remainingFiltersCount} more</p>}
+            {hasMoreThanThree && <p data-cy="remaning-filters">and {remainingFiltersCount} more</p>}
           </div>
         )}
       </div>
