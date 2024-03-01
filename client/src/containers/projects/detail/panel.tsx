@@ -4,7 +4,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { notFound, useParams, useSearchParams } from 'next/navigation';
 
-import { Tooltip } from '@radix-ui/react-tooltip';
 import { useAtom } from 'jotai';
 import { ArrowLeft, ChevronRight, Share as Download, X } from 'lucide-react';
 import * as qs from 'qs';
@@ -16,7 +15,7 @@ import Share from '@/containers/share';
 
 import { Button } from '@/components/ui/button';
 import { Drawer, DrawerClose, DrawerContent, DrawerTrigger } from '@/components/ui/drawer';
-import { TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
+import { Tooltip, TooltipArrow, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 
 import ProjectDashboard from './dashboard';
 
@@ -93,7 +92,32 @@ export default function ProjectDetailPanel() {
               className="flex justify-between border-b-2 border-dotted border-gray-400 py-4"
             >
               <p className="text-xs font-medium uppercase text-gray-500">{title}</p>
-              <p className="text-sm text-yellow-900">{value}</p>
+              {title === 'Location' && (
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <p className="cursor-pointer text-sm text-yellow-900 underline hover:no-underline">
+                      {value}
+                    </p>
+                  </TooltipTrigger>
+                  <TooltipContent
+                    side={'top'}
+                    sideOffset={4}
+                    className="rounded-lg border-none p-4"
+                  >
+                    <ol className="text-sm text-yellow-900">
+                      {PANEL_OVERVIEW_ITEMS.find((item) => item.title === title)?.items?.map(
+                        (item, idx) => (
+                          <li key={idx}>
+                            {idx + 1}. {item.title}
+                          </li>
+                        )
+                      )}
+                    </ol>
+                    <TooltipArrow className="fill-white" />
+                  </TooltipContent>
+                </Tooltip>
+              )}
+              {title !== 'Location' && <p className="text-sm text-yellow-900">{value}</p>}
             </div>
           ))}
         </div>

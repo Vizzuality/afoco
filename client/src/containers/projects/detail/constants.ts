@@ -5,7 +5,21 @@ import TRAINING_SVG from '@/svgs/ui/training-activities.svg';
 export const PANEL_OVERVIEW_ITEMS = [
   { title: 'Status', value: 'Ongoing' },
   { title: 'Priority Areas', value: 'Climate change adaptation' },
-  { title: 'Location', value: 'West Nousa, Indonesia' },
+  {
+    title: 'Location',
+    value: 'West Nousa, Indonesia',
+    items: [
+      {
+        title: 'West Java, Indonesia',
+      },
+      {
+        title: 'East Kalimantan, Indonesia',
+      },
+      {
+        title: 'Central Sulawesi, Indonesia',
+      },
+    ],
+  },
   { title: 'Duration', value: '2021-2024' },
   { title: 'Donors', value: 'Korea Forest Service' },
   { title: 'Investment', value: 'USD 800K' },
