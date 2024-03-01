@@ -3,10 +3,14 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { notFound, useParams, useSearchParams } from 'next/navigation';
 
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Download } from 'lucide-react';
 import * as qs from 'qs';
 
 import { PANEL_OVERVIEW_ITEMS, RESUME_ITEMS } from '@/containers/countries/detail/constants';
+import Share from '@/containers/share';
+
+import { Button } from '@/components/ui/button';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 
 export default function CountryDetailPanel() {
   const params = useParams<{ country: string }>();
@@ -25,13 +29,29 @@ export default function CountryDetailPanel() {
   }
   return (
     <div className="p-6">
-      <Link
-        href={`/countries${queryParams}`}
-        className="absolute top-8 z-10 flex items-center space-x-3 rounded px-2 py-1 text-xs text-yellow-900 transition-all hover:bg-yellow-100"
-      >
-        <ArrowLeft className="h-4 w-4 text-yellow-900" />
-        <p>Back</p>
-      </Link>
+      <div className="absolute left-6 right-6 top-4 z-10 flex justify-between">
+        <Link
+          href={`/countries${queryParams}`}
+          className="flex items-center space-x-3 rounded px-2 py-1 text-xs text-yellow-900 transition-all hover:bg-yellow-100"
+        >
+          <ArrowLeft className="h-4 w-4 text-yellow-900" />
+          <p>Back</p>
+        </Link>
+        <div className="flex items-center space-x-2">
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button variant="ghost" className="rounded-full">
+                <Download className="text-yellow-900" size={18} />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent side={'left'} sideOffset={20}>
+              <p className="text-sm text-yellow-900">Download country</p>
+            </TooltipContent>
+          </Tooltip>
+
+          <Share />
+        </div>
+      </div>
       <div className="mt-16 flex space-x-2">
         <Image
           src="/images/countries/placeholder.png"

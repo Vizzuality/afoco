@@ -1,15 +1,20 @@
 import { useCallback, useEffect, useState } from 'react';
 
-import { usePathname } from 'next/navigation';
+import { EmailShareButton, FacebookShareButton, TwitterShareButton } from 'react-share';
 
-import { Facebook, Twitter, Linkedin, Mail, Share2 } from 'lucide-react';
+import { useParams, usePathname } from 'next/navigation';
+
+import { Facebook, Twitter, Mail, Share2 } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 
 export default function Share() {
+  const params = useParams<{ country: string; slug: string }>();
+
   const pathname = usePathname();
+
   const [currentUrl, setCurrentUrl] = useState<string>('');
 
   const [shareLinkBtnText, setShareLinkBtnText] = useState('Copy');
@@ -35,13 +40,15 @@ export default function Share() {
     <Dialog>
       <DialogTrigger>
         <Tooltip>
-          <TooltipTrigger asChild>
+          <TooltipTrigger asChild data-cy="share-tooltip-button">
             <div className="flex h-8 w-8 items-center justify-center rounded-full hover:bg-yellow-100">
               <Share2 className="text-yellow-900" size={18} />
             </div>
           </TooltipTrigger>
           <TooltipContent side={'left'} sideOffset={14}>
-            <p className="text-sm text-yellow-900">Share project</p>
+            <p className="text-sm text-yellow-900">
+              {pathname.includes('countries') ? 'Share country' : 'Share project'}
+            </p>
           </TooltipContent>
         </Tooltip>
       </DialogTrigger>
@@ -53,25 +60,52 @@ export default function Share() {
             <div className="bg-background flex h-10 rounded-md border px-3 py-2 text-sm text-gray-900">
               <p className="w-[410px] truncate">{currentUrl}</p>
             </div>
-            <Button variant="primary" size="base" className="w-20" onClick={copyShareLink}>
+            <Button
+              variant="primary"
+              size="base"
+              className="w-20"
+              onClick={copyShareLink}
+              data-cy="share-link-button"
+            >
               {shareLinkBtnText}
             </Button>
           </div>
           <div className="flex space-x-4 pt-6">
             <Button variant="primary" className="rounded-full">
-              <Facebook className="fill-white text-white" size={16} />
+              <FacebookShareButton
+                url={currentUrl}
+                title={`${params?.country || params?.slug || 'AFoCO'}`}
+                aria-label="share facebook"
+                data-testid="share-facebook-button"
+                data-cy="share-facebook-button"
+              >
+                <Facebook className="fill-white text-white" size={16} />
+              </FacebookShareButton>
             </Button>
 
             <Button variant="primary" className="rounded-full">
-              <Twitter className="fill-white text-white" size={16} />
+              <TwitterShareButton
+                url={currentUrl}
+                title={`${params?.country || params?.slug || 'AFoCO'}`}
+                aria-label="share twitter"
+                data-testid="share-twitter-button"
+                data-cy="share-twitter-button"
+              >
+                <Twitter className="fill-white text-white" size={16} />
+              </TwitterShareButton>
             </Button>
 
-            <Button variant="primary" className="rounded-full">
-              <Linkedin className="fill-white text-white" size={16} />
-            </Button>
-
-            <Button variant="primary" className="rounded-full">
-              <Mail className="fill-white text-yellow-400" size={16} />
+            <Button variant="primary" className="rounded-full" data-cy="email-share-button">
+              <EmailShareButton
+                url={currentUrl}
+                title={`${params?.country || params?.slug || 'AFoCO'}`}
+                subject={'I want to share this AFoCO link with you'}
+                body={''}
+                aria-label="share email"
+                data-testid="share-email-button"
+              >
+                <Mail className="fill-white text-yellow-400" size={16} />
+              </EmailShareButton>
             </Button>
           </div>
         </div>
