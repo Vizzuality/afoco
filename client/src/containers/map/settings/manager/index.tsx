@@ -2,10 +2,9 @@ import { useCallback, useEffect } from 'react';
 
 import { useMap } from 'react-map-gl';
 
-import { useAtomValue } from 'jotai';
 import { AnyLayer } from 'mapbox-gl';
 
-import { mapSettingsAtom } from '@/store';
+import { useSyncBasemap } from '@/hooks/datasets/sync-query';
 
 import { BASEMAPS } from '@/constants/basemaps';
 
@@ -16,7 +15,8 @@ type AnyLayerWithMetadata = AnyLayer & {
 const MapSettingsManager = () => {
   const { default: mapRef } = useMap();
   const loaded = mapRef?.loaded();
-  const { basemap, labels, boundaries, roads } = useAtomValue(mapSettingsAtom);
+  const [mapSettings] = useSyncBasemap();
+  const { basemap, labels, boundaries, roads } = mapSettings;
 
   const handleGroup = useCallback(
     (groups: string[], groupId: string, visible = true) => {
