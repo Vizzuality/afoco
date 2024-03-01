@@ -30,7 +30,7 @@ export default function CountryItem() {
           width={40}
           height={32}
         />
-        <h3 data-cy="country-detail-name">Bhutan</h3>
+        <h3>Bhutan</h3>
       </div>
       <p>
         <span className="font-semibold">32</span> projects
