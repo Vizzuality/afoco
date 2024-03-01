@@ -139,6 +139,7 @@ export default function ProjectDashboard() {
                   stroke: 'yellow',
                 }}
                 barDataKey="uv"
+                barRadius={[2, 2, 0, 0]}
                 fillBar="#70CCB0"
                 margin={{
                   top: 2,

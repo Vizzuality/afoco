@@ -8,6 +8,7 @@ export const metadata: Metadata = {
 import Filters from '@/containers/filters';
 import Panel from '@/containers/panel';
 import ProjectsList from '@/containers/projects/list';
+import Stats from '@/containers/projects/stats';
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
@@ -29,7 +30,7 @@ export default function Projects() {
             </TabsTrigger>
           </TabsList>
           <TabsContent value="statistics" className="mt-6 space-y-5">
-            Global Stats
+            <Stats />
           </TabsContent>
           <TabsContent value="list" className="mt-6 space-y-5">
             <Filters />
