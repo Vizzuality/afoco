@@ -1,4 +1,11 @@
 describe('map', () => {
+  it('changes basemap', () => {
+    cy.visit('/');
+    cy.get('button[data-cy="map-settings-button"]').click();
+    cy.get('button[data-cy="basemap-light"]').click();
+    // Todo: We would need to check if basemap is in the url
+  });
+
   it('loads', () => {
     cy.visit('/');
     const map = cy.get('#default').wait(8000);
@@ -55,6 +62,7 @@ describe('Map - settings. Updates URL accordingly on basemap selection', () => {
       expect(decodedUrl).to.include('"labels":"light"');
     });
   });
+
   it('Updates URL on dark label selection', () => {
     cy.visit('/');
     cy.get('[data-cy="map-settings-button"]').click();
@@ -73,6 +81,7 @@ describe('Map - settings. Updates URL accordingly on basemap selection', () => {
       }
     });
   });
+
   it('Updates URL on no label selection', () => {
     cy.visit('/');
     cy.get('[data-cy="map-settings-button"]').click();
@@ -118,7 +127,7 @@ describe('Map - settings. Updates URL accordingly on layers selection', () => {
     });
   });
 
-  it('Updates URL on boundaries boundaries selection', () => {
+  it('Updates URL on boundaries selection', () => {
     cy.visit(
       '/projects?basemap-settings={"basemap":"basemap-light","labels":"light","boundaries":false,"roads":false}'
     );
