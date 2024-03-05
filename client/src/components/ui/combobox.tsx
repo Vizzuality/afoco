@@ -38,14 +38,13 @@ export function Combobox({
           variant="ghost"
           role="combobox"
           aria-expanded={open}
-          className="h-10 w-full flex-1 justify-between rounded-md border-none bg-gray-100"
+          className="h-10 w-full flex-1 items-center justify-between rounded-md border-none bg-gray-100"
         >
-          <div className="flex w-full items-center space-x-2">
-            {icon && <Search size={20} />}
-
+          <div className="flex h-full w-full shrink-0 items-center space-x-2">
+            {icon && <Search size={20} className="" />}
             <span
               className={cn({
-                'max-w-[200px] cursor-pointer overflow-hidden truncate text-ellipsis text-xs text-gray-500':
+                'inline-block w-full flex-auto cursor-pointer justify-center truncate text-start align-middle text-xs text-gray-500':
                   true,
                 'text-gray-900': selectedOptionLabel,
               })}
