@@ -23,7 +23,7 @@ export default function Stats() {
           </p>
 
           <div
-            className="h-10 w-full"
+            className="h-10 w-full rounded-[4px]"
             style={{
               background: `linear-gradient(to right, #70CCB0 0%, #70CCB0 ${
                 (totalProjectsValue[0].value * 100) /
