@@ -61,9 +61,6 @@ describe('Map - settings. Updates URL accordingly on basemap selection', () => {
     cy.get('[data-cy="map-settings-content"]').should('be.visible');
     cy.get('[data-cy="map-settings-labels"]').should('be.visible');
 
-    // Navigate back to settings to select "light" labels, if the UI requires it
-    cy.get('[data-cy="map-settings-button"]').click();
-
     // Checking for "dark" labels
     cy.get('[data-cy="map-settings-label-dark"]').click();
     cy.url().should((url) => {

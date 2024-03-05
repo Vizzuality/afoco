@@ -60,7 +60,9 @@ export default function CountryDetailPanel() {
           width={40}
           height={32}
         />
-        <h2 className="text-xl">Bhutan</h2>
+        <h2 className="text-xl" data-cy="country-detail-name">
+          Bhutan
+        </h2>
       </div>
       <p className="my-4 text-sm text-gray-500">
         Lorem ipsum dolor sit amet consectetur. Vel odio tellus egestas et. Tellus et mattis magnis
