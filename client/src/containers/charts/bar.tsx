@@ -42,6 +42,7 @@ export default function BarChartComponent({
   data,
   activeStyles,
   barDataKey,
+  barRadius,
   fillBar,
   margin,
   xAxisDataKey,
@@ -51,6 +52,7 @@ export default function BarChartComponent({
   data: { [key: string]: unknown }[];
   activeStyles?: { stroke: string };
   barDataKey: string;
+  barRadius?: [number, number, number, number];
   fillBar?: string;
   margin?: { top: number; right: number; bottom: number; left: number };
   xAxisDataKey: string;
@@ -71,7 +73,7 @@ export default function BarChartComponent({
         <Bar
           dataKey={barDataKey}
           fill={fillBar}
-          radius={[2, 2, 0, 0]}
+          radius={barRadius}
           activeBar={<Rectangle stroke={activeStyles?.stroke} />}
         />
       </BarChart>
