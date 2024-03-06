@@ -1,0 +1,22 @@
+{
+   "@@type": "DecodeLayer",
+   "id": "tree-cover",
+   "source": {
+     "type": "raster",
+     "tiles": [
+       "https://storage.googleapis.com/wri-public/treecover/2010/30/{z}/{x}/{y}.png"
+     ],
+     "maxzoom": 12,
+     "minzoom": 2
+   },
+   "opacity": {
+    "o": "@@#params.opacity",
+    "@@function": "setOpacity"
+  },
+  "visibility": {
+    "v": "@@#params.visibility",
+    "type": "deckgl",
+    "@@function": "setVisibility"
+  },
+   "decodeFunction": "// values for creating power scale, domain (input), and range (output)\nfloat domainMin = 0.;\nfloat domainMax = 255.;\nfloat rangeMin = 0.;\nfloat rangeMax = 255.;\n\nfloat exponent = zoom < 13. ? 0.3 + (zoom - 3.) / 20. : 1.;\nfloat intensity = color.g * 255.;\n\n// get the min, max, and current values on the power scale\nfloat minPow = pow(domainMin, exponent - domainMin);\nfloat maxPow = pow(domainMax, exponent);\nfloat currentPow = pow(intensity, exponent);\n\n// get intensity value mapped to range\nfloat scaleIntensity = ((currentPow - minPow) / (maxPow - minPow) * (rangeMax - rangeMin)) + rangeMin;\n// a value between 0 and 255\ncolor.a *= zoom < 13. ? scaleIntensity * 0.8 / 255. : color.g * 0.8;\n\ncolor.r = 151. / 255.;\ncolor.g = 189. / 255.;\ncolor.b = 61. / 255.;"
+ }

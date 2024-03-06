@@ -1,3 +1,4 @@
+import { Layer as DeckLayer } from '@deck.gl/core/typed';
 import type { AnyLayer, AnySourceData } from 'mapbox-gl';
 
 export type Config = {
@@ -48,12 +49,12 @@ export type InteractionConfig = {
 };
 
 export type LayerProps = {
-  id?: string;
+  id?: LayerId;
   zIndex?: number;
   onAdd?: () => void;
   onRemove?: (ids: string[]) => void;
   beforeId: string;
-  settings: { opacity: LayerSettings['opacity']; visibility: LayerSettings['visibility'] };
+  settings?: { opacity: LayerSettings['opacity']; visibility: LayerSettings['visibility'] };
 };
 
 export type LayerTyped = {
@@ -62,3 +63,9 @@ export type LayerTyped = {
   legend_config: LegendConfig;
   interaction_config: InteractionConfig;
 };
+
+export type DeckGLLayerProps<T> = LayerProps &
+  Partial<T> & {
+    beforeId: string;
+    config: DeckLayer<{ beforeId: string }>;
+  };

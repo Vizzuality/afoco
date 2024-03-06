@@ -1,37 +1,23 @@
 'use client';
 
-import { useEffect } from 'react';
+import { Layer } from 'deck.gl/typed';
 
-import { LayerProps } from '@/types/layers';
+import { LayerId, LayerProps } from '@/types/layers';
 
-import { useDeckMapboxOverlayContext } from '@/components/map/provider';
+import { useDeckMapboxOverlay } from '@/components/map/provider';
 
 export type DeckLayerProps<T> = LayerProps &
   Partial<T> & {
-    type: new (props: { id: string; beforeId: string | undefined }) => unknown;
+    config: Layer | null;
   };
 
-const DeckLayer = <T,>({ id, type, ...props }: DeckLayerProps<T>) => {
-  // Render deck layer
-  const i = `${id}-deck`;
-  const { addLayer, removeLayer } = useDeckMapboxOverlayContext();
-
-  useEffect(() => {
-    const ly = new type({
-      ...props,
-      id: i,
-      beforeId: id,
-    });
-    addLayer(ly);
-  }, [i, id, type, props, addLayer]);
-
-  useEffect(() => {
-    return () => {
-      removeLayer(i);
-    };
-  }, [i, removeLayer]);
+const DeckJsonLayer = <T,>({ id, config }: DeckLayerProps<T>) => {
+  useDeckMapboxOverlay({
+    id: id as LayerId,
+    layer: config,
+  });
 
   return null;
 };
 
-export default DeckLayer;
+export default DeckJsonLayer;
