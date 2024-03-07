@@ -12,16 +12,14 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "layer": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::layer.layer"
-    },
     "locations": {
       "type": "relation",
       "relation": "manyToMany",
       "target": "api::location.location",
       "inversedBy": "projects"
+    },
+    "project_code": {
+      "type": "string"
     }
   }
 }
