@@ -27,16 +27,13 @@
         "livelihood_type",
         "production",
         "project_infra"
-      ],
-      "required": true
+      ]
     },
     "field_name": {
-      "type": "string",
-      "required": true
+      "type": "string"
     },
     "unit": {
-      "type": "string",
-      "required": true
+      "type": "string"
     },
     "data_type": {
       "type": "enumeration",
@@ -44,8 +41,7 @@
         "string",
         "int",
         "list"
-      ],
-      "required": true
+      ]
     },
     "using_year": {
       "type": "boolean",

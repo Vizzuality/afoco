@@ -15,21 +15,18 @@
     "indicator_field_metadatum": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "api::indicator-field-metadata.indicator-field-metadata",
-      "required": true
+      "target": "api::indicator-field-metadata.indicator-field-metadata"
+    },
+    "value": {
+      "type": "json"
+    },
+    "year": {
+      "type": "integer"
     },
     "project": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "api::project.project",
-      "required": true
-    },
-    "value": {
-      "type": "json",
-      "required": true
-    },
-    "year": {
-      "type": "integer"
+      "target": "api::project.project"
     }
   }
 }
