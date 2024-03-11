@@ -17,17 +17,18 @@ const MapLegends = ({ className = '' }) => {
   const [openLegend, setOpenLegend] = useState(true);
   const handleOpenLegend = useCallback(() => setOpenLegend((prev) => !prev), []);
 
-  // const handleChangeOrder = useCallback(
-  //   (order: string[]) => {
-  //     const newLayers: string[] = order.reduce((prev: string[], curr) => {
-  //       const id = layers.find((layer) => layer === curr);
-  //       return !!id ? [...prev, id] : prev;
-  //     }, []);
-
-  //     setLayers(newLayers);
-  //   },
-  //   [layers, setLayers]
-  // );
+  const handleChangeOrder = useCallback(
+    (/* order: LayerSettings[] */) => {
+      // const newLayers: LayerSettings[] = order.reduce((prev, curr) => {
+      //   const id = layers.find((layer) => layer === curr);
+      //   return !!id ? [...prev, id] : prev;
+      // }, []);
+      // setLayersToURL(newLayers);
+    },
+    [
+      /* layers, setLayersToURL */
+    ]
+  );
 
   const sortable = layers?.length > 1;
 
@@ -43,7 +44,7 @@ const MapLegends = ({ className = '' }) => {
             enabled: sortable,
             handle: true,
           }}
-          // onChangeOrder={handleChangeOrder}
+          onChangeOrder={handleChangeOrder}
         >
           {layers.map((layer) => {
             const settings = { opacity: layer.opacity, visibility: layer.visibility };

@@ -2,7 +2,7 @@ import ProjectItem from '@/containers/projects/item';
 
 export default function ProjectsList() {
   return (
-    <div className="flex flex-col space-y-2">
+    <div className="no-scrollbar flex max-h-[75vh] flex-col space-y-2 overflow-y-auto">
       <ProjectItem id="uniqueId1" />
       <ProjectItem id="uniqueId2" />
       <ProjectItem id="uniqueId3" />

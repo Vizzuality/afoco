@@ -1,9 +1,9 @@
 'use client';
 
-import { useCallback, Suspense } from 'react';
+import { useCallback, Suspense, useState } from 'react';
 
 import flatten from 'lodash-es/flatten';
-import { Filter } from 'lucide-react';
+import { Filter, Search } from 'lucide-react';
 
 import { useSyncFilters } from '@/hooks/datasets/sync-query';
 
@@ -11,7 +11,6 @@ import FiltersContent from '@/containers/filters/content';
 import type { FiltersType, FilterSettings } from '@/containers/filters/types';
 
 import { Button } from '@/components/ui/button';
-import { Combobox } from '@/components/ui/combobox';
 import {
   Dialog,
   DialogContent,
@@ -20,15 +19,19 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
+import { Input } from '@/components/ui/input';
 
 import FiltersBadge from './badge';
-import { INTERVENTION_TYPES, PROJECTS, AREAS } from './constants';
+import { INTERVENTION_TYPES, AREAS } from './constants';
 
 export default function Filters() {
   const [filtersSettings, setFiltersToURL] = useSyncFilters();
   const handleResetFilters = useCallback(() => {
     setFiltersToURL({});
   }, [setFiltersToURL]);
+
+  const [searchValue, setSearchValue] = useState('');
+  console.info(searchValue);
 
   const filtersSettingsParsed = flatten(
     Object.entries(filtersSettings as FilterSettings)?.map((filter) => {
@@ -52,8 +55,14 @@ export default function Filters() {
   return (
     <Suspense>
       <div className="space-y-2">
-        <div className="flex space-x-2">
-          <Combobox placeholder="Search project" options={PROJECTS} icon />
+        <div className="relative flex space-x-2">
+          <Input
+            placeholder="Search project by name"
+            className="border-none bg-gray-100 pl-11 placeholder:text-gray-500"
+            onChange={(e) => setSearchValue(e.target.value)}
+          />
+          <Search size={24} className="absolute left-1 top-2" />
+
           <Dialog>
             <DialogTrigger aria-label="Show filters" asChild>
               <Button variant="outline" size="base" className="space-x-2">

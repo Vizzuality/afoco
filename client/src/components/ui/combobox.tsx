@@ -55,7 +55,7 @@ export function Combobox({
           </div>
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="space-y-2 bg-white p-0 text-gray-900">
+      <PopoverContent className="popover-menu-content space-y-2 bg-white p-0 text-gray-900">
         <Command>
           <CommandInput placeholder={placeholder} />
           <CommandEmpty>No results found.</CommandEmpty>
