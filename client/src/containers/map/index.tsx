@@ -87,7 +87,7 @@ export default function MapContainer() {
 
   const handleMapViewStateChange = useCallback(() => {
     if (map) {
-      setZoom(map.getZoom());
+      setZoom(parseFloat(map.getZoom().toFixed(2)));
       const b = map
         .getBounds()
         .toArray()
