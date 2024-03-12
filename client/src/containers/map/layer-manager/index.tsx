@@ -1,6 +1,6 @@
 import { Layer } from 'react-map-gl';
 
-import { useSyncLayers } from '@/hooks/datasets/sync-query';
+import { useSyncLayers, useSyncZoom } from '@/hooks/datasets/sync-query';
 
 import { LAYERS } from '@/containers/datasets/layers';
 
@@ -8,6 +8,7 @@ import { DeckMapboxOverlayProvider } from '@/components/map/provider';
 
 const LayerManager = () => {
   const [layers] = useSyncLayers();
+  const [currentZoom] = useSyncZoom();
 
   return (
     <DeckMapboxOverlayProvider>
@@ -34,7 +35,8 @@ const LayerManager = () => {
           The first item will always be at the top of the layers stack
         */}
         {layers.map((l, i) => {
-          const LayerComponent = LAYERS[l.id];
+          const ID = l.id === 'projects' && currentZoom > 4 ? 'projects-geometry' : l.id;
+          const LayerComponent = LAYERS[ID];
 
           const beforeId = i === 0 ? 'custom-layers' : `${layers[i - 1]}-layer`;
           const settings = { opacity: l.opacity, visibility: l.visibility };
