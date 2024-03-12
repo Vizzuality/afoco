@@ -21,3 +21,5 @@ export const useSyncBasemap = () =>
       roads: false,
     })
   );
+
+export const useSyncZoom = () => useQueryState('zoom', parseAsJson<number>().withDefault(2));

@@ -14,6 +14,8 @@ import { bboxAtom, hoveredProjectAtom, layersInteractiveIdsAtom, tmpBboxAtom } f
 
 import { Bbox } from '@/types/map';
 
+import { useSyncZoom } from '@/hooks/datasets/sync-query';
+
 import MapSettingsManager from '@/containers/map/settings/manager';
 
 import Map from '@/components/map';
@@ -49,7 +51,9 @@ export default function MapContainer() {
 
   const { [id]: map } = useMap();
   const { push } = useRouter();
+
   const params = useParams<{ id: string }>();
+  const [, setZoom] = useSyncZoom();
 
   const layersInteractiveIds = useAtomValue(layersInteractiveIdsAtom);
   const setHoveredProject = useSetAtom(hoveredProjectAtom);
@@ -83,6 +87,7 @@ export default function MapContainer() {
 
   const handleMapViewStateChange = useCallback(() => {
     if (map) {
+      setZoom(map.getZoom());
       const b = map
         .getBounds()
         .toArray()
@@ -93,7 +98,7 @@ export default function MapContainer() {
       setBbox(b);
       setTmpBbox(null);
     }
-  }, [map, setBbox, setTmpBbox]);
+  }, [map, setBbox, setTmpBbox, setZoom]);
 
   const handleMapClick = useCallback(
     (e: MapLayerMouseEvent) => {
