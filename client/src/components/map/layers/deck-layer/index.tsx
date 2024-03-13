@@ -7,8 +7,8 @@ import { LayerProps } from '@/types/layers';
 import { useDeckMapboxOverlayContext } from '@/components/map/provider';
 
 export type DeckLayerProps<T> = LayerProps &
-  T & {
-    type: any;
+  Partial<T> & {
+    type: new (props: { id: string; beforeId: string | undefined }) => unknown;
   };
 
 const DeckLayer = <T,>({ id, type, ...props }: DeckLayerProps<T>) => {

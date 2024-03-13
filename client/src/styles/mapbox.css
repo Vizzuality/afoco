@@ -632,3 +632,7 @@ a.mapboxgl-ctrl-logo.mapboxgl-compact {
 #home-globe .mapboxgl-ctrl-logo {
   display: none;
 }
+
+.mapboxgl-ctrl-attrib-inner {
+  display: none;
+}

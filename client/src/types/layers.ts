@@ -14,6 +14,21 @@ export type ParamsConfigValue = {
   default: unknown;
 };
 
+export type LayerId =
+  | 'projects'
+  | 'tree-cover'
+  | 'net-forest-carbon-flux'
+  | 'biomass-density'
+  | 'net-forest-carbon-flux'
+  | 'oil-carbon-density'
+  | 'land-degradation';
+
+export interface LayerSettings {
+  opacity: number;
+  visibility: 'none' | 'visible';
+  id: LayerId;
+}
+
 export type ParamsConfig = Record<string, ParamsConfigValue>[];
 
 export type LegendConfig = {
@@ -39,8 +54,10 @@ export type InteractionConfig = {
 export type LayerProps = {
   id?: string;
   zIndex?: number;
-  onAdd?: (props: Config) => void;
-  onRemove?: (props: Config) => void;
+  onAdd?: () => void;
+  onRemove?: (ids: string[]) => void;
+  beforeId: string;
+  settings: { opacity: LayerSettings['opacity']; visibility: LayerSettings['visibility'] };
 };
 
 export type LayerTyped = Layer & {
