@@ -45,6 +45,11 @@ variable "ec2_instance_type" {
   description = "The type of EC2 instance to launch"
 }
 
+variable "ec2_disk_size" {
+  type        = string
+  description = "The size of EC2 instance disk to launch"
+}
+
 variable "rds_security_group_id" {
   type        = string
   description = "The security group ID for the RDS instance"

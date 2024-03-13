@@ -22,7 +22,7 @@ output "password" {
 }
 
 output "host" {
-  value = aws_db_instance.postgresql.endpoint
+  value = aws_db_instance.postgresql.address
 }
 
 output "port" {

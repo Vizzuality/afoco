@@ -1,0 +1,32 @@
+{
+  "kind": "collectionType",
+  "collectionName": "indicator_fields",
+  "info": {
+    "singularName": "indicator-field",
+    "pluralName": "indicator-fields",
+    "displayName": "ProjectIndicatorField",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "indicator_field_metadatum": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::indicator-field-metadata.indicator-field-metadata"
+    },
+    "value": {
+      "type": "json"
+    },
+    "year": {
+      "type": "integer"
+    },
+    "project": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::project.project"
+    }
+  }
+}

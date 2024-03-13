@@ -1,0 +1,29 @@
+{
+  "kind": "collectionType",
+  "collectionName": "countries",
+  "info": {
+    "singularName": "country",
+    "pluralName": "countries",
+    "displayName": "Country",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "country_population": {
+      "type": "integer"
+    },
+    "country_deforestation": {
+      "type": "integer"
+    },
+    "country_economy": {
+      "type": "integer"
+    }
+  }
+}

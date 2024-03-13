@@ -1,28 +1,3 @@
-terraform {
-  backend "s3" {
-    // TF does not allow vars here.
-    // Use output state_bucket or "{var.project}-tfstate" from the state project
-    bucket = "afoco-terraform-state"
-    // Use var.aws_region from the state project
-    region = "ap-northeast-2"
-    // Use output state_lock_table or "{var.project}-tfstate-lock" from the state project
-    dynamodb_table = "afoco-terraform-state-lock"
-    encrypt        = true
-    key            = "state"
-  }
-
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "~> 5.0"
-    }
-  }
-}
-
-provider "aws" {
-  region = var.aws_region
-}
-
 data "aws_vpc" "default_vpc" {
   default = true
 }
@@ -74,22 +49,35 @@ data "aws_subnets" "subnets_with_ec2_instance_type_offering_map" {
   }
 }
 
+module "iam" {
+  source = "./modules/iam"
+}
+
+
 locals {
-  subnets_with_ec2_instance_type_offering_ids = sort([for k, v in data.aws_subnets.subnets_with_ec2_instance_type_offering_map : v.ids[0]])
+  subnets_with_ec2_instance_type_offering_ids = sort([
+    for k, v in data.aws_subnets.subnets_with_ec2_instance_type_offering_map : v.ids[0]
+  ])
 }
 
 module "staging" {
-  source             = "./modules/env"
-  domain             = var.staging_domain
-  project            = var.project
-  environment        = "staging"
-  aws_region         = var.aws_region
-  vpc                = data.aws_vpc.default_vpc
-  subnet_ids         = local.subnets_with_ec2_instance_type_offering_ids
-  availability_zones = data.aws_availability_zones.azs_with_ec2_instance_type_offering.names
-  beanstalk_platform = var.beanstalk_platform
-  beanstalk_tier     = var.beanstalk_tier
-  ec2_instance_type  = var.ec2_instance_type
-  rds_engine_version = var.rds_engine_version
-  rds_instance_class = var.rds_instance_class
+  source                          = "./modules/env"
+  domain                          = var.staging_domain
+  project_name                    = var.project_name
+  repo_name                       = var.repo_name
+  environment                     = "staging"
+  aws_region                      = var.aws_region
+  vpc                             = data.aws_vpc.default_vpc
+  subnet_ids                      = local.subnets_with_ec2_instance_type_offering_ids
+  availability_zones              = data.aws_availability_zones.azs_with_ec2_instance_type_offering.names
+  beanstalk_platform              = var.beanstalk_platform
+  beanstalk_tier                  = var.beanstalk_tier
+  ec2_instance_type               = var.ec2_instance_type
+  ec2_disk_size                   = var.ec2_disk_size
+  rds_engine_version              = var.rds_engine_version
+  rds_instance_class              = var.rds_instance_class
+  mapbox_api_token                = var.mapbox_api_token
+  ga_tracking_id                  = var.ga_tracking_id
+  pipeline_user_access_key_id     = module.iam.pipeline_user_access_key_id
+  pipeline_user_access_key_secret = module.iam.pipeline_user_access_key_secret
 }
