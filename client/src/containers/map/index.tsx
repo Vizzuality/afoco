@@ -19,11 +19,11 @@ import {
   tmpBboxAtom,
 } from '@/store';
 
-import { useGetLayers } from '@/types/generated/layer';
-import { LayerTyped } from '@/types/layers';
+// import { useGetLayers } from '@/types/generated/layer';
+// import { LayerTyped } from '@/types/layers';
 import { Bbox } from '@/types/map';
 
-import Popup from '@/containers/map/popup';
+// import Popup from '@/containers/map/popup';
 import MapSettingsManager from '@/containers/map/settings/manager';
 
 import Map from '@/components/map';
@@ -71,20 +71,20 @@ export default function MapContainer() {
   const [bboxA, setBbox] = useAtom(bboxAtom);
   const [tmpBbox, setTmpBbox] = useAtom(tmpBboxAtom);
 
-  const { data: layersInteractiveData } = useGetLayers(
-    {
-      filters: {
-        id: {
-          $in: layersInteractive,
-        },
-      },
-    },
-    {
-      query: {
-        enabled: !!layersInteractive.length,
-      },
-    }
-  );
+  // const { data: layersInteractiveData } = useGetLayers(
+  //   {
+  //     filters: {
+  //       id: {
+  //         $in: layersInteractive,
+  //       },
+  //     },
+  //   },
+  //   {
+  //     query: {
+  //       enabled: !!layersInteractive.length,
+  //     },
+  //   }
+  // );
 
   const tmpBounds: CustomMapProps['bounds'] = useMemo(() => {
     if (tmpBbox) {
@@ -123,28 +123,28 @@ export default function MapContainer() {
     }
   }, [map, setBbox, setTmpBbox]);
 
-  const handleMapClick = useCallback(
-    (e: MapLayerMouseEvent) => {
-      if (
-        layersInteractive.length &&
-        layersInteractiveData?.data &&
-        layersInteractiveData?.data.some((l) => {
-          const attributes = l.attributes as LayerTyped;
-          return attributes?.interaction_config?.events.some((ev) => ev.type === 'click');
-        })
-      ) {
-        const p = Object.assign({}, e, { features: e.features ?? [] });
-        setPopup(p);
-      }
+  // const handleMapClick = useCallback(
+  //   (e: MapLayerMouseEvent) => {
+  //     if (
+  //       layersInteractive.length &&
+  //       layersInteractiveData?.data &&
+  //       layersInteractiveData?.data.some((l) => {
+  //         const attributes = l.attributes as LayerTyped;
+  //         return attributes?.interaction_config?.events.some((ev) => ev.type === 'click');
+  //       })
+  //     ) {
+  //       const p = Object.assign({}, e, { features: e.features ?? [] });
+  //       setPopup(p);
+  //     }
 
-      if (e.features && e.features[0] && map) {
-        push(`/projects/${e.features[0].properties?.slug}`);
-        const bboxTurf = bbox(e.features[0]) as LngLatBoundsLike;
-        map.fitBounds(bboxTurf, { padding: 100, maxZoom: 6 });
-      }
-    },
-    [layersInteractive, layersInteractiveData, setPopup, push, map]
-  );
+  //     if (e.features && e.features[0] && map) {
+  //       push(`/projects/${e.features[0].properties?.slug}`);
+  //       const bboxTurf = bbox(e.features[0]) as LngLatBoundsLike;
+  //       map.fitBounds(bboxTurf, { padding: 100, maxZoom: 6 });
+  //     }
+  //   },
+  //   [layersInteractive, layersInteractiveData, setPopup, push, map]
+  // );
 
   let hoveredStateId: string | null = null;
   const handleMouseMove = useCallback(
@@ -217,7 +217,7 @@ export default function MapContainer() {
         maxZoom={maxZoom}
         mapStyle="mapbox://styles/layer-manager/clj8fgofm000t01pjcu21agsd?fresh=true"
         interactiveLayerIds={layersInteractiveIds}
-        onClick={handleMapClick}
+        // onClick={handleMapClick}
         onMapViewStateChange={handleMapViewStateChange}
         onMouseMove={handleMouseMove}
       >
@@ -230,7 +230,7 @@ export default function MapContainer() {
 
             <LayerManager />
 
-            <Popup />
+            {/* <Popup /> */}
 
             <MapSettingsManager />
 

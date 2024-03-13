@@ -11,7 +11,15 @@ import { cn } from '@/lib/classnames';
 
 import { hoveredProjectAtom } from '@/store';
 
-export default function ProjectItem({ id }: { id: string }) {
+import { ProjectListResponseDataItem } from '@/types/generated/strapi.schemas';
+
+export default function ProjectItem({
+  data,
+  id,
+}: {
+  data: ProjectListResponseDataItem;
+  id: string;
+}) {
   const hoveredProject = useAtomValue(hoveredProjectAtom);
   const searchParams = useSearchParams();
   const layersParams = searchParams.get('layers');

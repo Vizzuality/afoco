@@ -6,7 +6,9 @@ import { useSearchParams } from 'next/navigation';
 
 import * as qs from 'qs';
 
-export default function CountryItem() {
+import { CountryListResponseDataItem } from '@/types/generated/strapi.schemas';
+
+export default function CountryItem({ data }: { data: CountryListResponseDataItem }) {
   const searchParams = useSearchParams();
   const layersParams = searchParams.get('layers');
   const filtersParams = searchParams.get('filters');
@@ -30,7 +32,7 @@ export default function CountryItem() {
           width={40}
           height={32}
         />
-        <h3>Bhutan</h3>
+        <h3>{data.attributes?.name}</h3>
       </div>
       <p>
         <span className="font-semibold">32</span> projects
