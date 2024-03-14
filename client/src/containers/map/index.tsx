@@ -59,7 +59,7 @@ export default function MapContainer() {
 
   const { [id]: map } = useMap();
   const { push } = useRouter();
-  const params = useParams<{ country: string; slug: string }>();
+  const params = useParams<{ id: string }>();
 
   const layersInteractive = useAtomValue(layersInteractiveAtom);
   const layersInteractiveIds = useAtomValue(layersInteractiveIdsAtom);
@@ -104,10 +104,10 @@ export default function MapContainer() {
   }, [tmpBbox]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
-    if (!params.slug && !params.country && map && initialViewState && initialViewState.bounds) {
+    if (!params.id && map && initialViewState && initialViewState.bounds) {
       map.fitBounds(initialViewState.bounds, { padding: 100 });
     }
-  }, [params.slug, params.country, map, tmpBbox, setBbox, initialViewState]);
+  }, [params.id, map, tmpBbox, setBbox, initialViewState]);
 
   const handleMapViewStateChange = useCallback(() => {
     if (map) {
@@ -123,28 +123,28 @@ export default function MapContainer() {
     }
   }, [map, setBbox, setTmpBbox]);
 
-  // const handleMapClick = useCallback(
-  //   (e: MapLayerMouseEvent) => {
-  //     if (
-  //       layersInteractive.length &&
-  //       layersInteractiveData?.data &&
-  //       layersInteractiveData?.data.some((l) => {
-  //         const attributes = l.attributes as LayerTyped;
-  //         return attributes?.interaction_config?.events.some((ev) => ev.type === 'click');
-  //       })
-  //     ) {
-  //       const p = Object.assign({}, e, { features: e.features ?? [] });
-  //       setPopup(p);
-  //     }
+  const handleMapClick = useCallback(
+    (e: MapLayerMouseEvent) => {
+      // if (
+      //   layersInteractive.length &&
+      //   layersInteractiveData?.data &&
+      //   layersInteractiveData?.data.some((l) => {
+      //     const attributes = l.attributes as LayerTyped;
+      //     return attributes?.interaction_config?.events.some((ev) => ev.type === 'click');
+      //   })
+      // ) {
+      //   const p = Object.assign({}, e, { features: e.features ?? [] });
+      //   setPopup(p);
+      // }
 
-  //     if (e.features && e.features[0] && map) {
-  //       push(`/projects/${e.features[0].properties?.slug}`);
-  //       const bboxTurf = bbox(e.features[0]) as LngLatBoundsLike;
-  //       map.fitBounds(bboxTurf, { padding: 100, maxZoom: 6 });
-  //     }
-  //   },
-  //   [layersInteractive, layersInteractiveData, setPopup, push, map]
-  // );
+      if (e.features && e.features[0] && map) {
+        push(`/projects/${e.features[0].properties?.ID}`);
+        const bboxTurf = bbox(e.features[0]) as LngLatBoundsLike;
+        map.fitBounds(bboxTurf, { padding: 100, maxZoom: 6 });
+      }
+    },
+    [map, push]
+  );
 
   let hoveredStateId: string | null = null;
   const handleMouseMove = useCallback(
@@ -217,7 +217,7 @@ export default function MapContainer() {
         maxZoom={maxZoom}
         mapStyle="mapbox://styles/layer-manager/clj8fgofm000t01pjcu21agsd?fresh=true"
         interactiveLayerIds={layersInteractiveIds}
-        // onClick={handleMapClick}
+        onClick={handleMapClick}
         onMapViewStateChange={handleMapViewStateChange}
         onMouseMove={handleMouseMove}
       >

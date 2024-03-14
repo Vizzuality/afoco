@@ -20,7 +20,7 @@ import { Tooltip, TooltipArrow, TooltipContent, TooltipTrigger } from '@/compone
 import ProjectDashboard from './dashboard';
 
 export default function ProjectDetailPanel() {
-  const params = useParams<{ slug: string }>();
+  const params = useParams<{ id: string }>();
   const searchParams = useSearchParams();
   const layersParams = searchParams.get('layers');
   const filtersParams = searchParams.get('filters');
@@ -33,7 +33,7 @@ export default function ProjectDetailPanel() {
   );
 
   // TODO: We will need to fetch data and check if slug exists
-  if (!params.slug) {
+  if (!params.id) {
     return notFound();
   }
 

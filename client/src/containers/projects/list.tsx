@@ -8,10 +8,7 @@ export default function ProjectsList() {
 
   return (
     <div className="no-scrollbar flex max-h-[75vh] flex-col space-y-2 overflow-y-auto">
-      {data?.data &&
-        data.data.map((project) => (
-          <ProjectItem key={project.id} id={`uniqueId${project.id}`} data={project} />
-        ))}
+      {data?.data && data.data.map((project) => <ProjectItem key={project.id} data={project} />)}
     </div>
   );
 }

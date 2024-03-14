@@ -7,10 +7,7 @@ import { ArrowLeft, Download, ExternalLink, Info } from 'lucide-react';
 import * as qs from 'qs';
 
 import { useGetCountriesId } from '@/types/generated/country';
-import {
-  useGetCountryIndicatorFields,
-  useGetCountryIndicatorFieldsId,
-} from '@/types/generated/country-indicator-field';
+import { useGetCountryIndicatorFields } from '@/types/generated/country-indicator-field';
 
 import BubbleChart from '@/containers/charts/bubble';
 import PieChart from '@/containers/charts/pie';
@@ -26,14 +23,8 @@ import { communityBeneficiaries, funding, seedsPlanted, usefulLinks } from './mo
 export default function CountryDetailPanel() {
   const params = useParams<{ id: string }>();
   const { data } = useGetCountriesId(Number(params.id));
-  const { data: indicators } = useGetCountryIndicatorFields({
-    filters: {
-      country: {
-        $eq: 'Bhutan',
-      },
-    },
-  });
-
+  const { data: indicators } = useGetCountryIndicatorFields({ populate: '*' });
+  console.log({ indicators });
   const searchParams = useSearchParams();
   const layersParams = searchParams.get('layers');
   const filtersParams = searchParams.get('filters');

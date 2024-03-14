@@ -8,8 +8,7 @@
         "coordinates": [39.797222, 47.115858]
       },
       "properties": {
-        "slug": "indonesia-landscape",
-        "ID": "uniqueId1"
+        "ID": "1"
       }
     },
     {
@@ -19,8 +18,7 @@
         "coordinates": [103.986414, 1.356161]
       },
       "properties": {
-        "slug": "indonesia-landscape",
-        "ID": "uniqueId2"
+        "ID": "2"
       }
     },
     {
@@ -31,7 +29,7 @@
       },
       "properties": {
         "slug": "indonesia-landscape",
-        "ID": "uniqueId3"
+        "ID": "3"
       }
     },
     {
@@ -42,7 +40,7 @@
       },
       "properties": {
         "slug": "indonesia-landscape",
-        "ID": "uniqueId4"
+        "ID": "4"
       }
     },
     {
@@ -52,8 +50,7 @@
         "coordinates": [2.3838, 6.358247]
       },
       "properties": {
-        "slug": "indonesia-landscape",
-        "ID": "uniqueId5"
+        "ID": "5"
       }
     },
     {
@@ -63,8 +60,7 @@
         "coordinates": [-130.445587, 54.292]
       },
       "properties": {
-        "slug": "indonesia-landscape",
-        "ID": "uniqueId6"
+        "ID": "6"
       }
     },
     {
@@ -74,8 +70,7 @@
         "coordinates": [31.016249, 27.050816]
       },
       "properties": {
-        "slug": "indonesia-landscape",
-        "ID": "uniqueId7"
+        "ID": "7"
       }
     },
     {
@@ -85,8 +80,7 @@
         "coordinates": [-165.441642, 64.507221]
       },
       "properties": {
-        "slug": "indonesia-landscape",
-        "ID": "uniqueId8"
+        "ID": "8"
       }
     },
     {
@@ -96,8 +90,7 @@
         "coordinates": [48.747107, 31.343159]
       },
       "properties": {
-        "slug": "indonesia-landscape",
-        "ID": "uniqueId9"
+        "ID": "9"
       }
     },
     {
@@ -107,8 +100,7 @@
         "coordinates": [75.758483, 31.432942]
       },
       "properties": {
-        "slug": "indonesia-landscape",
-        "ID": "uniqueId10"
+        "ID": "10"
       }
     },
     {
@@ -118,8 +110,7 @@
         "coordinates": [83.223522, 17.727958]
       },
       "properties": {
-        "slug": "indonesia-landscape",
-        "ID": "uniqueId11"
+        "ID": "11"
       }
     },
     {
@@ -129,8 +120,7 @@
         "coordinates": [77.038894, 11.030142]
       },
       "properties": {
-        "slug": "indonesia-landscape",
-        "ID": "uniqueId12"
+        "ID": "12"
       }
     },
     {
@@ -140,8 +130,7 @@
         "coordinates": [114.246947, 30.601714]
       },
       "properties": {
-        "slug": "indonesia-landscape",
-        "ID": "uniqueId13"
+        "ID": "13"
       }
     },
     {
@@ -151,8 +140,7 @@
         "coordinates": [-49.173709, -25.536]
       },
       "properties": {
-        "slug": "indonesia-landscape",
-        "ID": "uniqueId14"
+        "ID": "14"
       }
     },
     {
@@ -162,8 +150,7 @@
         "coordinates": [81.740378, 21.185987]
       },
       "properties": {
-        "slug": "indonesia-landscape",
-        "ID": "uniqueId15"
+        "ID": "15"
       }
     },
     {
@@ -173,8 +160,7 @@
         "coordinates": [101.446569, 0.464601]
       },
       "properties": {
-        "slug": "indonesia-landscape",
-        "ID": "uniqueId16"
+        "ID": "16"
       }
     },
     {
@@ -184,8 +170,7 @@
         "coordinates": [128.662989, 38.058782]
       },
       "properties": {
-        "slug": "indonesia-landscape",
-        "ID": "uniqueId17"
+        "ID": "17"
       }
     }
   ]

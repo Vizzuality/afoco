@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 
 import { EmailShareButton, FacebookShareButton, TwitterShareButton } from 'react-share';
 
-import { useParams, usePathname } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 
 import { Facebook, Twitter, Mail, Share2 } from 'lucide-react';
 
@@ -11,8 +11,6 @@ import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 
 export default function Share() {
-  const params = useParams<{ country: string; slug: string }>();
-
   const pathname = usePathname();
 
   const [currentUrl, setCurrentUrl] = useState<string>('');
@@ -74,7 +72,7 @@ export default function Share() {
             <Button variant="primary" className="rounded-full">
               <FacebookShareButton
                 url={currentUrl}
-                title={`${params?.country || params?.slug || 'AFoCO'}`}
+                title={'AFoCO'}
                 aria-label="share facebook"
                 data-testid="share-facebook-button"
                 data-cy="share-facebook-button"
@@ -86,7 +84,7 @@ export default function Share() {
             <Button variant="primary" className="rounded-full">
               <TwitterShareButton
                 url={currentUrl}
-                title={`${params?.country || params?.slug || 'AFoCO'}`}
+                title={'AFoCO'}
                 aria-label="share twitter"
                 data-testid="share-twitter-button"
                 data-cy="share-twitter-button"
@@ -98,7 +96,7 @@ export default function Share() {
             <Button variant="primary" className="rounded-full" data-cy="email-share-button">
               <EmailShareButton
                 url={currentUrl}
-                title={`${params?.country || params?.slug || 'AFoCO'}`}
+                title={'AFoCO'}
                 subject={'I want to share this AFoCO link with you'}
                 body={''}
                 aria-label="share email"
