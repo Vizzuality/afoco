@@ -4,7 +4,7 @@ import SEEDS_SVG from '@/svgs/ui/planted-seeds.svg';
 import PROJECTS_SVG from '@/svgs/ui/projects.svg';
 
 export const PANEL_OVERVIEW_ITEMS = [
-  { title: 'National Forest Area', value: '137', note: '73% of land' },
+  { title: 'National Forest Area', value: '137Mha', note: '73% of land' },
   { title: 'Net carbon 2001 - 2022 (MtCO₂e/year)', value: '+347', note: 'emission' },
 ];
 
