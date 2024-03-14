@@ -4,8 +4,9 @@ import { GeoJSONSourceRaw, GeoJSONSourceOptions } from 'mapbox-gl';
 
 import type { LayerProps } from '@/types/layers';
 
+import mockData from '../mock-projects.json';
+
 import { useLayers } from './hooks';
-import mockData from './mock.json';
 
 const GEOJSON = mockData as GeoJSON.FeatureCollection;
 

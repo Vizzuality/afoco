@@ -20,6 +20,7 @@ export function useLayers({
       layout: {
         visibility: visibility,
       },
+      maxzoom: 4,
     },
     {
       id: 'projects',
@@ -39,6 +40,32 @@ export function useLayers({
       layout: {
         visibility: visibility,
       },
+      maxzoom: 4,
+    },
+    {
+      id: 'projects_boundaries',
+      type: 'line',
+      paint: {
+        'line-color': '#176252',
+        'line-opacity': opacity,
+        'line-width': 2,
+      },
+      layout: {
+        visibility: visibility,
+      },
+      minzoom: 4,
+    },
+    {
+      id: 'projects_fill',
+      type: 'fill',
+      paint: {
+        'fill-color': '#176252',
+        'fill-opacity': opacity * 0.4,
+      },
+      layout: {
+        visibility: visibility,
+      },
+      minzoom: 4,
     },
   ] as CircleLayer[];
 }

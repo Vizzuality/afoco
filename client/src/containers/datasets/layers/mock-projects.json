@@ -70,6 +70,17 @@
         ],
         "type": "LineString"
       }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [39.797222, 47.115858]
+      },
+      "properties": {
+        "slug": "indonesia-landscape",
+        "ID": "uniqueId1"
+      }
     }
   ]
 }
