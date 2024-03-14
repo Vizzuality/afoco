@@ -1,117 +1,103 @@
-// import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
-// import { useMap } from 'react-map-gl';
+import { useMap } from 'react-map-gl';
 
-// import type { Feature } from 'geojson';
-// import { useAtomValue } from 'jotai';
+import type { Feature } from 'geojson';
+import { useAtomValue } from 'jotai';
 
-// import { format } from '@/lib/utils/formats';
+import { layersInteractiveIdsAtom, popupAtom } from '@/store';
 
-// import { layersInteractiveIdsAtom, popupAtom } from '@/store';
+// import { useGetLayersId } from '@/types/generated/layer';
 
-// // import { useGetLayersId } from '@/types/generated/layer';
-// import { LayerTyped } from '@/types/layers';
+export interface PopupItemProps {
+  id: string;
+}
+const PopupItem = ({ id }: PopupItemProps) => {
+  const [rendered, setRendered] = useState(false);
+  const DATA_REF = useRef<Feature['properties'] | undefined>();
 
-// import ContentLoader from '@/components/ui/loader';
+  const { default: map } = useMap();
 
-// export interface PopupItemProps {
-//   id: string;
-// }
-// const PopupItem = ({ id }: PopupItemProps) => {
-//   const [rendered, setRendered] = useState(false);
-//   const DATA_REF = useRef<Feature['properties'] | undefined>();
+  const popup = useAtomValue(popupAtom);
+  const layersInteractiveIds = useAtomValue(layersInteractiveIdsAtom);
+  // TODO: change strapi schema id to string
+  // const { data, isFetching, isFetched, isError, isPlaceholderData } = useGetLayersId(Number(id));
 
-//   const { default: map } = useMap();
+  // const attributes = data?.data?.attributes as LayerTyped;
+  // const source = attributes.config.source;
+  // const click = attributes.interaction_config.events.find((ev) => ev.type === 'click');
 
-//   const popup = useAtomValue(popupAtom);
-//   const layersInteractiveIds = useAtomValue(layersInteractiveIdsAtom);
-//   // TODO: change strapi schema id to string
-//   const { data, isFetching, isFetched, isError, isPlaceholderData } = useGetLayersId(Number(id));
+  // const DATA = useMemo(() => {
+  //   if (source.type === 'vector' && rendered && popup && map) {
+  //     const point = map.project(popup.lngLat);
 
-//   const attributes = data?.data?.attributes as LayerTyped;
-//   const source = attributes.config.source;
-//   const click = attributes.interaction_config.events.find((ev) => ev.type === 'click');
+  //     // check if the point is outside the canvas
+  //     if (
+  //       point.x < 0 ||
+  //       point.x > map.getCanvas().width ||
+  //       point.y < 0 ||
+  //       point.y > map.getCanvas().height
+  //     ) {
+  //       return DATA_REF.current;
+  //     }
+  //     const query = map.queryRenderedFeatures(point, {
+  //       layers: layersInteractiveIds,
+  //     });
 
-//   const DATA = useMemo(() => {
-//     if (source.type === 'vector' && rendered && popup && map) {
-//       const point = map.project(popup.lngLat);
+  //     const d = query.find((d) => {
+  //       return d.source === source.id;
+  //     })?.properties;
 
-//       // check if the point is outside the canvas
-//       if (
-//         point.x < 0 ||
-//         point.x > map.getCanvas().width ||
-//         point.y < 0 ||
-//         point.y > map.getCanvas().height
-//       ) {
-//         return DATA_REF.current;
-//       }
-//       const query = map.queryRenderedFeatures(point, {
-//         layers: layersInteractiveIds,
-//       });
+  //     DATA_REF.current = d;
 
-//       const d = query.find((d) => {
-//         return d.source === source.id;
-//       })?.properties;
+  //     if (d) {
+  //       return DATA_REF.current;
+  //     }
+  //   }
 
-//       DATA_REF.current = d;
+  //   return DATA_REF.current;
+  // }, [popup, source, layersInteractiveIds, map, rendered]);
 
-//       if (d) {
-//         return DATA_REF.current;
-//       }
-//     }
+  // handle renderer
+  const handleMapRender = useCallback(() => {
+    setRendered(!!map?.loaded() && !!map?.areTilesLoaded());
+  }, [map]);
 
-//     return DATA_REF.current;
-//   }, [popup, source, layersInteractiveIds, map, rendered]);
+  useEffect(() => {
+    map?.on('render', handleMapRender);
 
-//   // handle renderer
-//   const handleMapRender = useCallback(() => {
-//     setRendered(!!map?.loaded() && !!map?.areTilesLoaded());
-//   }, [map]);
+    return () => {
+      map?.off('render', handleMapRender);
+    };
+  }, [map, handleMapRender]);
 
-//   useEffect(() => {
-//     map?.on('render', handleMapRender);
+  return (
+    <div className="p-4">
+      <div className="space-y-3">
+        <h3 className="text-base font-semibold">{/* attributes.title */}</h3>
 
-//     return () => {
-//       map?.off('render', handleMapRender);
-//     };
-//   }, [map, handleMapRender]);
+        {/* <dl className="space-y-2">
+            {click &&
+              !!DATA &&
+              click.values.map((v) => {
+                return (
+                  <div key={v.key}>
+                    <dt className="text-xs font-semibold uppercase">{v.label || v.key}:</dt>
+                    <dd className="text-sm">
+                      {format({
+                        id: v.format?.id,
+                        value: DATA[v.key],
+                        options: v.format?.options,
+                      })}
+                    </dd>
+                  </div>
+                );
+              })}
+            {click && !DATA && <div className="text-xs">No data</div>}
+          </dl> */}
+      </div>
+    </div>
+  );
+};
 
-//   return (
-//     <div className="p-4">
-//       <div className="space-y-3">
-//         <h3 className="text-base font-semibold">{attributes.title}</h3>
-
-//         <ContentLoader
-//           data={data?.data}
-//           isFetching={isFetching || (!rendered && !DATA_REF.current)}
-//           isFetched={isFetched && (rendered || !!DATA_REF.current)}
-//           isError={isError}
-//           isPlaceholderData={isPlaceholderData}
-//           skeletonClassName="h-20 w-[250px]"
-//         >
-//           <dl className="space-y-2">
-//             {click &&
-//               !!DATA &&
-//               click.values.map((v) => {
-//                 return (
-//                   <div key={v.key}>
-//                     <dt className="text-xs font-semibold uppercase">{v.label || v.key}:</dt>
-//                     <dd className="text-sm">
-//                       {format({
-//                         id: v.format?.id,
-//                         value: DATA[v.key],
-//                         options: v.format?.options,
-//                       })}
-//                     </dd>
-//                   </div>
-//                 );
-//               })}
-//             {click && !DATA && <div className="text-xs">No data</div>}
-//           </dl>
-//         </ContentLoader>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default PopupItem;
+export default PopupItem;
