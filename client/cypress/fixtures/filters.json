@@ -1,0 +1,80 @@
+{
+    "intervention": [
+        {
+            "id": "agroforestry",
+            "label": "Agroforestry"
+        },
+        {
+            "id": "conservation-and-protection",
+            "label": "Conservation & Protection"
+        },
+        {
+            "id": "livelihood-improvement",
+            "label": "Livelihood Improvement"
+        },
+        {
+            "id": "mangrove-restoration",
+            "label": "Mangrove Restoration"
+        },
+        {
+            "id": "peatland-restoration",
+            "label": "Peatland Restoration"
+        },
+        {
+            "id": "restoration-and-revegetation",
+            "label": "Restoration & Revegetation"
+        }
+    ],
+    "country": [
+        {
+            "id": "spain",
+            "label": "Spain"
+        },
+        {
+            "id": "bhutan",
+            "label": "Bhutan"
+        }
+    ],
+    "area_restored": [
+        {
+            "id": "<200",
+            "label": "<200"
+        },
+        {
+            "id": "200-500",
+            "label": "200-500"
+        },
+        {
+            "id": ">500",
+            "label": ">500"
+        }
+    ],
+    "area_protected": [
+        {
+            "id": "<200",
+            "label": "<200"
+        },
+        {
+            "id": "200-500",
+            "label": "200-500"
+        },
+        {
+            "id": ">500",
+            "label": ">500"
+        }
+    ],
+    "area_plantation": [
+        {
+            "id": "<200",
+            "label": "<200"
+        },
+        {
+            "id": "200-500",
+            "label": "200-500"
+        },
+        {
+            "id": ">500",
+            "label": ">500"
+        }
+    ]
+}

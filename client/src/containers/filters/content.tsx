@@ -49,7 +49,7 @@ const FiltersCheckbox = ({
   );
 
   return (
-    <div className="flex flex-col space-y-2">
+    <div className="flex flex-col space-y-2" data-cy="filters-content">
       <span className="font-extrabold leading-5">{title}</span>
       <div className="flex flex-wrap items-center gap-2 text-gray-900">
         {options.map(({ id, label }) => (
@@ -58,6 +58,7 @@ const FiltersCheckbox = ({
               id={id}
               onClick={handleChange}
               checked={filtersSettings?.[type]?.includes(id)}
+              data-cy={`filter-${type}-${id}`}
             />
             <Label htmlFor={id}>{label}</Label>
           </div>
@@ -84,7 +85,7 @@ export default function FiltersContent() {
   return (
     <div className="flex flex-col space-y-6 text-sm">
       <FiltersCheckbox type="intervention" title="Intervention type" options={INTERVENTION_TYPES} />
-      <div>
+      <div data-cy="filter-country-content">
         <span className="font-extrabold leading-5">Country</span>
         <Combobox
           placeholder="Search country"
@@ -93,6 +94,7 @@ export default function FiltersContent() {
             { label: 'Bhutan', value: 'bhutan' },
           ]}
           onClick={handleSingleValueChange}
+          type="country"
         />
       </div>
       <FiltersCheckbox
