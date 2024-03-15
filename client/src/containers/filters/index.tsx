@@ -65,7 +65,7 @@ export default function Filters() {
 
           <Dialog>
             <DialogTrigger aria-label="Show filters" asChild>
-              <Button variant="outline" size="base" className="space-x-2">
+              <Button variant="outline" size="base">
                 <Filter className="stroke-[1.5px]" />
                 <span>Filters</span>
               </Button>
