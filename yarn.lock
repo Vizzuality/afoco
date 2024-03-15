@@ -5920,6 +5920,8 @@ __metadata:
 "afoco@workspace:.":
   version: 0.0.0-use.local
   resolution: "afoco@workspace:."
+  dependencies:
+    framer-motion: 11.0.13
   languageName: unknown
   linkType: soft
 
@@ -10543,6 +10545,26 @@ __metadata:
   dependencies:
     map-cache: ^0.2.2
   checksum: 1cbbd0b0116b67d5790175de0038a11df23c1cd2e8dcdbade58ebba5594c2d641dade6b4f126d82a7b4a6ffc2ea12e3d387dbb64ea2ae97cf02847d436f60fdc
+  languageName: node
+  linkType: hard
+
+"framer-motion@npm:11.0.13":
+  version: 11.0.13
+  resolution: "framer-motion@npm:11.0.13"
+  dependencies:
+    tslib: ^2.4.0
+  peerDependencies:
+    "@emotion/is-prop-valid": "*"
+    react: ^18.0.0
+    react-dom: ^18.0.0
+  peerDependenciesMeta:
+    "@emotion/is-prop-valid":
+      optional: true
+    react:
+      optional: true
+    react-dom:
+      optional: true
+  checksum: 888feea1e17cc748992f7e42aeac0855c13561d7c87c82935a10f268ca9fffd5f22809b97a4ef2a3c1de8e8ca5ca69c8e93b5ae8a5df0cacd3cf79919f1d54c9
   languageName: node
   linkType: hard
 
