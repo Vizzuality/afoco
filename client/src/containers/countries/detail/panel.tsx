@@ -6,6 +6,8 @@ import { notFound, useParams, useSearchParams } from 'next/navigation';
 import { ArrowLeft, Download, ExternalLink, Info } from 'lucide-react';
 import * as qs from 'qs';
 
+import { useGetCountriesId } from '@/types/generated/country';
+
 import BubbleChart from '@/containers/charts/bubble';
 import PieChart from '@/containers/charts/pie';
 import { PANEL_OVERVIEW_ITEMS, RESUME_ITEMS } from '@/containers/countries/detail/constants';
@@ -18,7 +20,9 @@ import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip
 import { communityBeneficiaries, funding, seedsPlanted, usefulLinks } from './mock';
 
 export default function CountryDetailPanel() {
-  const params = useParams<{ country: string }>();
+  const params = useParams<{ id: string }>();
+  const { data } = useGetCountriesId(Number(params.id));
+
   const searchParams = useSearchParams();
   const layersParams = searchParams.get('layers');
   const filtersParams = searchParams.get('filters');
@@ -28,8 +32,7 @@ export default function CountryDetailPanel() {
     { encode: false, addQueryPrefix: true, skipNulls: true }
   );
 
-  // TODO: We will need to fetch data and check if slug exists
-  if (!params.country) {
+  if (!params.id) {
     return notFound();
   }
   return (
@@ -66,7 +69,7 @@ export default function CountryDetailPanel() {
           height={32}
         />
         <h2 className="text-xl" data-cy="country-detail-name">
-          Bhutan
+          {data?.data?.attributes?.name}
         </h2>
       </div>
       <p className="my-4 line-clamp-5 text-sm text-gray-500">

@@ -4,7 +4,6 @@ import { useCallback } from 'react';
 
 import { Info } from 'lucide-react';
 
-import { DatasetListResponseDataItem } from '@/types/generated/strapi.schemas';
 import { LayerId } from '@/types/layers';
 
 import { useSyncLayers } from '@/hooks/datasets/sync-query';
@@ -13,7 +12,8 @@ import { Button } from '@/components/ui/button';
 import { Dialog, DialogClose, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import { Switch } from '@/components/ui/switch';
 
-export default function DatasetsItem(props: Required<DatasetListResponseDataItem>) {
+// TODO: replace with real type DatasetItemResonseDataItem
+export default function DatasetsItem(props: any) {
   const [layers, setLayersToURL] = useSyncLayers();
 
   const handleLayerChange = useCallback(() => {

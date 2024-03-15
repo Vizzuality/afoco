@@ -1,5 +1,5 @@
 module.exports = {
-  scaffold: {
+  afoco: {
     output: {
       mode: 'tags',
       client: 'react-query',
@@ -26,7 +26,7 @@ module.exports = {
     input: {
       target: '../cms/dist/src/extensions/documentation/documentation/1.0.0/full_documentation.json',
       filters: {
-        tags: ['Dataset', 'Dataset-group', 'Layer', 'Metadatum'],
+        tags: ['Country', 'Country-indicator-field', 'Indicator-field-metadata', 'Project', 'Project-indicator-field'],
       },
     }
   }

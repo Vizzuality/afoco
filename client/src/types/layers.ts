@@ -1,9 +1,5 @@
 import type { AnyLayer, AnySourceData } from 'mapbox-gl';
 
-import { FormatProps } from '@/lib/utils/formats';
-
-import type { Layer } from '@/types/generated/strapi.schemas';
-
 export type Config = {
   source: AnySourceData;
   styles: AnyLayer[];
@@ -46,7 +42,7 @@ export type InteractionConfig = {
     values: {
       key: string;
       label: string;
-      format?: FormatProps;
+      format?: unknown;
     }[];
   }[];
 };
@@ -60,7 +56,7 @@ export type LayerProps = {
   settings: { opacity: LayerSettings['opacity']; visibility: LayerSettings['visibility'] };
 };
 
-export type LayerTyped = Layer & {
+export type LayerTyped = {
   config: Config;
   params_config: ParamsConfig;
   legend_config: LegendConfig;
