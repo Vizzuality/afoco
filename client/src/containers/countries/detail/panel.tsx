@@ -14,7 +14,7 @@ import { PANEL_OVERVIEW_ITEMS, RESUME_ITEMS } from '@/containers/countries/detai
 import Share from '@/containers/share';
 
 import { Button } from '@/components/ui/button';
-import { Dialog, DialogContent, DialogOverlay, DialogTrigger } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 
 import { communityBeneficiaries, funding, seedsPlanted, usefulLinks } from './mock';
