@@ -6,6 +6,9 @@ const nextConfig = {
   images: {
     domains: ['api.mapbox.com'],
   },
+  cssLoaderOptions: {
+    url: false,
+  },
   async redirects() {
     return [
       {
