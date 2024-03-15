@@ -5920,6 +5920,8 @@ __metadata:
 "afoco@workspace:.":
   version: 0.0.0-use.local
   resolution: "afoco@workspace:."
+  dependencies:
+    flag-icons: 7.2.0
   languageName: unknown
   linkType: soft
 
@@ -10350,6 +10352,13 @@ __metadata:
     object.pick: ^1.2.0
     parse-filepath: ^1.0.1
   checksum: 9c76fb17e9f7e3f21e65b563cf49aed944c6b257a46b04306cef8883d60e295e904f57514443e60c64874914d13557b2f464071181d8d80a37cd9d8565075b7f
+  languageName: node
+  linkType: hard
+
+"flag-icons@npm:7.2.0":
+  version: 7.2.0
+  resolution: "flag-icons@npm:7.2.0"
+  checksum: 0d0dbca2aae63adcff513d974e03474b15bd4ba67ca6bedbfd62529733653a25e8c48f98c55c6ce57f850895d63e805d969829fb82f7e73096a3c5e894773b57
   languageName: node
   linkType: hard
 

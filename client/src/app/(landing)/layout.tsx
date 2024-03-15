@@ -1,6 +1,8 @@
 import '@/styles/globals.css';
 import '@/styles/mapbox.css';
 
+import '../../../../node_modules/flag-icons/css/flag-icons.min.css';
+
 import dynamic from 'next/dynamic';
 
 import Providers from '@/app/(landing)/layout-providers';
