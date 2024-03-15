@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 
-import { Check, Search } from 'lucide-react';
+import { Check, Search as SearchIcon } from 'lucide-react';
 
 import { cn } from '@/lib/classnames';
 
@@ -15,6 +15,7 @@ import {
   CommandItem,
 } from '@/components/ui/command';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import Search from '@/components/ui/search';
 
 export function Combobox({
   icon,
@@ -34,25 +35,13 @@ export function Combobox({
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
-        <Button
-          variant="ghost"
-          role="combobox"
+        <Search
+          value={value}
+          setValue={setValue}
           aria-expanded={open}
-          className="h-10 w-full flex-1 items-center justify-between rounded-md border-none bg-gray-100"
-        >
-          <div className="flex h-full w-full shrink-0 items-center space-x-2">
-            {icon && <Search size={20} className="" />}
-            <span
-              className={cn({
-                'inline-block w-full flex-auto cursor-pointer justify-center truncate text-start align-middle text-xs text-gray-500':
-                  true,
-                'text-gray-900': selectedOptionLabel,
-              })}
-            >
-              {value ? selectedOptionLabel : placeholder}
-            </span>
-          </div>
-        </Button>
+          selectedOptionLabel={selectedOptionLabel}
+          className="flex-1 items-center justify-between rounded-md border-none bg-gray-100"
+        />
       </PopoverTrigger>
       <PopoverContent className="popover-menu-content space-y-2 bg-white p-0 text-gray-900">
         <Command>
