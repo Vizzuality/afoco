@@ -12,6 +12,9 @@ import { cn } from '@/lib/classnames';
 
 import { sidebarTabAtom } from '@/store';
 
+import { useGetCountries } from '@/types/generated/country';
+import { useGetProjects } from '@/types/generated/project';
+
 import { useSyncLayers } from '@/hooks/datasets/sync-query';
 
 import type { SidebarTab } from '@/containers/sidebar/constants';
@@ -19,6 +22,8 @@ import { TABS } from '@/containers/sidebar/constants';
 
 export default function Sidebar() {
   const searchParams = useSearchParams();
+  const { data: projects } = useGetProjects({ populate: '*' });
+  const { data: countries } = useGetCountries({ populate: '*' });
 
   const layersParams = searchParams.get('layers');
   const filtersParams = searchParams.get('filters');
@@ -71,7 +76,7 @@ export default function Sidebar() {
                   </div>
                 )}
 
-                {name === 'projects' && (
+                {name === 'projects' && !!projects?.data?.length && (
                   <div
                     className={cn({
                       'absolute bottom-1 left-4 h-4 w-4 rounded-full bg-yellow-300 text-xs font-semibold text-yellow-700':
@@ -79,11 +84,11 @@ export default function Sidebar() {
                       'bg-yellow-300 text-white': sidebarTab === name,
                     })}
                   >
-                    12
+                    {projects?.data?.length}
                   </div>
                 )}
 
-                {name === 'countries' && (
+                {name === 'countries' && !!countries?.data?.length && (
                   <div
                     className={cn({
                       'absolute bottom-1 left-4 h-4 w-4 rounded-full bg-yellow-300 text-xs font-semibold text-yellow-700':
@@ -91,7 +96,7 @@ export default function Sidebar() {
                       'bg-yellow-300 text-white': sidebarTab === name,
                     })}
                   >
-                    2
+                    {countries?.data?.length}
                   </div>
                 )}
               </div>

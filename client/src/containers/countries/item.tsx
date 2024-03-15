@@ -9,6 +9,8 @@ import { cn } from '@/lib/classnames';
 
 import { CountryListResponseDataItem } from '@/types/generated/strapi.schemas';
 
+import { FLAGS } from './constants';
+
 export default function CountryItem({ data }: { data: CountryListResponseDataItem }) {
   const searchParams = useSearchParams();
   const layersParams = searchParams.get('layers');
@@ -18,25 +20,6 @@ export default function CountryItem({ data }: { data: CountryListResponseDataIte
     { layers: layersParams, filters: filtersParams },
     { encode: false, addQueryPrefix: true, skipNulls: true }
   );
-
-  const FLAGS = {
-    Bhutan: 'bt',
-    ['Brunei Darussalam']: 'bn',
-    Cambodia: 'kh',
-    Indonesia: 'id',
-    Kazakhstan: 'kz',
-    ['Kyrgyz Republic']: 'kg',
-    ['Lao PDR']: 'la',
-    Malaysia: 'my',
-    Mongolia: 'mn',
-    Myanmar: 'mm',
-    Philippines: 'ph',
-    ['Republic of Korea']: 'kr',
-    Singapore: 'sg',
-    Thailand: 'th',
-    ['Timor-Leste']: 'tl',
-    ['Viet Nam']: 'vn',
-  };
 
   return (
     <Link
