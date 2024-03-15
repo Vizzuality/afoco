@@ -64,6 +64,7 @@ export default function Sidebar() {
                   height={24}
                   className="h-6 w-6"
                 />
+
                 {name === 'datasets' && layers.length > 0 && (
                   <div
                     className={cn({
