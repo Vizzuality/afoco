@@ -1,7 +1,5 @@
 'use client';
 
-// import { useDatasetsGroups } from '@/hooks/datasets';
-
 import { useState } from 'react';
 
 import { Search } from 'lucide-react';
@@ -14,7 +12,6 @@ import { MOCK_LAYERS } from './mock';
 export default function DatasetsList() {
   const [searchValue, setSearchValue] = useState('');
   console.info(searchValue);
-  // const { groups, isFetching, isFetched, isPlaceholderData, isError } = useDatasetsGroups();
 
   return (
     <>

@@ -32,7 +32,6 @@ export default function ProjectDetailPanel() {
     { encode: false, addQueryPrefix: true, skipNulls: true }
   );
 
-  // TODO: We will need to fetch data and check if slug exists
   if (!params.id) {
     return notFound();
   }

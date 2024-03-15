@@ -10,20 +10,10 @@ import { useParams, useRouter } from 'next/navigation';
 import bbox from '@turf/bbox';
 import { useAtomValue, useSetAtom, useAtom } from 'jotai';
 
-import {
-  bboxAtom,
-  hoveredProjectAtom,
-  layersInteractiveAtom,
-  layersInteractiveIdsAtom,
-  popupAtom,
-  tmpBboxAtom,
-} from '@/store';
+import { bboxAtom, hoveredProjectAtom, layersInteractiveIdsAtom, tmpBboxAtom } from '@/store';
 
-// import { useGetLayers } from '@/types/generated/layer';
-// import { LayerTyped } from '@/types/layers';
 import { Bbox } from '@/types/map';
 
-// import Popup from '@/containers/map/popup';
 import MapSettingsManager from '@/containers/map/settings/manager';
 
 import Map from '@/components/map';
@@ -61,30 +51,12 @@ export default function MapContainer() {
   const { push } = useRouter();
   const params = useParams<{ id: string }>();
 
-  const layersInteractive = useAtomValue(layersInteractiveAtom);
   const layersInteractiveIds = useAtomValue(layersInteractiveIdsAtom);
   const setHoveredProject = useSetAtom(hoveredProjectAtom);
   const [cursor, setCursor] = useState<'grab' | 'pointer'>('grab');
 
-  const setPopup = useSetAtom(popupAtom);
-
   const [bboxA, setBbox] = useAtom(bboxAtom);
   const [tmpBbox, setTmpBbox] = useAtom(tmpBboxAtom);
-
-  // const { data: layersInteractiveData } = useGetLayers(
-  //   {
-  //     filters: {
-  //       id: {
-  //         $in: layersInteractive,
-  //       },
-  //     },
-  //   },
-  //   {
-  //     query: {
-  //       enabled: !!layersInteractive.length,
-  //     },
-  //   }
-  // );
 
   const tmpBounds: CustomMapProps['bounds'] = useMemo(() => {
     if (tmpBbox) {
@@ -125,18 +97,6 @@ export default function MapContainer() {
 
   const handleMapClick = useCallback(
     (e: MapLayerMouseEvent) => {
-      // if (
-      //   layersInteractive.length &&
-      //   layersInteractiveData?.data &&
-      //   layersInteractiveData?.data.some((l) => {
-      //     const attributes = l.attributes as LayerTyped;
-      //     return attributes?.interaction_config?.events.some((ev) => ev.type === 'click');
-      //   })
-      // ) {
-      //   const p = Object.assign({}, e, { features: e.features ?? [] });
-      //   setPopup(p);
-      // }
-
       if (e.features && e.features[0] && map) {
         push(`/projects/${e.features[0].properties?.ID}`);
         const bboxTurf = bbox(e.features[0]) as LngLatBoundsLike;
@@ -229,8 +189,6 @@ export default function MapContainer() {
             </Controls>
 
             <LayerManager />
-
-            {/* <Popup /> */}
 
             <MapSettingsManager />
 
