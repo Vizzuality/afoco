@@ -2,11 +2,10 @@
 
 import { useState } from 'react';
 
-import { Check, Search as SearchIcon } from 'lucide-react';
+import { Check } from 'lucide-react';
 
 import { cn } from '@/lib/classnames';
 
-import { Button } from '@/components/ui/button';
 import {
   Command,
   CommandEmpty,
@@ -18,7 +17,6 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import Search from '@/components/ui/search';
 
 export function Combobox({
-  icon,
   placeholder = 'Search',
   options,
   onClick,
