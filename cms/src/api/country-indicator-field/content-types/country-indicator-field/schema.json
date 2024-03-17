@@ -4,28 +4,30 @@
   "info": {
     "singularName": "country-indicator-field",
     "pluralName": "country-indicator-fields",
-    "displayName": "CountryIndicatorField"
+    "displayName": "CountryIndicatorField",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
   },
   "pluginOptions": {},
   "attributes": {
-    "indicator_field_metadatum": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::indicator-field-metadata.indicator-field-metadata"
-    },
     "country": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::country.country"
     },
+    "indicator_name": {
+      "type": "string"
+    },
+    "unit": {
+      "type": "string"
+    },
     "value": {
       "type": "json"
     },
-    "year": {
-      "type": "integer"
+    "using_year": {
+      "type": "boolean"
     }
   }
 }

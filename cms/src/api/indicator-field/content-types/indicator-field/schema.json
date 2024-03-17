@@ -12,21 +12,22 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "indicator_field_metadatum": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::indicator-field-metadata.indicator-field-metadata"
-    },
-    "value": {
-      "type": "json"
-    },
-    "year": {
-      "type": "integer"
-    },
     "project": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::project.project"
+    },
+    "indicator_name": {
+      "type": "string"
+    },
+    "unit": {
+      "type": "string"
+    },
+    "value": {
+      "type": "json"
+    },
+    "using_year": {
+      "type": "boolean"
     }
   }
 }

@@ -16,14 +16,14 @@
       "type": "string",
       "required": true
     },
-    "country_population": {
-      "type": "integer"
+    "iso": {
+      "type": "string"
     },
-    "country_deforestation": {
-      "type": "integer"
+    "description": {
+      "type": "richtext"
     },
-    "country_economy": {
-      "type": "integer"
+    "gfw_link": {
+      "type": "string"
     }
   }
 }
