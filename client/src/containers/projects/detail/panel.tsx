@@ -172,7 +172,7 @@ export default function ProjectDetailPanel() {
           </Button>
         </DrawerTrigger>
         <DrawerContent className="left-[514px] w-[calc(100vw-570px)]">
-          <ProjectDashboard />
+          <ProjectDashboard id={Number(params.id)} />
           <DrawerClose
             className="focus:ring-ring absolute -right-6 top-7 z-50 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:pointer-events-none"
             onClick={() => setDashboard(false)}

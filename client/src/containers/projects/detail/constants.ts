@@ -27,13 +27,13 @@ export const PANEL_OVERVIEW_ITEMS = [
 export const DASHBOARD_OVERVIEW_RESUME_ITEMS = [
   {
     title: 'Project area',
-    value: '10',
+    value: 'project_site_area',
     unit: 'ha',
     icon: AREA_SVG,
   },
   {
     title: 'Seeds planted',
-    value: '400',
+    value: 'trees_planted_total',
     unit: null,
     icon: SEEDS_SVG,
   },

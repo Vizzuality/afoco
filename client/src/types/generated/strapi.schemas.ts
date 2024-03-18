@@ -47,6 +47,49 @@ export type GetProjectsParams = {
   locale?: string;
 };
 
+export type GetIndicatorFieldsParams = {
+  /**
+   * Sort by attributes ascending (asc) or descending (desc)
+   */
+  sort?: string;
+  /**
+   * Return page/pageSize (default: true)
+   */
+  'pagination[withCount]'?: boolean;
+  /**
+   * Page number (default: 0)
+   */
+  'pagination[page]'?: number;
+  /**
+   * Page size (default: 25)
+   */
+  'pagination[pageSize]'?: number;
+  /**
+   * Offset value (default: 0)
+   */
+  'pagination[start]'?: number;
+  /**
+   * Number of entities to return (default: 25)
+   */
+  'pagination[limit]'?: number;
+  /**
+   * Fields to return (ex: title,author)
+   */
+  fields?: string;
+  /**
+   * Relations to return
+   */
+  populate?: string;
+  /**
+   * Filters to apply
+   */
+  filters?: { [key: string]: any };
+  /**
+   * Locale to apply
+   */
+  locale?: string;
+};
+
 export type GetCountryIndicatorFieldsParams = {
   /**
    * Sort by attributes ascending (asc) or descending (desc)
@@ -657,8 +700,9 @@ export type ProjectStatus = (typeof ProjectStatus)[keyof typeof ProjectStatus];
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const ProjectStatus = {
-  new: 'new',
-  finished: 'finished',
+  Completed: 'Completed',
+  'On-going': 'On-going',
+  Under_inception: 'Under inception',
 } as const;
 
 export type ProjectListResponseMetaPagination = {
@@ -693,8 +737,9 @@ export type ProjectRequestDataStatus =
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const ProjectRequestDataStatus = {
-  new: 'new',
-  finished: 'finished',
+  Completed: 'Completed',
+  'On-going': 'On-going',
+  Under_inception: 'Under inception',
 } as const;
 
 export type ProjectRequestData = {
@@ -1218,8 +1263,9 @@ export type IndicatorFieldProjectDataAttributesStatus =
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const IndicatorFieldProjectDataAttributesStatus = {
-  new: 'new',
-  finished: 'finished',
+  Completed: 'Completed',
+  'On-going': 'On-going',
+  Under_inception: 'Under inception',
 } as const;
 
 export type IndicatorFieldListResponseMetaPagination = {
@@ -1330,6 +1376,7 @@ export type CountryIndicatorFieldCountryDataAttributes = {
   iso?: string;
   description?: string;
   gfw_link?: string;
+  country_information_link?: string;
   createdAt?: string;
   updatedAt?: string;
   publishedAt?: string;
@@ -1581,6 +1628,7 @@ export interface Country {
   iso?: string;
   description?: string;
   gfw_link?: string;
+  country_information_link?: string;
   createdAt?: string;
   updatedAt?: string;
   publishedAt?: string;
@@ -1785,6 +1833,7 @@ export type CountryRequestData = {
   iso?: string;
   description?: string;
   gfw_link?: string;
+  country_information_link?: string;
 };
 
 export interface CountryRequest {
