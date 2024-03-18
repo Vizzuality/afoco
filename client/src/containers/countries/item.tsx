@@ -1,6 +1,7 @@
 'use client';
 
-import Image from 'next/image';
+import Flag from 'react-world-flags';
+
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 
@@ -22,16 +23,13 @@ export default function CountryItem({ data }: { data: CountryListResponseDataIte
     <Link
       href={`/countries/${data.id}${queryParams}`}
       data-cy="country-item-link"
-      className="flex items-center justify-between space-x-4 rounded-lg border border-gray-100 bg-white py-2 pl-2 pr-4 text-sm text-yellow-900 shadow-sm transition-all duration-300 hover:border-yellow-500"
+      className="flex items-center justify-between space-x-4 rounded-lg border border-gray-100 bg-white py-2 pl-2 pr-4 text-sm text-yellow-900 no-underline shadow-sm transition-all duration-300 hover:border-yellow-500"
     >
-      <div className="flex items-center space-x-4">
-        <Image
-          src="/images/countries/placeholder.png"
-          alt="Country Flag"
-          className="rounded"
-          width={40}
-          height={32}
-        />
+      <div className="not-prose flex items-center space-x-4">
+        {data.attributes?.iso && (
+          <Flag code={data.attributes.iso} height="32" width="40" className="rounded" />
+        )}
+
         <h3>{data.attributes?.name}</h3>
       </div>
       <p>
