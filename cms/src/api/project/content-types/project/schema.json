@@ -21,8 +21,9 @@
     "status": {
       "type": "enumeration",
       "enum": [
-        "new",
-        "finished"
+        "Completed",
+        "On-going",
+        "Under inception"
       ]
     },
     "intervention_types": {

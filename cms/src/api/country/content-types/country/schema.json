@@ -24,6 +24,9 @@
     },
     "gfw_link": {
       "type": "string"
+    },
+    "country_information_link": {
+      "type": "string"
     }
   }
 }
