@@ -1,6 +1,7 @@
 'use client';
 
 import Markdown from 'react-markdown';
+import Flag from 'react-world-flags';
 
 import Image from 'next/image';
 import Link from 'next/link';
@@ -40,7 +41,6 @@ export default function CountryDetailPanel() {
     }
   } */
   );
-  console.log({ data });
 
   const searchParams = useSearchParams();
   const layersParams = searchParams.get('layers');
@@ -79,14 +79,10 @@ export default function CountryDetailPanel() {
           <Share />
         </div>
       </div>
-      <div className="mt-16 flex space-x-2">
-        <Image
-          src="/images/countries/placeholder.png"
-          alt="Country Flag"
-          className="rounded"
-          width={40}
-          height={32}
-        />
+      <div className="mt-12 flex items-center space-x-3">
+        {data?.data?.attributes?.iso && (
+          <Flag code={data?.data?.attributes.iso} height="40" width="48" className="rounded pt-5" />
+        )}
         <h2 className="text-xl" data-cy="country-detail-name">
           {data?.data?.attributes?.name}
         </h2>
