@@ -6,19 +6,13 @@ import Image from 'next/image';
 import { Info } from 'lucide-react';
 
 import BarsChart from '@/containers/charts/bar';
-import BubbleChart from '@/containers/charts/bubble';
 import PieChart from '@/containers/charts/pie';
 import { DASHBOARD_OVERVIEW_RESUME_ITEMS } from '@/containers/projects/detail/constants';
 
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 
-import {
-  communityBeneficiaries,
-  fundingInUSD,
-  projectFundingInfrastructure,
-  trainedPeoplePerYearData,
-} from './mock';
+import { fundingInUSD, projectFundingInfrastructure, trainedPeoplePerYearData } from './mock';
 
 export default function ProjectDashboard() {
   const [infoOpen, setInfoOpen] = useState(false);
@@ -34,7 +28,7 @@ export default function ProjectDashboard() {
         {DASHBOARD_OVERVIEW_RESUME_ITEMS.map(({ title, icon, value, unit }) => (
           <div
             key={title}
-            className="flex w-1/3 items-center space-x-4 rounded-xl bg-white p-4 text-sm text-green-800 shadow-sm"
+            className="flex w-1/2 items-center space-x-4 rounded-xl bg-white p-4 text-sm text-green-800 shadow-sm"
           >
             <div className="flex h-14 w-14 items-center justify-center rounded-full border border-green-400 bg-green-200/10">
               <Image src={icon} alt={title} width={32} height={32} />
@@ -53,7 +47,7 @@ export default function ProjectDashboard() {
         <div className="flex w-full gap-4">
           <div className="w-1/2 rounded-xl bg-white p-4 shadow-sm">
             <div className="flex items-center justify-between pb-2">
-              <h3 className="text-lg text-green-800">Project funding infrastructure</h3>
+              <h3 className="text-lg text-green-800">Total project value (USD)</h3>
               <Dialog>
                 <DialogTrigger onClick={() => setInfoOpen(true)}>
                   <Info className="text-green-800" size={20} />
@@ -117,7 +111,7 @@ export default function ProjectDashboard() {
           </div>
           <div className="w-1/2 rounded-xl bg-white p-4 shadow-sm">
             <div className="flex items-center justify-between pb-6">
-              <h3 className="text-lg text-green-800">Funding in USD</h3>
+              <h3 className="text-lg text-green-800">Total intervention area</h3>
               <Info className="h-5 w-5 text-green-800" />
             </div>
             <div className="h-44">
@@ -129,7 +123,7 @@ export default function ProjectDashboard() {
         <div className="flex w-full gap-4">
           <div className="w-1/2 rounded-xl bg-white p-4 shadow-sm">
             <div className="flex items-center justify-between pb-4">
-              <h3 className="text-lg text-green-800">Trained people per year</h3>
+              <h3 className="text-lg text-green-800">Total beneficiaries</h3>
               <Info className="h-5 w-5 text-green-800" />
             </div>
             <div className="h-44">
@@ -155,10 +149,9 @@ export default function ProjectDashboard() {
           </div>
           <div className="w-1/2 rounded-xl bg-white p-4 shadow-sm">
             <div className="flex items-center justify-between pb-8">
-              <h3 className="text-lg text-green-800">Community beneficiaries</h3>
+              <h3 className="text-lg text-green-800">Total jobs</h3>
               <Info className="h-5 w-5 text-green-800" />
             </div>
-            <BubbleChart data={communityBeneficiaries} />
           </div>
         </div>
       </div>

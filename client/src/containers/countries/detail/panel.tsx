@@ -13,9 +13,6 @@ import remarkGfm from 'remark-gfm';
 import { useGetCountriesId } from '@/types/generated/country';
 import { useGetCountryIndicatorFields } from '@/types/generated/country-indicator-field';
 
-import { useSyncQueryParams } from '@/hooks/datasets';
-
-import BubbleChart from '@/containers/charts/bubble';
 import PieChart from '@/containers/charts/pie';
 import { PANEL_OVERVIEW_ITEMS, RESUME_ITEMS } from '@/containers/countries/detail/constants';
 import Share from '@/containers/share';
@@ -24,7 +21,7 @@ import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 
-import { communityBeneficiaries, funding, seedsPlanted, usefulLinks } from './mock';
+import { funding, seedsPlanted, usefulLinks } from './mock';
 
 export default function CountryDetailPanel() {
   const params = useParams<{ id: string }>();
@@ -49,7 +46,7 @@ export default function CountryDetailPanel() {
     return notFound();
   }
   return (
-    <div className="p-6">
+    <div className="not-prose p-6">
       <div className="absolute left-6 right-6 top-4 z-10 flex justify-between">
         <Link
           href={`/countries${queryParams}`}
@@ -189,10 +186,9 @@ export default function CountryDetailPanel() {
 
           <div className="w-full rounded-xl bg-white p-4 shadow-sm">
             <div className="flex items-center justify-between pb-8">
-              <h3 className="text-base text-green-800">Community beneficiaries</h3>
+              <h3 className="text-base text-green-800">Total jobs</h3>
               <Info className="h-5 w-5 text-green-800" />
             </div>
-            <BubbleChart data={communityBeneficiaries} />
           </div>
           <div className="flex flex-col space-y-2 pb-8 pt-4">
             <h3 className="text-base text-green-800">Useful links</h3>
