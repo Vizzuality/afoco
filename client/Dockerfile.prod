@@ -20,7 +20,7 @@ COPY ./client .
 RUN yarn build
 
 # Copy only the built files into the final image
-FROM node:18.16-bookworm-slim AS runner
+FROM node:18.17-bookworm-slim AS runner
 ENV NODE_ENV production
 ENV NEXT_TELEMETRY_DISABLED 1
 
