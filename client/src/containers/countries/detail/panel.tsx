@@ -70,9 +70,9 @@ export default function CountryDetailPanel() {
           <Share />
         </div>
       </div>
-      <div className="mt-12 flex items-center space-x-3">
+      <div className="mt-16 flex items-center space-x-3">
         {data?.data?.attributes?.iso && (
-          <Flag code={data?.data?.attributes.iso} height="40" width="48" className="rounded pt-5" />
+          <Flag code={data?.data?.attributes.iso} height="40" width="48" className="rounded" />
         )}
         <h2 className="text-xl" data-cy="country-detail-name">
           {data?.data?.attributes?.name}
