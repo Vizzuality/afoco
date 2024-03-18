@@ -6,12 +6,9 @@ import { useSearchParams } from 'next/navigation';
 
 import * as qs from 'qs';
 
-import { useGetCountryIndicatorFieldsId } from '@/types/generated/country-indicator-field';
 import { CountryListResponseDataItem } from '@/types/generated/strapi.schemas';
 
 export default function CountryItem({ data }: { data: CountryListResponseDataItem }) {
-  const { data: indicators } = useGetCountryIndicatorFieldsId(data?.id as number);
-
   const searchParams = useSearchParams();
   const layersParams = searchParams.get('layers');
   const filtersParams = searchParams.get('filters');
