@@ -19,6 +19,13 @@ locals {
     DATABASE_PASSWORD                = module.postgresql.password
     DATABASE_SSL                     = true
     DATABASE_SSL_REJECT_UNAUTHORIZED = false
+
+    # Assets bucket
+    ASSETS_BUCKET_NAME                 = module.assets_bucket.bucket_name
+    ASSETS_BUCKET_REGION               = module.assets_bucket.bucket_region
+    ASSETS_BUCKET_USER_ACCESS_KEY      = module.assets_bucket.bucket_user_access_key
+    ASSETS_BUCKET_USER_SECRET_KEY      = module.assets_bucket.bucket_user_secret_key
+    ASSETS_BUCKET_REGIONAL_DOMAIN_NAME = module.assets_bucket.bucket_regional_domain_name
   }
   client_env = {
     NEXT_PUBLIC_ENVIRONMENT                    = "development"
@@ -55,8 +62,8 @@ resource "random_password" "jwt_secret" {
 }
 
 module "github_values" {
-  source     = "../github_values"
-  repo_name  = var.repo_name
+  source    = "../github_values"
+  repo_name = var.repo_name
   secret_map = {
     PIPELINE_USER_ACCESS_KEY_ID     = var.pipeline_user_access_key_id
     PIPELINE_USER_SECRET_ACCESS_KEY = var.pipeline_user_access_key_secret
@@ -74,10 +81,16 @@ module "ecr" {
 
   project     = var.project_name
   environment = var.environment
-  tags        = {
+  tags = {
     project     = var.project_name,
     environment = var.environment
   }
+}
+
+module "assets_bucket" {
+  source = "../assets_bucket"
+
+  application_name = "${var.project_name}-${var.environment}"
 }
 
 
