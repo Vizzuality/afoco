@@ -5,14 +5,15 @@ import Flag from 'react-world-flags';
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { notFound, useParams, useSearchParams } from 'next/navigation';
+import { notFound, useParams } from 'next/navigation';
 
 import { ArrowLeft, Download, ExternalLink, Info } from 'lucide-react';
-import * as qs from 'qs';
 import remarkGfm from 'remark-gfm';
 
 import { useGetCountriesId } from '@/types/generated/country';
 import { useGetCountryIndicatorFields } from '@/types/generated/country-indicator-field';
+
+import { useSyncQueryParams } from '@/hooks/datasets';
 
 import BubbleChart from '@/containers/charts/bubble';
 import PieChart from '@/containers/charts/pie';
@@ -42,14 +43,7 @@ export default function CountryDetailPanel() {
   } */
   );
 
-  const searchParams = useSearchParams();
-  const layersParams = searchParams.get('layers');
-  const filtersParams = searchParams.get('filters');
-
-  const queryParams = qs.stringify(
-    { layers: layersParams, filters: filtersParams },
-    { encode: false, addQueryPrefix: true, skipNulls: true }
-  );
+  const queryParams = useSyncQueryParams();
 
   if (!params.id) {
     return notFound();

@@ -2,13 +2,14 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { notFound, useParams, useSearchParams } from 'next/navigation';
+import { notFound, useParams } from 'next/navigation';
 
 import { useAtom } from 'jotai';
 import { ArrowLeft, ChevronRight, Share as Download, X } from 'lucide-react';
-import * as qs from 'qs';
 
 import { dashboardAtom } from '@/store';
+
+import { useSyncQueryParams } from '@/hooks/datasets';
 
 import { PANEL_OVERVIEW_ITEMS } from '@/containers/projects/detail/constants';
 import Share from '@/containers/share';
@@ -21,16 +22,8 @@ import ProjectDashboard from './dashboard';
 
 export default function ProjectDetailPanel() {
   const params = useParams<{ id: string }>();
-  const searchParams = useSearchParams();
-  const layersParams = searchParams.get('layers');
-  const filtersParams = searchParams.get('filters');
-
+  const queryParams = useSyncQueryParams();
   const [dashboard, setDashboard] = useAtom(dashboardAtom);
-
-  const queryParams = qs.stringify(
-    { layers: layersParams, filters: filtersParams },
-    { encode: false, addQueryPrefix: true, skipNulls: true }
-  );
 
   if (!params.id) {
     return notFound();

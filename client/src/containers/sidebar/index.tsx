@@ -2,11 +2,9 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { useSearchParams } from 'next/navigation';
 
 import { useAtom } from 'jotai';
 import { HelpCircle } from 'lucide-react';
-import * as qs from 'qs';
 
 import { cn } from '@/lib/classnames';
 
@@ -15,26 +13,19 @@ import { sidebarTabAtom } from '@/store';
 import { useGetCountries } from '@/types/generated/country';
 import { useGetProjects } from '@/types/generated/project';
 
+import { useSyncQueryParams } from '@/hooks/datasets';
 import { useSyncLayers } from '@/hooks/datasets/sync-query';
 
 import type { SidebarTab } from '@/containers/sidebar/constants';
 import { TABS } from '@/containers/sidebar/constants';
 
 export default function Sidebar() {
-  const searchParams = useSearchParams();
   const { data: projects } = useGetProjects({ populate: '*' });
   const { data: countries } = useGetCountries({ populate: '*' });
 
-  const layersParams = searchParams.get('layers');
-  const filtersParams = searchParams.get('filters');
-
+  const queryParams = useSyncQueryParams();
   const [sidebarTab, setSidebarTab] = useAtom(sidebarTabAtom);
   const [layers] = useSyncLayers();
-
-  const queryParams = qs.stringify(
-    { layers: layersParams, filters: filtersParams },
-    { encode: false, addQueryPrefix: true, skipNulls: true }
-  );
 
   return (
     <div className="rounded-8xl absolute bottom-0 left-4 top-0 z-20 my-2 w-20 bg-yellow-700 py-10 text-xs text-yellow-50">

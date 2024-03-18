@@ -14,6 +14,8 @@ import { bboxAtom, hoveredProjectAtom, layersInteractiveIdsAtom, tmpBboxAtom } f
 
 import { Bbox } from '@/types/map';
 
+import { useSyncQueryParams } from '@/hooks/datasets';
+
 import MapSettingsManager from '@/containers/map/settings/manager';
 
 import Map from '@/components/map';
@@ -46,6 +48,7 @@ const DEFAULT_PROPS: CustomMapProps = {
 
 export default function MapContainer() {
   const { id, initialViewState, minZoom, maxZoom } = DEFAULT_PROPS;
+  const queryParams = useSyncQueryParams();
 
   const { [id]: map } = useMap();
   const { push } = useRouter();
@@ -97,42 +100,47 @@ export default function MapContainer() {
 
   const handleMapClick = useCallback(
     (e: MapLayerMouseEvent) => {
-      if (e.features && e.features[0] && map) {
-        push(`/projects/${e.features[0].properties?.ID}`);
+      const ProjectData = e.features && e.features.find(({ layer }) => layer.id === 'projects');
+      if (e.features && e.features.length && map) {
+        if (ProjectData) {
+          push(`/projects/${ProjectData.properties?.project_code}${queryParams}`);
+        }
         const bboxTurf = bbox(e.features[0]) as LngLatBoundsLike;
         map.fitBounds(bboxTurf, { padding: 100, maxZoom: 6 });
       }
     },
-    [map, push]
+    [map, push, queryParams]
   );
 
-  let hoveredStateId: string | null = null;
+  let hoveredStateIdProjectsCircle: string | null = null;
+
   const handleMouseMove = useCallback(
     (e: MapLayerMouseEvent) => {
       const ProjectsLayer = e?.features && e?.features.find(({ layer }) => layer.id === 'projects');
-
       // *ON MOUSE ENTER
-      if (e.features && e.features[0] && map) {
+      if (e.features && map && ProjectsLayer) {
         setCursor('pointer');
-        setHoveredProject(e.features[0].properties?.ID);
+        setHoveredProject(ProjectsLayer.properties?.project_code);
       }
 
       if (ProjectsLayer && map) {
-        if (hoveredStateId !== null) {
+        if (hoveredStateIdProjectsCircle !== null) {
           map?.setFeatureState(
             {
+              sourceLayer: 'afoco_locations_full',
               source: 'projects',
-              id: hoveredStateId,
+              id: hoveredStateIdProjectsCircle,
             },
             { hover: false }
           );
         }
 
-        hoveredStateId = ProjectsLayer?.id as string;
+        hoveredStateIdProjectsCircle = ProjectsLayer?.properties?.project_code as string;
         map?.setFeatureState(
           {
+            sourceLayer: 'afoco_locations_full',
             source: 'projects',
-            id: hoveredStateId,
+            id: hoveredStateIdProjectsCircle,
           },
           { hover: true }
         );
@@ -144,20 +152,21 @@ export default function MapContainer() {
         setCursor('grab');
       }
 
-      if (!ProjectsLayer && map && hoveredStateId) {
+      if (!ProjectsLayer && map && hoveredStateIdProjectsCircle) {
         setHoveredProject(null);
 
         map?.setFeatureState(
           {
+            sourceLayer: 'afoco_locations_full',
             source: 'projects',
-            id: hoveredStateId,
+            id: hoveredStateIdProjectsCircle,
           },
           { hover: false }
         );
-        hoveredStateId = null;
+        hoveredStateIdProjectsCircle = null;
       }
     },
-    [setCursor, map, hoveredStateId]
+    [setCursor, map, hoveredStateIdProjectsCircle]
   );
 
   return (

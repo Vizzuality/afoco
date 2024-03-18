@@ -3,21 +3,13 @@
 import Flag from 'react-world-flags';
 
 import Link from 'next/link';
-import { useSearchParams } from 'next/navigation';
-
-import * as qs from 'qs';
 
 import { CountryListResponseDataItem } from '@/types/generated/strapi.schemas';
 
-export default function CountryItem({ data }: { data: CountryListResponseDataItem }) {
-  const searchParams = useSearchParams();
-  const layersParams = searchParams.get('layers');
-  const filtersParams = searchParams.get('filters');
+import { useSyncQueryParams } from '@/hooks/datasets';
 
-  const queryParams = qs.stringify(
-    { layers: layersParams, filters: filtersParams },
-    { encode: false, addQueryPrefix: true, skipNulls: true }
-  );
+export default function CountryItem({ data }: { data: CountryListResponseDataItem }) {
+  const queryParams = useSyncQueryParams();
 
   return (
     <Link
