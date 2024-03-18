@@ -1,12 +1,17 @@
 'use client';
+
+import Markdown from 'react-markdown';
+
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound, useParams, useSearchParams } from 'next/navigation';
 
 import { ArrowLeft, Download, ExternalLink, Info } from 'lucide-react';
 import * as qs from 'qs';
+import remarkGfm from 'remark-gfm';
 
 import { useGetCountriesId } from '@/types/generated/country';
+import { useGetCountryIndicatorFields } from '@/types/generated/country-indicator-field';
 
 import BubbleChart from '@/containers/charts/bubble';
 import PieChart from '@/containers/charts/pie';
@@ -14,7 +19,7 @@ import { PANEL_OVERVIEW_ITEMS, RESUME_ITEMS } from '@/containers/countries/detai
 import Share from '@/containers/share';
 
 import { Button } from '@/components/ui/button';
-import { Dialog, DialogContent, DialogOverlay, DialogTrigger } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 
 import { communityBeneficiaries, funding, seedsPlanted, usefulLinks } from './mock';
@@ -22,6 +27,20 @@ import { communityBeneficiaries, funding, seedsPlanted, usefulLinks } from './mo
 export default function CountryDetailPanel() {
   const params = useParams<{ id: string }>();
   const { data } = useGetCountriesId(Number(params.id));
+
+  const { data: indicators } = useGetCountryIndicatorFields(
+    {
+      populate: '*',
+      filters: {
+        country: { id: params.id },
+      },
+    } /* {
+    query: {
+      select: (response) => PARSEAR
+    }
+  } */
+  );
+  console.log({ data });
 
   const searchParams = useSearchParams();
   const layersParams = searchParams.get('layers');
@@ -98,58 +117,11 @@ export default function CountryDetailPanel() {
               </h2>
             </div>
             <div className='after:rounded-b-4xl z-10 flex flex-col after:absolute after:bottom-0.5 after:left-0 after:h-10 after:w-full after:bg-gradient-to-b after:from-white/0 after:to-white/100 after:content-[""]'>
-              <p className="no-scrollbar max-h-[65vh] overflow-y-auto pb-10 text-sm text-gray-900">
-                Forest occupies a total of 71 % (2.7 million ha) of the total geographical area (3.8
-                million ha) of Bhutan [1][2] and even the constitution of Bhutan mandates to
-                maintain at least 60% of forest cover in perpetuity[3]. For the conservation of
-                biodiversity, approximately 51.44% of the area is set aside under a protected area
-                network comprising national parks, wildlife sanctuaries, and srict nature reserves
-                which are well connected with biological corridors[4]. All the forest in Bhutan is
-                declared as State Reserved Forest Land and the Department of Forests and Park
-                Services under the Ministry of Agriculture and Forests is the focal agency for
-                forest conservation and protection in the country. Diverse climatic conditions
-                (subtropical, temperate, and alpine) combined with topographical variation (100-7500
-                meters above sea level)[5] has attributed to the country’s diverse forest types
-                which include subtropical forests, warm broadleaved forests, Chir pine forests, cool
-                broadleaved forests, evergreen oak forests, blue pine forests, spruce forests,
-                hemlock forests, fir forests, juniper-rhododendron scrubs, and dry alpine scrubs.
-                The Cool broadleaved forest (26%) forms the major portion of the forest of Bhutan
-                followed by warm broadleaved forest (18%)[1]. All most all the forests in the
-                country are scientifically managed under either one of the forest management
-                regimes; Protected Area network, Forest Management Units, Community Forests, Local
-                Forest Management Areas, and Private Forests. The National Forest Policy (2011)
-                requires all forests to have forest management plans focused on the sustainable
-                supply of forest products or ecosystem services. The management plans must also
-                ensure that pest and disease, forest fire, and natural disaster management related
-                to the particular resources are an integral part of the plan. Apart from being a
-                source of livelihood, a major watershed, and home to some of the rarest species of
-                flora and fauna, Bhutan’s forest is the largest carbon sink in the country [1].
-                Acknowledging this, in 2009, at COP15, Bhutan made a voluntary commitment to
-                maintaining Bhutan’s status as a net sink for greenhouse gases by ensuring that
-                greenhouse gas emission levels do not exceed the sequestration capacity of its
-                forests [6]. Through its 1st Intended Nationally Determined Contribution, Bhutan
-                further pledged its commitment to remain carbon neutral. The 2nd Nationally
-                Determined Contribution of Bhutan highlights ambitious targets under the forest
-                sector to strengthen the conservation of existing forests and increase the adaptive
-                capacity to climate change impacts without compromising opportunities for future
-                economic development and prosperity[7]. These targets are aligned with REDD+
-                Strategy and Action Plan of Bhutan to; 1) improve forest management and
-                conservation, 2) maintain at least 50% of land area as protected areas, 3) enhance
-                forest carbon stock through climate-smart restoration, 4) initiate and promote
-                agroforestry and 5) conserve watershed and wetlands[8]. [1] National Forest
-                Inventory, Stocking Nation’s Forest Resources, Volume I, 2015 Ministry of
-                Agriculture and Forests, Royal Government of Bhutan, Thimphu. [2] FAO. 2020. Global
-                Forest Resources Assessment 2020. Bhutan. FAO, Rome. [3] Royal Government of Bhutan
-                2008, The Constitution of the Kingdom of Bhutan. [4] Department of Forests and Park
-                Services 2019, Forestry Facts and Figures, 10-54. [5] National Biodiversity
-                Strategies and Action Plan of Bhutan, 2014. National Biodiversity Centre, Ministry
-                of Agriculture and Forests, Royal Government of Bhutan. [6] Kingdom of Bhutan.
-                Bhutan Intended Nationally Determined Contribution communicated on 30 September
-                2015. [7] Kingdom of Bhutan. Bhutan Second Nationally Determined Contribution
-                communicated on 5 June 2021. [8] Watershed Management Division, Department of Forest
-                and Park Services, RGoB, 2020 National REDD+ Strategy and Action Plan for Bhutan,
-                24-35.
-              </p>
+              <div className="no-scrollbar max-h-[65vh] overflow-y-auto pb-10 text-sm text-gray-900">
+                <Markdown remarkPlugins={[remarkGfm]} className="prose">
+                  {data?.data?.attributes?.description}
+                </Markdown>
+              </div>
             </div>
           </div>
         </DialogContent>
