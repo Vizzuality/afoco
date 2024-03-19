@@ -21,6 +21,7 @@ export const LandDegradationLayer = ({ beforeId }: LayerProps) => {
   const LAYERS = useLayers({
     settings: layerSettings,
   });
+
   if (!SOURCE || !LAYERS.length) return null;
 
   return (
