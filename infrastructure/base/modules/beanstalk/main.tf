@@ -85,6 +85,16 @@ locals {
       value     = "AWSServiceRoleForElasticBeanstalk"
     },
     {
+      namespace = "aws:elasticbeanstalk:application"
+      name      = "Application Healthcheck URL"
+      value     = "/health"
+    },
+    {
+      namespace = "aws:elasticbeanstalk:environment:process:default",
+      name      = "HealthCheckPath",
+      value     = "/health"
+    },
+    {
       namespace = "aws:autoscaling:launchconfiguration"
       name      = "IamInstanceProfile"
       value     = aws_iam_instance_profile.beanstalk_ec2.name
