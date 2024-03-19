@@ -5,13 +5,12 @@ import type { LayerProps } from '@/types/layers';
 import { useLayers } from './hooks';
 
 const SOURCE: SourceProps = {
-  promoteId: 'project_code',
   type: 'vector',
-  url: 'mapbox://afoco.1xqij8g6',
-  id: 'projects',
+  url: 'mapbox://afoco.76guc67g',
+  id: 'land_degradation',
 };
 
-export const ProjectsLayer = ({ beforeId, settings }: LayerProps) => {
+export const LandDegradationLayer = ({ beforeId, settings }: LayerProps) => {
   const LAYERS = useLayers({
     settings,
   });
