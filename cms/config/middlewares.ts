@@ -1,4 +1,4 @@
-export default [
+export default ({ env }) => [
   'strapi::errors',
   {
     name: 'strapi::security',
@@ -6,7 +6,7 @@ export default [
       contentSecurityPolicy: {
         useDefaults: true,
         directives: {
-          'img-src': ["'self'", 'data:', 'blob:', '*.strapi.io' ,'*.tile.openstreetmap.org'],
+          'img-src': ["'self'", 'data:', 'blob:', '*.strapi.io' ,'*.tile.openstreetmap.org', env('ASSETS_BUCKET_REGIONAL_DOMAIN_NAME')],
           upgradeInsecureRequests: null,
         },
       },
