@@ -27,6 +27,15 @@
     },
     "country_information_link": {
       "type": "string"
+    },
+    "short_description": {
+      "type": "string"
+    },
+    "projects": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::project.project",
+      "mappedBy": "countries"
     }
   }
 }

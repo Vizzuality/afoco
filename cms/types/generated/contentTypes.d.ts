@@ -573,9 +573,12 @@ export interface ApiCountryCountry extends Schema.CollectionType {
   };
   attributes: {
     name: Attribute.String & Attribute.Required;
-    country_population: Attribute.Integer;
-    country_deforestation: Attribute.Integer;
-    country_economy: Attribute.Integer;
+    iso: Attribute.String;
+    description: Attribute.RichText;
+    gfw_link: Attribute.String;
+    country_information_link: Attribute.String;
+    short_description: Attribute.String;
+    projects: Attribute.Relation<'api::country.country', 'manyToMany', 'api::project.project'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -592,23 +595,21 @@ export interface ApiCountryIndicatorFieldCountryIndicatorField extends Schema.Co
     singularName: 'country-indicator-field';
     pluralName: 'country-indicator-fields';
     displayName: 'CountryIndicatorField';
+    description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    indicator_field_metadatum: Attribute.Relation<
-      'api::country-indicator-field.country-indicator-field',
-      'oneToOne',
-      'api::indicator-field-metadata.indicator-field-metadata'
-    >;
     country: Attribute.Relation<
       'api::country-indicator-field.country-indicator-field',
       'oneToOne',
       'api::country.country'
     >;
+    indicator_name: Attribute.String;
+    unit: Attribute.String;
     value: Attribute.JSON;
-    year: Attribute.Integer;
+    using_year: Attribute.Boolean;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -639,18 +640,15 @@ export interface ApiIndicatorFieldIndicatorField extends Schema.CollectionType {
     draftAndPublish: true;
   };
   attributes: {
-    indicator_field_metadatum: Attribute.Relation<
-      'api::indicator-field.indicator-field',
-      'oneToOne',
-      'api::indicator-field-metadata.indicator-field-metadata'
-    >;
-    value: Attribute.JSON;
-    year: Attribute.Integer;
     project: Attribute.Relation<
       'api::indicator-field.indicator-field',
       'oneToOne',
       'api::project.project'
     >;
+    indicator_name: Attribute.String;
+    unit: Attribute.String;
+    value: Attribute.JSON;
+    using_year: Attribute.Boolean;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -669,53 +667,25 @@ export interface ApiIndicatorFieldIndicatorField extends Schema.CollectionType {
   };
 }
 
-export interface ApiIndicatorFieldMetadataIndicatorFieldMetadata extends Schema.CollectionType {
-  collectionName: 'indicator_field_metadatas';
+export interface ApiLayerLayer extends Schema.CollectionType {
+  collectionName: 'layers';
   info: {
-    singularName: 'indicator-field-metadata';
-    pluralName: 'indicator-field-metadatas';
-    displayName: 'IndicatorFieldMetadata';
-    description: '';
+    singularName: 'layer';
+    pluralName: 'layers';
+    displayName: 'Layer';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    indicator_type: Attribute.Enumeration<
-      [
-        'location_area',
-        'planted_area',
-        'carbon_area',
-        'species_planted',
-        'survival_rate',
-        'number_seedlings',
-        'community_beneficiaries',
-        'number_officials_trained',
-        'income_level',
-        'livelihood_type',
-        'production',
-        'project_infra'
-      ]
-    >;
-    field_name: Attribute.String;
-    unit: Attribute.String;
-    data_type: Attribute.Enumeration<['string', 'int', 'list']>;
-    using_year: Attribute.Boolean & Attribute.DefaultTo<true>;
-    list_of_options: Attribute.JSON & Attribute.DefaultTo<[]>;
+    name: Attribute.String;
+    configuration: Attribute.JSON;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::indicator-field-metadata.indicator-field-metadata',
-      'oneToOne',
-      'admin::user'
-    > &
+    createdBy: Attribute.Relation<'api::layer.layer', 'oneToOne', 'admin::user'> &
       Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::indicator-field-metadata.indicator-field-metadata',
-      'oneToOne',
-      'admin::user'
-    > &
+    updatedBy: Attribute.Relation<'api::layer.layer', 'oneToOne', 'admin::user'> &
       Attribute.Private;
   };
 }
@@ -733,6 +703,13 @@ export interface ApiProjectProject extends Schema.CollectionType {
   };
   attributes: {
     project_code: Attribute.String;
+    name: Attribute.String;
+    status: Attribute.Enumeration<['Completed', 'On-going', 'Under inception']>;
+    intervention_types: Attribute.JSON;
+    main_image: Attribute.Media;
+    description: Attribute.RichText;
+    short_description: Attribute.String;
+    countries: Attribute.Relation<'api::project.project', 'manyToMany', 'api::country.country'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -762,7 +739,7 @@ declare module '@strapi/strapi' {
       'api::country.country': ApiCountryCountry;
       'api::country-indicator-field.country-indicator-field': ApiCountryIndicatorFieldCountryIndicatorField;
       'api::indicator-field.indicator-field': ApiIndicatorFieldIndicatorField;
-      'api::indicator-field-metadata.indicator-field-metadata': ApiIndicatorFieldMetadataIndicatorFieldMetadata;
+      'api::layer.layer': ApiLayerLayer;
       'api::project.project': ApiProjectProject;
     }
   }

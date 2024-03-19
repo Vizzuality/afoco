@@ -42,6 +42,15 @@
     },
     "description": {
       "type": "richtext"
+    },
+    "short_description": {
+      "type": "string"
+    },
+    "countries": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::country.country",
+      "inversedBy": "projects"
     }
   }
 }
