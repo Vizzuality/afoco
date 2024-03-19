@@ -47,8 +47,8 @@ const MapLegends = ({ className = '' }) => {
           onChangeOrder={handleChangeOrder}
         >
           {layers.map((layer) => {
-            const settings = { opacity: layer.opacity, visibility: layer.visibility };
-            return <MapLegendItem key={layer.id} id={layer.id} settings={settings} />;
+            const settings = { opacity: layer.opacity, visibility: layer.visibility, id: layer.id };
+            return <MapLegendItem key={layer.id} settings={settings} />;
           })}
         </Legend>
       )}

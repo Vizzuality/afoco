@@ -7,8 +7,7 @@
     "dev": "strapi develop",
     "start": "strapi start",
     "build": "strapi build",
-    "strapi": "strapi",
-    "types": "strapi ts:generate-types"
+    "strapi": "strapi"
   },
   "dependencies": {
     "@strapi/plugin-documentation": "4.13.1",

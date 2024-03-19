@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "cypress:open": "cypress open",
-    "test:e2e": "cypress run --headless --browser chrome"
+    "test:e2e": "cypress run --headless --browser chrome",
+    "types": "strapi ts:generate-types"
   },
   "dependencies": {
     "@deck.gl/geo-layers": "8.9.19",

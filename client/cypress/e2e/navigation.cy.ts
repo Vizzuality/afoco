@@ -4,7 +4,8 @@ describe('navigation', () => {
   });
 
   it('access to project detail page and switch dashboard', () => {
-    cy.visit('/projects/indonesia-landscape');
+    cy.visit('/');
+    cy.get('a[data-cy="project-item-link"]').first().click();
     cy.get('button[data-cy="project-dashboard-button"]').click().wait(1000);
     cy.get('[data-cy="project-dashboard"]').should('exist');
     cy.get('button[data-cy="project-dashboard-button"]').click();
