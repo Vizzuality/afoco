@@ -84,16 +84,16 @@ locals {
       name      = "ServiceRole"
       value     = "AWSServiceRoleForElasticBeanstalk"
     },
-    {
-      namespace = "aws:elasticbeanstalk:application"
-      name      = "Application Healthcheck URL"
-      value     = "/health"
-    },
-    {
-      namespace = "aws:elasticbeanstalk:environment:process:default",
-      name      = "HealthCheckPath",
-      value     = "/health"
-    },
+    # {
+    #   namespace = "aws:elasticbeanstalk:application"
+    #   name      = "Application Healthcheck URL"
+    #   value     = "/health"
+    # },
+    # {
+    #   namespace = "aws:elasticbeanstalk:environment:process:default",
+    #   name      = "HealthCheckPath",
+    #   value     = "/health"
+    # },
     {
       namespace = "aws:autoscaling:launchconfiguration"
       name      = "IamInstanceProfile"
