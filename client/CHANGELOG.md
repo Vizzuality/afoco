@@ -25,8 +25,6 @@ Unreleased
 
 ### Added
 
-- Projects layer [AF-55](https://vizzuality.atlassian.net/browse/AF-55?atlOrigin=eyJpIjoiNmU3N2Q1YjVhMGRiNDNiODkzNjY1ZDZmMTE4Zjc3MmMiLCJwIjoiaiJ9)
-
 
 ### Changed
 
