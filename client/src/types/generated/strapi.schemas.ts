@@ -208,6 +208,22 @@ export interface UploadFile {
 
 export type ProjectResponseMeta = { [key: string]: any };
 
+export interface Project {
+  project_code?: string;
+  name?: string;
+  status?: ProjectStatus;
+  intervention_types?: unknown;
+  main_image?: ProjectMainImage;
+  description?: string;
+  short_description?: string;
+  countries?: ProjectCountries;
+  createdAt?: string;
+  updatedAt?: string;
+  publishedAt?: string;
+  createdBy?: ProjectCreatedBy;
+  updatedBy?: ProjectUpdatedBy;
+}
+
 export interface ProjectResponseDataObject {
   id?: number;
   attributes?: Project;
@@ -238,6 +254,223 @@ export type ProjectCreatedByData = {
 
 export type ProjectCreatedBy = {
   data?: ProjectCreatedByData;
+};
+
+export type ProjectCountriesDataItemAttributes = {
+  name?: string;
+  iso?: string;
+  description?: string;
+  gfw_link?: string;
+  country_information_link?: string;
+  short_description?: string;
+  projects?: ProjectCountriesDataItemAttributesProjects;
+  createdAt?: string;
+  updatedAt?: string;
+  publishedAt?: string;
+  createdBy?: ProjectCountriesDataItemAttributesCreatedBy;
+  updatedBy?: ProjectCountriesDataItemAttributesUpdatedBy;
+};
+
+export type ProjectCountriesDataItem = {
+  id?: number;
+  attributes?: ProjectCountriesDataItemAttributes;
+};
+
+export type ProjectCountries = {
+  data?: ProjectCountriesDataItem[];
+};
+
+export type ProjectCountriesDataItemAttributesUpdatedByDataAttributes = { [key: string]: any };
+
+export type ProjectCountriesDataItemAttributesUpdatedByData = {
+  id?: number;
+  attributes?: ProjectCountriesDataItemAttributesUpdatedByDataAttributes;
+};
+
+export type ProjectCountriesDataItemAttributesUpdatedBy = {
+  data?: ProjectCountriesDataItemAttributesUpdatedByData;
+};
+
+export type ProjectCountriesDataItemAttributesCreatedByDataAttributes = { [key: string]: any };
+
+export type ProjectCountriesDataItemAttributesCreatedByData = {
+  id?: number;
+  attributes?: ProjectCountriesDataItemAttributesCreatedByDataAttributes;
+};
+
+export type ProjectCountriesDataItemAttributesCreatedBy = {
+  data?: ProjectCountriesDataItemAttributesCreatedByData;
+};
+
+export type ProjectCountriesDataItemAttributesProjectsDataItemAttributes = {
+  project_code?: string;
+  name?: string;
+  status?: ProjectCountriesDataItemAttributesProjectsDataItemAttributesStatus;
+  intervention_types?: unknown;
+  main_image?: ProjectCountriesDataItemAttributesProjectsDataItemAttributesMainImage;
+  description?: string;
+  short_description?: string;
+  countries?: ProjectCountriesDataItemAttributesProjectsDataItemAttributesCountries;
+  createdAt?: string;
+  updatedAt?: string;
+  publishedAt?: string;
+  createdBy?: ProjectCountriesDataItemAttributesProjectsDataItemAttributesCreatedBy;
+  updatedBy?: ProjectCountriesDataItemAttributesProjectsDataItemAttributesUpdatedBy;
+};
+
+export type ProjectCountriesDataItemAttributesProjectsDataItem = {
+  id?: number;
+  attributes?: ProjectCountriesDataItemAttributesProjectsDataItemAttributes;
+};
+
+export type ProjectCountriesDataItemAttributesProjects = {
+  data?: ProjectCountriesDataItemAttributesProjectsDataItem[];
+};
+
+export type ProjectCountriesDataItemAttributesProjectsDataItemAttributesUpdatedByDataAttributes = {
+  [key: string]: any;
+};
+
+export type ProjectCountriesDataItemAttributesProjectsDataItemAttributesUpdatedByData = {
+  id?: number;
+  attributes?: ProjectCountriesDataItemAttributesProjectsDataItemAttributesUpdatedByDataAttributes;
+};
+
+export type ProjectCountriesDataItemAttributesProjectsDataItemAttributesUpdatedBy = {
+  data?: ProjectCountriesDataItemAttributesProjectsDataItemAttributesUpdatedByData;
+};
+
+export type ProjectCountriesDataItemAttributesProjectsDataItemAttributesCreatedByDataAttributes = {
+  [key: string]: any;
+};
+
+export type ProjectCountriesDataItemAttributesProjectsDataItemAttributesCreatedByData = {
+  id?: number;
+  attributes?: ProjectCountriesDataItemAttributesProjectsDataItemAttributesCreatedByDataAttributes;
+};
+
+export type ProjectCountriesDataItemAttributesProjectsDataItemAttributesCreatedBy = {
+  data?: ProjectCountriesDataItemAttributesProjectsDataItemAttributesCreatedByData;
+};
+
+export type ProjectCountriesDataItemAttributesProjectsDataItemAttributesCountriesDataItemAttributes =
+  { [key: string]: any };
+
+export type ProjectCountriesDataItemAttributesProjectsDataItemAttributesCountriesDataItem = {
+  id?: number;
+  attributes?: ProjectCountriesDataItemAttributesProjectsDataItemAttributesCountriesDataItemAttributes;
+};
+
+export type ProjectCountriesDataItemAttributesProjectsDataItemAttributesCountries = {
+  data?: ProjectCountriesDataItemAttributesProjectsDataItemAttributesCountriesDataItem[];
+};
+
+export type ProjectCountriesDataItemAttributesProjectsDataItemAttributesMainImageData = {
+  id?: number;
+  attributes?: ProjectCountriesDataItemAttributesProjectsDataItemAttributesMainImageDataAttributes;
+};
+
+export type ProjectCountriesDataItemAttributesProjectsDataItemAttributesMainImage = {
+  data?: ProjectCountriesDataItemAttributesProjectsDataItemAttributesMainImageData;
+};
+
+export type ProjectCountriesDataItemAttributesProjectsDataItemAttributesMainImageDataAttributesUpdatedByDataAttributes =
+  { [key: string]: any };
+
+export type ProjectCountriesDataItemAttributesProjectsDataItemAttributesMainImageDataAttributesUpdatedByData =
+  {
+    id?: number;
+    attributes?: ProjectCountriesDataItemAttributesProjectsDataItemAttributesMainImageDataAttributesUpdatedByDataAttributes;
+  };
+
+export type ProjectCountriesDataItemAttributesProjectsDataItemAttributesMainImageDataAttributesUpdatedBy =
+  {
+    data?: ProjectCountriesDataItemAttributesProjectsDataItemAttributesMainImageDataAttributesUpdatedByData;
+  };
+
+export type ProjectCountriesDataItemAttributesProjectsDataItemAttributesMainImageDataAttributes = {
+  name?: string;
+  alternativeText?: string;
+  caption?: string;
+  width?: number;
+  height?: number;
+  formats?: unknown;
+  hash?: string;
+  ext?: string;
+  mime?: string;
+  size?: number;
+  url?: string;
+  previewUrl?: string;
+  provider?: string;
+  provider_metadata?: unknown;
+  related?: ProjectCountriesDataItemAttributesProjectsDataItemAttributesMainImageDataAttributesRelated;
+  folder?: ProjectCountriesDataItemAttributesProjectsDataItemAttributesMainImageDataAttributesFolder;
+  folderPath?: string;
+  createdAt?: string;
+  updatedAt?: string;
+  createdBy?: ProjectCountriesDataItemAttributesProjectsDataItemAttributesMainImageDataAttributesCreatedBy;
+  updatedBy?: ProjectCountriesDataItemAttributesProjectsDataItemAttributesMainImageDataAttributesUpdatedBy;
+};
+
+export type ProjectCountriesDataItemAttributesProjectsDataItemAttributesMainImageDataAttributesCreatedByDataAttributes =
+  { [key: string]: any };
+
+export type ProjectCountriesDataItemAttributesProjectsDataItemAttributesMainImageDataAttributesCreatedByData =
+  {
+    id?: number;
+    attributes?: ProjectCountriesDataItemAttributesProjectsDataItemAttributesMainImageDataAttributesCreatedByDataAttributes;
+  };
+
+export type ProjectCountriesDataItemAttributesProjectsDataItemAttributesMainImageDataAttributesCreatedBy =
+  {
+    data?: ProjectCountriesDataItemAttributesProjectsDataItemAttributesMainImageDataAttributesCreatedByData;
+  };
+
+export type ProjectCountriesDataItemAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributes =
+  { [key: string]: any };
+
+export type ProjectCountriesDataItemAttributesProjectsDataItemAttributesMainImageDataAttributesFolderData =
+  {
+    id?: number;
+    attributes?: ProjectCountriesDataItemAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributes;
+  };
+
+export type ProjectCountriesDataItemAttributesProjectsDataItemAttributesMainImageDataAttributesFolder =
+  {
+    data?: ProjectCountriesDataItemAttributesProjectsDataItemAttributesMainImageDataAttributesFolderData;
+  };
+
+export type ProjectCountriesDataItemAttributesProjectsDataItemAttributesMainImageDataAttributesRelatedDataItemAttributes =
+  { [key: string]: any };
+
+export type ProjectCountriesDataItemAttributesProjectsDataItemAttributesMainImageDataAttributesRelatedDataItem =
+  {
+    id?: number;
+    attributes?: ProjectCountriesDataItemAttributesProjectsDataItemAttributesMainImageDataAttributesRelatedDataItemAttributes;
+  };
+
+export type ProjectCountriesDataItemAttributesProjectsDataItemAttributesMainImageDataAttributesRelated =
+  {
+    data?: ProjectCountriesDataItemAttributesProjectsDataItemAttributesMainImageDataAttributesRelatedDataItem[];
+  };
+
+export type ProjectCountriesDataItemAttributesProjectsDataItemAttributesStatus =
+  (typeof ProjectCountriesDataItemAttributesProjectsDataItemAttributesStatus)[keyof typeof ProjectCountriesDataItemAttributesProjectsDataItemAttributesStatus];
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const ProjectCountriesDataItemAttributesProjectsDataItemAttributesStatus = {
+  Completed: 'Completed',
+  'On-going': 'On-going',
+  Under_inception: 'Under inception',
+} as const;
+
+export type ProjectMainImageDataAttributesUpdatedByData = {
+  id?: number;
+  attributes?: ProjectMainImageDataAttributesUpdatedByDataAttributes;
+};
+
+export type ProjectMainImageDataAttributesUpdatedBy = {
+  data?: ProjectMainImageDataAttributesUpdatedByData;
 };
 
 export type ProjectMainImageDataAttributes = {
@@ -273,30 +506,7 @@ export type ProjectMainImage = {
   data?: ProjectMainImageData;
 };
 
-export interface Project {
-  project_code?: string;
-  name?: string;
-  status?: ProjectStatus;
-  intervention_types?: unknown;
-  main_image?: ProjectMainImage;
-  description?: string;
-  createdAt?: string;
-  updatedAt?: string;
-  publishedAt?: string;
-  createdBy?: ProjectCreatedBy;
-  updatedBy?: ProjectUpdatedBy;
-}
-
 export type ProjectMainImageDataAttributesUpdatedByDataAttributes = { [key: string]: any };
-
-export type ProjectMainImageDataAttributesUpdatedByData = {
-  id?: number;
-  attributes?: ProjectMainImageDataAttributesUpdatedByDataAttributes;
-};
-
-export type ProjectMainImageDataAttributesUpdatedBy = {
-  data?: ProjectMainImageDataAttributesUpdatedByData;
-};
 
 export type ProjectMainImageDataAttributesCreatedByDataAttributes = { [key: string]: any };
 
@@ -307,6 +517,15 @@ export type ProjectMainImageDataAttributesCreatedByData = {
 
 export type ProjectMainImageDataAttributesCreatedBy = {
   data?: ProjectMainImageDataAttributesCreatedByData;
+};
+
+export type ProjectMainImageDataAttributesFolderData = {
+  id?: number;
+  attributes?: ProjectMainImageDataAttributesFolderDataAttributes;
+};
+
+export type ProjectMainImageDataAttributesFolder = {
+  data?: ProjectMainImageDataAttributesFolderData;
 };
 
 export type ProjectMainImageDataAttributesFolderDataAttributesUpdatedByDataAttributes = {
@@ -322,28 +541,6 @@ export type ProjectMainImageDataAttributesFolderDataAttributesUpdatedBy = {
   data?: ProjectMainImageDataAttributesFolderDataAttributesUpdatedByData;
 };
 
-export type ProjectMainImageDataAttributesFolderDataAttributes = {
-  name?: string;
-  pathId?: number;
-  parent?: ProjectMainImageDataAttributesFolderDataAttributesParent;
-  children?: ProjectMainImageDataAttributesFolderDataAttributesChildren;
-  files?: ProjectMainImageDataAttributesFolderDataAttributesFiles;
-  path?: string;
-  createdAt?: string;
-  updatedAt?: string;
-  createdBy?: ProjectMainImageDataAttributesFolderDataAttributesCreatedBy;
-  updatedBy?: ProjectMainImageDataAttributesFolderDataAttributesUpdatedBy;
-};
-
-export type ProjectMainImageDataAttributesFolderData = {
-  id?: number;
-  attributes?: ProjectMainImageDataAttributesFolderDataAttributes;
-};
-
-export type ProjectMainImageDataAttributesFolder = {
-  data?: ProjectMainImageDataAttributesFolderData;
-};
-
 export type ProjectMainImageDataAttributesFolderDataAttributesCreatedByDataAttributes = {
   [key: string]: any;
 };
@@ -357,13 +554,21 @@ export type ProjectMainImageDataAttributesFolderDataAttributesCreatedBy = {
   data?: ProjectMainImageDataAttributesFolderDataAttributesCreatedByData;
 };
 
-export type ProjectMainImageDataAttributesFolderDataAttributesFilesDataItem = {
-  id?: number;
-  attributes?: ProjectMainImageDataAttributesFolderDataAttributesFilesDataItemAttributes;
-};
-
 export type ProjectMainImageDataAttributesFolderDataAttributesFiles = {
   data?: ProjectMainImageDataAttributesFolderDataAttributesFilesDataItem[];
+};
+
+export type ProjectMainImageDataAttributesFolderDataAttributes = {
+  name?: string;
+  pathId?: number;
+  parent?: ProjectMainImageDataAttributesFolderDataAttributesParent;
+  children?: ProjectMainImageDataAttributesFolderDataAttributesChildren;
+  files?: ProjectMainImageDataAttributesFolderDataAttributesFiles;
+  path?: string;
+  createdAt?: string;
+  updatedAt?: string;
+  createdBy?: ProjectMainImageDataAttributesFolderDataAttributesCreatedBy;
+  updatedBy?: ProjectMainImageDataAttributesFolderDataAttributesUpdatedBy;
 };
 
 export type ProjectMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesUpdatedByDataAttributes =
@@ -377,6 +582,10 @@ export type ProjectMainImageDataAttributesFolderDataAttributesFilesDataItemAttri
 
 export type ProjectMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesUpdatedBy = {
   data?: ProjectMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesUpdatedByData;
+};
+
+export type ProjectMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedBy = {
+  data?: ProjectMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByData;
 };
 
 export type ProjectMainImageDataAttributesFolderDataAttributesFilesDataItemAttributes = {
@@ -403,32 +612,9 @@ export type ProjectMainImageDataAttributesFolderDataAttributesFilesDataItemAttri
   updatedBy?: ProjectMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesUpdatedBy;
 };
 
-export type ProjectMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributes =
-  {
-    firstname?: string;
-    lastname?: string;
-    username?: string;
-    email?: string;
-    resetPasswordToken?: string;
-    registrationToken?: string;
-    isActive?: boolean;
-    roles?: ProjectMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRoles;
-    blocked?: boolean;
-    preferedLanguage?: string;
-    createdAt?: string;
-    updatedAt?: string;
-    createdBy?: ProjectMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesCreatedBy;
-    updatedBy?: ProjectMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesUpdatedBy;
-  };
-
-export type ProjectMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByData =
-  {
-    id?: number;
-    attributes?: ProjectMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributes;
-  };
-
-export type ProjectMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedBy = {
-  data?: ProjectMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByData;
+export type ProjectMainImageDataAttributesFolderDataAttributesFilesDataItem = {
+  id?: number;
+  attributes?: ProjectMainImageDataAttributesFolderDataAttributesFilesDataItemAttributes;
 };
 
 export type ProjectMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesUpdatedByDataAttributes =
@@ -459,15 +645,28 @@ export type ProjectMainImageDataAttributesFolderDataAttributesFilesDataItemAttri
     data?: ProjectMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesCreatedByData;
   };
 
-export type ProjectMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItem =
+export type ProjectMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributes =
   {
-    id?: number;
-    attributes?: ProjectMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributes;
+    firstname?: string;
+    lastname?: string;
+    username?: string;
+    email?: string;
+    resetPasswordToken?: string;
+    registrationToken?: string;
+    isActive?: boolean;
+    roles?: ProjectMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRoles;
+    blocked?: boolean;
+    preferedLanguage?: string;
+    createdAt?: string;
+    updatedAt?: string;
+    createdBy?: ProjectMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesCreatedBy;
+    updatedBy?: ProjectMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesUpdatedBy;
   };
 
-export type ProjectMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRoles =
+export type ProjectMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByData =
   {
-    data?: ProjectMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItem[];
+    id?: number;
+    attributes?: ProjectMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributes;
   };
 
 export type ProjectMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesUpdatedByDataAttributes =
@@ -497,6 +696,17 @@ export type ProjectMainImageDataAttributesFolderDataAttributesFilesDataItemAttri
     updatedBy?: ProjectMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesUpdatedBy;
   };
 
+export type ProjectMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItem =
+  {
+    id?: number;
+    attributes?: ProjectMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributes;
+  };
+
+export type ProjectMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRoles =
+  {
+    data?: ProjectMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItem[];
+  };
+
 export type ProjectMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesCreatedByDataAttributes =
   { [key: string]: any };
 
@@ -509,6 +719,19 @@ export type ProjectMainImageDataAttributesFolderDataAttributesFilesDataItemAttri
 export type ProjectMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesCreatedBy =
   {
     data?: ProjectMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesCreatedByData;
+  };
+
+export type ProjectMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributes =
+  {
+    action?: string;
+    subject?: string;
+    properties?: unknown;
+    conditions?: unknown;
+    role?: ProjectMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesRole;
+    createdAt?: string;
+    updatedAt?: string;
+    createdBy?: ProjectMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesCreatedBy;
+    updatedBy?: ProjectMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesUpdatedBy;
   };
 
 export type ProjectMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItem =
@@ -534,19 +757,6 @@ export type ProjectMainImageDataAttributesFolderDataAttributesFilesDataItemAttri
 export type ProjectMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesUpdatedBy =
   {
     data?: ProjectMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesUpdatedByData;
-  };
-
-export type ProjectMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributes =
-  {
-    action?: string;
-    subject?: string;
-    properties?: unknown;
-    conditions?: unknown;
-    role?: ProjectMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesRole;
-    createdAt?: string;
-    updatedAt?: string;
-    createdBy?: ProjectMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesCreatedBy;
-    updatedBy?: ProjectMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesUpdatedBy;
   };
 
 export type ProjectMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesCreatedByDataAttributes =
@@ -642,8 +852,6 @@ export type ProjectMainImageDataAttributesFolderDataAttributesParent = {
   data?: ProjectMainImageDataAttributesFolderDataAttributesParentData;
 };
 
-export type ProjectMainImageDataAttributesRelatedDataItemAttributes = { [key: string]: any };
-
 export type ProjectMainImageDataAttributesRelatedDataItem = {
   id?: number;
   attributes?: ProjectMainImageDataAttributesRelatedDataItemAttributes;
@@ -653,12 +861,15 @@ export type ProjectMainImageDataAttributesRelated = {
   data?: ProjectMainImageDataAttributesRelatedDataItem[];
 };
 
+export type ProjectMainImageDataAttributesRelatedDataItemAttributes = { [key: string]: any };
+
 export type ProjectStatus = (typeof ProjectStatus)[keyof typeof ProjectStatus];
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const ProjectStatus = {
-  new: 'new',
-  finished: 'finished',
+  Completed: 'Completed',
+  'On-going': 'On-going',
+  Under_inception: 'Under inception',
 } as const;
 
 export type ProjectListResponseMetaPagination = {
@@ -682,9 +893,7 @@ export interface ProjectListResponse {
   meta?: ProjectListResponseMeta;
 }
 
-export interface ProjectRequest {
-  data: ProjectRequestData;
-}
+export type ProjectRequestDataCountriesItem = number | string;
 
 export type ProjectRequestDataMainImage = number | string;
 
@@ -693,8 +902,9 @@ export type ProjectRequestDataStatus =
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const ProjectRequestDataStatus = {
-  new: 'new',
-  finished: 'finished',
+  Completed: 'Completed',
+  'On-going': 'On-going',
+  Under_inception: 'Under inception',
 } as const;
 
 export type ProjectRequestData = {
@@ -704,7 +914,246 @@ export type ProjectRequestData = {
   intervention_types?: unknown;
   main_image?: ProjectRequestDataMainImage;
   description?: string;
+  short_description?: string;
+  countries?: ProjectRequestDataCountriesItem[];
 };
+
+export interface ProjectRequest {
+  data: ProjectRequestData;
+}
+
+export type LayerResponseMeta = { [key: string]: any };
+
+export interface LayerResponseDataObject {
+  id?: number;
+  attributes?: Layer;
+}
+
+export interface LayerResponse {
+  data?: LayerResponseDataObject;
+  meta?: LayerResponseMeta;
+}
+
+export type LayerUpdatedByDataAttributes = { [key: string]: any };
+
+export type LayerUpdatedByData = {
+  id?: number;
+  attributes?: LayerUpdatedByDataAttributes;
+};
+
+export type LayerUpdatedBy = {
+  data?: LayerUpdatedByData;
+};
+
+export interface Layer {
+  name?: string;
+  configuration?: unknown;
+  createdAt?: string;
+  updatedAt?: string;
+  publishedAt?: string;
+  createdBy?: LayerCreatedBy;
+  updatedBy?: LayerUpdatedBy;
+}
+
+export type LayerCreatedByDataAttributes = {
+  firstname?: string;
+  lastname?: string;
+  username?: string;
+  email?: string;
+  resetPasswordToken?: string;
+  registrationToken?: string;
+  isActive?: boolean;
+  roles?: LayerCreatedByDataAttributesRoles;
+  blocked?: boolean;
+  preferedLanguage?: string;
+  createdAt?: string;
+  updatedAt?: string;
+  createdBy?: LayerCreatedByDataAttributesCreatedBy;
+  updatedBy?: LayerCreatedByDataAttributesUpdatedBy;
+};
+
+export type LayerCreatedByData = {
+  id?: number;
+  attributes?: LayerCreatedByDataAttributes;
+};
+
+export type LayerCreatedBy = {
+  data?: LayerCreatedByData;
+};
+
+export type LayerCreatedByDataAttributesUpdatedByDataAttributes = { [key: string]: any };
+
+export type LayerCreatedByDataAttributesUpdatedByData = {
+  id?: number;
+  attributes?: LayerCreatedByDataAttributesUpdatedByDataAttributes;
+};
+
+export type LayerCreatedByDataAttributesUpdatedBy = {
+  data?: LayerCreatedByDataAttributesUpdatedByData;
+};
+
+export type LayerCreatedByDataAttributesCreatedByDataAttributes = { [key: string]: any };
+
+export type LayerCreatedByDataAttributesCreatedByData = {
+  id?: number;
+  attributes?: LayerCreatedByDataAttributesCreatedByDataAttributes;
+};
+
+export type LayerCreatedByDataAttributesCreatedBy = {
+  data?: LayerCreatedByDataAttributesCreatedByData;
+};
+
+export type LayerCreatedByDataAttributesRolesDataItemAttributesUpdatedByDataAttributes = {
+  [key: string]: any;
+};
+
+export type LayerCreatedByDataAttributesRolesDataItemAttributesUpdatedByData = {
+  id?: number;
+  attributes?: LayerCreatedByDataAttributesRolesDataItemAttributesUpdatedByDataAttributes;
+};
+
+export type LayerCreatedByDataAttributesRolesDataItemAttributesUpdatedBy = {
+  data?: LayerCreatedByDataAttributesRolesDataItemAttributesUpdatedByData;
+};
+
+export type LayerCreatedByDataAttributesRolesDataItemAttributes = {
+  name?: string;
+  code?: string;
+  description?: string;
+  users?: LayerCreatedByDataAttributesRolesDataItemAttributesUsers;
+  permissions?: LayerCreatedByDataAttributesRolesDataItemAttributesPermissions;
+  createdAt?: string;
+  updatedAt?: string;
+  createdBy?: LayerCreatedByDataAttributesRolesDataItemAttributesCreatedBy;
+  updatedBy?: LayerCreatedByDataAttributesRolesDataItemAttributesUpdatedBy;
+};
+
+export type LayerCreatedByDataAttributesRolesDataItem = {
+  id?: number;
+  attributes?: LayerCreatedByDataAttributesRolesDataItemAttributes;
+};
+
+export type LayerCreatedByDataAttributesRoles = {
+  data?: LayerCreatedByDataAttributesRolesDataItem[];
+};
+
+export type LayerCreatedByDataAttributesRolesDataItemAttributesCreatedByDataAttributes = {
+  [key: string]: any;
+};
+
+export type LayerCreatedByDataAttributesRolesDataItemAttributesCreatedByData = {
+  id?: number;
+  attributes?: LayerCreatedByDataAttributesRolesDataItemAttributesCreatedByDataAttributes;
+};
+
+export type LayerCreatedByDataAttributesRolesDataItemAttributesCreatedBy = {
+  data?: LayerCreatedByDataAttributesRolesDataItemAttributesCreatedByData;
+};
+
+export type LayerCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributes = {
+  action?: string;
+  subject?: string;
+  properties?: unknown;
+  conditions?: unknown;
+  role?: LayerCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesRole;
+  createdAt?: string;
+  updatedAt?: string;
+  createdBy?: LayerCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesCreatedBy;
+  updatedBy?: LayerCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesUpdatedBy;
+};
+
+export type LayerCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItem = {
+  id?: number;
+  attributes?: LayerCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributes;
+};
+
+export type LayerCreatedByDataAttributesRolesDataItemAttributesPermissions = {
+  data?: LayerCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItem[];
+};
+
+export type LayerCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesUpdatedByDataAttributes =
+  { [key: string]: any };
+
+export type LayerCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesUpdatedByData =
+  {
+    id?: number;
+    attributes?: LayerCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesUpdatedByDataAttributes;
+  };
+
+export type LayerCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesUpdatedBy =
+  {
+    data?: LayerCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesUpdatedByData;
+  };
+
+export type LayerCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesCreatedByDataAttributes =
+  { [key: string]: any };
+
+export type LayerCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesCreatedByData =
+  {
+    id?: number;
+    attributes?: LayerCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesCreatedByDataAttributes;
+  };
+
+export type LayerCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesCreatedBy =
+  {
+    data?: LayerCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesCreatedByData;
+  };
+
+export type LayerCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesRoleDataAttributes =
+  { [key: string]: any };
+
+export type LayerCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesRoleData =
+  {
+    id?: number;
+    attributes?: LayerCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesRoleDataAttributes;
+  };
+
+export type LayerCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesRole = {
+  data?: LayerCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesRoleData;
+};
+
+export type LayerCreatedByDataAttributesRolesDataItemAttributesUsersDataItemAttributes = {
+  [key: string]: any;
+};
+
+export type LayerCreatedByDataAttributesRolesDataItemAttributesUsersDataItem = {
+  id?: number;
+  attributes?: LayerCreatedByDataAttributesRolesDataItemAttributesUsersDataItemAttributes;
+};
+
+export type LayerCreatedByDataAttributesRolesDataItemAttributesUsers = {
+  data?: LayerCreatedByDataAttributesRolesDataItemAttributesUsersDataItem[];
+};
+
+export type LayerListResponseMetaPagination = {
+  page?: number;
+  pageSize?: number;
+  pageCount?: number;
+  total?: number;
+};
+
+export type LayerListResponseMeta = {
+  pagination?: LayerListResponseMetaPagination;
+};
+
+export interface LayerListResponseDataItem {
+  id?: number;
+  attributes?: Layer;
+}
+
+export interface LayerListResponse {
+  data?: LayerListResponseDataItem[];
+  meta?: LayerListResponseMeta;
+}
+
+export type LayerRequestData = {
+  name?: string;
+  configuration?: unknown;
+};
+
+export interface LayerRequest {
+  data: LayerRequestData;
+}
 
 export type IndicatorFieldResponseMeta = { [key: string]: any };
 
@@ -729,6 +1178,17 @@ export type IndicatorFieldUpdatedBy = {
   data?: IndicatorFieldUpdatedByData;
 };
 
+export type IndicatorFieldCreatedByDataAttributes = { [key: string]: any };
+
+export type IndicatorFieldCreatedByData = {
+  id?: number;
+  attributes?: IndicatorFieldCreatedByDataAttributes;
+};
+
+export type IndicatorFieldCreatedBy = {
+  data?: IndicatorFieldCreatedByData;
+};
+
 export interface IndicatorField {
   project?: IndicatorFieldProject;
   indicator_name?: string;
@@ -741,17 +1201,6 @@ export interface IndicatorField {
   createdBy?: IndicatorFieldCreatedBy;
   updatedBy?: IndicatorFieldUpdatedBy;
 }
-
-export type IndicatorFieldCreatedByDataAttributes = { [key: string]: any };
-
-export type IndicatorFieldCreatedByData = {
-  id?: number;
-  attributes?: IndicatorFieldCreatedByDataAttributes;
-};
-
-export type IndicatorFieldCreatedBy = {
-  data?: IndicatorFieldCreatedByData;
-};
 
 export type IndicatorFieldProjectData = {
   id?: number;
@@ -773,20 +1222,6 @@ export type IndicatorFieldProjectDataAttributesUpdatedBy = {
   data?: IndicatorFieldProjectDataAttributesUpdatedByData;
 };
 
-export type IndicatorFieldProjectDataAttributes = {
-  project_code?: string;
-  name?: string;
-  status?: IndicatorFieldProjectDataAttributesStatus;
-  intervention_types?: unknown;
-  main_image?: IndicatorFieldProjectDataAttributesMainImage;
-  description?: string;
-  createdAt?: string;
-  updatedAt?: string;
-  publishedAt?: string;
-  createdBy?: IndicatorFieldProjectDataAttributesCreatedBy;
-  updatedBy?: IndicatorFieldProjectDataAttributesUpdatedBy;
-};
-
 export type IndicatorFieldProjectDataAttributesCreatedByDataAttributes = { [key: string]: any };
 
 export type IndicatorFieldProjectDataAttributesCreatedByData = {
@@ -796,6 +1231,82 @@ export type IndicatorFieldProjectDataAttributesCreatedByData = {
 
 export type IndicatorFieldProjectDataAttributesCreatedBy = {
   data?: IndicatorFieldProjectDataAttributesCreatedByData;
+};
+
+export type IndicatorFieldProjectDataAttributesCountriesDataItem = {
+  id?: number;
+  attributes?: IndicatorFieldProjectDataAttributesCountriesDataItemAttributes;
+};
+
+export type IndicatorFieldProjectDataAttributesCountries = {
+  data?: IndicatorFieldProjectDataAttributesCountriesDataItem[];
+};
+
+export type IndicatorFieldProjectDataAttributes = {
+  project_code?: string;
+  name?: string;
+  status?: IndicatorFieldProjectDataAttributesStatus;
+  intervention_types?: unknown;
+  main_image?: IndicatorFieldProjectDataAttributesMainImage;
+  description?: string;
+  short_description?: string;
+  countries?: IndicatorFieldProjectDataAttributesCountries;
+  createdAt?: string;
+  updatedAt?: string;
+  publishedAt?: string;
+  createdBy?: IndicatorFieldProjectDataAttributesCreatedBy;
+  updatedBy?: IndicatorFieldProjectDataAttributesUpdatedBy;
+};
+
+export type IndicatorFieldProjectDataAttributesCountriesDataItemAttributesUpdatedByDataAttributes =
+  { [key: string]: any };
+
+export type IndicatorFieldProjectDataAttributesCountriesDataItemAttributesUpdatedByData = {
+  id?: number;
+  attributes?: IndicatorFieldProjectDataAttributesCountriesDataItemAttributesUpdatedByDataAttributes;
+};
+
+export type IndicatorFieldProjectDataAttributesCountriesDataItemAttributesUpdatedBy = {
+  data?: IndicatorFieldProjectDataAttributesCountriesDataItemAttributesUpdatedByData;
+};
+
+export type IndicatorFieldProjectDataAttributesCountriesDataItemAttributesCreatedByDataAttributes =
+  { [key: string]: any };
+
+export type IndicatorFieldProjectDataAttributesCountriesDataItemAttributesCreatedByData = {
+  id?: number;
+  attributes?: IndicatorFieldProjectDataAttributesCountriesDataItemAttributesCreatedByDataAttributes;
+};
+
+export type IndicatorFieldProjectDataAttributesCountriesDataItemAttributesCreatedBy = {
+  data?: IndicatorFieldProjectDataAttributesCountriesDataItemAttributesCreatedByData;
+};
+
+export type IndicatorFieldProjectDataAttributesCountriesDataItemAttributesProjectsDataItemAttributes =
+  { [key: string]: any };
+
+export type IndicatorFieldProjectDataAttributesCountriesDataItemAttributesProjectsDataItem = {
+  id?: number;
+  attributes?: IndicatorFieldProjectDataAttributesCountriesDataItemAttributesProjectsDataItemAttributes;
+};
+
+export type IndicatorFieldProjectDataAttributesCountriesDataItemAttributesProjects = {
+  data?: IndicatorFieldProjectDataAttributesCountriesDataItemAttributesProjectsDataItem[];
+};
+
+export type IndicatorFieldProjectDataAttributesCountriesDataItemAttributes = {
+  name?: string;
+  iso?: string;
+  description?: string;
+  gfw_link?: string;
+  country_information_link?: string;
+  short_description?: string;
+  projects?: IndicatorFieldProjectDataAttributesCountriesDataItemAttributesProjects;
+  createdAt?: string;
+  updatedAt?: string;
+  publishedAt?: string;
+  createdBy?: IndicatorFieldProjectDataAttributesCountriesDataItemAttributesCreatedBy;
+  updatedBy?: IndicatorFieldProjectDataAttributesCountriesDataItemAttributesUpdatedBy;
 };
 
 export type IndicatorFieldProjectDataAttributesMainImageData = {
@@ -818,28 +1329,6 @@ export type IndicatorFieldProjectDataAttributesMainImageDataAttributesUpdatedByD
 
 export type IndicatorFieldProjectDataAttributesMainImageDataAttributesUpdatedBy = {
   data?: IndicatorFieldProjectDataAttributesMainImageDataAttributesUpdatedByData;
-};
-
-export type IndicatorFieldProjectDataAttributesMainImageDataAttributesCreatedByDataAttributes = {
-  [key: string]: any;
-};
-
-export type IndicatorFieldProjectDataAttributesMainImageDataAttributesCreatedByData = {
-  id?: number;
-  attributes?: IndicatorFieldProjectDataAttributesMainImageDataAttributesCreatedByDataAttributes;
-};
-
-export type IndicatorFieldProjectDataAttributesMainImageDataAttributesCreatedBy = {
-  data?: IndicatorFieldProjectDataAttributesMainImageDataAttributesCreatedByData;
-};
-
-export type IndicatorFieldProjectDataAttributesMainImageDataAttributesFolderData = {
-  id?: number;
-  attributes?: IndicatorFieldProjectDataAttributesMainImageDataAttributesFolderDataAttributes;
-};
-
-export type IndicatorFieldProjectDataAttributesMainImageDataAttributesFolder = {
-  data?: IndicatorFieldProjectDataAttributesMainImageDataAttributesFolderData;
 };
 
 export type IndicatorFieldProjectDataAttributesMainImageDataAttributes = {
@@ -866,6 +1355,28 @@ export type IndicatorFieldProjectDataAttributesMainImageDataAttributes = {
   updatedBy?: IndicatorFieldProjectDataAttributesMainImageDataAttributesUpdatedBy;
 };
 
+export type IndicatorFieldProjectDataAttributesMainImageDataAttributesCreatedByDataAttributes = {
+  [key: string]: any;
+};
+
+export type IndicatorFieldProjectDataAttributesMainImageDataAttributesCreatedByData = {
+  id?: number;
+  attributes?: IndicatorFieldProjectDataAttributesMainImageDataAttributesCreatedByDataAttributes;
+};
+
+export type IndicatorFieldProjectDataAttributesMainImageDataAttributesCreatedBy = {
+  data?: IndicatorFieldProjectDataAttributesMainImageDataAttributesCreatedByData;
+};
+
+export type IndicatorFieldProjectDataAttributesMainImageDataAttributesFolderData = {
+  id?: number;
+  attributes?: IndicatorFieldProjectDataAttributesMainImageDataAttributesFolderDataAttributes;
+};
+
+export type IndicatorFieldProjectDataAttributesMainImageDataAttributesFolder = {
+  data?: IndicatorFieldProjectDataAttributesMainImageDataAttributesFolderData;
+};
+
 export type IndicatorFieldProjectDataAttributesMainImageDataAttributesFolderDataAttributesUpdatedByDataAttributes =
   { [key: string]: any };
 
@@ -879,6 +1390,19 @@ export type IndicatorFieldProjectDataAttributesMainImageDataAttributesFolderData
   {
     data?: IndicatorFieldProjectDataAttributesMainImageDataAttributesFolderDataAttributesUpdatedByData;
   };
+
+export type IndicatorFieldProjectDataAttributesMainImageDataAttributesFolderDataAttributes = {
+  name?: string;
+  pathId?: number;
+  parent?: IndicatorFieldProjectDataAttributesMainImageDataAttributesFolderDataAttributesParent;
+  children?: IndicatorFieldProjectDataAttributesMainImageDataAttributesFolderDataAttributesChildren;
+  files?: IndicatorFieldProjectDataAttributesMainImageDataAttributesFolderDataAttributesFiles;
+  path?: string;
+  createdAt?: string;
+  updatedAt?: string;
+  createdBy?: IndicatorFieldProjectDataAttributesMainImageDataAttributesFolderDataAttributesCreatedBy;
+  updatedBy?: IndicatorFieldProjectDataAttributesMainImageDataAttributesFolderDataAttributesUpdatedBy;
+};
 
 export type IndicatorFieldProjectDataAttributesMainImageDataAttributesFolderDataAttributesCreatedByDataAttributes =
   { [key: string]: any };
@@ -902,19 +1426,6 @@ export type IndicatorFieldProjectDataAttributesMainImageDataAttributesFolderData
 
 export type IndicatorFieldProjectDataAttributesMainImageDataAttributesFolderDataAttributesFiles = {
   data?: IndicatorFieldProjectDataAttributesMainImageDataAttributesFolderDataAttributesFilesDataItem[];
-};
-
-export type IndicatorFieldProjectDataAttributesMainImageDataAttributesFolderDataAttributes = {
-  name?: string;
-  pathId?: number;
-  parent?: IndicatorFieldProjectDataAttributesMainImageDataAttributesFolderDataAttributesParent;
-  children?: IndicatorFieldProjectDataAttributesMainImageDataAttributesFolderDataAttributesChildren;
-  files?: IndicatorFieldProjectDataAttributesMainImageDataAttributesFolderDataAttributesFiles;
-  path?: string;
-  createdAt?: string;
-  updatedAt?: string;
-  createdBy?: IndicatorFieldProjectDataAttributesMainImageDataAttributesFolderDataAttributesCreatedBy;
-  updatedBy?: IndicatorFieldProjectDataAttributesMainImageDataAttributesFolderDataAttributesUpdatedBy;
 };
 
 export type IndicatorFieldProjectDataAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesUpdatedByDataAttributes =
@@ -981,25 +1492,6 @@ export type IndicatorFieldProjectDataAttributesMainImageDataAttributesFolderData
     data?: IndicatorFieldProjectDataAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesUpdatedByData;
   };
 
-export type IndicatorFieldProjectDataAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesCreatedByData =
-  {
-    id?: number;
-    attributes?: IndicatorFieldProjectDataAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesCreatedByDataAttributes;
-  };
-
-export type IndicatorFieldProjectDataAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesCreatedBy =
-  {
-    data?: IndicatorFieldProjectDataAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesCreatedByData;
-  };
-
-export type IndicatorFieldProjectDataAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesCreatedByDataAttributes =
-  { [key: string]: any };
-
-export type IndicatorFieldProjectDataAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRoles =
-  {
-    data?: IndicatorFieldProjectDataAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItem[];
-  };
-
 export type IndicatorFieldProjectDataAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributes =
   {
     firstname?: string;
@@ -1018,6 +1510,31 @@ export type IndicatorFieldProjectDataAttributesMainImageDataAttributesFolderData
     updatedBy?: IndicatorFieldProjectDataAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesUpdatedBy;
   };
 
+export type IndicatorFieldProjectDataAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesCreatedByDataAttributes =
+  { [key: string]: any };
+
+export type IndicatorFieldProjectDataAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesCreatedByData =
+  {
+    id?: number;
+    attributes?: IndicatorFieldProjectDataAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesCreatedByDataAttributes;
+  };
+
+export type IndicatorFieldProjectDataAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesCreatedBy =
+  {
+    data?: IndicatorFieldProjectDataAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesCreatedByData;
+  };
+
+export type IndicatorFieldProjectDataAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItem =
+  {
+    id?: number;
+    attributes?: IndicatorFieldProjectDataAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributes;
+  };
+
+export type IndicatorFieldProjectDataAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRoles =
+  {
+    data?: IndicatorFieldProjectDataAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItem[];
+  };
+
 export type IndicatorFieldProjectDataAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesUpdatedByDataAttributes =
   { [key: string]: any };
 
@@ -1030,6 +1547,19 @@ export type IndicatorFieldProjectDataAttributesMainImageDataAttributesFolderData
 export type IndicatorFieldProjectDataAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesUpdatedBy =
   {
     data?: IndicatorFieldProjectDataAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesUpdatedByData;
+  };
+
+export type IndicatorFieldProjectDataAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributes =
+  {
+    name?: string;
+    code?: string;
+    description?: string;
+    users?: IndicatorFieldProjectDataAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesUsers;
+    permissions?: IndicatorFieldProjectDataAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissions;
+    createdAt?: string;
+    updatedAt?: string;
+    createdBy?: IndicatorFieldProjectDataAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesCreatedBy;
+    updatedBy?: IndicatorFieldProjectDataAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesUpdatedBy;
   };
 
 export type IndicatorFieldProjectDataAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesCreatedByDataAttributes =
@@ -1046,19 +1576,6 @@ export type IndicatorFieldProjectDataAttributesMainImageDataAttributesFolderData
     data?: IndicatorFieldProjectDataAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesCreatedByData;
   };
 
-export type IndicatorFieldProjectDataAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributes =
-  {
-    action?: string;
-    subject?: string;
-    properties?: unknown;
-    conditions?: unknown;
-    role?: IndicatorFieldProjectDataAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesRole;
-    createdAt?: string;
-    updatedAt?: string;
-    createdBy?: IndicatorFieldProjectDataAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesCreatedBy;
-    updatedBy?: IndicatorFieldProjectDataAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesUpdatedBy;
-  };
-
 export type IndicatorFieldProjectDataAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItem =
   {
     id?: number;
@@ -1068,25 +1585,6 @@ export type IndicatorFieldProjectDataAttributesMainImageDataAttributesFolderData
 export type IndicatorFieldProjectDataAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissions =
   {
     data?: IndicatorFieldProjectDataAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItem[];
-  };
-
-export type IndicatorFieldProjectDataAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributes =
-  {
-    name?: string;
-    code?: string;
-    description?: string;
-    users?: IndicatorFieldProjectDataAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesUsers;
-    permissions?: IndicatorFieldProjectDataAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissions;
-    createdAt?: string;
-    updatedAt?: string;
-    createdBy?: IndicatorFieldProjectDataAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesCreatedBy;
-    updatedBy?: IndicatorFieldProjectDataAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesUpdatedBy;
-  };
-
-export type IndicatorFieldProjectDataAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItem =
-  {
-    id?: number;
-    attributes?: IndicatorFieldProjectDataAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributes;
   };
 
 export type IndicatorFieldProjectDataAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesUpdatedByDataAttributes =
@@ -1129,6 +1627,19 @@ export type IndicatorFieldProjectDataAttributesMainImageDataAttributesFolderData
 export type IndicatorFieldProjectDataAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesRole =
   {
     data?: IndicatorFieldProjectDataAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesRoleData;
+  };
+
+export type IndicatorFieldProjectDataAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributes =
+  {
+    action?: string;
+    subject?: string;
+    properties?: unknown;
+    conditions?: unknown;
+    role?: IndicatorFieldProjectDataAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesRole;
+    createdAt?: string;
+    updatedAt?: string;
+    createdBy?: IndicatorFieldProjectDataAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesCreatedBy;
+    updatedBy?: IndicatorFieldProjectDataAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesUpdatedBy;
   };
 
 export type IndicatorFieldProjectDataAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesUsersDataItemAttributes =
@@ -1200,6 +1711,10 @@ export type IndicatorFieldProjectDataAttributesMainImageDataAttributesFolderData
   data?: IndicatorFieldProjectDataAttributesMainImageDataAttributesFolderDataAttributesParentData;
 };
 
+export type IndicatorFieldProjectDataAttributesMainImageDataAttributesRelatedDataItemAttributes = {
+  [key: string]: any;
+};
+
 export type IndicatorFieldProjectDataAttributesMainImageDataAttributesRelatedDataItem = {
   id?: number;
   attributes?: IndicatorFieldProjectDataAttributesMainImageDataAttributesRelatedDataItemAttributes;
@@ -1209,17 +1724,14 @@ export type IndicatorFieldProjectDataAttributesMainImageDataAttributesRelated = 
   data?: IndicatorFieldProjectDataAttributesMainImageDataAttributesRelatedDataItem[];
 };
 
-export type IndicatorFieldProjectDataAttributesMainImageDataAttributesRelatedDataItemAttributes = {
-  [key: string]: any;
-};
-
 export type IndicatorFieldProjectDataAttributesStatus =
   (typeof IndicatorFieldProjectDataAttributesStatus)[keyof typeof IndicatorFieldProjectDataAttributesStatus];
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const IndicatorFieldProjectDataAttributesStatus = {
-  new: 'new',
-  finished: 'finished',
+  Completed: 'Completed',
+  'On-going': 'On-going',
+  Under_inception: 'Under inception',
 } as const;
 
 export type IndicatorFieldListResponseMetaPagination = {
@@ -1259,14 +1771,27 @@ export interface IndicatorFieldRequest {
 
 export type CountryIndicatorFieldResponseMeta = { [key: string]: any };
 
-export interface CountryIndicatorFieldResponseDataObject {
-  id?: number;
-  attributes?: CountryIndicatorField;
-}
-
 export interface CountryIndicatorFieldResponse {
   data?: CountryIndicatorFieldResponseDataObject;
   meta?: CountryIndicatorFieldResponseMeta;
+}
+
+export interface CountryIndicatorField {
+  country?: CountryIndicatorFieldCountry;
+  indicator_name?: string;
+  unit?: string;
+  value?: unknown;
+  using_year?: boolean;
+  createdAt?: string;
+  updatedAt?: string;
+  publishedAt?: string;
+  createdBy?: CountryIndicatorFieldCreatedBy;
+  updatedBy?: CountryIndicatorFieldUpdatedBy;
+}
+
+export interface CountryIndicatorFieldResponseDataObject {
+  id?: number;
+  attributes?: CountryIndicatorField;
 }
 
 export type CountryIndicatorFieldUpdatedByDataAttributes = { [key: string]: any };
@@ -1291,22 +1816,14 @@ export type CountryIndicatorFieldCreatedBy = {
   data?: CountryIndicatorFieldCreatedByData;
 };
 
+export type CountryIndicatorFieldCountryData = {
+  id?: number;
+  attributes?: CountryIndicatorFieldCountryDataAttributes;
+};
+
 export type CountryIndicatorFieldCountry = {
   data?: CountryIndicatorFieldCountryData;
 };
-
-export interface CountryIndicatorField {
-  country?: CountryIndicatorFieldCountry;
-  indicator_name?: string;
-  unit?: string;
-  value?: unknown;
-  using_year?: boolean;
-  createdAt?: string;
-  updatedAt?: string;
-  publishedAt?: string;
-  createdBy?: CountryIndicatorFieldCreatedBy;
-  updatedBy?: CountryIndicatorFieldUpdatedBy;
-}
 
 export type CountryIndicatorFieldCountryDataAttributesUpdatedByDataAttributes = {
   [key: string]: any;
@@ -1321,15 +1838,14 @@ export type CountryIndicatorFieldCountryDataAttributesUpdatedBy = {
   data?: CountryIndicatorFieldCountryDataAttributesUpdatedByData;
 };
 
-export type CountryIndicatorFieldCountryDataAttributesCreatedBy = {
-  data?: CountryIndicatorFieldCountryDataAttributesCreatedByData;
-};
-
 export type CountryIndicatorFieldCountryDataAttributes = {
   name?: string;
   iso?: string;
   description?: string;
   gfw_link?: string;
+  country_information_link?: string;
+  short_description?: string;
+  projects?: CountryIndicatorFieldCountryDataAttributesProjects;
   createdAt?: string;
   updatedAt?: string;
   publishedAt?: string;
@@ -1337,50 +1853,8 @@ export type CountryIndicatorFieldCountryDataAttributes = {
   updatedBy?: CountryIndicatorFieldCountryDataAttributesUpdatedBy;
 };
 
-export type CountryIndicatorFieldCountryData = {
-  id?: number;
-  attributes?: CountryIndicatorFieldCountryDataAttributes;
-};
-
-export type CountryIndicatorFieldCountryDataAttributesCreatedByDataAttributesUpdatedByDataAttributes =
-  { [key: string]: any };
-
-export type CountryIndicatorFieldCountryDataAttributesCreatedByDataAttributesUpdatedByData = {
-  id?: number;
-  attributes?: CountryIndicatorFieldCountryDataAttributesCreatedByDataAttributesUpdatedByDataAttributes;
-};
-
-export type CountryIndicatorFieldCountryDataAttributesCreatedByDataAttributesUpdatedBy = {
-  data?: CountryIndicatorFieldCountryDataAttributesCreatedByDataAttributesUpdatedByData;
-};
-
-export type CountryIndicatorFieldCountryDataAttributesCreatedByDataAttributesCreatedByDataAttributes =
-  { [key: string]: any };
-
-export type CountryIndicatorFieldCountryDataAttributesCreatedByDataAttributesCreatedByData = {
-  id?: number;
-  attributes?: CountryIndicatorFieldCountryDataAttributesCreatedByDataAttributesCreatedByDataAttributes;
-};
-
-export type CountryIndicatorFieldCountryDataAttributesCreatedByDataAttributesCreatedBy = {
-  data?: CountryIndicatorFieldCountryDataAttributesCreatedByDataAttributesCreatedByData;
-};
-
 export type CountryIndicatorFieldCountryDataAttributesCreatedByDataAttributes = {
-  firstname?: string;
-  lastname?: string;
-  username?: string;
-  email?: string;
-  resetPasswordToken?: string;
-  registrationToken?: string;
-  isActive?: boolean;
-  roles?: CountryIndicatorFieldCountryDataAttributesCreatedByDataAttributesRoles;
-  blocked?: boolean;
-  preferedLanguage?: string;
-  createdAt?: string;
-  updatedAt?: string;
-  createdBy?: CountryIndicatorFieldCountryDataAttributesCreatedByDataAttributesCreatedBy;
-  updatedBy?: CountryIndicatorFieldCountryDataAttributesCreatedByDataAttributesUpdatedBy;
+  [key: string]: any;
 };
 
 export type CountryIndicatorFieldCountryDataAttributesCreatedByData = {
@@ -1388,135 +1862,505 @@ export type CountryIndicatorFieldCountryDataAttributesCreatedByData = {
   attributes?: CountryIndicatorFieldCountryDataAttributesCreatedByDataAttributes;
 };
 
-export type CountryIndicatorFieldCountryDataAttributesCreatedByDataAttributesRolesDataItemAttributesUpdatedByData =
+export type CountryIndicatorFieldCountryDataAttributesCreatedBy = {
+  data?: CountryIndicatorFieldCountryDataAttributesCreatedByData;
+};
+
+export type CountryIndicatorFieldCountryDataAttributesProjectsDataItem = {
+  id?: number;
+  attributes?: CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributes;
+};
+
+export type CountryIndicatorFieldCountryDataAttributesProjects = {
+  data?: CountryIndicatorFieldCountryDataAttributesProjectsDataItem[];
+};
+
+export type CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesUpdatedByDataAttributes =
+  { [key: string]: any };
+
+export type CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesUpdatedByData = {
+  id?: number;
+  attributes?: CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesUpdatedByDataAttributes;
+};
+
+export type CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesUpdatedBy = {
+  data?: CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesUpdatedByData;
+};
+
+export type CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributes = {
+  project_code?: string;
+  name?: string;
+  status?: CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesStatus;
+  intervention_types?: unknown;
+  main_image?: CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImage;
+  description?: string;
+  short_description?: string;
+  countries?: CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesCountries;
+  createdAt?: string;
+  updatedAt?: string;
+  publishedAt?: string;
+  createdBy?: CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesCreatedBy;
+  updatedBy?: CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesUpdatedBy;
+};
+
+export type CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesCreatedByDataAttributes =
+  { [key: string]: any };
+
+export type CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesCreatedByData = {
+  id?: number;
+  attributes?: CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesCreatedByDataAttributes;
+};
+
+export type CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesCreatedBy = {
+  data?: CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesCreatedByData;
+};
+
+export type CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesCountriesDataItem =
   {
     id?: number;
-    attributes?: CountryIndicatorFieldCountryDataAttributesCreatedByDataAttributesRolesDataItemAttributesUpdatedByDataAttributes;
+    attributes?: CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesCountriesDataItemAttributes;
   };
 
-export type CountryIndicatorFieldCountryDataAttributesCreatedByDataAttributesRolesDataItemAttributesUpdatedBy =
+export type CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesCountries = {
+  data?: CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesCountriesDataItem[];
+};
+
+export type CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesCountriesDataItemAttributes =
+  { [key: string]: any };
+
+export type CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageData = {
+  id?: number;
+  attributes?: CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributes;
+};
+
+export type CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImage = {
+  data?: CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageData;
+};
+
+export type CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesUpdatedByDataAttributes =
+  { [key: string]: any };
+
+export type CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesUpdatedByData =
   {
-    data?: CountryIndicatorFieldCountryDataAttributesCreatedByDataAttributesRolesDataItemAttributesUpdatedByData;
+    id?: number;
+    attributes?: CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesUpdatedByDataAttributes;
   };
 
-export type CountryIndicatorFieldCountryDataAttributesCreatedByDataAttributesRolesDataItemAttributes =
+export type CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesUpdatedBy =
+  {
+    data?: CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesUpdatedByData;
+  };
+
+export type CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesCreatedByDataAttributes =
+  { [key: string]: any };
+
+export type CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesCreatedByData =
+  {
+    id?: number;
+    attributes?: CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesCreatedByDataAttributes;
+  };
+
+export type CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesCreatedBy =
+  {
+    data?: CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesCreatedByData;
+  };
+
+export type CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderData =
+  {
+    id?: number;
+    attributes?: CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributes;
+  };
+
+export type CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolder =
+  {
+    data?: CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderData;
+  };
+
+export type CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributes =
+  {
+    name?: string;
+    alternativeText?: string;
+    caption?: string;
+    width?: number;
+    height?: number;
+    formats?: unknown;
+    hash?: string;
+    ext?: string;
+    mime?: string;
+    size?: number;
+    url?: string;
+    previewUrl?: string;
+    provider?: string;
+    provider_metadata?: unknown;
+    related?: CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesRelated;
+    folder?: CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolder;
+    folderPath?: string;
+    createdAt?: string;
+    updatedAt?: string;
+    createdBy?: CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesCreatedBy;
+    updatedBy?: CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesUpdatedBy;
+  };
+
+export type CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesUpdatedByDataAttributes =
+  { [key: string]: any };
+
+export type CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesUpdatedByData =
+  {
+    id?: number;
+    attributes?: CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesUpdatedByDataAttributes;
+  };
+
+export type CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesUpdatedBy =
+  {
+    data?: CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesUpdatedByData;
+  };
+
+export type CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesCreatedByDataAttributes =
+  { [key: string]: any };
+
+export type CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesCreatedByData =
+  {
+    id?: number;
+    attributes?: CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesCreatedByDataAttributes;
+  };
+
+export type CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesCreatedBy =
+  {
+    data?: CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesCreatedByData;
+  };
+
+export type CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItem =
+  {
+    id?: number;
+    attributes?: CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributes;
+  };
+
+export type CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFiles =
+  {
+    data?: CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItem[];
+  };
+
+export type CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributes =
+  {
+    name?: string;
+    pathId?: number;
+    parent?: CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesParent;
+    children?: CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesChildren;
+    files?: CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFiles;
+    path?: string;
+    createdAt?: string;
+    updatedAt?: string;
+    createdBy?: CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesCreatedBy;
+    updatedBy?: CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesUpdatedBy;
+  };
+
+export type CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesUpdatedByDataAttributes =
+  { [key: string]: any };
+
+export type CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesUpdatedByData =
+  {
+    id?: number;
+    attributes?: CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesUpdatedByDataAttributes;
+  };
+
+export type CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesUpdatedBy =
+  {
+    data?: CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesUpdatedByData;
+  };
+
+export type CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByData =
+  {
+    id?: number;
+    attributes?: CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributes;
+  };
+
+export type CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedBy =
+  {
+    data?: CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByData;
+  };
+
+export type CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributes =
+  {
+    name?: string;
+    alternativeText?: string;
+    caption?: string;
+    width?: number;
+    height?: number;
+    formats?: unknown;
+    hash?: string;
+    ext?: string;
+    mime?: string;
+    size?: number;
+    url?: string;
+    previewUrl?: string;
+    provider?: string;
+    provider_metadata?: unknown;
+    related?: CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesRelated;
+    folder?: CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesFolder;
+    folderPath?: string;
+    createdAt?: string;
+    updatedAt?: string;
+    createdBy?: CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedBy;
+    updatedBy?: CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesUpdatedBy;
+  };
+
+export type CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesUpdatedByDataAttributes =
+  { [key: string]: any };
+
+export type CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesUpdatedByData =
+  {
+    id?: number;
+    attributes?: CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesUpdatedByDataAttributes;
+  };
+
+export type CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesUpdatedBy =
+  {
+    data?: CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesUpdatedByData;
+  };
+
+export type CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesCreatedByData =
+  {
+    id?: number;
+    attributes?: CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesCreatedByDataAttributes;
+  };
+
+export type CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesCreatedBy =
+  {
+    data?: CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesCreatedByData;
+  };
+
+export type CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributes =
+  {
+    firstname?: string;
+    lastname?: string;
+    username?: string;
+    email?: string;
+    resetPasswordToken?: string;
+    registrationToken?: string;
+    isActive?: boolean;
+    roles?: CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRoles;
+    blocked?: boolean;
+    preferedLanguage?: string;
+    createdAt?: string;
+    updatedAt?: string;
+    createdBy?: CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesCreatedBy;
+    updatedBy?: CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesUpdatedBy;
+  };
+
+export type CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesCreatedByDataAttributes =
+  { [key: string]: any };
+
+export type CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItem =
+  {
+    id?: number;
+    attributes?: CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributes;
+  };
+
+export type CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRoles =
+  {
+    data?: CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItem[];
+  };
+
+export type CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesUpdatedByDataAttributes =
+  { [key: string]: any };
+
+export type CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesUpdatedByData =
+  {
+    id?: number;
+    attributes?: CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesUpdatedByDataAttributes;
+  };
+
+export type CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesUpdatedBy =
+  {
+    data?: CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesUpdatedByData;
+  };
+
+export type CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesCreatedByDataAttributes =
+  { [key: string]: any };
+
+export type CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesCreatedByData =
+  {
+    id?: number;
+    attributes?: CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesCreatedByDataAttributes;
+  };
+
+export type CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesCreatedBy =
+  {
+    data?: CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesCreatedByData;
+  };
+
+export type CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItem =
+  {
+    id?: number;
+    attributes?: CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributes;
+  };
+
+export type CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissions =
+  {
+    data?: CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItem[];
+  };
+
+export type CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributes =
   {
     name?: string;
     code?: string;
     description?: string;
-    users?: CountryIndicatorFieldCountryDataAttributesCreatedByDataAttributesRolesDataItemAttributesUsers;
-    permissions?: CountryIndicatorFieldCountryDataAttributesCreatedByDataAttributesRolesDataItemAttributesPermissions;
+    users?: CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesUsers;
+    permissions?: CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissions;
     createdAt?: string;
     updatedAt?: string;
-    createdBy?: CountryIndicatorFieldCountryDataAttributesCreatedByDataAttributesRolesDataItemAttributesCreatedBy;
-    updatedBy?: CountryIndicatorFieldCountryDataAttributesCreatedByDataAttributesRolesDataItemAttributesUpdatedBy;
+    createdBy?: CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesCreatedBy;
+    updatedBy?: CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesUpdatedBy;
   };
 
-export type CountryIndicatorFieldCountryDataAttributesCreatedByDataAttributesRolesDataItem = {
-  id?: number;
-  attributes?: CountryIndicatorFieldCountryDataAttributesCreatedByDataAttributesRolesDataItemAttributes;
-};
-
-export type CountryIndicatorFieldCountryDataAttributesCreatedByDataAttributesRoles = {
-  data?: CountryIndicatorFieldCountryDataAttributesCreatedByDataAttributesRolesDataItem[];
-};
-
-export type CountryIndicatorFieldCountryDataAttributesCreatedByDataAttributesRolesDataItemAttributesUpdatedByDataAttributes =
+export type CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesUpdatedByDataAttributes =
   { [key: string]: any };
 
-export type CountryIndicatorFieldCountryDataAttributesCreatedByDataAttributesRolesDataItemAttributesCreatedByDataAttributes =
+export type CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesUpdatedByData =
+  {
+    id?: number;
+    attributes?: CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesUpdatedByDataAttributes;
+  };
+
+export type CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesUpdatedBy =
+  {
+    data?: CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesUpdatedByData;
+  };
+
+export type CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesCreatedByDataAttributes =
   { [key: string]: any };
 
-export type CountryIndicatorFieldCountryDataAttributesCreatedByDataAttributesRolesDataItemAttributesCreatedByData =
+export type CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesCreatedByData =
   {
     id?: number;
-    attributes?: CountryIndicatorFieldCountryDataAttributesCreatedByDataAttributesRolesDataItemAttributesCreatedByDataAttributes;
+    attributes?: CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesCreatedByDataAttributes;
   };
 
-export type CountryIndicatorFieldCountryDataAttributesCreatedByDataAttributesRolesDataItemAttributesCreatedBy =
+export type CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesCreatedBy =
   {
-    data?: CountryIndicatorFieldCountryDataAttributesCreatedByDataAttributesRolesDataItemAttributesCreatedByData;
+    data?: CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesCreatedByData;
   };
 
-export type CountryIndicatorFieldCountryDataAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItem =
-  {
-    id?: number;
-    attributes?: CountryIndicatorFieldCountryDataAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributes;
-  };
-
-export type CountryIndicatorFieldCountryDataAttributesCreatedByDataAttributesRolesDataItemAttributesPermissions =
-  {
-    data?: CountryIndicatorFieldCountryDataAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItem[];
-  };
-
-export type CountryIndicatorFieldCountryDataAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesUpdatedByDataAttributes =
+export type CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesRoleDataAttributes =
   { [key: string]: any };
 
-export type CountryIndicatorFieldCountryDataAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesUpdatedByData =
+export type CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesRoleData =
   {
     id?: number;
-    attributes?: CountryIndicatorFieldCountryDataAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesUpdatedByDataAttributes;
+    attributes?: CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesRoleDataAttributes;
   };
 
-export type CountryIndicatorFieldCountryDataAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesUpdatedBy =
+export type CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesRole =
   {
-    data?: CountryIndicatorFieldCountryDataAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesUpdatedByData;
+    data?: CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesRoleData;
   };
 
-export type CountryIndicatorFieldCountryDataAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesCreatedByDataAttributes =
-  { [key: string]: any };
-
-export type CountryIndicatorFieldCountryDataAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesCreatedByData =
-  {
-    id?: number;
-    attributes?: CountryIndicatorFieldCountryDataAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesCreatedByDataAttributes;
-  };
-
-export type CountryIndicatorFieldCountryDataAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesCreatedBy =
-  {
-    data?: CountryIndicatorFieldCountryDataAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesCreatedByData;
-  };
-
-export type CountryIndicatorFieldCountryDataAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesRoleDataAttributes =
-  { [key: string]: any };
-
-export type CountryIndicatorFieldCountryDataAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesRoleData =
-  {
-    id?: number;
-    attributes?: CountryIndicatorFieldCountryDataAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesRoleDataAttributes;
-  };
-
-export type CountryIndicatorFieldCountryDataAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesRole =
-  {
-    data?: CountryIndicatorFieldCountryDataAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesRoleData;
-  };
-
-export type CountryIndicatorFieldCountryDataAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributes =
+export type CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributes =
   {
     action?: string;
     subject?: string;
     properties?: unknown;
     conditions?: unknown;
-    role?: CountryIndicatorFieldCountryDataAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesRole;
+    role?: CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesRole;
     createdAt?: string;
     updatedAt?: string;
-    createdBy?: CountryIndicatorFieldCountryDataAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesCreatedBy;
-    updatedBy?: CountryIndicatorFieldCountryDataAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesUpdatedBy;
+    createdBy?: CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesCreatedBy;
+    updatedBy?: CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesUpdatedBy;
   };
 
-export type CountryIndicatorFieldCountryDataAttributesCreatedByDataAttributesRolesDataItemAttributesUsersDataItemAttributes =
+export type CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesUsersDataItemAttributes =
   { [key: string]: any };
 
-export type CountryIndicatorFieldCountryDataAttributesCreatedByDataAttributesRolesDataItemAttributesUsersDataItem =
+export type CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesUsersDataItem =
   {
     id?: number;
-    attributes?: CountryIndicatorFieldCountryDataAttributesCreatedByDataAttributesRolesDataItemAttributesUsersDataItemAttributes;
+    attributes?: CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesUsersDataItemAttributes;
   };
 
-export type CountryIndicatorFieldCountryDataAttributesCreatedByDataAttributesRolesDataItemAttributesUsers =
+export type CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesUsers =
   {
-    data?: CountryIndicatorFieldCountryDataAttributesCreatedByDataAttributesRolesDataItemAttributesUsersDataItem[];
+    data?: CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesUsersDataItem[];
   };
+
+export type CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesFolderDataAttributes =
+  { [key: string]: any };
+
+export type CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesFolderData =
+  {
+    id?: number;
+    attributes?: CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesFolderDataAttributes;
+  };
+
+export type CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesFolder =
+  {
+    data?: CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesFolderData;
+  };
+
+export type CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesRelatedDataItemAttributes =
+  { [key: string]: any };
+
+export type CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesRelatedDataItem =
+  {
+    id?: number;
+    attributes?: CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesRelatedDataItemAttributes;
+  };
+
+export type CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesRelated =
+  {
+    data?: CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesRelatedDataItem[];
+  };
+
+export type CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesChildrenDataItem =
+  {
+    id?: number;
+    attributes?: CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesChildrenDataItemAttributes;
+  };
+
+export type CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesChildren =
+  {
+    data?: CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesChildrenDataItem[];
+  };
+
+export type CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesChildrenDataItemAttributes =
+  { [key: string]: any };
+
+export type CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesParentDataAttributes =
+  { [key: string]: any };
+
+export type CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesParentData =
+  {
+    id?: number;
+    attributes?: CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesParentDataAttributes;
+  };
+
+export type CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesParent =
+  {
+    data?: CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesParentData;
+  };
+
+export type CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesRelatedDataItemAttributes =
+  { [key: string]: any };
+
+export type CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesRelatedDataItem =
+  {
+    id?: number;
+    attributes?: CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesRelatedDataItemAttributes;
+  };
+
+export type CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesRelated =
+  {
+    data?: CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesMainImageDataAttributesRelatedDataItem[];
+  };
+
+export type CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesStatus =
+  (typeof CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesStatus)[keyof typeof CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesStatus];
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const CountryIndicatorFieldCountryDataAttributesProjectsDataItemAttributesStatus = {
+  Completed: 'Completed',
+  'On-going': 'On-going',
+  Under_inception: 'Under inception',
+} as const;
 
 export type CountryIndicatorFieldListResponseMetaPagination = {
   page?: number;
@@ -1576,45 +2420,7 @@ export type CountryUpdatedBy = {
   data?: CountryUpdatedByData;
 };
 
-export interface Country {
-  name: string;
-  iso?: string;
-  description?: string;
-  gfw_link?: string;
-  createdAt?: string;
-  updatedAt?: string;
-  publishedAt?: string;
-  createdBy?: CountryCreatedBy;
-  updatedBy?: CountryUpdatedBy;
-}
-
-export type CountryCreatedByDataAttributesUpdatedByDataAttributes = { [key: string]: any };
-
-export type CountryCreatedByDataAttributesUpdatedByData = {
-  id?: number;
-  attributes?: CountryCreatedByDataAttributesUpdatedByDataAttributes;
-};
-
-export type CountryCreatedByDataAttributesUpdatedBy = {
-  data?: CountryCreatedByDataAttributesUpdatedByData;
-};
-
-export type CountryCreatedByDataAttributes = {
-  firstname?: string;
-  lastname?: string;
-  username?: string;
-  email?: string;
-  resetPasswordToken?: string;
-  registrationToken?: string;
-  isActive?: boolean;
-  roles?: CountryCreatedByDataAttributesRoles;
-  blocked?: boolean;
-  preferedLanguage?: string;
-  createdAt?: string;
-  updatedAt?: string;
-  createdBy?: CountryCreatedByDataAttributesCreatedBy;
-  updatedBy?: CountryCreatedByDataAttributesUpdatedBy;
-};
+export type CountryCreatedByDataAttributes = { [key: string]: any };
 
 export type CountryCreatedByData = {
   id?: number;
@@ -1625,139 +2431,553 @@ export type CountryCreatedBy = {
   data?: CountryCreatedByData;
 };
 
-export type CountryCreatedByDataAttributesCreatedByDataAttributes = { [key: string]: any };
-
-export type CountryCreatedByDataAttributesCreatedByData = {
+export type CountryProjectsDataItem = {
   id?: number;
-  attributes?: CountryCreatedByDataAttributesCreatedByDataAttributes;
+  attributes?: CountryProjectsDataItemAttributes;
 };
 
-export type CountryCreatedByDataAttributesCreatedBy = {
-  data?: CountryCreatedByDataAttributesCreatedByData;
+export type CountryProjects = {
+  data?: CountryProjectsDataItem[];
 };
 
-export type CountryCreatedByDataAttributesRolesDataItem = {
-  id?: number;
-  attributes?: CountryCreatedByDataAttributesRolesDataItemAttributes;
-};
-
-export type CountryCreatedByDataAttributesRoles = {
-  data?: CountryCreatedByDataAttributesRolesDataItem[];
-};
-
-export type CountryCreatedByDataAttributesRolesDataItemAttributesUpdatedByDataAttributes = {
-  [key: string]: any;
-};
-
-export type CountryCreatedByDataAttributesRolesDataItemAttributesUpdatedByData = {
-  id?: number;
-  attributes?: CountryCreatedByDataAttributesRolesDataItemAttributesUpdatedByDataAttributes;
-};
-
-export type CountryCreatedByDataAttributesRolesDataItemAttributesUpdatedBy = {
-  data?: CountryCreatedByDataAttributesRolesDataItemAttributesUpdatedByData;
-};
-
-export type CountryCreatedByDataAttributesRolesDataItemAttributesCreatedByDataAttributes = {
-  [key: string]: any;
-};
-
-export type CountryCreatedByDataAttributesRolesDataItemAttributesCreatedByData = {
-  id?: number;
-  attributes?: CountryCreatedByDataAttributesRolesDataItemAttributesCreatedByDataAttributes;
-};
-
-export type CountryCreatedByDataAttributesRolesDataItemAttributesCreatedBy = {
-  data?: CountryCreatedByDataAttributesRolesDataItemAttributesCreatedByData;
-};
-
-export type CountryCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributes = {
-  action?: string;
-  subject?: string;
-  properties?: unknown;
-  conditions?: unknown;
-  role?: CountryCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesRole;
-  createdAt?: string;
-  updatedAt?: string;
-  createdBy?: CountryCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesCreatedBy;
-  updatedBy?: CountryCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesUpdatedBy;
-};
-
-export type CountryCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItem = {
-  id?: number;
-  attributes?: CountryCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributes;
-};
-
-export type CountryCreatedByDataAttributesRolesDataItemAttributesPermissions = {
-  data?: CountryCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItem[];
-};
-
-export type CountryCreatedByDataAttributesRolesDataItemAttributes = {
-  name?: string;
-  code?: string;
+export interface Country {
+  name: string;
+  iso?: string;
   description?: string;
-  users?: CountryCreatedByDataAttributesRolesDataItemAttributesUsers;
-  permissions?: CountryCreatedByDataAttributesRolesDataItemAttributesPermissions;
+  gfw_link?: string;
+  country_information_link?: string;
+  short_description?: string;
+  projects?: CountryProjects;
   createdAt?: string;
   updatedAt?: string;
-  createdBy?: CountryCreatedByDataAttributesRolesDataItemAttributesCreatedBy;
-  updatedBy?: CountryCreatedByDataAttributesRolesDataItemAttributesUpdatedBy;
+  publishedAt?: string;
+  createdBy?: CountryCreatedBy;
+  updatedBy?: CountryUpdatedBy;
+}
+
+export type CountryProjectsDataItemAttributesUpdatedByDataAttributes = { [key: string]: any };
+
+export type CountryProjectsDataItemAttributesUpdatedByData = {
+  id?: number;
+  attributes?: CountryProjectsDataItemAttributesUpdatedByDataAttributes;
 };
 
-export type CountryCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesUpdatedByDataAttributes =
-  { [key: string]: any };
+export type CountryProjectsDataItemAttributesUpdatedBy = {
+  data?: CountryProjectsDataItemAttributesUpdatedByData;
+};
 
-export type CountryCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesUpdatedByData =
-  {
-    id?: number;
-    attributes?: CountryCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesUpdatedByDataAttributes;
-  };
+export type CountryProjectsDataItemAttributesCreatedByData = {
+  id?: number;
+  attributes?: CountryProjectsDataItemAttributesCreatedByDataAttributes;
+};
 
-export type CountryCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesUpdatedBy =
-  {
-    data?: CountryCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesUpdatedByData;
-  };
+export type CountryProjectsDataItemAttributesCreatedBy = {
+  data?: CountryProjectsDataItemAttributesCreatedByData;
+};
 
-export type CountryCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesCreatedByDataAttributes =
-  { [key: string]: any };
+export type CountryProjectsDataItemAttributes = {
+  project_code?: string;
+  name?: string;
+  status?: CountryProjectsDataItemAttributesStatus;
+  intervention_types?: unknown;
+  main_image?: CountryProjectsDataItemAttributesMainImage;
+  description?: string;
+  short_description?: string;
+  countries?: CountryProjectsDataItemAttributesCountries;
+  createdAt?: string;
+  updatedAt?: string;
+  publishedAt?: string;
+  createdBy?: CountryProjectsDataItemAttributesCreatedBy;
+  updatedBy?: CountryProjectsDataItemAttributesUpdatedBy;
+};
 
-export type CountryCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesCreatedByData =
-  {
-    id?: number;
-    attributes?: CountryCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesCreatedByDataAttributes;
-  };
+export type CountryProjectsDataItemAttributesCreatedByDataAttributes = { [key: string]: any };
 
-export type CountryCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesCreatedBy =
-  {
-    data?: CountryCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesCreatedByData;
-  };
+export type CountryProjectsDataItemAttributesCountriesDataItemAttributes = {
+  name?: string;
+  iso?: string;
+  description?: string;
+  gfw_link?: string;
+  country_information_link?: string;
+  short_description?: string;
+  projects?: CountryProjectsDataItemAttributesCountriesDataItemAttributesProjects;
+  createdAt?: string;
+  updatedAt?: string;
+  publishedAt?: string;
+  createdBy?: CountryProjectsDataItemAttributesCountriesDataItemAttributesCreatedBy;
+  updatedBy?: CountryProjectsDataItemAttributesCountriesDataItemAttributesUpdatedBy;
+};
 
-export type CountryCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesRoleDataAttributes =
-  { [key: string]: any };
+export type CountryProjectsDataItemAttributesCountriesDataItem = {
+  id?: number;
+  attributes?: CountryProjectsDataItemAttributesCountriesDataItemAttributes;
+};
 
-export type CountryCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesRoleData =
-  {
-    id?: number;
-    attributes?: CountryCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesRoleDataAttributes;
-  };
+export type CountryProjectsDataItemAttributesCountries = {
+  data?: CountryProjectsDataItemAttributesCountriesDataItem[];
+};
 
-export type CountryCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesRole =
-  {
-    data?: CountryCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesRoleData;
-  };
-
-export type CountryCreatedByDataAttributesRolesDataItemAttributesUsersDataItemAttributes = {
+export type CountryProjectsDataItemAttributesCountriesDataItemAttributesUpdatedByDataAttributes = {
   [key: string]: any;
 };
 
-export type CountryCreatedByDataAttributesRolesDataItemAttributesUsersDataItem = {
+export type CountryProjectsDataItemAttributesCountriesDataItemAttributesUpdatedByData = {
   id?: number;
-  attributes?: CountryCreatedByDataAttributesRolesDataItemAttributesUsersDataItemAttributes;
+  attributes?: CountryProjectsDataItemAttributesCountriesDataItemAttributesUpdatedByDataAttributes;
 };
 
-export type CountryCreatedByDataAttributesRolesDataItemAttributesUsers = {
-  data?: CountryCreatedByDataAttributesRolesDataItemAttributesUsersDataItem[];
+export type CountryProjectsDataItemAttributesCountriesDataItemAttributesUpdatedBy = {
+  data?: CountryProjectsDataItemAttributesCountriesDataItemAttributesUpdatedByData;
 };
+
+export type CountryProjectsDataItemAttributesCountriesDataItemAttributesCreatedByDataAttributes = {
+  [key: string]: any;
+};
+
+export type CountryProjectsDataItemAttributesCountriesDataItemAttributesCreatedByData = {
+  id?: number;
+  attributes?: CountryProjectsDataItemAttributesCountriesDataItemAttributesCreatedByDataAttributes;
+};
+
+export type CountryProjectsDataItemAttributesCountriesDataItemAttributesCreatedBy = {
+  data?: CountryProjectsDataItemAttributesCountriesDataItemAttributesCreatedByData;
+};
+
+export type CountryProjectsDataItemAttributesCountriesDataItemAttributesProjectsDataItemAttributes =
+  { [key: string]: any };
+
+export type CountryProjectsDataItemAttributesCountriesDataItemAttributesProjectsDataItem = {
+  id?: number;
+  attributes?: CountryProjectsDataItemAttributesCountriesDataItemAttributesProjectsDataItemAttributes;
+};
+
+export type CountryProjectsDataItemAttributesCountriesDataItemAttributesProjects = {
+  data?: CountryProjectsDataItemAttributesCountriesDataItemAttributesProjectsDataItem[];
+};
+
+export type CountryProjectsDataItemAttributesMainImageData = {
+  id?: number;
+  attributes?: CountryProjectsDataItemAttributesMainImageDataAttributes;
+};
+
+export type CountryProjectsDataItemAttributesMainImage = {
+  data?: CountryProjectsDataItemAttributesMainImageData;
+};
+
+export type CountryProjectsDataItemAttributesMainImageDataAttributesUpdatedByDataAttributes = {
+  [key: string]: any;
+};
+
+export type CountryProjectsDataItemAttributesMainImageDataAttributesUpdatedByData = {
+  id?: number;
+  attributes?: CountryProjectsDataItemAttributesMainImageDataAttributesUpdatedByDataAttributes;
+};
+
+export type CountryProjectsDataItemAttributesMainImageDataAttributesUpdatedBy = {
+  data?: CountryProjectsDataItemAttributesMainImageDataAttributesUpdatedByData;
+};
+
+export type CountryProjectsDataItemAttributesMainImageDataAttributes = {
+  name?: string;
+  alternativeText?: string;
+  caption?: string;
+  width?: number;
+  height?: number;
+  formats?: unknown;
+  hash?: string;
+  ext?: string;
+  mime?: string;
+  size?: number;
+  url?: string;
+  previewUrl?: string;
+  provider?: string;
+  provider_metadata?: unknown;
+  related?: CountryProjectsDataItemAttributesMainImageDataAttributesRelated;
+  folder?: CountryProjectsDataItemAttributesMainImageDataAttributesFolder;
+  folderPath?: string;
+  createdAt?: string;
+  updatedAt?: string;
+  createdBy?: CountryProjectsDataItemAttributesMainImageDataAttributesCreatedBy;
+  updatedBy?: CountryProjectsDataItemAttributesMainImageDataAttributesUpdatedBy;
+};
+
+export type CountryProjectsDataItemAttributesMainImageDataAttributesCreatedByDataAttributes = {
+  [key: string]: any;
+};
+
+export type CountryProjectsDataItemAttributesMainImageDataAttributesCreatedByData = {
+  id?: number;
+  attributes?: CountryProjectsDataItemAttributesMainImageDataAttributesCreatedByDataAttributes;
+};
+
+export type CountryProjectsDataItemAttributesMainImageDataAttributesCreatedBy = {
+  data?: CountryProjectsDataItemAttributesMainImageDataAttributesCreatedByData;
+};
+
+export type CountryProjectsDataItemAttributesMainImageDataAttributesFolderData = {
+  id?: number;
+  attributes?: CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributes;
+};
+
+export type CountryProjectsDataItemAttributesMainImageDataAttributesFolder = {
+  data?: CountryProjectsDataItemAttributesMainImageDataAttributesFolderData;
+};
+
+export type CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesUpdatedByDataAttributes =
+  { [key: string]: any };
+
+export type CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesUpdatedByData =
+  {
+    id?: number;
+    attributes?: CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesUpdatedByDataAttributes;
+  };
+
+export type CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesUpdatedBy =
+  {
+    data?: CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesUpdatedByData;
+  };
+
+export type CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributes = {
+  name?: string;
+  pathId?: number;
+  parent?: CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesParent;
+  children?: CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesChildren;
+  files?: CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFiles;
+  path?: string;
+  createdAt?: string;
+  updatedAt?: string;
+  createdBy?: CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesCreatedBy;
+  updatedBy?: CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesUpdatedBy;
+};
+
+export type CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesCreatedByDataAttributes =
+  { [key: string]: any };
+
+export type CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesCreatedByData =
+  {
+    id?: number;
+    attributes?: CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesCreatedByDataAttributes;
+  };
+
+export type CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesCreatedBy =
+  {
+    data?: CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesCreatedByData;
+  };
+
+export type CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItem =
+  {
+    id?: number;
+    attributes?: CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributes;
+  };
+
+export type CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFiles = {
+  data?: CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItem[];
+};
+
+export type CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesUpdatedByDataAttributes =
+  { [key: string]: any };
+
+export type CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesUpdatedByData =
+  {
+    id?: number;
+    attributes?: CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesUpdatedByDataAttributes;
+  };
+
+export type CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesUpdatedBy =
+  {
+    data?: CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesUpdatedByData;
+  };
+
+export type CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributes =
+  {
+    name?: string;
+    alternativeText?: string;
+    caption?: string;
+    width?: number;
+    height?: number;
+    formats?: unknown;
+    hash?: string;
+    ext?: string;
+    mime?: string;
+    size?: number;
+    url?: string;
+    previewUrl?: string;
+    provider?: string;
+    provider_metadata?: unknown;
+    related?: CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesRelated;
+    folder?: CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesFolder;
+    folderPath?: string;
+    createdAt?: string;
+    updatedAt?: string;
+    createdBy?: CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedBy;
+    updatedBy?: CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesUpdatedBy;
+  };
+
+export type CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributes =
+  {
+    firstname?: string;
+    lastname?: string;
+    username?: string;
+    email?: string;
+    resetPasswordToken?: string;
+    registrationToken?: string;
+    isActive?: boolean;
+    roles?: CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRoles;
+    blocked?: boolean;
+    preferedLanguage?: string;
+    createdAt?: string;
+    updatedAt?: string;
+    createdBy?: CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesCreatedBy;
+    updatedBy?: CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesUpdatedBy;
+  };
+
+export type CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByData =
+  {
+    id?: number;
+    attributes?: CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributes;
+  };
+
+export type CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedBy =
+  {
+    data?: CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByData;
+  };
+
+export type CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesUpdatedByDataAttributes =
+  { [key: string]: any };
+
+export type CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesUpdatedByData =
+  {
+    id?: number;
+    attributes?: CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesUpdatedByDataAttributes;
+  };
+
+export type CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesUpdatedBy =
+  {
+    data?: CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesUpdatedByData;
+  };
+
+export type CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesCreatedByDataAttributes =
+  { [key: string]: any };
+
+export type CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesCreatedByData =
+  {
+    id?: number;
+    attributes?: CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesCreatedByDataAttributes;
+  };
+
+export type CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesCreatedBy =
+  {
+    data?: CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesCreatedByData;
+  };
+
+export type CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItem =
+  {
+    id?: number;
+    attributes?: CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributes;
+  };
+
+export type CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRoles =
+  {
+    data?: CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItem[];
+  };
+
+export type CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesUpdatedByDataAttributes =
+  { [key: string]: any };
+
+export type CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesUpdatedByData =
+  {
+    id?: number;
+    attributes?: CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesUpdatedByDataAttributes;
+  };
+
+export type CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesUpdatedBy =
+  {
+    data?: CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesUpdatedByData;
+  };
+
+export type CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributes =
+  {
+    name?: string;
+    code?: string;
+    description?: string;
+    users?: CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesUsers;
+    permissions?: CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissions;
+    createdAt?: string;
+    updatedAt?: string;
+    createdBy?: CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesCreatedBy;
+    updatedBy?: CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesUpdatedBy;
+  };
+
+export type CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesCreatedByDataAttributes =
+  { [key: string]: any };
+
+export type CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesCreatedByData =
+  {
+    id?: number;
+    attributes?: CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesCreatedByDataAttributes;
+  };
+
+export type CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesCreatedBy =
+  {
+    data?: CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesCreatedByData;
+  };
+
+export type CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItem =
+  {
+    id?: number;
+    attributes?: CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributes;
+  };
+
+export type CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissions =
+  {
+    data?: CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItem[];
+  };
+
+export type CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesUpdatedByDataAttributes =
+  { [key: string]: any };
+
+export type CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesUpdatedByData =
+  {
+    id?: number;
+    attributes?: CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesUpdatedByDataAttributes;
+  };
+
+export type CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesUpdatedBy =
+  {
+    data?: CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesUpdatedByData;
+  };
+
+export type CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributes =
+  {
+    action?: string;
+    subject?: string;
+    properties?: unknown;
+    conditions?: unknown;
+    role?: CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesRole;
+    createdAt?: string;
+    updatedAt?: string;
+    createdBy?: CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesCreatedBy;
+    updatedBy?: CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesUpdatedBy;
+  };
+
+export type CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesCreatedByDataAttributes =
+  { [key: string]: any };
+
+export type CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesCreatedByData =
+  {
+    id?: number;
+    attributes?: CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesCreatedByDataAttributes;
+  };
+
+export type CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesCreatedBy =
+  {
+    data?: CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesCreatedByData;
+  };
+
+export type CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesRoleDataAttributes =
+  { [key: string]: any };
+
+export type CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesRoleData =
+  {
+    id?: number;
+    attributes?: CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesRoleDataAttributes;
+  };
+
+export type CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesRole =
+  {
+    data?: CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesRoleData;
+  };
+
+export type CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesUsersDataItemAttributes =
+  { [key: string]: any };
+
+export type CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesUsersDataItem =
+  {
+    id?: number;
+    attributes?: CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesUsersDataItemAttributes;
+  };
+
+export type CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesUsers =
+  {
+    data?: CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesUsersDataItem[];
+  };
+
+export type CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesFolderDataAttributes =
+  { [key: string]: any };
+
+export type CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesFolderData =
+  {
+    id?: number;
+    attributes?: CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesFolderDataAttributes;
+  };
+
+export type CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesFolder =
+  {
+    data?: CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesFolderData;
+  };
+
+export type CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesRelatedDataItemAttributes =
+  { [key: string]: any };
+
+export type CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesRelatedDataItem =
+  {
+    id?: number;
+    attributes?: CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesRelatedDataItemAttributes;
+  };
+
+export type CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesRelated =
+  {
+    data?: CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesFilesDataItemAttributesRelatedDataItem[];
+  };
+
+export type CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesChildrenDataItemAttributes =
+  { [key: string]: any };
+
+export type CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesChildrenDataItem =
+  {
+    id?: number;
+    attributes?: CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesChildrenDataItemAttributes;
+  };
+
+export type CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesChildren = {
+  data?: CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesChildrenDataItem[];
+};
+
+export type CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesParentDataAttributes =
+  { [key: string]: any };
+
+export type CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesParentData =
+  {
+    id?: number;
+    attributes?: CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesParentDataAttributes;
+  };
+
+export type CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesParent = {
+  data?: CountryProjectsDataItemAttributesMainImageDataAttributesFolderDataAttributesParentData;
+};
+
+export type CountryProjectsDataItemAttributesMainImageDataAttributesRelatedDataItemAttributes = {
+  [key: string]: any;
+};
+
+export type CountryProjectsDataItemAttributesMainImageDataAttributesRelatedDataItem = {
+  id?: number;
+  attributes?: CountryProjectsDataItemAttributesMainImageDataAttributesRelatedDataItemAttributes;
+};
+
+export type CountryProjectsDataItemAttributesMainImageDataAttributesRelated = {
+  data?: CountryProjectsDataItemAttributesMainImageDataAttributesRelatedDataItem[];
+};
+
+export type CountryProjectsDataItemAttributesStatus =
+  (typeof CountryProjectsDataItemAttributesStatus)[keyof typeof CountryProjectsDataItemAttributesStatus];
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const CountryProjectsDataItemAttributesStatus = {
+  Completed: 'Completed',
+  'On-going': 'On-going',
+  Under_inception: 'Under inception',
+} as const;
 
 export type CountryListResponseMetaPagination = {
   page?: number;
@@ -1780,11 +3000,16 @@ export interface CountryListResponse {
   meta?: CountryListResponseMeta;
 }
 
+export type CountryRequestDataProjectsItem = number | string;
+
 export type CountryRequestData = {
   name: string;
   iso?: string;
   description?: string;
   gfw_link?: string;
+  country_information_link?: string;
+  short_description?: string;
+  projects?: CountryRequestDataProjectsItem[];
 };
 
 export interface CountryRequest {
