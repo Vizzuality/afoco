@@ -2,32 +2,31 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { useSearchParams } from 'next/navigation';
 
 import { useAtomValue } from 'jotai';
-import * as qs from 'qs';
 
 import { cn } from '@/lib/classnames';
 
 import { hoveredProjectAtom } from '@/store';
 
-import { ProjectListResponseDataItem } from '@/types/generated/strapi.schemas';
+import { ProjectListResponseDataItem, Project } from '@/types/generated/strapi.schemas';
 
-export default function ProjectItem({ data }: { data: ProjectListResponseDataItem }) {
+import { useSyncQueryParams } from '@/hooks/datasets';
+
+export default function ProjectItem({
+  data,
+}: {
+  data: {
+    id: ProjectListResponseDataItem['id'];
+    project_code: Project['project_code'];
+  };
+}) {
   const hoveredProject = useAtomValue(hoveredProjectAtom);
-  const searchParams = useSearchParams();
-  const layersParams = searchParams.get('layers');
-  const filtersParams = searchParams.get('filters');
-
-  const queryParams = qs.stringify(
-    { layers: layersParams, filters: filtersParams },
-    { encode: false, addQueryPrefix: true, skipNulls: true }
-  );
-
+  const queryParams = useSyncQueryParams();
   return (
     data && (
       <Link
-        href={`/projects/${data.id}${queryParams}`}
+        href={`/projects/${data?.project_code}${queryParams}`}
         data-cy="project-item-link"
         className={cn({
           'flex space-x-4 rounded-lg border border-gray-100 bg-white py-2 pl-2 pr-4 shadow-sm transition-all duration-300 hover:border-yellow-500':

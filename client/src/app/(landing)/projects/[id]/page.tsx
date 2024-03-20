@@ -2,7 +2,6 @@ import { Metadata } from 'next';
 
 import Panel from '@/containers/panel';
 import ProjectDetailPanel from '@/containers/projects/detail/panel';
-
 export const metadata: Metadata = {
   title: 'AFoCO | Project Detail',
   description: '',

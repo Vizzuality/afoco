@@ -1,4 +1,4 @@
-import { CircleLayer } from 'mapbox-gl';
+import type { LayerProps } from 'react-map-gl';
 
 import { LayerSettings } from '@/types/layers';
 
@@ -6,13 +6,15 @@ export function useLayers({
   settings: { opacity = 1, visibility = 'visible' },
 }: {
   settings: { opacity: LayerSettings['opacity']; visibility: LayerSettings['visibility'] };
-}) {
+}): LayerProps[] {
   return [
     {
       id: 'projects_points_shadow',
       type: 'circle',
+      source: 'projects',
+      'source-layer': 'afoco_locations_full',
       paint: {
-        'circle-radius': 32,
+        'circle-radius': 5,
         'circle-color': '#ccc',
         'circle-blur': 1,
         'circle-opacity': opacity,
@@ -20,10 +22,13 @@ export function useLayers({
       layout: {
         visibility: visibility,
       },
+      maxzoom: 6,
     },
     {
       id: 'projects',
       type: 'circle',
+      source: 'projects',
+      'source-layer': 'afoco_locations_full',
       paint: {
         'circle-stroke-color': '#ffffff',
         'circle-stroke-width': ['case', ['boolean', ['feature-state', 'hover'], false], 3, 7],
@@ -34,11 +39,56 @@ export function useLayers({
           '#EFB82A',
           '#176252',
         ],
+        'circle-stroke-opacity': opacity,
         'circle-opacity': opacity,
       },
       layout: {
         visibility: visibility,
       },
+      maxzoom: 6,
     },
-  ] as CircleLayer[];
+    {
+      id: 'projects_boundaries',
+      type: 'line',
+      source: 'projects',
+      'source-layer': 'afoco_locations_full',
+      paint: {
+        // 'line-color': [
+        //   'case',
+        //   ['boolean', ['feature-state', 'hover'], false],
+        //   '#176252',
+        //   '#170099',
+        // ],
+        'line-color': '#176252',
+        'line-opacity': opacity,
+        'line-width': 1.5,
+      },
+      layout: {
+        visibility: visibility,
+      },
+      maxzoom: 18,
+      minzoom: 6,
+    },
+    {
+      id: 'projects_fill',
+      type: 'fill',
+      source: 'projects',
+      'source-layer': 'afoco_locations_full',
+      paint: {
+        // 'fill-color': [
+        //   'case',
+        //   ['boolean', ['feature-state', 'hover'], false],
+        //   '#176252',
+        //   '#170099',
+        // ],
+        'fill-color': '#176252',
+        'fill-opacity': opacity * 0.4,
+      },
+      layout: {
+        visibility: visibility,
+      },
+      maxzoom: 18,
+      minzoom: 6,
+    },
+  ];
 }

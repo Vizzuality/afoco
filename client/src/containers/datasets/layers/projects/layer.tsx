@@ -1,19 +1,14 @@
-import { Layer, Source } from 'react-map-gl';
-
-import { GeoJSONSourceRaw, GeoJSONSourceOptions } from 'mapbox-gl';
+import { Layer, Source, SourceProps } from 'react-map-gl';
 
 import type { LayerProps } from '@/types/layers';
 
 import { useLayers } from './hooks';
-import mockData from './mock.json';
 
-const GEOJSON = mockData as GeoJSON.FeatureCollection;
-
-const SOURCE: GeoJSONSourceRaw & GeoJSONSourceOptions & { id: string } = {
-  type: 'geojson',
-  data: GEOJSON,
+const SOURCE: SourceProps = {
+  promoteId: 'project_code',
+  type: 'vector',
+  url: 'mapbox://afoco.agmzsef7',
   id: 'projects',
-  promoteId: 'ID',
 };
 
 export const ProjectsLayer = ({ beforeId, settings }: LayerProps) => {
