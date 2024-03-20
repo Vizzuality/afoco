@@ -61,7 +61,7 @@ export default function CountryDetailPanel() {
     return notFound();
   }
   return (
-    <div className="not-prose p-5 pt-0">
+    <div className="p-5 pt-0">
       <div className="bg-background absolute left-0 right-0 top-0 z-10 flex w-full justify-between rounded-t-3xl px-5 pt-7">
         <Link
           href={`/countries${queryParams}`}

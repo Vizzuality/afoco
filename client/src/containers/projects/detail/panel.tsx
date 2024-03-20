@@ -32,7 +32,7 @@ export default function ProjectDetailPanel() {
 
   return (
     <div className="no-scrollbar h-full overflow-x-hidden rounded-3xl bg-neutral-50 p-6 pb-40">
-      <div className="not-prose absolute left-0 top-0 w-full">
+      <div className="absolute left-0 top-0 w-full">
         <div className="relative">
           <Image
             src="/images/projects/detail/placeholder.png"
