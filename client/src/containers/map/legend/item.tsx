@@ -14,7 +14,7 @@ const MapLegendItem = ({ settings }: { settings: LayerSettings }) => {
       className="shadow-legend flex w-full items-center justify-between rounded bg-white px-4 py-2"
       id={id}
     >
-      <LegendDetailComponent settings={settings} />
+      {LegendDetailComponent && <LegendDetailComponent settings={settings} />}
     </div>
   );
 };

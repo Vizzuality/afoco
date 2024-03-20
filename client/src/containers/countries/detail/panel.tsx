@@ -13,7 +13,7 @@ import remarkGfm from 'remark-gfm';
 import { formatCompactNumber } from '@/lib/utils/formats';
 
 import { useGetCountriesId } from '@/types/generated/country';
-// import { useGetCountryIndicatorFields } from '@/types/generated/country-indicator-field';
+import { useGetCountryIndicatorFields } from '@/types/generated/country-indicator-field';
 
 import { useSyncQueryParams } from '@/hooks/datasets';
 

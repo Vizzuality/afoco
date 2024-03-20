@@ -24,28 +24,28 @@ const TreeCoverLossSettings: React.FC<TreeCoverLossSettings> = ({
   paramsConfig,
   onChangeSettings,
 }) => {
-  const startYear = useMemo(
-    () => paramsConfig.find(({ key }) => key === 'startYear')?.default as number,
-    [paramsConfig]
-  );
+  // const startYear = useMemo(
+  //   () => paramsConfig.find(({ key }) => key === 'startYear')?.default as number,
+  //   [paramsConfig]
+  // );
 
-  const endYear = useMemo(
-    () => paramsConfig.find(({ key }) => key === 'endYear')?.default as number,
-    [paramsConfig]
-  );
+  // const endYear = useMemo(
+  //   () => paramsConfig.find(({ key }) => key === 'endYear')?.default as number,
+  //   [paramsConfig]
+  // );
 
-  const options = useMemo(
-    () =>
-      startYear && endYear
-        ? Array.from({
-            length: endYear - startYear + 1,
-          }).map((_, index) => ({
-            label: startYear + index,
-            value: startYear + index,
-          }))
-        : [],
-    [startYear, endYear]
-  );
+  // const options = useMemo(
+  //   () =>
+  //     startYear && endYear
+  //       ? Array.from({
+  //           length: endYear - startYear + 1,
+  //         }).map((_, index) => ({
+  //           label: startYear + index,
+  //           value: startYear + index,
+  //         }))
+  //       : [],
+  //   [startYear, endYear]
+  // );
 
   return (
     <>
@@ -60,7 +60,7 @@ const TreeCoverLossSettings: React.FC<TreeCoverLossSettings> = ({
             <SelectValue />
           </SelectTrigger>
           <SelectContent>
-            {options.map(({ label, value }) => (
+            {/* {options.map(({ label, value }) => (
               <SelectItem
                 key={value}
                 value={`${value}`}
@@ -69,7 +69,7 @@ const TreeCoverLossSettings: React.FC<TreeCoverLossSettings> = ({
               >
                 {label}
               </SelectItem>
-            ))}
+            ))} */}
           </SelectContent>
         </Select>
         <label htmlFor="tree-cover-loss-to">to</label>
@@ -81,7 +81,7 @@ const TreeCoverLossSettings: React.FC<TreeCoverLossSettings> = ({
             <SelectValue />
           </SelectTrigger>
           <SelectContent>
-            {options.map(({ label, value }) => (
+            {/* {options.map(({ label, value }) => (
               <SelectItem
                 key={value}
                 value={`${value}`}
@@ -90,7 +90,7 @@ const TreeCoverLossSettings: React.FC<TreeCoverLossSettings> = ({
               >
                 {label}
               </SelectItem>
-            ))}
+            ))} */}
           </SelectContent>
         </Select>
       </div>
