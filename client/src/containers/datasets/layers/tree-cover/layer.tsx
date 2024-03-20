@@ -5,11 +5,12 @@ import { Layer } from 'deck.gl/typed';
 import { parseConfig, JSON_CONFIGURATION } from '@/lib/json-converter';
 
 // import { useGetLayersId } from '@/types/generated/layer';
-import DeckJsonLayer from '@/components/map/layers/deck-layer';
 
 import type { LayerId, LayerProps, LayerSettings } from '@/types/layers';
 
 import { useSyncLayers } from '@/hooks/datasets/sync-query';
+
+import DeckJsonLayer from '@/components/map/layers/deck-layer';
 
 import fakeConfig from './mock.json';
 
