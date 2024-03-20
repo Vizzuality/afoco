@@ -13,14 +13,22 @@ import { Input } from '@/components/ui/input';
 export default function ProjectsList() {
   const [searchValue, setSearchValue] = useState('');
 
-  const { data } = useGetProjects({
-    populate: '*',
-    filters: {
-      name: {
-        $contains: searchValue,
+  const { data } = useGetProjects(
+    {
+      populate: '*',
+      filters: {
+        name: {
+          $contains: searchValue,
+        },
       },
     },
-  });
+    {
+      query: {
+        select: (response) =>
+          response?.data?.filter((project) => project.attributes?.project_code !== 'AFoCO_global'),
+      },
+    }
+  );
 
   return (
     <div className="no-scrollbar flex max-h-[75vh] flex-col space-y-2 overflow-y-auto">
@@ -34,7 +42,7 @@ export default function ProjectsList() {
 
         <Filters />
       </div>
-      {data?.data && data.data.map((project) => <ProjectItem key={project?.id} data={project} />)}
+      {data && data.map((project) => <ProjectItem key={project?.id} data={project} />)}
     </div>
   );
 }
