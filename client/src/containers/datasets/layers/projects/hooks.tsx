@@ -32,13 +32,14 @@ export function useLayers({
       paint: {
         'circle-stroke-color': '#ffffff',
         'circle-stroke-width': ['case', ['boolean', ['feature-state', 'hover'], false], 3, 7],
-        'circle-radius': ['case', ['boolean', ['feature-state', 'hover'], false], 10, 7],
+        'circle-radius': ['case', ['boolean', ['feature-state', 'hover'], false], 13, 7],
         'circle-color': [
           'case',
           ['boolean', ['feature-state', 'hover'], false],
           '#EFB82A',
           '#176252',
         ],
+        'circle-stroke-opacity': opacity,
         'circle-opacity': opacity,
       },
       layout: {
