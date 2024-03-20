@@ -28,7 +28,7 @@ const SIMPLE_LAYERS: SimpleLayerIndex = {
   'land-degradation': LandDegradationLayer,
 };
 
-export const LEGENDS: LegendIndex = {
+export const LEGENDS: { [key in LayerId]?: React.ComponentType<any> } = {
   projects: ProjectsLegend,
   'land-degradation': LandDegradationLegend,
   'tree-cover': ProjectsLegend,
