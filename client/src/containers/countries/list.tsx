@@ -12,7 +12,6 @@ import { Input } from '@/components/ui/input';
 
 export default function CountriesList() {
   const [searchValue, setSearchValue] = useState('');
-  console.info(searchValue);
 
   const { data } = useGetCountries({
     populate: '*',

@@ -15,7 +15,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 export default function Projects() {
   return (
     <Panel>
-      <div className="not-prose space-y-5 p-5">
+      <div className="space-y-5 p-5">
         <h2 className="text-3xl font-normal">Projects</h2>
         <Tabs defaultValue="list">
           <TabsList className="w-full">

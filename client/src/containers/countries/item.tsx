@@ -33,7 +33,7 @@ export default function CountryItem({ data }: { data: CountryListResponseDataIte
       data-cy="country-item-link"
       className="flex items-center justify-between space-x-4 rounded-lg border border-gray-100 bg-white py-2 pl-2 pr-4 text-sm text-yellow-900 no-underline shadow-sm transition-all duration-300 hover:border-yellow-500"
     >
-      <div className="not-prose flex items-center space-x-4">
+      <div className="flex items-center space-x-4">
         {data.attributes?.iso && (
           <Flag code={data.attributes.iso} height="32" width="40" className="rounded" />
         )}
