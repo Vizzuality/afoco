@@ -18,12 +18,12 @@ import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 
 import { totalInterventionArea } from './mock';
 
-export default function ProjectDashboard({ id }: { id: number }) {
+export default function ProjectDashboard({ id }: { id: string }) {
   const { data: indicators } = useGetIndicatorFields(
     {
       populate: '*',
       filters: {
-        project: { id: id },
+        project: { project_code: id },
       },
     },
     {
@@ -48,25 +48,27 @@ export default function ProjectDashboard({ id }: { id: number }) {
     >
       <h3 className="mb-2 text-xl font-extrabold text-gray-400">Overview</h3>
 
-      <div className="mb-4 flex space-x-4">
-        {DASHBOARD_OVERVIEW_RESUME_ITEMS.map(({ title, icon, value, unit }) => (
-          <div
-            key={title}
-            className="flex w-1/2 items-center space-x-4 rounded-xl bg-white p-4 text-sm text-green-800 shadow-sm"
-          >
-            <div className="flex h-14 w-14 items-center justify-center rounded-full border border-green-400 bg-green-200/10">
-              <Image src={icon} alt={title} width={32} height={32} />
-            </div>
-            <div className="flex flex-col">
-              <div className="flex items-end space-x-0.5">
-                <p className="text-5xl font-extrabold text-green-400">{indicators[value]}</p>
-                {unit && <p className="mb-0.5 text-base font-normal text-green-400">{unit}</p>}
+      {indicators && (
+        <div className="mb-4 flex space-x-4">
+          {DASHBOARD_OVERVIEW_RESUME_ITEMS.map(({ title, icon, value, unit }) => (
+            <div
+              key={title}
+              className="flex w-1/2 items-center space-x-4 rounded-xl bg-white p-4 text-sm text-green-800 shadow-sm"
+            >
+              <div className="flex h-14 w-14 items-center justify-center rounded-full border border-green-400 bg-green-200/10">
+                <Image src={icon} alt={title} width={32} height={32} />
               </div>
-              <p>{title}</p>
+              <div className="flex flex-col">
+                <div className="flex items-end space-x-0.5">
+                  <p className="text-5xl font-extrabold text-green-400">{indicators[value]}</p>
+                  {unit && <p className="mb-0.5 text-base font-normal text-green-400">{unit}</p>}
+                </div>
+                <p>{title}</p>
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
 
       {indicators && (
         <div className="flex h-[70vh] w-full flex-col justify-between gap-4">

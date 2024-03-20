@@ -15,6 +15,8 @@ import { formatCompactNumber } from '@/lib/utils/formats';
 import { useGetCountriesId } from '@/types/generated/country';
 import { useGetCountryIndicatorFields } from '@/types/generated/country-indicator-field';
 
+import { useSyncQueryParams } from '@/hooks/datasets';
+
 import BarsChart from '@/containers/charts/bar';
 import SingleBar from '@/containers/charts/single-bar';
 import {
@@ -218,29 +220,31 @@ export default function CountryDetailPanel() {
               <p className="py-4 text-3xl font-extrabold">
                 {formatCompactNumber(indicators.beneficiaries_total)}
               </p>
-              <div className="h-44">
-                <BarsChart
-                  data={Object.entries(indicators.beneficiaries).map(([year, uv]) => ({
-                    year,
-                    uv,
-                  }))}
-                  activeStyles={{
-                    stroke: 'yellow',
-                  }}
-                  barDataKey="uv"
-                  barRadius={[20, 20, 20, 20]}
-                  fillBar="#70CCB0"
-                  margin={{
-                    top: 2,
-                    right: 2,
-                    left: -40,
-                    bottom: -4,
-                  }}
-                  xAxisDataKey="year"
-                  xAxisTicks={['2020', '2022', '2024']}
-                  yAxisTicks={['0', '250', '500']}
-                />
-              </div>
+              {indicators.beneficiaries && (
+                <div className="h-44">
+                  <BarsChart
+                    data={Object.entries(indicators.beneficiaries).map(([year, uv]) => ({
+                      year,
+                      uv,
+                    }))}
+                    activeStyles={{
+                      stroke: 'yellow',
+                    }}
+                    barDataKey="uv"
+                    barRadius={[20, 20, 20, 20]}
+                    fillBar="#70CCB0"
+                    margin={{
+                      top: 2,
+                      right: 2,
+                      left: -40,
+                      bottom: -4,
+                    }}
+                    xAxisDataKey="year"
+                    xAxisTicks={['2020', '2022', '2024']}
+                    yAxisTicks={['0', '250', '500']}
+                  />
+                </div>
+              )}
             </div>
             <div className="w-full rounded-xl bg-white p-4 shadow-sm">
               <div className="flex items-center justify-between pb-2">
@@ -251,29 +255,31 @@ export default function CountryDetailPanel() {
               <p className="py-4 text-3xl font-extrabold">
                 {formatCompactNumber(indicators.jobs_total)}
               </p>
-              <div className="h-44">
-                <BarsChart
-                  data={Object.entries(indicators.jobs).map(([year, uv]) => ({
-                    year,
-                    uv,
-                  }))}
-                  activeStyles={{
-                    stroke: 'yellow',
-                  }}
-                  barDataKey="uv"
-                  barRadius={[20, 20, 20, 20]}
-                  fillBar="#70B6CC"
-                  margin={{
-                    top: 2,
-                    right: 2,
-                    left: -40,
-                    bottom: -4,
-                  }}
-                  xAxisDataKey="year"
-                  xAxisTicks={['2020', '2022', '2024']}
-                  yAxisTicks={['0', '250', '500']}
-                />
-              </div>
+              {indicators.jobs && (
+                <div className="h-44">
+                  <BarsChart
+                    data={Object.entries(indicators.jobs).map(([year, uv]) => ({
+                      year,
+                      uv,
+                    }))}
+                    activeStyles={{
+                      stroke: 'yellow',
+                    }}
+                    barDataKey="uv"
+                    barRadius={[20, 20, 20, 20]}
+                    fillBar="#70B6CC"
+                    margin={{
+                      top: 2,
+                      right: 2,
+                      left: -40,
+                      bottom: -4,
+                    }}
+                    xAxisDataKey="year"
+                    xAxisTicks={['2020', '2022', '2024']}
+                    yAxisTicks={['0', '250', '500']}
+                  />
+                </div>
+              )}
             </div>
 
             <div className="flex flex-col space-y-2 pb-8 pt-4">

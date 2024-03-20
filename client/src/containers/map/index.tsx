@@ -106,7 +106,7 @@ export default function MapContainer() {
           push(`/projects/${ProjectData.properties?.project_code}${queryParams}`);
         }
         const bboxTurf = bbox(e.features[0]) as LngLatBoundsLike;
-        map.fitBounds(bboxTurf, { padding: 100, maxZoom: 6 });
+        map.fitBounds(bboxTurf, { padding: 100, maxZoom: 9 });
       }
     },
     [map, push, queryParams]
