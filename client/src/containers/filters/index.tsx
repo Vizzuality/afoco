@@ -1,9 +1,9 @@
 'use client';
 
-import { useCallback, Suspense, useState } from 'react';
+import { useCallback, Suspense } from 'react';
 
 import flatten from 'lodash-es/flatten';
-import { Filter, Search } from 'lucide-react';
+import { Filter } from 'lucide-react';
 
 import { useSyncFilters } from '@/hooks/datasets/sync-query';
 
@@ -19,7 +19,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
-import { Input } from '@/components/ui/input';
 
 import FiltersBadge from './badge';
 import { INTERVENTION_TYPES, AREAS } from './constants';
@@ -29,9 +28,6 @@ export default function Filters() {
   const handleResetFilters = useCallback(() => {
     setFiltersToURL({});
   }, [setFiltersToURL]);
-
-  const [searchValue, setSearchValue] = useState('');
-  console.info(searchValue);
 
   const filtersSettingsParsed = flatten(
     Object.entries(filtersSettings as FilterSettings)?.map((filter) => {
@@ -55,14 +51,7 @@ export default function Filters() {
   return (
     <Suspense>
       <div className="space-y-2">
-        <div className="relative flex space-x-2">
-          <Input
-            placeholder="Search project by name"
-            className="border-none bg-gray-100 pl-11 placeholder:text-gray-500"
-            onChange={(e) => setSearchValue(e.target.value)}
-          />
-          <Search size={24} className="absolute left-1 top-2" />
-
+        <div className=" flex space-x-2">
           <Dialog>
             <DialogTrigger aria-label="Show filters" asChild>
               <Button variant="outline" size="base">
