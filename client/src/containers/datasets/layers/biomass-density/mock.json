@@ -1,0 +1,22 @@
+{
+  "@@type": "DecodeLayer",
+  "id": "biomass-density",
+  "source": {
+    "type": "raster",
+    "tiles": [
+      "https://tiles.globalforestwatch.org/gfw_soil_carbon_stocks/v20200724/default/{z}/{x}/{y}.png"
+    ],
+    "maxzoom": 12,
+    "minzoom": 2
+  },
+  "opacity": {
+    "o": "@@#params.opacity",
+    "@@function": "setOpacity"
+  },
+  "visibility": {
+    "v": "@@#params.visibility",
+    "type": "deckgl",
+    "@@function": "setVisibility"
+  }
+}
+  
