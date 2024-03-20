@@ -13,6 +13,7 @@ export default function Countries() {
     <Panel>
       <div className="not-prose space-y-5 p-5">
         <h2 className="text-3xl font-normal">Countries</h2>
+
         <CountriesList />
       </div>
     </Panel>
