@@ -86,6 +86,7 @@ export default function CountryDetailPanel() {
           <Share />
         </div>
       </div>
+
       <div className="mt-16 flex items-center space-x-3 pt-7">
         {data?.data?.attributes?.iso && (
           <Flag code={data?.data?.attributes.iso} height="40" width="48" className="rounded" />
@@ -95,7 +96,7 @@ export default function CountryDetailPanel() {
         </h2>
       </div>
       <p className="my-4 line-clamp-5 text-sm text-gray-500">
-        {data?.data?.attributes?.description}
+        {data?.data?.attributes?.short_description}
       </p>
 
       <Dialog>
