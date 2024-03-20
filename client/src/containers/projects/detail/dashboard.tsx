@@ -16,7 +16,7 @@ import { DASHBOARD_OVERVIEW_RESUME_ITEMS } from '@/containers/projects/detail/co
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 
-import { totalInterventionArea } from './mock';
+import { totalInterventionArea } from './constants';
 
 export default function ProjectDashboard({ id }: { id: string }) {
   const { data: indicators } = useGetIndicatorFields(

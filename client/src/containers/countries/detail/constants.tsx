@@ -45,3 +45,18 @@ export const totalInterventionArea = [
   { name: 'Reforestation', value: 'area_reforested_total' },
   { name: 'Protection', value: 'area_protected_total' },
 ];
+
+export const usefulLinks = [
+  {
+    title: 'Country Information Hub',
+    description:
+      'Archive of forestry and forestry-related laws, strategies, plans and policies in each Party.',
+    link: 'country_information_link',
+  },
+  {
+    title: 'Global forest Watch country dashboard',
+    description:
+      'Explore interactive maps and charts that summarise key statistics about the Indonesia’s forest.',
+    link: 'gfw_link',
+  },
+];

@@ -24,13 +24,12 @@ import {
   RESUME_ITEMS,
   totalInterventionArea,
 } from '@/containers/countries/detail/constants';
+import { usefulLinks } from '@/containers/countries/detail/constants';
 import Share from '@/containers/share';
 
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
-
-import { usefulLinks } from './mock';
 
 export default function CountryDetailPanel() {
   const params = useParams<{ id: string }>();
