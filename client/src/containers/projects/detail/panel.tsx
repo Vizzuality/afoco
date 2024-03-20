@@ -7,9 +7,11 @@ import { notFound, useParams } from 'next/navigation';
 import { useAtom } from 'jotai';
 import { ArrowLeft, ChevronRight, Share as Download, X } from 'lucide-react';
 
+import { formatCompactNumber } from '@/lib/utils/formats';
+
 import { dashboardAtom } from '@/store';
 
-import { useGetCountryIndicatorFields } from '@/types/generated/country-indicator-field';
+import { useGetIndicatorFields } from '@/types/generated/indicator-field';
 import { useGetProjects } from '@/types/generated/project';
 
 import { useSyncQueryParams } from '@/hooks/datasets';
@@ -40,25 +42,25 @@ export default function ProjectDetailPanel() {
       },
     }
   );
-  // const { data: indicators } = useGetIndicatorFields(
-  //   {
-  //     populate: '*',
-  //     filters: {
-  //       project: { project_code: params.id },
-  //     },
-  //   }
-  // {
-  //   query: {
-  //     select: (response) =>
-  //       Object.assign(
-  //         {},
-  //         ...(response.data ?? []).map((item) => ({
-  //           [item.attributes?.indicator_name as string]: item.attributes?.value,
-  //         }))
-  //       ),
-  //   },
-  // }
-  // );
+  const { data: indicators } = useGetIndicatorFields(
+    {
+      populate: '*',
+      filters: {
+        project: { project_code: params.id },
+      },
+    },
+    {
+      query: {
+        select: (response) =>
+          Object.assign(
+            {},
+            ...(response.data ?? []).map((item) => ({
+              [item.attributes?.indicator_name as string]: item.attributes?.value,
+            }))
+          ),
+      },
+    }
+  );
 
   if (!params.id) {
     return notFound();
@@ -145,7 +147,9 @@ export default function ProjectDetailPanel() {
           </div>
           <div className="flex justify-between border-b-2 border-dotted border-gray-400 py-4">
             <p className="text-xs font-medium uppercase text-gray-500">Investment</p>
-            {/* <p className="text-sm text-yellow-900">{}</p> */}
+            <p className="text-sm text-yellow-900">
+              {formatCompactNumber(indicators?.project_funding?.total_budget)}
+            </p>
           </div>
         </div>
         <div className="flex flex-col space-y-2">
