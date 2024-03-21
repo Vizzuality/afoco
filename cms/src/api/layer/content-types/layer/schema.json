@@ -4,7 +4,8 @@
   "info": {
     "singularName": "layer",
     "pluralName": "layers",
-    "displayName": "Layer"
+    "displayName": "Layer",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -14,7 +15,22 @@
     "name": {
       "type": "string"
     },
-    "configuration": {
+    "config": {
+      "type": "json"
+    },
+    "params_config": {
+      "type": "json"
+    },
+    "decode_function": {
+      "type": "string"
+    },
+    "legend_config": {
+      "type": "json"
+    },
+    "description": {
+      "type": "string"
+    },
+    "info": {
       "type": "json"
     }
   }
