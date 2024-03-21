@@ -120,6 +120,7 @@ export default function ProjectDashboard({ id }: { id: string }) {
                 <h3 className="text-lg text-green-800">Total intervention area</h3>
                 <Info className="h-5 w-5 text-green-800" />
               </div>
+              {/* // !TODO: Add intervention_area_total */}
               <p className="py-4 text-3xl font-extrabold">{formatCompactNumber(348)}ha</p>
 
               <div className="space-y-3">
