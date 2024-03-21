@@ -5,6 +5,7 @@ describe('navigation', () => {
 
   it('access to project detail page and switch dashboard', () => {
     cy.visit('/');
+    cy.get('[data-cy="projects-list-tab"]').click();
     cy.get('a[data-cy="project-item-link"]').first().click();
     cy.get('button[data-cy="project-dashboard-button"]').click().wait(1000);
     cy.get('[data-cy="project-dashboard"]').should('exist');
@@ -13,8 +14,8 @@ describe('navigation', () => {
   });
 
   it('access to country detail page', () => {
-    cy.visit('/');
-    cy.get('a[data-cy="sidebar-tab-countries"]').click();
+    cy.visit('/').wait(1000);
+    cy.get('a[data-cy="sidebar-tab-countries"]').click().wait(5000);
     cy.get('a[data-cy="country-item-link"]').first().click();
     cy.get('[data-cy="country-detail-name"]').should('exist');
   });

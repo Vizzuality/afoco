@@ -18,10 +18,14 @@ export default function Projects() {
         <h2 className="text-3xl font-normal">Projects</h2>
         <Tabs defaultValue="statistics">
           <TabsList className="w-full">
-            <TabsTrigger value="statistics" className="rounded-l-lg">
+            <TabsTrigger
+              value="statistics"
+              className="rounded-l-lg"
+              data-cy="projects-statistics-tab"
+            >
               Statistics
             </TabsTrigger>
-            <TabsTrigger value="list" className="rounded-r-lg">
+            <TabsTrigger value="list" className="rounded-r-lg" data-cy="projects-list-tab">
               List
             </TabsTrigger>
           </TabsList>
