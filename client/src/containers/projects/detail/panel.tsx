@@ -7,16 +7,20 @@ import { notFound, useParams } from 'next/navigation';
 import { useAtom } from 'jotai';
 import { ArrowLeft, ChevronRight, Share as Download, X } from 'lucide-react';
 
+import { formatCompactNumber } from '@/lib/utils/formats';
+
 import { dashboardAtom } from '@/store';
+
+import { useGetIndicatorFields } from '@/types/generated/indicator-field';
+import { useGetProjects } from '@/types/generated/project';
 
 import { useSyncQueryParams } from '@/hooks/datasets';
 
-import { PANEL_OVERVIEW_ITEMS } from '@/containers/projects/detail/constants';
 import Share from '@/containers/share';
 
 import { Button } from '@/components/ui/button';
 import { Drawer, DrawerClose, DrawerContent, DrawerTrigger } from '@/components/ui/drawer';
-import { Tooltip, TooltipArrow, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 
 import ProjectDashboard from './dashboard';
 
@@ -24,6 +28,39 @@ export default function ProjectDetailPanel() {
   const params = useParams<{ id: string }>();
   const queryParams = useSyncQueryParams();
   const [dashboard, setDashboard] = useAtom(dashboardAtom);
+
+  const { data } = useGetProjects(
+    {
+      populate: '*',
+      filters: {
+        project_code: params.id,
+      },
+    },
+    {
+      query: {
+        select: (response) => response?.data && response.data[0].attributes,
+      },
+    }
+  );
+  const { data: indicators } = useGetIndicatorFields(
+    {
+      populate: '*',
+      filters: {
+        project: { project_code: params.id },
+      },
+    },
+    {
+      query: {
+        select: (response) =>
+          Object.assign(
+            {},
+            ...(response.data ?? []).map((item) => ({
+              [item.attributes?.indicator_name as string]: item.attributes?.value,
+            }))
+          ),
+      },
+    }
+  );
 
   if (!params.id) {
     return notFound();
@@ -40,10 +77,7 @@ export default function ProjectDetailPanel() {
             height={300}
             className="w-full rounded-t-[24px]"
           />
-          <h2 className="absolute bottom-6 mx-6 text-xl font-semibold text-white">
-            Innovative Solutions for Climate Change and Biodiversity Landscape Strategy to Support
-            SDGs in Indonesia
-          </h2>
+          <h2 className="absolute bottom-6 mx-6 text-xl font-semibold text-white">{data?.name}</h2>
         </div>
       </div>
       <div className="absolute left-6 right-6 top-4 z-10 flex justify-between">
@@ -70,48 +104,53 @@ export default function ProjectDetailPanel() {
         </div>
       </div>
       <div className="flex flex-col space-y-8">
-        <p className="mt-72 pt-2 text-sm text-gray-500">
-          The project will introduce innovative solutions for sustainable management practices and
-          enhance the capacities of Forest Management Units (FMUs) and local communities on
-          contributing to Indonesia’s emissions reduction targets and improve biodiversity
-          landscapes to support the achievement of the Sustainable Development Goals (SDGs), in
-          particular, SDGs 1, 8, 13 and 15.
-        </p>
+        <p className="mt-72 pt-2 text-sm text-gray-500">{data?.description}</p>
         <div>
-          {PANEL_OVERVIEW_ITEMS.map(({ title, value }) => (
-            <div
-              key={title}
-              className="flex justify-between border-b-2 border-dotted border-gray-400 py-4"
-            >
-              <p className="text-xs font-medium uppercase text-gray-500">{title}</p>
-              {title === 'Location' && (
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <p className="cursor-pointer text-sm text-yellow-900 underline hover:no-underline">
-                      {value}
-                    </p>
-                  </TooltipTrigger>
-                  <TooltipContent
-                    side={'top'}
-                    sideOffset={4}
-                    className="rounded-lg border-none p-4"
-                  >
-                    <ol className="text-sm text-yellow-900">
-                      {PANEL_OVERVIEW_ITEMS.find((item) => item.title === title)?.items?.map(
-                        (item, idx) => (
-                          <li key={idx}>
-                            {idx + 1}. {item.title}
-                          </li>
-                        )
-                      )}
-                    </ol>
-                    <TooltipArrow className="fill-white" />
-                  </TooltipContent>
-                </Tooltip>
-              )}
-              {title !== 'Location' && <p className="text-sm text-yellow-900">{value}</p>}
-            </div>
-          ))}
+          <div className="flex justify-between border-b-2 border-dotted border-gray-400 py-4">
+            <p className="text-xs font-medium uppercase text-gray-500">Status</p>
+            <p className="text-sm text-yellow-900">{data?.status}</p>
+          </div>
+          <div className="flex justify-between border-b-2 border-dotted border-gray-400 py-4">
+            <p className="text-xs font-medium uppercase text-gray-500">Priority areas</p>
+            {/* <p className="text-sm text-yellow-900">{}</p> */}
+          </div>
+          <div className="flex justify-between border-b-2 border-dotted border-gray-400 py-4">
+            <p className="text-xs font-medium uppercase text-gray-500">Location</p>
+            {/* <p className="text-sm text-yellow-900">{}</p> */}
+            {/* <Tooltip>
+              <TooltipTrigger asChild>
+                <p className="cursor-pointer text-sm text-yellow-900 underline hover:no-underline">
+                  {value}
+                </p>
+              </TooltipTrigger>
+              <TooltipContent side={'top'} sideOffset={4} className="rounded-lg border-none p-4">
+                <ol className="text-sm text-yellow-900">
+                  {PANEL_OVERVIEW_ITEMS.find((item) => item.title === title)?.items?.map(
+                    (item, idx) => (
+                      <li key={idx}>
+                        {idx + 1}. {item.title}
+                      </li>
+                    )
+                  )}
+                </ol>
+                <TooltipArrow className="fill-white" />
+              </TooltipContent>
+            </Tooltip> */}
+          </div>
+          <div className="flex justify-between border-b-2 border-dotted border-gray-400 py-4">
+            <p className="text-xs font-medium uppercase text-gray-500">Duration</p>
+            {/* <p className="text-sm text-yellow-900">{}</p> */}
+          </div>
+          <div className="flex justify-between border-b-2 border-dotted border-gray-400 py-4">
+            <p className="text-xs font-medium uppercase text-gray-500">Donors</p>
+            {/* <p className="text-sm text-yellow-900">{}</p> */}
+          </div>
+          <div className="flex justify-between border-b-2 border-dotted border-gray-400 py-4">
+            <p className="text-xs font-medium uppercase text-gray-500">Investment</p>
+            <p className="text-sm text-yellow-900">
+              {formatCompactNumber(indicators?.project_funding?.total_budget)}
+            </p>
+          </div>
         </div>
         <div className="flex flex-col space-y-2">
           <h4 className="text-xs font-medium uppercase text-yellow-900">Project Gallery</h4>
