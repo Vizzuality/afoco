@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 import { useAtom } from 'jotai';
 import { HelpCircle } from 'lucide-react';
@@ -24,6 +25,7 @@ export default function Sidebar() {
   const { data: countries } = useGetCountries({ populate: '*' });
 
   const queryParams = useSyncQueryParams();
+  const pathname = usePathname();
   const [sidebarTab, setSidebarTab] = useAtom(sidebarTabAtom);
   const [layers] = useSyncLayers();
 
@@ -33,6 +35,7 @@ export default function Sidebar() {
         <div className="flex flex-col items-center pb-12">
           <Image src="/images/logo.svg" alt="logo" width={62} height={29} />
         </div>
+
         <ul className="flex h-full flex-col">
           {TABS.map(({ name, icon, href }) => (
             <Link
@@ -40,10 +43,9 @@ export default function Sidebar() {
               key={name}
               data-cy={`sidebar-tab-${name}`}
               className={cn({
-                'rounded-8xl mx-2 mt-2 flex flex-col items-center space-y-1 border-2 border-transparent py-10 text-center':
+                'rounded-8xl mx-2 mt-2 flex flex-col items-center space-y-1 border-2 border-transparent py-10 text-center hover:border-yellow-50':
                   true,
-                'bg-yellow-600': sidebarTab === name,
-                'hover:border-yellow-50': sidebarTab !== name,
+                'bg-yellow-600': pathname.includes(name),
               })}
               onClick={() => setSidebarTab(name as SidebarTab)}
             >
