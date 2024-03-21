@@ -7,6 +7,7 @@ import FUNCTIONS from '@/lib/utils';
 
 import { ParamsConfig } from '@/types/layers';
 
+import DecodeLayer from '@/components/map/layers/decode-layer';
 import {
   LegendTypeBasic,
   LegendTypeChoropleth,
@@ -19,7 +20,8 @@ export const JSON_CONFIGURATION = new JSONConfiguration({
     //
     {},
     require('@deck.gl/layers'),
-    require('@deck.gl/aggregation-layers')
+    require('@deck.gl/aggregation-layers'),
+    { DecodeLayer }
   ),
   functions: FUNCTIONS,
   enumerations: {},

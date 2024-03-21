@@ -4,7 +4,7 @@ import { DraggableAttributes } from '@dnd-kit/core';
 import { SyntheticListeners } from '@dnd-kit/core/dist/hooks/utilities';
 import { LucideIcon } from 'lucide-react';
 
-import { LayerSettings } from '@/types/layers';
+import type { LayerId, LayerSettings } from '@/types/layers';
 
 type Sortable = {
   enabled: boolean;
@@ -46,7 +46,7 @@ export interface LegendProps extends PropsWithChildren {
 }
 
 export interface LegendItemProps extends LegendItemEvents {
-  id: string;
+  id: LayerId;
   name?: string;
   className?: string;
 

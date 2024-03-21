@@ -8,6 +8,7 @@ import { DeckMapboxOverlayProvider } from '@/components/map/provider';
 
 const LayerManager = () => {
   const [layers] = useSyncLayers();
+  const layersIds = layers.map((l) => l.id);
 
   return (
     <DeckMapboxOverlayProvider>
@@ -16,12 +17,13 @@ const LayerManager = () => {
           Generate all transparent backgrounds to be able to sort by layers without an error
           - https://github.com/visgl/react-map-gl/issues/939#issuecomment-625290200
         */}
-        {layers.map((l, i) => {
-          const beforeId = i === 0 ? 'custom-layers' : `${layers[i - 1]}-layer`;
+
+        {layersIds.map((l, i) => {
+          const beforeId = i === 0 ? 'custom-layers' : `${layersIds[i - 1]}-layer`;
           return (
             <Layer
-              id={`${l.id}-layer`}
-              key={l.id}
+              id={`${l}-layer`}
+              key={l}
               type="background"
               layout={{ visibility: 'none' }}
               beforeId={beforeId}
@@ -34,13 +36,11 @@ const LayerManager = () => {
           The first item will always be at the top of the layers stack
         */}
 
-        {layers.map((l, i) => {
-          const LayerComponent = LAYERS[l.id];
+        {layersIds.map((l, i) => {
+          const LayerComponent = LAYERS[l];
+          const beforeId = i === 0 ? 'custom-layers' : `${layersIds[i - 1]}-layer`;
 
-          const beforeId = i === 0 ? 'custom-layers' : `${layers[i - 1]}-layer`;
-          const settings = { opacity: l.opacity, visibility: l.visibility };
-
-          return <LayerComponent id={l.id} key={l.id} beforeId={beforeId} settings={settings} />;
+          return <LayerComponent id={l} key={l} beforeId={beforeId} />;
         })}
       </>
     </DeckMapboxOverlayProvider>

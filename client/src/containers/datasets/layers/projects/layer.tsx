@@ -2,6 +2,8 @@ import { Layer, Source, SourceProps } from 'react-map-gl';
 
 import type { LayerProps } from '@/types/layers';
 
+import { useSyncLayers } from '@/hooks/datasets/sync-query';
+
 import { useLayers } from './hooks';
 
 const SOURCE: SourceProps = {
@@ -11,9 +13,14 @@ const SOURCE: SourceProps = {
   id: 'projects',
 };
 
-export const ProjectsLayer = ({ beforeId, settings }: LayerProps) => {
+export const ProjectsLayer = ({ beforeId }: LayerProps) => {
+  const [layers] = useSyncLayers();
+  const { id, ...layerSettings } = layers.find((layer) => layer.id === 'projects') || {
+    visibility: 'visible',
+    opacity: 1,
+  };
   const LAYERS = useLayers({
-    settings,
+    settings: layerSettings,
   });
   if (!SOURCE || !LAYERS.length) return null;
 
