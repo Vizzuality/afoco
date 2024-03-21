@@ -8,8 +8,6 @@ export const openAtom = atom<boolean>(true);
 
 export const dashboardAtom = atom<boolean>(false);
 
-export const sidebarTabAtom = atom<'projects' | 'countries' | 'datasets'>('projects');
-
 // Map viewport
 export const bboxAtom = atom<readonly [number, number, number, number] | null | undefined>(null);
 

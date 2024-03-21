@@ -41,9 +41,7 @@ export default function ProjectItem({ data }: { data: ProjectListResponseDataIte
             {data?.attributes?.name}
           </h3>
           <div className="text-2xs flex space-x-6 pb-2.5 text-gray-500">
-            <p>Agroforestry</p>
-            <p>Vietnam</p>
-            <p>Complete</p>
+            <p>{data?.attributes?.status}</p>
           </div>
         </div>
       </Link>
