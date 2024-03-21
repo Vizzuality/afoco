@@ -16,12 +16,16 @@ export default function Projects() {
     <Panel>
       <div className="space-y-5 px-5 py-7">
         <h2 className="text-3xl font-normal">Projects</h2>
-        <Tabs defaultValue="list">
+        <Tabs defaultValue="statistics">
           <TabsList className="w-full">
-            <TabsTrigger value="statistics" className="rounded-l-lg">
+            <TabsTrigger
+              value="statistics"
+              className="rounded-l-lg"
+              data-cy="projects-statistics-tab"
+            >
               Statistics
             </TabsTrigger>
-            <TabsTrigger value="list" className="rounded-r-lg">
+            <TabsTrigger value="list" className="rounded-r-lg" data-cy="projects-list-tab">
               List
             </TabsTrigger>
           </TabsList>

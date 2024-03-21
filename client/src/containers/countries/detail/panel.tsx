@@ -62,7 +62,7 @@ export default function CountryDetailPanel() {
   }
   return (
     <div className="p-5 pt-0">
-      <div className="bg-background absolute left-0 right-0 top-0 z-10 flex w-full justify-between rounded-t-3xl px-5 pt-7">
+      <div className="bg-background absolute left-0 right-0 top-0 z-10 flex w-full justify-between rounded-t-3xl px-5 pt-4">
         <Link
           href={`/countries${queryParams}`}
           className="flex items-center space-x-3 rounded px-2 py-1 text-xs text-yellow-900 transition-all hover:bg-yellow-100"
@@ -188,7 +188,10 @@ export default function CountryDetailPanel() {
                 <h3 className="text-base text-green-800">Total intervention area</h3>
                 <Info className="text-green-800" size={20} />
               </div>
-              <p className="py-4 text-3xl font-extrabold">{formatCompactNumber(348)}ha</p>
+
+              <p className="py-4 text-3xl font-extrabold">
+                {formatCompactNumber(indicators.intervention_area_total)}ha
+              </p>
 
               <div className="space-y-4">
                 {totalInterventionArea.map(({ name, value }) => (

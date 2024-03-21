@@ -105,7 +105,7 @@ export default function ProjectDetailPanel() {
         </div>
       </div>
       <div className="flex flex-col space-y-8">
-        <p className="mt-72 pt-2 text-sm text-gray-500">{data?.description}</p>
+        <p className="mt-72 pt-2 text-sm text-gray-500">{data?.short_description}</p>
         <div>
           <div className="flex justify-between border-b-2 border-dotted border-gray-400 py-4">
             <p className="text-xs font-medium uppercase text-gray-500">Status</p>
@@ -117,7 +117,10 @@ export default function ProjectDetailPanel() {
           </div>
           <div className="flex justify-between border-b-2 border-dotted border-gray-400 py-4">
             <p className="text-xs font-medium uppercase text-gray-500">Location</p>
-            {/* <p className="text-sm text-yellow-900">{}</p> */}
+            <p className="text-sm text-yellow-900">
+              {data?.countries?.data?.map((d) => d?.attributes?.name).join(', ')}
+            </p>
+
             {/* <Tooltip>
               <TooltipTrigger asChild>
                 <p className="cursor-pointer text-sm text-yellow-900 underline hover:no-underline">
