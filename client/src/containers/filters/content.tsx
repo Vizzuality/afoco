@@ -3,6 +3,7 @@
 import { useCallback } from 'react';
 
 import { SelectTrigger } from '@radix-ui/react-select';
+import { ChevronDown } from 'lucide-react';
 
 import { useGetCountries } from '@/types/generated/country';
 
@@ -100,14 +101,17 @@ export default function FiltersContent() {
         <span className="font-extrabold leading-5">Country</span>
 
         <Select onValueChange={handleSingleValueChange}>
-          <SelectTrigger className="flex h-10 items-center justify-start rounded border border-gray-400 px-4">
-            <SelectValue placeholder="Select country"> </SelectValue>
-            {filtersSettings.country}
+          <SelectTrigger className="flex h-10 items-center justify-between rounded border border-gray-400 px-4">
+            <div>
+              <SelectValue placeholder="Select country"> </SelectValue>
+              {filtersSettings.country}
+            </div>
+            <ChevronDown size={20} />
           </SelectTrigger>
-          <SelectContent className="no-scrollbar max-h-96 overflow-y-auto">
+          <SelectContent className="no-scrollbar max-h-96 overflow-y-auto border-none shadow-md">
             {countries &&
               countries.map((country) => (
-                <SelectItem key={country} value={country as string}>
+                <SelectItem key={country} value={country as string} className="cursor-pointer">
                   {country}
                 </SelectItem>
               ))}
