@@ -26,6 +26,7 @@ import ProjectDashboard from './dashboard';
 
 export default function ProjectDetailPanel() {
   const params = useParams<{ id: string }>();
+
   const queryParams = useSyncQueryParams();
   const [dashboard, setDashboard] = useAtom(dashboardAtom);
 
@@ -68,7 +69,7 @@ export default function ProjectDetailPanel() {
 
   return (
     <div className="no-scrollbar h-full overflow-x-hidden rounded-3xl bg-neutral-50 p-6 pb-40">
-      <div className="not-prose absolute left-0 top-0 w-full">
+      <div className="absolute left-0 top-0 w-full">
         <div className="relative">
           <Image
             src="/images/projects/detail/placeholder.png"
@@ -211,7 +212,7 @@ export default function ProjectDetailPanel() {
           </Button>
         </DrawerTrigger>
         <DrawerContent className="left-[514px] w-[calc(100vw-570px)]">
-          <ProjectDashboard />
+          <ProjectDashboard id={params.id} />
           <DrawerClose
             className="focus:ring-ring absolute -right-6 top-7 z-50 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:pointer-events-none"
             onClick={() => setDashboard(false)}
