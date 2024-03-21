@@ -51,8 +51,10 @@ export default function Stats() {
               <h3 className="text-base text-green-800">Total intervention area</h3>
               <Info className="text-green-800" size={20} />
             </div>
-            {/* // !TODO: Add intervention_area_total */}
-            <p className="py-4 text-3xl font-extrabold">{formatCompactNumber(348)}ha</p>
+
+            <p className="py-4 text-3xl font-extrabold">
+              {formatCompactNumber(indicators.intervention_area_total)}ha
+            </p>
 
             <div className="space-y-4">
               {totalInterventionArea.map(({ name, value }) => (
