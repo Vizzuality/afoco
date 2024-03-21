@@ -17,7 +17,7 @@ export type LayerId =
   | 'net-forest-carbon-flux'
   | 'biomass-density'
   | 'net-forest-carbon-flux'
-  | 'oil-carbon-density'
+  | 'soil-carbon-density'
   | 'land-degradation';
 
 export interface LayerSettings {
