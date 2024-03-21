@@ -38,7 +38,7 @@ export function Combobox({
           setValue={setValue}
           aria-expanded={open}
           selectedOptionLabel={selectedOptionLabel}
-          className="flex-1 items-center justify-between rounded-md border-none bg-gray-100"
+          className="h-10 flex-1 items-center justify-between rounded-md border-none"
         />
       </PopoverTrigger>
       <PopoverContent className="popover-menu-content space-y-2 bg-white p-0 text-gray-900">
