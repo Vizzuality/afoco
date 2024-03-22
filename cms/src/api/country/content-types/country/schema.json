@@ -36,6 +36,12 @@
       "relation": "manyToMany",
       "target": "api::project.project",
       "mappedBy": "countries"
+    },
+    "country_indicator_fields": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::country-indicator-field.country-indicator-field",
+      "mappedBy": "country"
     }
   }
 }

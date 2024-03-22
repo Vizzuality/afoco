@@ -68,6 +68,12 @@
     },
     "duration": {
       "type": "string"
+    },
+    "project_indicator_fields": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::indicator-field.indicator-field",
+      "mappedBy": "project"
     }
   }
 }

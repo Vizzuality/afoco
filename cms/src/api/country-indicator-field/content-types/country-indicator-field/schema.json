@@ -14,8 +14,9 @@
   "attributes": {
     "country": {
       "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::country.country"
+      "relation": "manyToOne",
+      "target": "api::country.country",
+      "inversedBy": "country_indicator_fields"
     },
     "indicator_name": {
       "type": "string"
