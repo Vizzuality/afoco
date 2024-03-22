@@ -2,7 +2,6 @@
 
 import { useCallback } from 'react';
 
-import { SelectTrigger } from '@radix-ui/react-select';
 import { ChevronDown } from 'lucide-react';
 
 import { useGetCountries } from '@/types/generated/country';
@@ -13,7 +12,13 @@ import type { FilterValues, FiltersType } from '@/containers/filters/types';
 
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
-import { Select, SelectContent, SelectItem, SelectValue } from '@/components/ui/select';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectValue,
+  SelectTrigger,
+} from '@/components/ui/select';
 
 import { AREAS, INTERVENTION_TYPES } from './constants';
 
@@ -83,6 +88,7 @@ export default function FiltersContent() {
       },
     }
   );
+
   const handleSingleValueChange = useCallback(
     (e: string) => {
       const update = {
@@ -106,7 +112,6 @@ export default function FiltersContent() {
               <SelectValue placeholder="Select country"> </SelectValue>
               {filtersSettings.country}
             </div>
-            <ChevronDown size={20} />
           </SelectTrigger>
           <SelectContent className="no-scrollbar max-h-96 overflow-y-auto border-none shadow-md">
             {countries &&

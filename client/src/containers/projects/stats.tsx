@@ -90,38 +90,40 @@ export default function Stats() {
             </p>
 
             <div className="h-44">
-              <BarsChart
-                data={Object.entries(indicators.beneficiaries).map(([year, uv]) => ({
-                  year,
-                  uv,
-                }))}
-                activeStyles={{
-                  stroke: 'yellow',
-                }}
-                barDataKey="uv"
-                barRadius={[20, 20, 20, 20]}
-                fillBar="#70CCB0"
-                margin={{
-                  top: 2,
-                  right: 2,
-                  left: -36,
-                  bottom: -4,
-                }}
-                xAxisDataKey="year"
-                xAxisTicks={Object.keys(indicators.beneficiaries)}
-                yAxisTicks={[
-                  '0',
-                  (
-                    Object.values(indicators?.beneficiaries as number[]).sort(
-                      (a: number, b: number) => b - a
-                    )[0] / 2
-                  ).toString(),
+              {indicators.beneficiaries && (
+                <BarsChart
+                  data={Object.entries(indicators.beneficiaries).map(([year, uv]) => ({
+                    year,
+                    uv,
+                  }))}
+                  activeStyles={{
+                    stroke: 'yellow',
+                  }}
+                  barDataKey="uv"
+                  barRadius={[20, 20, 20, 20]}
+                  fillBar="#70CCB0"
+                  margin={{
+                    top: 2,
+                    right: 2,
+                    left: -36,
+                    bottom: -4,
+                  }}
+                  xAxisDataKey="year"
+                  xAxisTicks={Object.keys(indicators.beneficiaries)}
+                  yAxisTicks={[
+                    '0',
+                    (
+                      Object.values(indicators?.beneficiaries as number[]).sort(
+                        (a: number, b: number) => b - a
+                      )[0] / 2
+                    ).toString(),
 
-                  Object.values(indicators?.beneficiaries as number[])
-                    .sort((a: number, b: number) => b - a)[0]
-                    .toString(),
-                ]}
-              />
+                    Object.values(indicators?.beneficiaries as number[])
+                      .sort((a: number, b: number) => b - a)[0]
+                      .toString(),
+                  ]}
+                />
+              )}
             </div>
           </div>
         </div>
@@ -136,38 +138,40 @@ export default function Stats() {
               {formatCompactNumber(indicators.jobs_total)}
             </p>{' '}
             <div className="h-44">
-              <BarsChart
-                data={Object.entries(indicators.jobs).map(([year, uv]) => ({
-                  year,
-                  uv,
-                }))}
-                activeStyles={{
-                  stroke: 'yellow',
-                }}
-                barDataKey="uv"
-                barRadius={[20, 20, 20, 20]}
-                fillBar="#70B6CC"
-                margin={{
-                  top: 2,
-                  right: 2,
-                  left: -36,
-                  bottom: -4,
-                }}
-                xAxisDataKey="year"
-                xAxisTicks={Object.keys(indicators.jobs)}
-                yAxisTicks={[
-                  '0',
-                  (
-                    Object.values(indicators?.jobs as number[]).sort(
-                      (a: number, b: number) => b - a
-                    )[0] / 2
-                  ).toString(),
+              {indicators.jobs && (
+                <BarsChart
+                  data={Object.entries(indicators.jobs).map(([year, uv]) => ({
+                    year,
+                    uv,
+                  }))}
+                  activeStyles={{
+                    stroke: 'yellow',
+                  }}
+                  barDataKey="uv"
+                  barRadius={[20, 20, 20, 20]}
+                  fillBar="#70B6CC"
+                  margin={{
+                    top: 2,
+                    right: 2,
+                    left: -36,
+                    bottom: -4,
+                  }}
+                  xAxisDataKey="year"
+                  xAxisTicks={Object.keys(indicators.jobs)}
+                  yAxisTicks={[
+                    '0',
+                    (
+                      Object.values(indicators?.jobs as number[]).sort(
+                        (a: number, b: number) => b - a
+                      )[0] / 2
+                    ).toString(),
 
-                  Object.values(indicators?.jobs as number[])
-                    .sort((a: number, b: number) => b - a)[0]
-                    .toString(),
-                ]}
-              />
+                    Object.values(indicators?.jobs as number[])
+                      .sort((a: number, b: number) => b - a)[0]
+                      .toString(),
+                  ]}
+                />
+              )}
             </div>
           </div>
         </div>

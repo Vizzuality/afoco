@@ -5,6 +5,8 @@ import { Search } from 'lucide-react';
 
 import { useGetProjects } from '@/types/generated/project';
 
+import { useSyncFilters } from '@/hooks/datasets/sync-query';
+
 import Filters from '@/containers/filters';
 import ProjectItem from '@/containers/projects/item';
 
@@ -14,6 +16,7 @@ import FiltersSelected from '../filters/selected';
 
 export default function ProjectsList() {
   const [searchValue, setSearchValue] = useState('');
+  const [filtersSettings] = useSyncFilters();
 
   const { data } = useGetProjects(
     {
@@ -22,6 +25,20 @@ export default function ProjectsList() {
         name: {
           $contains: searchValue,
         },
+        countries: {
+          name: {
+            $in: filtersSettings?.country,
+          },
+        },
+        intervention_types: {
+          // $in: filtersSettings?.intervention,
+        },
+        // project_indicator_fields: {
+        //   indicator_name: 'project_site_area',
+        //   value: {
+        //     $gte: 16,
+        //   },
+        // },
       },
     },
     {
@@ -41,7 +58,7 @@ export default function ProjectsList() {
           onChange={(e) => setSearchValue(e.target.value)}
         />
         <Search size={24} className="absolute left-2 top-2" />
-        <Filters />
+        <Filters nrResults={data?.length as number} />
       </div>
       <FiltersSelected />
       {data && data.map((project) => <ProjectItem key={project?.id} data={project} />)}

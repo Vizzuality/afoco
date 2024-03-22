@@ -18,7 +18,7 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 
-export default function Filters() {
+export default function Filters({ nrResults = 0 }: { nrResults: number }) {
   const [, setFiltersToURL] = useSyncFilters();
   const handleResetFilters = useCallback(() => {
     setFiltersToURL({});
@@ -46,7 +46,9 @@ export default function Filters() {
                   Clear all
                 </button>
                 <Button variant="primary" size="base" onClick={handleResetFilters}>
-                  Show <span className="font-bold"> X </span>results
+                  <p>
+                    Show <span className="font-bold"> {nrResults} </span> results
+                  </p>
                 </Button>
               </DialogFooter>
             </DialogContent>
