@@ -57,6 +57,41 @@ export default function CountryDetailPanel() {
 
   const queryParams = useSyncQueryParams();
 
+  const getParsedJSONData = (json) => {
+    return {};
+  };
+  const jsonToCsv = (json) => {
+    let csv = '';
+
+    const parsedJsonData = getParsedJSONData(json);
+    console.log({ parsedJsonData });
+
+    const headers = Object.keys(json.data.attributes);
+    csv += headers.join(',') + '\n';
+    json.data.attributes.forEach(function (row) {
+      console.log('row', row);
+      const data = headers.map((header) => JSON.stringify(row[header])).join(',');
+      csv += data + '\n';
+    });
+
+    return csv;
+  };
+
+  const downloadCSVCountryData = () => {
+    const csvData = jsonToCsv(data);
+    const blob = new Blob([csvData], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+
+    a.href = url;
+
+    a.download = `${data?.data?.attributes?.name}.csv`;
+
+    document.body.appendChild(a);
+
+    a.click();
+  };
+
   if (!params.id) {
     return notFound();
   }
@@ -73,7 +108,7 @@ export default function CountryDetailPanel() {
         <div className="flex items-center space-x-2">
           <Tooltip>
             <TooltipTrigger asChild>
-              <Button variant="ghost" className="rounded-full">
+              <Button variant="ghost" className="rounded-full" onClick={downloadCSVCountryData}>
                 <Download className="text-yellow-900" size={18} />
               </Button>
             </TooltipTrigger>
