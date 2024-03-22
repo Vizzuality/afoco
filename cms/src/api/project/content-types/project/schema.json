@@ -26,9 +26,6 @@
         "Under inception"
       ]
     },
-    "intervention_types": {
-      "type": "json"
-    },
     "main_image": {
       "type": "media",
       "multiple": false,
@@ -74,6 +71,12 @@
       "relation": "oneToMany",
       "target": "api::indicator-field.indicator-field",
       "mappedBy": "project"
+    },
+    "intervention_types": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::intervention-type.intervention-type",
+      "inversedBy": "projects"
     }
   }
 }

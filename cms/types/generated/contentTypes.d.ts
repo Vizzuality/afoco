@@ -579,6 +579,11 @@ export interface ApiCountryCountry extends Schema.CollectionType {
     country_information_link: Attribute.String;
     short_description: Attribute.String;
     projects: Attribute.Relation<'api::country.country', 'manyToMany', 'api::project.project'>;
+    country_indicator_fields: Attribute.Relation<
+      'api::country.country',
+      'oneToMany',
+      'api::country-indicator-field.country-indicator-field'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -603,13 +608,14 @@ export interface ApiCountryIndicatorFieldCountryIndicatorField extends Schema.Co
   attributes: {
     country: Attribute.Relation<
       'api::country-indicator-field.country-indicator-field',
-      'oneToOne',
+      'manyToOne',
       'api::country.country'
     >;
     indicator_name: Attribute.String;
     unit: Attribute.String;
     value: Attribute.JSON;
     using_year: Attribute.Boolean;
+    filter_tag: Attribute.Float;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -642,13 +648,14 @@ export interface ApiIndicatorFieldIndicatorField extends Schema.CollectionType {
   attributes: {
     project: Attribute.Relation<
       'api::indicator-field.indicator-field',
-      'oneToOne',
+      'manyToOne',
       'api::project.project'
     >;
     indicator_name: Attribute.String;
     unit: Attribute.String;
     value: Attribute.JSON;
     using_year: Attribute.Boolean;
+    filter_tag: Attribute.Float;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -667,19 +674,61 @@ export interface ApiIndicatorFieldIndicatorField extends Schema.CollectionType {
   };
 }
 
-export interface ApiLayerLayer extends Schema.CollectionType {
-  collectionName: 'layers';
+export interface ApiInterventionTypeInterventionType extends Schema.CollectionType {
+  collectionName: 'intervention_types';
   info: {
-    singularName: 'layer';
-    pluralName: 'layers';
-    displayName: 'Layer';
+    singularName: 'intervention-type';
+    pluralName: 'intervention-types';
+    displayName: 'InterventionType';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
     name: Attribute.String;
-    configuration: Attribute.JSON;
+    projects: Attribute.Relation<
+      'api::intervention-type.intervention-type',
+      'manyToMany',
+      'api::project.project'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::intervention-type.intervention-type',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::intervention-type.intervention-type',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiLayerLayer extends Schema.CollectionType {
+  collectionName: 'layers';
+  info: {
+    singularName: 'layer';
+    pluralName: 'layers';
+    displayName: 'Layer';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    config: Attribute.JSON;
+    params_config: Attribute.JSON;
+    decode_function: Attribute.String;
+    legend_config: Attribute.JSON;
+    description: Attribute.String;
+    info: Attribute.JSON;
+    slug: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -705,11 +754,23 @@ export interface ApiProjectProject extends Schema.CollectionType {
     project_code: Attribute.String;
     name: Attribute.String;
     status: Attribute.Enumeration<['Completed', 'On-going', 'Under inception']>;
-    intervention_types: Attribute.JSON;
     main_image: Attribute.Media;
     description: Attribute.RichText;
     short_description: Attribute.String;
     countries: Attribute.Relation<'api::project.project', 'manyToMany', 'api::country.country'>;
+    gallery: Attribute.Media;
+    donors: Attribute.String;
+    duration: Attribute.String;
+    project_indicator_fields: Attribute.Relation<
+      'api::project.project',
+      'oneToMany',
+      'api::indicator-field.indicator-field'
+    >;
+    intervention_types: Attribute.Relation<
+      'api::project.project',
+      'manyToMany',
+      'api::intervention-type.intervention-type'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -739,6 +800,7 @@ declare module '@strapi/strapi' {
       'api::country.country': ApiCountryCountry;
       'api::country-indicator-field.country-indicator-field': ApiCountryIndicatorFieldCountryIndicatorField;
       'api::indicator-field.indicator-field': ApiIndicatorFieldIndicatorField;
+      'api::intervention-type.intervention-type': ApiInterventionTypeInterventionType;
       'api::layer.layer': ApiLayerLayer;
       'api::project.project': ApiProjectProject;
     }

@@ -29,6 +29,9 @@
     },
     "using_year": {
       "type": "boolean"
+    },
+    "filter_tag": {
+      "type": "float"
     }
   }
 }
