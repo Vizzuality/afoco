@@ -1,10 +1,9 @@
 export const INTERVENTION_TYPES = [
-  { id: 'agroforestry', label: 'Agroforestry' },
-  { id: 'conservation-and-protection', label: 'Conservation & Protection' },
-  { id: 'livelihood-improvement', label: 'Livelihood Improvement' },
-  { id: 'mangrove-restoration', label: 'Mangrove Restoration' },
-  { id: 'peatland-restoration', label: 'Peatland Restoration' },
-  { id: 'restoration-and-revegetation', label: 'Restoration & Revegetation' },
+  { id: 'climate-change-adaptation', label: 'Climate change adaptation' },
+  { id: 'livelihood-improvement', label: 'Livelihood improvement' },
+  { id: 'forest-disaster-management', label: 'Forest disaster management' },
+  { id: 'strengthening-institution-capabilities', label: 'Strengthening institution capabilities' },
+  { id: 'restoration-and-reforestation', label: 'Restoration and reforestation' },
 ];
 
 export const CATEGORIES_FILTERS_DICTIONARY: { [key: string]: string } = {

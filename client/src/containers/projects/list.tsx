@@ -31,7 +31,9 @@ export default function ProjectsList() {
           },
         },
         intervention_types: {
-          // $in: filtersSettings?.intervention,
+          $containsi: Array.isArray(filtersSettings?.intervention)
+            ? filtersSettings?.intervention.map((i: string) => i.replace(/-/g, ' '))
+            : [],
         },
         // project_indicator_fields: {
         //   indicator_name: 'project_site_area',
