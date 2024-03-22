@@ -32,11 +32,11 @@ export default function ProjectItem({ data }: { data: ProjectListResponseDataIte
         <Image
           src="/images/projects/placeholder.png"
           alt="Project Image"
-          width={300}
+          width={350}
           height={300}
-          className="max-w-[100px]"
+          className="w-1/3"
         />
-        <div className="flex flex-col space-y-2">
+        <div className="flex w-2/3 flex-col space-y-2">
           <h3 className="line-clamp-4 text-sm font-bold text-yellow-900" id="project-detail-title">
             {data?.attributes?.name}
           </h3>

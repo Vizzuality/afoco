@@ -2,13 +2,18 @@
 
 import { useCallback } from 'react';
 
+import { SelectTrigger } from '@radix-ui/react-select';
+import { ChevronDown } from 'lucide-react';
+
+import { useGetCountries } from '@/types/generated/country';
+
 import { useSyncFilters } from '@/hooks/datasets/sync-query';
 
 import type { FilterValues, FiltersType } from '@/containers/filters/types';
 
 import { Checkbox } from '@/components/ui/checkbox';
-import { Combobox } from '@/components/ui/combobox';
 import { Label } from '@/components/ui/label';
+import { Select, SelectContent, SelectItem, SelectValue } from '@/components/ui/select';
 
 import { AREAS, INTERVENTION_TYPES } from './constants';
 
@@ -70,6 +75,14 @@ const FiltersCheckbox = ({
 export default function FiltersContent() {
   const [filtersSettings, setFiltersToURL] = useSyncFilters();
 
+  const { data: countries } = useGetCountries(
+    { populate: 'name' },
+    {
+      query: {
+        select: (response) => response?.data && response?.data.map((d) => d?.attributes?.name),
+      },
+    }
+  );
   const handleSingleValueChange = useCallback(
     (e: string) => {
       const update = {
@@ -84,16 +97,26 @@ export default function FiltersContent() {
   return (
     <div className="flex flex-col space-y-6 text-sm">
       <FiltersCheckbox type="intervention" title="Intervention type" options={INTERVENTION_TYPES} />
-      <div>
+      <div className="flex flex-col">
         <span className="font-extrabold leading-5">Country</span>
-        <Combobox
-          placeholder="Search country"
-          options={[
-            { label: 'Spain', value: 'Spain' },
-            { label: 'Bhutan', value: 'bhutan' },
-          ]}
-          onClick={handleSingleValueChange}
-        />
+
+        <Select onValueChange={handleSingleValueChange}>
+          <SelectTrigger className="flex h-10 items-center justify-between rounded border border-gray-400 px-4">
+            <div>
+              <SelectValue placeholder="Select country"> </SelectValue>
+              {filtersSettings.country}
+            </div>
+            <ChevronDown size={20} />
+          </SelectTrigger>
+          <SelectContent className="no-scrollbar max-h-96 overflow-y-auto border-none shadow-md">
+            {countries &&
+              countries.map((country) => (
+                <SelectItem key={country} value={country as string} className="cursor-pointer">
+                  {country}
+                </SelectItem>
+              ))}
+          </SelectContent>
+        </Select>
       </div>
       <FiltersCheckbox
         type="area_restored"
