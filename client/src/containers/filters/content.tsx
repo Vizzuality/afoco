@@ -2,8 +2,6 @@
 
 import { useCallback } from 'react';
 
-import { ChevronDown } from 'lucide-react';
-
 import { useGetCountries } from '@/types/generated/country';
 
 import { useSyncFilters } from '@/hooks/datasets/sync-query';
