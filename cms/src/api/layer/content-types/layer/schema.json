@@ -32,6 +32,9 @@
     },
     "info": {
       "type": "json"
+    },
+    "slug": {
+      "type": "string"
     }
   }
 }

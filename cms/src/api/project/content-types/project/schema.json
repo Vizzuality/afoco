@@ -53,14 +53,21 @@
       "inversedBy": "projects"
     },
     "gallery": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ],
-      "type": "media",
-      "multiple": true
+      ]
+    },
+    "donors": {
+      "type": "string"
+    },
+    "duration": {
+      "type": "string"
     }
   }
 }
