@@ -18,7 +18,7 @@ export default function ProjectsList() {
   const [searchValue, setSearchValue] = useState('');
   const [filtersSettings] = useSyncFilters();
 
-  console.log('FILTERS', filtersSettings);
+  console.log('FILTERS', filtersSettings.area_plantation?.[0]);
 
   const { data } = useGetProjects(
     {
@@ -32,11 +32,6 @@ export default function ProjectsList() {
             $in: filtersSettings?.country,
           },
         },
-        // intervention_types: {
-        //   $containsi: Array.isArray(filtersSettings?.intervention)
-        //     ? filtersSettings?.intervention.map((i: string) => i.replace(/-/g, ' '))
-        //     : [],
-        // },
         intervention_types: {
           name: {
             $containsi: Array.isArray(filtersSettings?.intervention)
@@ -45,19 +40,32 @@ export default function ProjectsList() {
           },
         },
         project_indicator_fields: {
-          indicator_name: 'area_plantation_total',
-          // !TODO: buscar or
-          filter_tag: {
-            ...(filtersSettings.area_plantation === '>500' && {
-              $lt: 500,
-            }),
-            ...(filtersSettings.area_plantation === '<200' && {
-              $gt: 200,
-            }),
-            ...(filtersSettings.area_plantation === '200-500' && {
-              $between: [200, 500],
-            }),
-          },
+          $and: [
+            {
+              indicator_name: 'area_plantation_total',
+              filter_tag: {
+                ...(filtersSettings.area_plantation?.[0] === '>500' && {
+                  $gt: 500,
+                }),
+              },
+            },
+            {
+              indicator_name: 'area_plantation_total',
+              filter_tag: {
+                ...(filtersSettings.area_plantation?.[0] === '<200' && {
+                  $lt: 200,
+                }),
+              },
+            },
+            {
+              indicator_name: 'area_plantation_total',
+              filter_tag: {
+                ...(filtersSettings.area_plantation?.[0] === '200-500' && {
+                  $between: [200, 500],
+                }),
+              },
+            },
+          ],
         },
       },
     },
