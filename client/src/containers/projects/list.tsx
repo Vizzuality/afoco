@@ -40,33 +40,31 @@ export default function ProjectsList() {
           },
         },
         project_indicator_fields: {
-          // $or: [
-          //   {
-          //     ...(filtersSettings.area_plantation?.includes('>500') && {
-          //       indicator_name: 'area_plantation_total',
-          //       filter_tag: {
-          //         $gt: 500,
-          //       },
-          //     }),
-          //   },
-          //   {
-          //     ...(filtersSettings.area_plantation?.includes('<200') && {
-          //       indicator_name: 'area_plantation_total',
-          //       filter_tag: {
-          //         $lt: 200,
-          //       },
-          //     }),
-          //   },
-          //   {
-          //     ...(filtersSettings.area_plantation?.includes('200-500') && {
-          //       indicator_name: 'area_plantation_total',
-          //       filter_tag: {
-          //         $between: [200, 500],
-          //       },
-          //     }),
-          //   },
-          // ],
           $or: [
+            {
+              ...(filtersSettings.area_restored?.includes('>500') && {
+                indicator_name: 'area_reforested_total',
+                filter_tag: {
+                  $gt: 500,
+                },
+              }),
+            },
+            {
+              ...(filtersSettings.area_restored?.includes('<200') && {
+                indicator_name: 'area_reforested_total',
+                filter_tag: {
+                  $lt: 200,
+                },
+              }),
+            },
+            {
+              ...(filtersSettings.area_restored?.includes('200-500') && {
+                indicator_name: 'area_reforested_total',
+                filter_tag: {
+                  $between: [200, 500],
+                },
+              }),
+            },
             {
               ...(filtersSettings.area_protected?.includes('>500') && {
                 indicator_name: 'area_protected_total',
