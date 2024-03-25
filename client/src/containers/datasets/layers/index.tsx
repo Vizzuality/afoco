@@ -50,8 +50,8 @@ export const LEGENDS: LegendIndex = {
 function combineLayers<T>(
   deckglLayers: DeckGLLayerIndex<T>,
   simpleLayers: SimpleLayerIndex
-): { [key in LayerId]: React.ComponentType<any> } {
-  return { ...deckglLayers, ...simpleLayers } as { [key in LayerId]: React.ComponentType<any> };
+): { [key: number]: React.ComponentType<any> } {
+  return { ...deckglLayers, ...simpleLayers } as { [key: number]: React.ComponentType<any> };
 }
 
 export const LAYERS = combineLayers(DECKGL_LAYERS, SIMPLE_LAYERS);

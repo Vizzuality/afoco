@@ -106,7 +106,7 @@ export const useDeckMapboxOverlay = ({
   layer,
   did,
 }: {
-  id: string;
+  id: number;
   layer: Layer | null;
   did?: string;
 }) => {

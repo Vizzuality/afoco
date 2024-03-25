@@ -1485,7 +1485,7 @@ export interface Layer {
   decode_function?: string;
   legend_config?: unknown;
   description?: string;
-  info?: unknown;
+  info?: string;
   slug?: string;
   createdAt?: string;
   updatedAt?: string;
@@ -1672,7 +1672,7 @@ export type LayerListResponseMeta = {
 };
 
 export interface LayerListResponseDataItem {
-  id?: number;
+  id: number;
   attributes?: Layer;
 }
 

@@ -16,14 +16,14 @@ const SOURCE: SourceProps = {
   maxzoom: 12,
 };
 
-export const SoilCarbonDensityLayer = ({ beforeId }: LayerProps) => {
+export const SoilCarbonDensityLayer = ({ beforeId, id }: LayerProps) => {
   const [layers] = useSyncLayers();
-  const { id, ...layerSettings } = layers.find((layer) => layer.id === 'soil-carbon-density') || {
+  const settings = layers.find((layer) => layer.id === id) || {
     visibility: 'visible',
     opacity: 1,
   };
   const LAYERS = useLayers({
-    settings: layerSettings,
+    settings,
   });
 
   if (!SOURCE || !LAYERS.length) return null;

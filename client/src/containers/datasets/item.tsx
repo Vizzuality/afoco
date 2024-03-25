@@ -4,8 +4,10 @@ import { useCallback } from 'react';
 
 import { Info } from 'lucide-react';
 
-import type { LayerListResponse } from '@/types/generated/layer';
-import { LayerId } from '@/types/layers';
+import type {
+  LayerListResponse,
+  LayerListResponseDataItem,
+} from '@/types/generated/strapi.schemas';
 
 import { useSyncLayers } from '@/hooks/datasets/sync-query';
 
@@ -14,18 +16,20 @@ import { Dialog, DialogClose, DialogContent, DialogTrigger } from '@/components/
 import { Switch } from '@/components/ui/switch';
 
 // TODO: replace with real type DatasetItemResonseDataItem
-export default function DatasetsItem(props: LayerListResponse) {
+export default function DatasetsItem(props: LayerListResponseDataItem) {
   const [layers, setLayersToURL] = useSyncLayers();
 
   const handleLayerChange = useCallback(() => {
     if (!layers.some((l) => l.id === props.id)) {
-      setLayersToURL([...layers, { id: props.id as LayerId, opacity: 1, visibility: 'visible' }]);
+      setLayersToURL([...layers, { id: props.id, opacity: 1, visibility: 'visible' }]);
     }
     if (layers.some((l) => l.id === props.id)) {
       const newLayers = layers.filter((l) => l.id !== props.id);
       setLayersToURL(newLayers);
     }
   }, [layers, setLayersToURL, props.id]);
+
+  if (!props.attributes) return null;
 
   return (
     <div className="flex flex-col space-y-1.5 border-b py-2">

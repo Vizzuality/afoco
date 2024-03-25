@@ -12,14 +12,14 @@ const SOURCE: SourceProps = {
   id: 'land_degradation',
 };
 
-export const LandDegradationLayer = ({ beforeId }: LayerProps) => {
+export const LandDegradationLayer = ({ beforeId, id }: LayerProps) => {
   const [layers] = useSyncLayers();
-  const { id, ...layerSettings } = layers.find((layer) => layer.id === 'projects') || {
+  const settings = layers.find((layer) => layer.id === id) || {
     visibility: 'visible',
     opacity: 1,
   };
   const LAYERS = useLayers({
-    settings: layerSettings,
+    settings,
   });
 
   if (!SOURCE || !LAYERS.length) return null;

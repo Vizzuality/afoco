@@ -5,7 +5,7 @@ import { Layer } from 'deck.gl/typed';
 import { parseConfig, JSON_CONFIGURATION } from '@/lib/json-converter';
 
 import { useGetLayersId } from '@/types/generated/layer';
-import type { LayerId, LayerProps, LayerSettings } from '@/types/layers';
+import type { LayerProps, LayerSettings } from '@/types/layers';
 
 import { useSyncLayers } from '@/hooks/datasets/sync-query';
 
@@ -16,7 +16,7 @@ const TreeCoverLayer = ({
   beforeId,
   settings = { opacity: 1, visibility: 'visible' },
 }: {
-  id: LayerId;
+  id: number;
   beforeId: string;
   settings: LayerProps['settings'];
 }) => {
