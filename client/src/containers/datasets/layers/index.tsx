@@ -1,21 +1,24 @@
 import type { LayerProps, DeckGLLayerProps, LayerSettings, LayerId } from '@/types/layers';
 
 import BiomassDensity from '@/containers/datasets/layers/biomass-density/layer';
+import BiomassDensityLegend from '@/containers/datasets/layers/biomass-density/legend';
 import { LandDegradationLayer } from '@/containers/datasets/layers/land-degradation/layer';
 import LandDegradationLegend from '@/containers/datasets/layers/land-degradation/legend';
 import NetForestCarbonFluxLayer from '@/containers/datasets/layers/net-forest-carbon-flux/layer';
+import NetForestCarbonFluxLegend from '@/containers/datasets/layers/net-forest-carbon-flux/legend';
 import { ProjectsLayer } from '@/containers/datasets/layers/projects/layer';
 import ProjectsLegend from '@/containers/datasets/layers/projects/legend';
+import SoilCarbonDensityLayer from '@/containers/datasets/layers/soil-carbon-density/layer';
+import SoilCarbonDensityLegend from '@/containers/datasets/layers/soil-carbon-density/legend';
 import TreeCoverLayer from '@/containers/datasets/layers/tree-cover/layer';
-
-import SoilCarbonDensity from './soil-carbon-density/layer';
+import TreeCoverLegend from '@/containers/datasets/layers/tree-cover/legend';
 
 type DeckGLLayerIndex<T> = {
-  [K in LayerId]?: React.ComponentType<DeckGLLayerProps<T>>;
+  [key: number]: React.ComponentType<DeckGLLayerProps<T>>;
 };
 
 type SimpleLayerIndex = {
-  [K in LayerId]?: React.ComponentType<LayerProps>;
+  [key: number]: React.ComponentType<LayerProps>;
 };
 
 type LegendIndex = {
@@ -23,24 +26,25 @@ type LegendIndex = {
 };
 
 // layers that require DeckGLLayerProps
-const DECKGL_LAYERS: DeckGLLayerIndex<LayerId> = {
-  'tree-cover': TreeCoverLayer as React.ComponentType<DeckGLLayerProps<LayerId>>,
-  'net-forest-carbon-flux': NetForestCarbonFluxLayer as React.ComponentType<
-    DeckGLLayerProps<LayerId>
-  >,
-  'biomass-density': BiomassDensity as React.ComponentType<DeckGLLayerProps<LayerId>>,
-  'soil-carbon-density': SoilCarbonDensity as React.ComponentType<DeckGLLayerProps<LayerId>>,
+const DECKGL_LAYERS: DeckGLLayerIndex<number> = {
+  1: TreeCoverLayer as React.ComponentType<DeckGLLayerProps<number>>,
+  3: NetForestCarbonFluxLayer as React.ComponentType<DeckGLLayerProps<number>>,
+  2: BiomassDensity as React.ComponentType<DeckGLLayerProps<number>>,
 };
 
 const SIMPLE_LAYERS: SimpleLayerIndex = {
-  projects: ProjectsLayer,
-  'land-degradation': LandDegradationLayer,
+  5: ProjectsLayer,
+  4: SoilCarbonDensityLayer,
+  6: LandDegradationLayer,
 };
 
 export const LEGENDS: LegendIndex = {
-  projects: ProjectsLegend,
-  'tree-cover': ProjectsLegend,
-  'land-degradation': LandDegradationLegend,
+  5: ProjectsLegend,
+  1: TreeCoverLegend,
+  3: NetForestCarbonFluxLegend,
+  2: BiomassDensityLegend,
+  4: SoilCarbonDensityLegend,
+  6: LandDegradationLegend,
 };
 
 function combineLayers<T>(

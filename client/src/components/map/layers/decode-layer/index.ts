@@ -15,6 +15,7 @@ export interface DecodeLayerProps {
   decodeFunction: string;
   decodeParams: Record<string, unknown>;
   opacity: number;
+  styles: Record<string, unknown>;
 }
 
 class DecodeLayer {

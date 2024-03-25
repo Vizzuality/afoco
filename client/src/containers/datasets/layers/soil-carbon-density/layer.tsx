@@ -1,54 +1,40 @@
-'use client';
+import { Layer, Source, SourceProps } from 'react-map-gl';
 
-import { Layer } from 'deck.gl/typed';
-
-import { parseConfig, JSON_CONFIGURATION } from '@/lib/json-converter';
-
-// import { useGetLayersId } from '@/types/generated/layer';
-
-import type { LayerId, LayerProps, LayerSettings } from '@/types/layers';
+import type { LayerProps } from '@/types/layers';
 
 import { useSyncLayers } from '@/hooks/datasets/sync-query';
 
-import DeckJsonLayer from '@/components/map/layers/deck-layer';
+import { useLayers } from './hooks';
 
-import fakeConfig from './mock.json';
-
-const SoilCarbonDensity = ({
-  id,
-  beforeId,
-  settings = { opacity: 1, visibility: 'visible' },
-}: {
-  id: LayerId;
-  beforeId: string;
-  settings: LayerProps['settings'];
-}) => {
-  // TODO: change strapi schema id to string
-  // const { data } = useGetLayersId(Number(id));
-  const [layers] = useSyncLayers();
-  const layerSettings = layers.find((l: LayerSettings) => l.id === id);
-
-  const { opacity, visibility } = layerSettings || settings;
-  // if (!data?.data?.attributes) return null;
-  const config = fakeConfig;
-  const params_config = [
-    {
-      key: 'opacity',
-      default: 1,
-    },
-    {
-      key: 'visibility',
-      default: true,
-    },
-  ];
-
-  const c = parseConfig<Layer>({
-    config,
-    params_config,
-    settings: { opacity, visibility },
-    jsonConfiguration: JSON_CONFIGURATION,
-  } as any);
-  return <DeckJsonLayer id="biomass-density" beforeId={beforeId} config={c} />;
+const SOURCE: SourceProps = {
+  type: 'raster',
+  tiles: [
+    'https://tiles.globalforestwatch.org/gfw_soil_carbon_stocks/v20200724/default/{z}/{x}/{y}.png',
+  ],
+  id: 'soil-carbon-density',
+  minzoom: 0,
+  maxzoom: 12,
 };
 
-export default SoilCarbonDensity;
+export const SoilCarbonDensityLayer = ({ beforeId }: LayerProps) => {
+  const [layers] = useSyncLayers();
+  const { id, ...layerSettings } = layers.find((layer) => layer.id === 'soil-carbon-density') || {
+    visibility: 'visible',
+    opacity: 1,
+  };
+  const LAYERS = useLayers({
+    settings: layerSettings,
+  });
+
+  if (!SOURCE || !LAYERS.length) return null;
+
+  return (
+    <Source {...SOURCE}>
+      {LAYERS.map((LAYER) => (
+        <Layer {...LAYER} key={LAYER.id} beforeId={beforeId} id={LAYER.id} />
+      ))}
+    </Source>
+  );
+};
+
+export default SoilCarbonDensityLayer;

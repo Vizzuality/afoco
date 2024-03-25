@@ -28,16 +28,3 @@ export const AREAS = [
     label: '>500',
   },
 ];
-
-export const PROJECTS = [
-  {
-    value: '1',
-    label:
-      'Conservation and development of forest ecosystems biodiversity resources at Cat Tien National Park',
-  },
-  {
-    value: '2',
-    label:
-      'Innovative Solutions for Climate Change and Biodiversity Landscape Strategy to Support SDGs in Indonesia',
-  },
-];

@@ -69,3 +69,12 @@ export type DeckGLLayerProps<T> = LayerProps &
     beforeId: string;
     config: DeckLayer<{ beforeId: string }>;
   };
+
+export type LegendType = {
+  type: 'basic' | 'gradient' | 'choropleth';
+  items: {
+    name?: string;
+    value: string;
+    color: string;
+  }[];
+};
