@@ -18,6 +18,8 @@ export default function ProjectsList() {
   const [searchValue, setSearchValue] = useState('');
   const [filtersSettings] = useSyncFilters();
 
+  console.log('FILTERS', filtersSettings);
+
   const { data } = useGetProjects(
     {
       populate: '*',
@@ -35,6 +37,13 @@ export default function ProjectsList() {
         //     ? filtersSettings?.intervention.map((i: string) => i.replace(/-/g, ' '))
         //     : [],
         // },
+        intervention_types: {
+          name: {
+            $containsi: Array.isArray(filtersSettings?.intervention)
+              ? filtersSettings?.intervention.map((i: string) => i.replace(/-/g, ' '))
+              : [],
+          },
+        },
         project_indicator_fields: {
           indicator_name: 'area_plantation_total',
           // !TODO: buscar or
