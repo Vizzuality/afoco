@@ -18,8 +18,6 @@ export default function ProjectsList() {
   const [searchValue, setSearchValue] = useState('');
   const [filtersSettings] = useSyncFilters();
 
-  console.log('FILTERS', filtersSettings.area_plantation);
-
   const { data } = useGetProjects(
     {
       populate: '*',
@@ -124,8 +122,6 @@ export default function ProjectsList() {
       },
     }
   );
-
-  console.log('PROJECTS', data);
 
   return (
     <div className="no-scrollbar flex max-h-[75vh] flex-col space-y-2 overflow-y-auto">
