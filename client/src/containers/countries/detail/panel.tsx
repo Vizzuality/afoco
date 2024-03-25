@@ -14,6 +14,7 @@ import { formatCompactNumber } from '@/lib/utils/formats';
 
 import { useGetCountriesId } from '@/types/generated/country';
 import { useGetCountryIndicatorFields } from '@/types/generated/country-indicator-field';
+import { CountryResponse } from '@/types/generated/strapi.schemas';
 
 import { useSyncQueryParams } from '@/hooks/datasets';
 
@@ -57,19 +58,33 @@ export default function CountryDetailPanel() {
 
   const queryParams = useSyncQueryParams();
 
-  const getParsedJSONData = (json) => {
-    return {};
-  };
-  const jsonToCsv = (json) => {
+  const jsonToCsv = (json: CountryResponse) => {
     let csv = '';
 
-    const parsedJsonData = getParsedJSONData(json);
-    console.log({ parsedJsonData });
+    const parsedJsonData = [
+      Object.entries(json.data?.attributes ?? {})
+        .map((entry) => {
+          return { [entry[0]]: entry[1] };
+        })
+        .reduce(function (result, current) {
+          return Object.assign(result, current);
+        }, []),
+    ];
 
-    const headers = Object.keys(json.data.attributes);
+    const COLUMNS = [
+      'name',
+      'iso',
+      'description',
+      'gfw_link',
+      'country_information_link',
+      'short_description',
+    ];
+
+    const headers = Object.keys(json.data?.attributes ?? {}).filter((el) => COLUMNS.includes(el));
+
     csv += headers.join(',') + '\n';
-    json.data.attributes.forEach(function (row) {
-      console.log('row', row);
+
+    parsedJsonData?.forEach(function (row: { [key: string]: any }) {
       const data = headers.map((header) => JSON.stringify(row[header])).join(',');
       csv += data + '\n';
     });
@@ -78,7 +93,7 @@ export default function CountryDetailPanel() {
   };
 
   const downloadCSVCountryData = () => {
-    const csvData = jsonToCsv(data);
+    const csvData = jsonToCsv(data || {}); // Provide a default value of an empty object if data is undefined
     const blob = new Blob([csvData], { type: 'text/csv' });
     const url = window.URL.createObjectURL(blob);
     const a = document.createElement('a');
