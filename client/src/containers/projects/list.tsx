@@ -5,6 +5,8 @@ import { Search } from 'lucide-react';
 
 import { useGetProjects } from '@/types/generated/project';
 
+import { useSyncFilters } from '@/hooks/datasets/sync-query';
+
 import Filters from '@/containers/filters';
 import ProjectItem from '@/containers/projects/item';
 
@@ -14,6 +16,7 @@ import FiltersSelected from '../filters/selected';
 
 export default function ProjectsList() {
   const [searchValue, setSearchValue] = useState('');
+  const [filtersSettings] = useSyncFilters();
 
   const { data } = useGetProjects(
     {
@@ -21,6 +24,94 @@ export default function ProjectsList() {
       filters: {
         name: {
           $contains: searchValue,
+        },
+        countries: {
+          name: {
+            $in: filtersSettings?.country,
+          },
+        },
+        intervention_types: {
+          name: {
+            $containsi: Array.isArray(filtersSettings?.intervention)
+              ? filtersSettings?.intervention.map((i: string) => i.replace(/-/g, ' '))
+              : [],
+          },
+        },
+        project_indicator_fields: {
+          $or: [
+            {
+              ...(filtersSettings.area_restored?.includes('>500') && {
+                indicator_name: 'area_reforested_total',
+                filter_tag: {
+                  $gt: 500,
+                },
+              }),
+            },
+            {
+              ...(filtersSettings.area_restored?.includes('<200') && {
+                indicator_name: 'area_reforested_total',
+                filter_tag: {
+                  $lt: 200,
+                },
+              }),
+            },
+            {
+              ...(filtersSettings.area_restored?.includes('200-500') && {
+                indicator_name: 'area_reforested_total',
+                filter_tag: {
+                  $between: [200, 500],
+                },
+              }),
+            },
+            {
+              ...(filtersSettings.area_protected?.includes('>500') && {
+                indicator_name: 'area_protected_total',
+                filter_tag: {
+                  $gt: 500,
+                },
+              }),
+            },
+            {
+              ...(filtersSettings.area_protected?.includes('<200') && {
+                indicator_name: 'area_protected_total',
+                filter_tag: {
+                  $lt: 200,
+                },
+              }),
+            },
+            {
+              ...(filtersSettings.area_protected?.includes('200-500') && {
+                indicator_name: 'area_protected_total',
+                filter_tag: {
+                  $between: [200, 500],
+                },
+              }),
+            },
+            {
+              ...(filtersSettings.area_plantation?.includes('>500') && {
+                indicator_name: 'area_plantation_total',
+                filter_tag: {
+                  $gt: 500,
+                },
+              }),
+            },
+            {
+              ...(filtersSettings.area_plantation?.includes('<200') && {
+                indicator_name: 'area_plantation_total',
+                filter_tag: {
+                  $lt: 200,
+                },
+              }),
+            },
+            {
+              ...(filtersSettings.area_plantation?.includes('200-500') && {
+                indicator_name: 'area_plantation_total',
+                filter_tag: {
+                  $between: [200, 500],
+                },
+              }),
+            },
+          ],
         },
       },
     },
@@ -41,7 +132,7 @@ export default function ProjectsList() {
           onChange={(e) => setSearchValue(e.target.value)}
         />
         <Search size={24} className="absolute left-2 top-2" />
-        <Filters />
+        <Filters nrResults={data?.length as number} />
       </div>
       <FiltersSelected />
       {data && data.map((project) => <ProjectItem key={project?.id} data={project} />)}

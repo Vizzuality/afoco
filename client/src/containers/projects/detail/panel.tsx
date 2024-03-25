@@ -111,10 +111,10 @@ export default function ProjectDetailPanel() {
             <p className="text-xs font-medium uppercase text-gray-500">Status</p>
             <p className="text-sm text-yellow-900">{data?.status}</p>
           </div>
-          <div className="flex justify-between border-b-2 border-dotted border-gray-400 py-4">
+          {/* <div className="flex justify-between border-b-2 border-dotted border-gray-400 py-4">
             <p className="text-xs font-medium uppercase text-gray-500">Priority areas</p>
-            {/* <p className="text-sm text-yellow-900">{}</p> */}
-          </div>
+            <p className="text-sm text-yellow-900">{}</p>
+          </div> */}
           <div className="flex justify-between border-b-2 border-dotted border-gray-400 py-4">
             <p className="text-xs font-medium uppercase text-gray-500">Location</p>
             <p className="text-sm text-yellow-900">
@@ -143,16 +143,16 @@ export default function ProjectDetailPanel() {
           </div>
           <div className="flex justify-between border-b-2 border-dotted border-gray-400 py-4">
             <p className="text-xs font-medium uppercase text-gray-500">Duration</p>
-            {/* <p className="text-sm text-yellow-900">{}</p> */}
+            <p className="text-sm text-yellow-900">{data?.duration}</p>
           </div>
           <div className="flex justify-between border-b-2 border-dotted border-gray-400 py-4">
             <p className="text-xs font-medium uppercase text-gray-500">Donors</p>
-            {/* <p className="text-sm text-yellow-900">{}</p> */}
+            <p className="text-sm text-yellow-900">{data?.donors}</p>
           </div>
           <div className="flex justify-between border-b-2 border-dotted border-gray-400 py-4">
             <p className="text-xs font-medium uppercase text-gray-500">Investment</p>
             <p className="text-sm text-yellow-900">
-              {formatCompactNumber(indicators?.project_funding?.total_budget)}
+              {formatCompactNumber(indicators?.project_funding?.total_funding)}
             </p>
           </div>
         </div>

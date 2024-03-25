@@ -26,7 +26,7 @@ module.exports = {
     input: {
       target: '../cms/dist/src/extensions/documentation/documentation/1.0.0/full_documentation.json',
       filters: {
-        tags: ['Country', 'Country-indicator-field', 'Project', 'Indicator-field'],
+        tags: ['Country', 'Country-indicator-field', 'Project', 'Indicator-field', 'Intervention-type', 'Layer'],
       },
     }
   }

@@ -11,6 +11,7 @@ import FiltersContent from '@/containers/filters/content';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogFooter,
   DialogHeader,
@@ -18,7 +19,7 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 
-export default function Filters() {
+export default function Filters({ nrResults = 0 }: { nrResults: number }) {
   const [, setFiltersToURL] = useSyncFilters();
   const handleResetFilters = useCallback(() => {
     setFiltersToURL({});
@@ -45,9 +46,13 @@ export default function Filters() {
                 <button type="button" onClick={handleResetFilters}>
                   Clear all
                 </button>
-                <Button variant="primary" size="base" onClick={handleResetFilters}>
-                  Show <span className="font-bold"> X </span>results
-                </Button>
+                <DialogClose>
+                  <Button variant="primary" size="base" onClick={close}>
+                    <p>
+                      Show <span className="font-bold"> {nrResults} </span> results
+                    </p>
+                  </Button>
+                </DialogClose>
               </DialogFooter>
             </DialogContent>
           </Dialog>
