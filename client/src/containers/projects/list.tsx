@@ -30,17 +30,26 @@ export default function ProjectsList() {
             $in: filtersSettings?.country,
           },
         },
-        intervention_types: {
-          $containsi: Array.isArray(filtersSettings?.intervention)
-            ? filtersSettings?.intervention.map((i: string) => i.replace(/-/g, ' '))
-            : [],
-        },
-        // project_indicator_fields: {
-        //   indicator_name: 'project_site_area',
-        //   value: {
-        //     $gte: 16,
-        //   },
+        // intervention_types: {
+        //   $containsi: Array.isArray(filtersSettings?.intervention)
+        //     ? filtersSettings?.intervention.map((i: string) => i.replace(/-/g, ' '))
+        //     : [],
         // },
+        project_indicator_fields: {
+          indicator_name: 'area_plantation_total',
+          // !TODO: buscar or
+          filter_tag: {
+            ...(filtersSettings.area_plantation === '>500' && {
+              $lt: 500,
+            }),
+            ...(filtersSettings.area_plantation === '<200' && {
+              $gt: 200,
+            }),
+            ...(filtersSettings.area_plantation === '200-500' && {
+              $between: [200, 500],
+            }),
+          },
+        },
       },
     },
     {
@@ -50,6 +59,8 @@ export default function ProjectsList() {
       },
     }
   );
+
+  console.log('PROJECTS', data);
 
   return (
     <div className="no-scrollbar flex max-h-[75vh] flex-col space-y-2 overflow-y-auto">
