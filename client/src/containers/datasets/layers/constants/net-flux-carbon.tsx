@@ -1,8 +1,12 @@
 import { FC } from 'react';
 
-export const BiomassDensityInfo: FC = () => (
+export const NetForestCarbonFluxInfo: FC = () => (
   <div className="space-y-4 px-6 text-sm text-yellow-900">
-    <p className="font-light">Shows aboveground live woody biomass density.</p>
+    <p className="font-light">
+      Displays the net loss of forest ecosystem carbon, calculated as the difference between forest
+      carbon emissions from stand-replacing forest disturbances and carbon removals from forest
+      growth.
+    </p>
     <div className="flex space-x-4">
       <span className="font-medium">Citation:</span>
       <p className="font-light">
@@ -23,7 +27,7 @@ export const BiomassDensityInfo: FC = () => (
     <div className="flex space-x-4">
       <span className="font-medium">Source:</span>
       <a
-        href="https://gfw.global/3QbgJkN"
+        href="https://gfw.global/3DtjK8u"
         rel="noopener noreferrer"
         target="_blank"
         className="text-yellow-400 underline"
@@ -47,4 +51,4 @@ export const BiomassDensityInfo: FC = () => (
   </div>
 );
 
-export default BiomassDensityInfo;
+export default NetForestCarbonFluxInfo;

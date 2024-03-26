@@ -28,8 +28,9 @@ export default function DatasetsItem(props: LayerListResponseDataItem) {
   }, [layers, setLayersToURL, props.id]);
 
   if (!props.attributes) return null;
-  const Info = INFO[2];
-  console.log(INFO);
+
+  const Info = INFO[props.id];
+
   return (
     <div className="flex flex-col space-y-1.5 border-b py-2">
       <div className="flex items-center justify-between">
@@ -41,40 +42,42 @@ export default function DatasetsItem(props: LayerListResponseDataItem) {
           {/* <h3 className="text-sm">{props.attributes.title}</h3> */}
           <h3 className="text-sm">{props.attributes.name}</h3>
         </div>
-        <Dialog>
-          <DialogTrigger
-            className="flex items-center justify-center rounded-full p-2 hover:bg-yellow-50 data-[state=open]:bg-yellow-50"
-            data-cy={`info-${props.attributes.slug}-button`}
-          >
-            <InfoIcon className="h-4 w-4 text-black" strokeWidth={1} />
-          </DialogTrigger>
+        {Info && (
+          <Dialog>
+            <DialogTrigger
+              className="flex items-center justify-center rounded-full p-2 hover:bg-yellow-50 data-[state=open]:bg-yellow-50"
+              data-cy={`info-${props.attributes.slug}-button`}
+            >
+              <InfoIcon className="h-4 w-4 text-black" strokeWidth={1} />
+            </DialogTrigger>
 
-          <DialogContent className="p-0" data-cy={`info-${props.attributes.slug}-dialog`}>
-            <h3 className="px-6 pt-4 text-xl font-medium text-green-900">
-              {/* {props.attributes.title} */}
-              {props.attributes.name}
-            </h3>
-            <div className="border-b border-t border-gray-100 py-2.5">
-              <p className="px-6 text-sm text-yellow-900">{props.attributes.info}</p>
-            </div>
-            <div className="flex w-full px-6 pb-4">
-              <DialogClose asChild>
-                <Button
-                  data-cy={`info-${props.attributes.slug}-dialog-close`}
-                  variant="primary"
-                  size="base"
-                  className="ml-auto w-12 self-end"
-                >
-                  Ok
-                </Button>
-              </DialogClose>
-            </div>
-          </DialogContent>
-        </Dialog>
+            <DialogContent className="p-0" data-cy={`info-${props.attributes.slug}-dialog`}>
+              <h3 className="px-6 pt-4 text-xl font-medium text-green-900">
+                {/* {props.attributes.title} */}
+                {props.attributes.name}
+              </h3>
+              <div className="border-b border-t border-gray-100 py-2.5">
+                <Info />
+                {/* <p className="px-6 text-sm text-yellow-900">{props.attributes.info}</p> */}
+              </div>
+              <div className="flex w-full px-6 pb-4">
+                <DialogClose asChild>
+                  <Button
+                    data-cy={`info-${props.attributes.slug}-dialog-close`}
+                    variant="primary"
+                    size="base"
+                    className="ml-auto w-12 self-end"
+                  >
+                    Ok
+                  </Button>
+                </DialogClose>
+              </div>
+            </DialogContent>
+          </Dialog>
+        )}
       </div>
       <div>
-        <Info />
-        {/* <p className="ml-10 mr-5 text-xs leading-4 text-gray-500">{props.attributes.description}</p> */}
+        <p className="ml-10 mr-5 text-xs leading-4 text-gray-500">{props.attributes.description}</p>
       </div>
     </div>
   );

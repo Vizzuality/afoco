@@ -1,29 +1,23 @@
 import { FC } from 'react';
 
-export const BiomassDensityInfo: FC = () => (
+export const SoilCarbonDensityInfo: FC = () => (
   <div className="space-y-4 px-6 text-sm text-yellow-900">
-    <p className="font-light">Shows aboveground live woody biomass density.</p>
+    <p className="font-light">Identifies organic carbon density in the topsoil (0-30 cm depth).</p>
     <div className="flex space-x-4">
       <span className="font-medium">Citation:</span>
       <p className="font-light">
-        Harris, N.L., D.A. Gibbs, A. Baccini, R.A. Birdsey, S. de Bruin, M. Farina, L. Fatoyinbo,
-        M.C. Hansen, M. Herold, R.A. Houghton, P.V. Potapov, D. Requena Suarez, R.M. Roman-Cuesta,
-        S.S. Saatchi, C.M. Slay, S.A. Turubanova, A. Tyukavina. 2021. Global maps of twenty-first
-        century forest carbon fluxes.{' '}
-        <a
-          href="https://doi.org/10.1038/s41558-020-00976-6"
-          rel="noopener noreferrer"
-          target="_blank"
-        >
+        Sanderman J, Hengl T, Fiske G et al. (2018) A global map of mangrove forest soil carbon at
+        30 m spatial resolution.{' '}
+        <a href="http://doi.org/10.1088/1748-9326/aabe1c" rel="noopener noreferrer" target="_blank">
           {' '}
-          Nature Climate Change.
+          Environmental Research Letters 13: 055002.
         </a>
       </p>
     </div>
     <div className="flex space-x-4">
       <span className="font-medium">Source:</span>
       <a
-        href="https://gfw.global/3QbgJkN"
+        href="https://gfw.global/3rQ6OGW"
         rel="noopener noreferrer"
         target="_blank"
         className="text-yellow-400 underline"
@@ -47,4 +41,4 @@ export const BiomassDensityInfo: FC = () => (
   </div>
 );
 
-export default BiomassDensityInfo;
+export default SoilCarbonDensityInfo;

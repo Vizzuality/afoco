@@ -1,29 +1,25 @@
 import { FC } from 'react';
 
-export const BiomassDensityInfo: FC = () => (
+export const TreeCoverInfo: FC = () => (
   <div className="space-y-4 px-6 text-sm text-yellow-900">
-    <p className="font-light">Shows aboveground live woody biomass density.</p>
+    <p className="font-light">Identifies areas of tree cover.</p>
     <div className="flex space-x-4">
       <span className="font-medium">Citation:</span>
       <p className="font-light">
-        Harris, N.L., D.A. Gibbs, A. Baccini, R.A. Birdsey, S. de Bruin, M. Farina, L. Fatoyinbo,
-        M.C. Hansen, M. Herold, R.A. Houghton, P.V. Potapov, D. Requena Suarez, R.M. Roman-Cuesta,
-        S.S. Saatchi, C.M. Slay, S.A. Turubanova, A. Tyukavina. 2021. Global maps of twenty-first
-        century forest carbon fluxes.{' '}
-        <a
-          href="https://doi.org/10.1038/s41558-020-00976-6"
-          rel="noopener noreferrer"
-          target="_blank"
-        >
+        Hansen, M. C., P. V. Potapov, R. Moore, M. Hancher, S. A. Turubanova, A. Tyukavina, D. Thau,
+        S. V. Stehman, S. J. Goetz, T. R. Loveland, A. Kommareddy, A. Egorov, L. Chini, C. O.
+        Justice, and J. R. G. Townshend. 2013. “High-Resolution Global Maps of 21st-Century Forest
+        Cover Change.”{' '}
+        <a href="https://doi.org/10.1126/science.1244693" rel="noopener noreferrer" target="_blank">
           {' '}
-          Nature Climate Change.
+          Science 342 (15 November): 850–53.
         </a>
       </p>
     </div>
     <div className="flex space-x-4">
       <span className="font-medium">Source:</span>
       <a
-        href="https://gfw.global/3QbgJkN"
+        href="https://gfw.global/2MoEQxq"
         rel="noopener noreferrer"
         target="_blank"
         className="text-yellow-400 underline"
@@ -47,4 +43,4 @@ export const BiomassDensityInfo: FC = () => (
   </div>
 );
 
-export default BiomassDensityInfo;
+export default TreeCoverInfo;
