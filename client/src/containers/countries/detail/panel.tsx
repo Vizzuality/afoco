@@ -314,7 +314,6 @@ export default function CountryDetailPanel() {
                       bottom: -4,
                     }}
                     xAxisDataKey="year"
-                    xAxisTicks={['2020', '2022', '2024']}
                     yAxisTicks={['0', '250', '500']}
                   />
                 </div>
@@ -349,7 +348,6 @@ export default function CountryDetailPanel() {
                       bottom: -4,
                     }}
                     xAxisDataKey="year"
-                    xAxisTicks={['2020', '2022', '2024']}
                     yAxisTicks={['0', '250', '500']}
                   />
                 </div>
