@@ -14,7 +14,6 @@ import { formatCompactNumber } from '@/lib/utils/formats';
 
 import { useGetCountriesId } from '@/types/generated/country';
 import { useGetCountryIndicatorFields } from '@/types/generated/country-indicator-field';
-import { CountryResponse } from '@/types/generated/strapi.schemas';
 
 import { useSyncQueryParams } from '@/hooks/datasets';
 
@@ -58,11 +57,11 @@ export default function CountryDetailPanel() {
 
   const queryParams = useSyncQueryParams();
 
-  const jsonToCsv = (json: CountryResponse) => {
+  const jsonToCsv = (json) => {
     let csv = '';
 
     const parsedJsonData = [
-      Object.entries(json.data?.attributes ?? {})
+      Object.entries(json ?? {})
         .map((entry) => {
           return { [entry[0]]: entry[1] };
         })
@@ -78,11 +77,25 @@ export default function CountryDetailPanel() {
       'gfw_link',
       'country_information_link',
       'short_description',
+      'area_plantation_total',
+      'area_protected_total',
+      'area_reforested_total',
+      'beneficiaries_total',
+      'forest_area_pct',
+      'intervention_area_total',
+      'jobs_total',
+      'net_flux_co2e_year',
+      'production_ntfp_total',
+      'project_site_area',
+      'projects_completed',
+      'projects_count',
+      'tree_cover_extent_2010_ha',
+      'trees_planted_total',
     ];
 
-    const headers = Object.keys(json.data?.attributes ?? {}).filter((el) => COLUMNS.includes(el));
-
+    const headers = Object.keys(json ?? {}).filter((el) => COLUMNS.includes(el));
     csv += headers.join(',') + '\n';
+    console.log({ parsedJsonData });
 
     parsedJsonData?.forEach(function (row: { [key: string]: any }) {
       const data = headers.map((header) => JSON.stringify(row[header])).join(',');
@@ -93,23 +106,23 @@ export default function CountryDetailPanel() {
   };
 
   const downloadCSVCountryData = () => {
-    const csvData = jsonToCsv(data || {}); // Provide a default value of an empty object if data is undefined
+    const dataToDownload = { ...indicators, ...data?.data?.attributes };
+
+    console.log('DATA', dataToDownload);
+    const csvData = jsonToCsv(dataToDownload || {}); // Provide a default value of an empty object if data is undefined
     const blob = new Blob([csvData], { type: 'text/csv' });
     const url = window.URL.createObjectURL(blob);
     const a = document.createElement('a');
-
     a.href = url;
-
     a.download = `${data?.data?.attributes?.name}.csv`;
-
     document.body.appendChild(a);
-
     a.click();
   };
 
   if (!params.id) {
     return notFound();
   }
+
   return (
     <div className="p-5 pt-0">
       <div className="bg-background absolute left-0 right-0 top-0 z-10 flex w-full justify-between rounded-t-3xl px-5 pt-4">
