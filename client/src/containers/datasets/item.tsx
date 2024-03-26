@@ -2,16 +2,17 @@
 
 import { useCallback } from 'react';
 
-import { Info } from 'lucide-react';
+import { Info as InfoIcon } from 'lucide-react';
 
 import type { LayerListResponseDataItem } from '@/types/generated/strapi.schemas';
 
 import { useSyncLayers } from '@/hooks/datasets/sync-query';
 
+import { INFO } from '@/containers/datasets/layers';
+
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogClose, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import { Switch } from '@/components/ui/switch';
-
 // TODO: replace with real type DatasetItemResonseDataItem
 export default function DatasetsItem(props: LayerListResponseDataItem) {
   const [layers, setLayersToURL] = useSyncLayers();
@@ -27,7 +28,8 @@ export default function DatasetsItem(props: LayerListResponseDataItem) {
   }, [layers, setLayersToURL, props.id]);
 
   if (!props.attributes) return null;
-
+  const Info = INFO[2];
+  console.log(INFO);
   return (
     <div className="flex flex-col space-y-1.5 border-b py-2">
       <div className="flex items-center justify-between">
@@ -44,7 +46,7 @@ export default function DatasetsItem(props: LayerListResponseDataItem) {
             className="flex items-center justify-center rounded-full p-2 hover:bg-yellow-50 data-[state=open]:bg-yellow-50"
             data-cy={`info-${props.attributes.slug}-button`}
           >
-            <Info className="h-4 w-4 text-black" strokeWidth={1} />
+            <InfoIcon className="h-4 w-4 text-black" strokeWidth={1} />
           </DialogTrigger>
 
           <DialogContent className="p-0" data-cy={`info-${props.attributes.slug}-dialog`}>
@@ -71,7 +73,8 @@ export default function DatasetsItem(props: LayerListResponseDataItem) {
         </Dialog>
       </div>
       <div>
-        <p className="ml-10 mr-5 text-xs leading-4 text-gray-500">{props.attributes.description}</p>
+        <Info />
+        {/* <p className="ml-10 mr-5 text-xs leading-4 text-gray-500">{props.attributes.description}</p> */}
       </div>
     </div>
   );

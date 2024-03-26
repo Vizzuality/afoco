@@ -2,6 +2,7 @@ import type { LayerProps, DeckGLLayerProps, LayerSettings, LayerId } from '@/typ
 
 import BiomassDensity from '@/containers/datasets/layers/biomass-density/layer';
 import BiomassDensityLegend from '@/containers/datasets/layers/biomass-density/legend';
+import BiomassDensityInfo from '@/containers/datasets/layers/constants/biomass-density';
 import { LandDegradationLayer } from '@/containers/datasets/layers/land-degradation/layer';
 import LandDegradationLegend from '@/containers/datasets/layers/land-degradation/legend';
 import NetForestCarbonFluxLayer from '@/containers/datasets/layers/net-forest-carbon-flux/layer';
@@ -25,6 +26,10 @@ type LegendIndex = {
   [key: string]: React.ComponentType<{ settings: LayerSettings }>;
 };
 
+type InfoIndex = {
+  [key: number]: React.ComponentType;
+};
+
 // layers that require DeckGLLayerProps
 const DECKGL_LAYERS: DeckGLLayerIndex<number> = {
   1: TreeCoverLayer as React.ComponentType<DeckGLLayerProps<number>>,
@@ -45,6 +50,10 @@ export const LEGENDS: LegendIndex = {
   2: BiomassDensityLegend,
   4: SoilCarbonDensityLegend,
   6: LandDegradationLegend,
+};
+
+export const INFO: InfoIndex = {
+  2: BiomassDensityInfo,
 };
 
 function combineLayers<T>(
