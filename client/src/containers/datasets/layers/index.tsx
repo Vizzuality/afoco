@@ -1,4 +1,4 @@
-import type { LayerProps, DeckGLLayerProps, LayerSettings, LayerId } from '@/types/layers';
+import type { LayerProps, DeckGLLayerProps, LayerSettings } from '@/types/layers';
 
 import BiomassDensity from '@/containers/datasets/layers/biomass-density/layer';
 import BiomassDensityLegend from '@/containers/datasets/layers/biomass-density/legend';

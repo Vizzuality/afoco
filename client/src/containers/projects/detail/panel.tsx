@@ -13,9 +13,15 @@ import { dashboardAtom } from '@/store';
 
 import { useGetIndicatorFields } from '@/types/generated/indicator-field';
 import { useGetProjects } from '@/types/generated/project';
+import {
+  InterventionTypeListResponseDataItem,
+  Project,
+  ProjectProjectIndicatorFields,
+} from '@/types/generated/strapi.schemas';
 
 import { useSyncQueryParams } from '@/hooks/datasets';
 
+import { COLUMNS, CSV_COLUMNS_ORDER } from '@/containers/projects/detail/constants';
 import Share from '@/containers/share';
 
 import { Button } from '@/components/ui/button';
@@ -63,6 +69,64 @@ export default function ProjectDetailPanel() {
     }
   );
 
+  const jsonToCsv = (json: ProjectProjectIndicatorFields & Project) => {
+    let csv = '';
+
+    const parsedJsonData = [
+      Object.entries(json ?? {})
+        .map((entry) => {
+          if (entry[0] === 'countries' || entry[0] === 'intervention_types')
+            return {
+              [entry[0]]: entry[1].data.map(
+                (el: InterventionTypeListResponseDataItem) => el.attributes?.name
+              ),
+            };
+          return { [entry[0]]: entry[1] };
+        })
+        .reduce(function (result, current) {
+          return Object.assign(result, current);
+        }, []),
+    ];
+
+    const headers = Object.keys(json ?? {}).filter((el) => COLUMNS.includes(el));
+    headers.sort(
+      (a: string, b: string) =>
+        CSV_COLUMNS_ORDER[a as keyof typeof CSV_COLUMNS_ORDER] -
+        CSV_COLUMNS_ORDER[b as keyof typeof CSV_COLUMNS_ORDER]
+    );
+
+    csv += headers.join(',') + '\n';
+
+    parsedJsonData?.forEach(function (row: { [key: string]: number | object | string[] }) {
+      const data = headers
+        .map((header) => {
+          if (Array.isArray(row[header])) return `"${row[header].toString()}"`;
+
+          if (typeof row[header] === 'object' && !Array.isArray(row[header])) {
+            return `"${JSON.stringify(row[header]).replace(/"/g, "'")}"`;
+          }
+          return JSON.stringify(row[header]);
+        })
+        .join(',');
+      csv += data + '\n';
+    });
+
+    return csv;
+  };
+
+  const downloadCSVProjectData = () => {
+    const dataToDownload = { ...indicators, ...data };
+
+    const csvData = jsonToCsv(dataToDownload || {}); // Provide a default value of an empty object if data is undefined
+    const blob = new Blob([csvData], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${data?.name}.csv`;
+    document.body.appendChild(a);
+    a.click();
+  };
+
   if (!params.id) {
     return notFound();
   }
@@ -92,7 +156,7 @@ export default function ProjectDetailPanel() {
         <div className="flex items-center space-x-2">
           <Tooltip>
             <TooltipTrigger asChild>
-              <Button variant="ghost" className="rounded-full">
+              <Button variant="ghost" className="rounded-full" onClick={downloadCSVProjectData}>
                 <Download className="rotate-180 text-yellow-900" size={18} />
               </Button>
             </TooltipTrigger>
