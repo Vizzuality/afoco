@@ -4,10 +4,7 @@ import { useCallback } from 'react';
 
 import { Info } from 'lucide-react';
 
-import type {
-  LayerListResponse,
-  LayerListResponseDataItem,
-} from '@/types/generated/strapi.schemas';
+import type { LayerListResponseDataItem } from '@/types/generated/strapi.schemas';
 
 import { useSyncLayers } from '@/hooks/datasets/sync-query';
 
@@ -45,12 +42,12 @@ export default function DatasetsItem(props: LayerListResponseDataItem) {
         <Dialog>
           <DialogTrigger
             className="flex items-center justify-center rounded-full p-2 hover:bg-yellow-50 data-[state=open]:bg-yellow-50"
-            data-cy={`info-${props.attributes.name}-button`}
+            data-cy={`info-${props.attributes.slug}-button`}
           >
             <Info className="h-4 w-4 text-black" strokeWidth={1} />
           </DialogTrigger>
 
-          <DialogContent className="p-0" data-cy={`info-${props.attributes.name}-dialog`}>
+          <DialogContent className="p-0" data-cy={`info-${props.attributes.slug}-dialog`}>
             <h3 className="px-6 pt-4 text-xl font-medium text-green-900">
               {/* {props.attributes.title} */}
               {props.attributes.name}
@@ -61,7 +58,7 @@ export default function DatasetsItem(props: LayerListResponseDataItem) {
             <div className="flex w-full px-6 pb-4">
               <DialogClose asChild>
                 <Button
-                  data-cy={`info-${props.attributes.name}-dialog-close`}
+                  data-cy={`info-${props.attributes.slug}-dialog-close`}
                   variant="primary"
                   size="base"
                   className="ml-auto w-12 self-end"
