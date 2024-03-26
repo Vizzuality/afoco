@@ -1,28 +1,49 @@
-import type { LayerSettings } from '@/types/layers';
+import { useGetLayersId } from '@/types/generated/layer';
+import type { LayerSettings, LegendType } from '@/types/layers';
 
 import LegendSettings from '@/containers/legend-settings';
 
-const LegendItems = {
-  'No degradation': '#D1D5DB',
-  'Low degradation': '#FFCC73',
-  'Medium degradation': '#D48D00',
-  'High degradation': '#E23600',
-};
-
 export default function Legend({ settings }: { settings: LayerSettings }) {
+  const { data } = useGetLayersId(Number(settings.id));
+
+  if (!data?.data?.attributes) return null;
+
+  const { legend_config, name } = data.data.attributes;
+  const { items } = legend_config as LegendType;
+
   return (
-    <div className="w-full text-xs">
-      <div className="flex w-full items-center justify-between">
-        <p className="capitalize">Land Degradation</p>
+    <div className="flex w-full flex-col space-y-2">
+      <div className="flex w-full items-start justify-between">
+        <p className="max-w-[200px] text-xs capitalize">{name}</p>
         <LegendSettings settings={settings} />
       </div>
-      <div className="flex flex-col py-2">
-        {Object.entries(LegendItems).map((item) => (
-          <div key={item[0]} className="flex space-x-2">
-            <div className="h-3 w-3 shrink-0 rounded-full" style={{ backgroundColor: item[1] }} />
-            <p>{item[0]}</p>
-          </div>
-        ))}
+      <div>
+        <ul className="flex w-full">
+          {items.map(({ color }) => (
+            <li
+              key={`${color}`}
+              className="h-2 flex-shrink-0"
+              style={{
+                width: `${100 / items.length}%`,
+                backgroundColor: color,
+              }}
+            />
+          ))}
+        </ul>
+
+        <ul className="mt-1 flex w-full">
+          {items.map(({ value }) => (
+            <li
+              key={`${value}`}
+              className="flex-shrink-0 text-start text-xs last:text-end"
+              style={{
+                width: `${100 / items.length}%`,
+              }}
+            >
+              {value}
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   );

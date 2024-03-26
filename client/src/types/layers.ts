@@ -23,7 +23,7 @@ export type LayerId =
 export interface LayerSettings {
   opacity: number;
   visibility: 'none' | 'visible';
-  id: LayerId;
+  id: number;
 }
 
 export type ParamsConfig = Record<string, ParamsConfigValue>[];
@@ -49,7 +49,7 @@ export type InteractionConfig = {
 };
 
 export type LayerProps = {
-  id?: LayerId;
+  id: number;
   zIndex?: number;
   onAdd?: () => void;
   onRemove?: (ids: string[]) => void;
@@ -69,3 +69,12 @@ export type DeckGLLayerProps<T> = LayerProps &
     beforeId: string;
     config: DeckLayer<{ beforeId: string }>;
   };
+
+export type LegendType = {
+  type: 'basic' | 'gradient' | 'choropleth';
+  items: {
+    name?: string;
+    value: string;
+    color: string;
+  }[];
+};
