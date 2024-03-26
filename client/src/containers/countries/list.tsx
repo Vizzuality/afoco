@@ -17,7 +17,7 @@ export default function CountriesList() {
     populate: '*',
     filters: {
       name: {
-        $contains: searchValue,
+        $containsi: searchValue,
       },
     },
   });

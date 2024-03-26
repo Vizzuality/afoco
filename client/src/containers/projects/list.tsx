@@ -23,7 +23,7 @@ export default function ProjectsList() {
       populate: '*',
       filters: {
         name: {
-          $contains: searchValue,
+          $containsi: searchValue,
         },
         countries: {
           name: {
