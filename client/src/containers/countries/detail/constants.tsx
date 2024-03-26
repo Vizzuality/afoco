@@ -48,6 +48,11 @@ export const totalInterventionArea = [
 
 export const usefulLinks = [
   {
+    title: 'Publications of AFoCO projects and programs.',
+    description: '',
+    link: 'https://afocosec.org/knowledge/publications',
+  },
+  {
     title: 'Country Information Hub',
     description:
       'Archive of forestry and forestry-related laws, strategies, plans and policies in each Party.',
