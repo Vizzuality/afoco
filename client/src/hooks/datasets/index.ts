@@ -6,7 +6,7 @@ import { useSyncFilters, useSyncLayers, useSyncBasemap } from './sync-query';
 export const useSyncQueryParams = () => {
   const [filters] = useSyncFilters();
   const [layers] = useSyncLayers();
-  const [mapSettings] = useSyncBasemap();
+  const [settings] = useSyncBasemap();
 
-  return serialize({ filters, layers, mapSettings });
+  return serialize({ filters, layers, settings });
 };

@@ -63,7 +63,6 @@ const MapSettingsManager = () => {
 
   const handleStyleLoad = useCallback(() => {
     const B = BASEMAPS.find((b) => b.value === basemap);
-
     handleGroup(['basemap'], basemap);
     handleGroup(['labels'], labels);
 

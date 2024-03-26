@@ -7,7 +7,7 @@ export const PANEL_OVERVIEW_ITEMS = [
   {
     title: 'National Forest Area',
     value: 'tree_cover_extent_2010_ha',
-    unit: 'Mha',
+    unit: 'ha',
     percentage: 'forest_area_pct',
     note: 'of land)',
   },
