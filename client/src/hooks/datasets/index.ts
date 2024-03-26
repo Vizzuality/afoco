@@ -1,9 +1,5 @@
 'use client';
 
-import { useMemo } from 'react';
-
-import { group } from 'd3-array';
-
 // import { useGetDatasets } from '@/types/generated/dataset';
 
 import { serialize } from './query-parsers';

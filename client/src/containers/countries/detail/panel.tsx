@@ -26,6 +26,7 @@ import {
   totalInterventionArea,
 } from '@/containers/countries/detail/constants';
 import { usefulLinks } from '@/containers/countries/detail/constants';
+import { COLUMNS, CSV_COLUMNS_ORDER } from '@/containers/countries/detail/constants';
 import Share from '@/containers/share';
 
 import { Button } from '@/components/ui/button';
@@ -71,68 +72,16 @@ export default function CountryDetailPanel() {
         }, []),
     ];
 
-    const COLUMNS = [
-      'name',
-      'iso',
-      'description',
-      'short_description',
-      'gfw_link',
-      'country_information_link',
-      'area_plantation_total',
-      'area_protected_total',
-      'area_reforested_total',
-      'forest_area_pct',
-      'intervention_area_total',
-      'jobs',
-      'jobs_total',
-      'net_flux_co2e_year',
-      'production_ntfp_total',
-      'project_site_area',
-      'projects_completed',
-      'projects_count',
-      'tree_cover_extent_2010_ha',
-      'trees_planted_total',
-      'beneficiaries',
-      'beneficiaries_total',
-      'country_funding',
-      'ntfp',
-    ];
-
-    const order = {
-      name: 1,
-      iso: 2,
-      description: 3,
-      short_description: 4,
-      gfw_link: 5,
-      country_information_link: 6,
-      area_plantation_total: 7,
-      area_protected_total: 8,
-      area_reforested_total: 9,
-      forest_area_pct: 10,
-      intervention_area_total: 11,
-      jobs: 12,
-      jobs_total: 13,
-      net_flux_co2e_year: 14,
-      production_ntfp_total: 15,
-      project_site_area: 16,
-      projects_completed: 17,
-      projects_count: 18,
-      tree_cover_extent_2010_ha: 19,
-      trees_planted_total: 20,
-      beneficiaries: 21,
-      beneficiaries_total: 22,
-      country_funding: 23,
-      ntfp: 24,
-    };
-
     const headers = Object.keys(json ?? {}).filter((el) => COLUMNS.includes(el));
     headers.sort(
-      (a: string, b: string) => order[a as keyof typeof order] - order[b as keyof typeof order]
+      (a: string, b: string) =>
+        CSV_COLUMNS_ORDER[a as keyof typeof CSV_COLUMNS_ORDER] -
+        CSV_COLUMNS_ORDER[b as keyof typeof CSV_COLUMNS_ORDER]
     );
 
     csv += headers.join(',') + '\n';
 
-    parsedJsonData?.forEach(function (row: { [key: string]: any }) {
+    parsedJsonData?.forEach(function (row: { [key: string]: number | object | string[] }) {
       const data = headers
         .map((header) => {
           if (Array.isArray(row[header])) return `"${row[header].toString()}"`;
