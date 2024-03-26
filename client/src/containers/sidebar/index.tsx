@@ -70,30 +70,6 @@ export default function Sidebar() {
                     {layers.length}
                   </div>
                 )}
-
-                {name === 'projects' && !!projects?.data?.length && (
-                  <div
-                    className={cn({
-                      'absolute bottom-1 left-4 h-4 w-4 rounded-full bg-yellow-300 text-xs font-semibold text-yellow-700':
-                        true,
-                      'bg-yellow-300 text-white': sidebarTab === name,
-                    })}
-                  >
-                    {projects?.data?.length}
-                  </div>
-                )}
-
-                {name === 'countries' && !!countries?.data?.length && (
-                  <div
-                    className={cn({
-                      'absolute bottom-1 left-4 h-4 w-4 rounded-full bg-yellow-300 text-xs font-semibold text-yellow-700':
-                        true,
-                      'bg-yellow-300 text-white': sidebarTab === name,
-                    })}
-                  >
-                    {countries?.data?.length}
-                  </div>
-                )}
               </div>
               <p className="capitalize">{name}</p>
             </Link>
