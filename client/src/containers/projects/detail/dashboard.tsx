@@ -122,7 +122,12 @@ export default function ProjectDashboard({ id }: { id: string }) {
               </div>
 
               <p className="py-4 text-3xl font-extrabold">
-                {formatCompactNumber(indicators.intervention_area_total)}ha
+                {formatCompactNumber(
+                  indicators.area_plantation_total +
+                    indicators.area_protected_total +
+                    indicators.area_reforested_total
+                )}{' '}
+                ha
               </p>
 
               <div className="space-y-3">

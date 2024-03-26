@@ -14,6 +14,7 @@ import { formatCompactNumber } from '@/lib/utils/formats';
 
 import { useGetCountriesId } from '@/types/generated/country';
 import { useGetCountryIndicatorFields } from '@/types/generated/country-indicator-field';
+import { Country, CountryCountryIndicatorFieldsDataItem } from '@/types/generated/strapi.schemas';
 
 import { useSyncQueryParams } from '@/hooks/datasets';
 
@@ -25,6 +26,7 @@ import {
   totalInterventionArea,
 } from '@/containers/countries/detail/constants';
 import { usefulLinks } from '@/containers/countries/detail/constants';
+import { COLUMNS, CSV_COLUMNS_ORDER } from '@/containers/countries/detail/constants';
 import Share from '@/containers/share';
 
 import { Button } from '@/components/ui/button';
@@ -57,9 +59,62 @@ export default function CountryDetailPanel() {
 
   const queryParams = useSyncQueryParams();
 
+  const jsonToCsv = (json: CountryCountryIndicatorFieldsDataItem['attributes'] & Country) => {
+    let csv = '';
+
+    const parsedJsonData = [
+      Object.entries(json ?? {})
+        .map((entry) => {
+          return { [entry[0]]: entry[1] };
+        })
+        .reduce(function (result, current) {
+          return Object.assign(result, current);
+        }, []),
+    ];
+
+    const headers = Object.keys(json ?? {}).filter((el) => COLUMNS.includes(el));
+    headers.sort(
+      (a: string, b: string) =>
+        CSV_COLUMNS_ORDER[a as keyof typeof CSV_COLUMNS_ORDER] -
+        CSV_COLUMNS_ORDER[b as keyof typeof CSV_COLUMNS_ORDER]
+    );
+
+    csv += headers.join(',') + '\n';
+
+    parsedJsonData?.forEach(function (row: { [key: string]: number | object | string[] }) {
+      const data = headers
+        .map((header) => {
+          if (Array.isArray(row[header])) return `"${row[header].toString()}"`;
+
+          if (typeof row[header] === 'object' && !Array.isArray(row[header])) {
+            return `"${JSON.stringify(row[header]).replace(/"/g, "'")}"`;
+          }
+          return JSON.stringify(row[header]);
+        })
+        .join(',');
+      csv += data + '\n';
+    });
+
+    return csv;
+  };
+
+  const downloadCSVCountryData = () => {
+    const dataToDownload = { ...indicators, ...data?.data?.attributes };
+
+    const csvData = jsonToCsv(dataToDownload || {}); // Provide a default value of an empty object if data is undefined
+    const blob = new Blob([csvData], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${data?.data?.attributes?.name}.csv`;
+    document.body.appendChild(a);
+    a.click();
+  };
+
   if (!params.id) {
     return notFound();
   }
+
   return (
     <div className="p-5 pt-0">
       <div className="bg-background absolute left-0 right-0 top-0 z-10 flex w-full justify-between rounded-t-3xl px-5 pt-4">
@@ -73,7 +128,7 @@ export default function CountryDetailPanel() {
         <div className="flex items-center space-x-2">
           <Tooltip>
             <TooltipTrigger asChild>
-              <Button variant="ghost" className="rounded-full">
+              <Button variant="ghost" className="rounded-full" onClick={downloadCSVCountryData}>
                 <Download className="text-yellow-900" size={18} />
               </Button>
             </TooltipTrigger>
@@ -190,7 +245,12 @@ export default function CountryDetailPanel() {
               </div>
 
               <p className="py-4 text-3xl font-extrabold">
-                {formatCompactNumber(indicators.intervention_area_total)}ha
+                {formatCompactNumber(
+                  indicators.area_plantation_total +
+                    indicators.area_protected_total +
+                    indicators.area_reforested_total
+                )}{' '}
+                ha
               </p>
 
               <div className="space-y-4">
