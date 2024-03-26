@@ -10,9 +10,6 @@ import { HelpCircle } from 'lucide-react';
 
 import { cn } from '@/lib/classnames';
 
-import { useGetCountries } from '@/types/generated/country';
-import { useGetProjects } from '@/types/generated/project';
-
 import { useSyncQueryParams } from '@/hooks/datasets';
 import { useSyncLayers } from '@/hooks/datasets/sync-query';
 
@@ -21,9 +18,6 @@ import { TABS } from '@/containers/sidebar/constants';
 
 export default function Sidebar() {
   const pathname = usePathname();
-
-  const { data: projects } = useGetProjects({ populate: '*' });
-  const { data: countries } = useGetCountries({ populate: '*' });
 
   const queryParams = useSyncQueryParams();
   const [layers] = useSyncLayers();
