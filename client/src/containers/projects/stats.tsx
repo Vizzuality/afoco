@@ -123,7 +123,15 @@ export default function Stats() {
                     bottom: -4,
                   }}
                   xAxisDataKey="year"
-                  xAxisTicks={Object.keys(indicators.beneficiaries)}
+                  xAxisTicks={[
+                    Object.keys(indicators.beneficiaries)[0],
+                    Object.keys(indicators.beneficiaries)[
+                      Object.keys(indicators.beneficiaries).length / 2
+                    ],
+                    Object.keys(indicators.beneficiaries)[
+                      Object.keys(indicators.beneficiaries).length - 1
+                    ],
+                  ]}
                   yAxisTicks={[
                     '0',
                     (
