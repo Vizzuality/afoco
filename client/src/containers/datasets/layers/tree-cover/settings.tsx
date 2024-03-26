@@ -1,14 +1,6 @@
-import { useMemo } from 'react';
-
 import { ParamsConfig } from '@/types/layers';
 
-import {
-  Select,
-  SelectTrigger,
-  SelectContent,
-  SelectItem,
-  SelectValue,
-} from '@/components/ui/select';
+import { Select, SelectTrigger, SelectContent, SelectValue } from '@/components/ui/select';
 export interface TreeCoverLossSettings {
   description: string;
   startYear: number;

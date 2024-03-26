@@ -1,13 +1,8 @@
 'use client';
 
-import { useState } from 'react';
-
 import { orderBy } from 'lodash-es';
-import { Search } from 'lucide-react';
 
 import { useGetLayers } from '@/types/generated/layer';
-
-import { Input } from '@/components/ui/input';
 
 import DatasetsItem from './item';
 
