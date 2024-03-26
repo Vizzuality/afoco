@@ -356,7 +356,9 @@ export default function CountryDetailPanel() {
                     href={
                       link === 'gfw_link'
                         ? data?.data?.attributes?.gfw_link
-                        : data?.data?.attributes?.country_information_link
+                        : link === 'country_information_link'
+                        ? data?.data?.attributes?.country_information_link
+                        : link
                     }
                     target="_blank"
                     rel="noreferrer"
