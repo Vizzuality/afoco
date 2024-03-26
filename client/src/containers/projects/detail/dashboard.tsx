@@ -138,7 +138,16 @@ export default function ProjectDashboard({ id }: { id: string }) {
 
                       <div
                         className="h-2 rounded-3xl bg-[#FFCC73]"
-                        style={{ width: indicators[value] * 0.3 }}
+                        style={{
+                          width: !!indicators[value]
+                            ? `${
+                                (indicators[value] * 100) /
+                                (indicators.area_plantation_total +
+                                  indicators.area_protected_total +
+                                  indicators.area_reforested_total)
+                              }%`
+                            : '0%',
+                        }}
                       />
                     </div>
 
