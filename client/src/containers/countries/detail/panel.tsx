@@ -390,7 +390,6 @@ export default function CountryDetailPanel() {
                       bottom: -4,
                     }}
                     xAxisDataKey="year"
-                    yAxisTicks={['0', '250', '500']}
                   />
                 </div>
               )}
@@ -447,7 +446,6 @@ export default function CountryDetailPanel() {
                       bottom: -4,
                     }}
                     xAxisDataKey="year"
-                    yAxisTicks={['0', '250', '500']}
                   />
                 </div>
               )}
