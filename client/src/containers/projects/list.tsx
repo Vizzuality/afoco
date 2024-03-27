@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
 
-import { Search } from 'lucide-react';
+import { Search, X } from 'lucide-react';
 
 import { useGetProjects } from '@/types/generated/project';
 
@@ -15,7 +15,7 @@ import { Input } from '@/components/ui/input';
 import FiltersSelected from '../filters/selected';
 
 export default function ProjectsList() {
-  const [searchValue, setSearchValue] = useState('');
+  const [searchValue, setSearchValue] = useState<string | null>(null);
   const [filtersSettings] = useSyncFilters();
 
   const { data } = useGetProjects(
@@ -125,13 +125,26 @@ export default function ProjectsList() {
 
   return (
     <div className="no-scrollbar flex max-h-[75vh] flex-col space-y-2 overflow-y-auto">
-      <div className="relative mx-1 mt-1 flex justify-between space-x-2">
-        <Input
-          placeholder="Search project by name"
-          className="border-none bg-gray-100 pl-11 placeholder:text-gray-500"
-          onChange={(e) => setSearchValue(e.target.value)}
-        />
-        <Search size={24} className="absolute left-2 top-2" />
+      <div className="mx-1 mt-1 flex justify-between space-x-2">
+        <div className="relative">
+          <Input
+            placeholder="Search project by name"
+            className="border-none bg-gray-100 pl-11 placeholder:text-gray-500"
+            onChange={(e) => setSearchValue(e.target.value)}
+            value={searchValue || ''}
+          />
+          <Search size={24} className="absolute left-2 top-2" />
+          {!!searchValue && (
+            <button
+              type="button"
+              className="absolute right-3 top-3"
+              aria-label="reset-search"
+              onClick={() => setSearchValue(null)}
+            >
+              <X className="h-3.5 w-3.5 cursor-pointer text-yellow-900" />
+            </button>
+          )}
+        </div>
         <Filters nrResults={data?.length as number} />
       </div>
       <FiltersSelected />
