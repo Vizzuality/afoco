@@ -44,26 +44,26 @@ export default function ProjectDashboard({ id }: { id: string }) {
   return (
     <div
       data-cy="project-dashboard"
-      className="z-50 box-content h-full w-full rounded-3xl bg-neutral-50 p-6 shadow-md"
+      className="no-scrollbar z-50 box-content h-full w-full overflow-x-hidden rounded-3xl bg-neutral-50 p-6 shadow-md xl:overflow-y-auto"
     >
       <h3 className="mb-2 text-xl font-extrabold text-gray-400">Overview</h3>
 
       {indicators && (
-        <div className="mb-4 flex space-x-4">
+        <div className="mb-4 flex flex-col space-y-2 xl:flex-row xl:space-x-4 xl:space-y-0">
           {DASHBOARD_OVERVIEW_RESUME_ITEMS.map(({ title, icon, value, unit }) => (
             <div
               key={title}
-              className="flex w-1/2 items-center space-x-4 rounded-xl bg-white p-4 text-sm text-green-800 shadow-sm"
+              className="flex items-center space-x-6 rounded-xl bg-white p-4 text-sm text-green-800 shadow-sm xl:w-1/2 xl:space-x-4"
             >
-              <div className="flex h-14 w-14 items-center justify-center rounded-full border border-green-400 bg-green-200/10">
+              <div className="flex h-14 w-16 items-center justify-center rounded-full xl:border xl:border-green-400 xl:bg-green-200/10">
                 <Image src={icon} alt={title} width={32} height={32} />
               </div>
-              <div className="flex flex-col">
+              <div className="flex w-full flex-row-reverse items-center justify-between xl:flex-col xl:items-start">
                 <div className="flex items-end space-x-0.5">
                   <p className="text-5xl font-extrabold text-green-400">{indicators[value]}</p>
                   {unit && <p className="mb-0.5 text-base font-normal text-green-400">{unit}</p>}
                 </div>
-                <p>{title}</p>
+                <p className="text-base font-normal text-green-800 xl:text-sm">{title}</p>
               </div>
             </div>
           ))}
@@ -71,9 +71,9 @@ export default function ProjectDashboard({ id }: { id: string }) {
       )}
 
       {indicators && (
-        <div className="flex h-[70vh] w-full flex-col justify-between gap-4">
-          <div className="flex h-1/2 w-full gap-4">
-            <div className="w-1/2 rounded-xl bg-white p-4 shadow-sm">
+        <div className="flex w-full flex-col justify-between gap-4 xl:h-[70vh]">
+          <div className="flex w-full flex-col gap-4 xl:h-1/2 xl:flex-row">
+            <div className="rounded-xl bg-white p-4 shadow-sm xl:w-1/2">
               <div className="flex items-center justify-between">
                 <h3 className="text-lg text-green-800">Total project value (USD)</h3>
                 <Dialog>
@@ -115,7 +115,7 @@ export default function ProjectDashboard({ id }: { id: string }) {
               </div>
               <SingleBar data={indicators.project_funding} />
             </div>
-            <div className="w-1/2 rounded-xl bg-white p-4 shadow-sm">
+            <div className="rounded-xl bg-white p-4 shadow-sm xl:w-1/2">
               <div className="flex items-center justify-between">
                 <h3 className="text-lg text-green-800">Total intervention area</h3>
                 <Info className="h-5 w-5 text-green-800" />
@@ -163,8 +163,8 @@ export default function ProjectDashboard({ id }: { id: string }) {
             </div>
           </div>
 
-          <div className="flex h-1/2 w-full gap-4">
-            <div className="w-1/2 rounded-xl bg-white p-4 shadow-sm">
+          <div className="flex w-full flex-col gap-4 xl:h-1/2 xl:flex-row">
+            <div className="rounded-xl bg-white p-4 shadow-sm xl:w-1/2">
               <div className="flex items-center justify-between">
                 <h3 className="text-lg text-green-800">Total beneficiaries</h3>
                 <Info className="h-5 w-5 text-green-800" />
@@ -197,7 +197,7 @@ export default function ProjectDashboard({ id }: { id: string }) {
                 )}
               </div>
             </div>
-            <div className="w-1/2 rounded-xl bg-white p-4 shadow-sm">
+            <div className="rounded-xl bg-white p-4 shadow-sm xl:w-1/2">
               <div className="flex items-center justify-between">
                 <h3 className="text-lg text-green-800">Total jobs</h3>
                 <Info className="h-5 w-5 text-green-800" />
