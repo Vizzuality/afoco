@@ -32,7 +32,7 @@ export default function Filters({ nrResults = 0 }: { nrResults: number }) {
           <Dialog>
             <DialogTrigger aria-label="Show filters" asChild>
               <Button variant="outline" size="base">
-                <Filter className="stroke-[1.5px]" />
+                <Filter className="hidden stroke-[1.5px] xl:block" />
                 <span>Filters</span>
               </Button>
             </DialogTrigger>

@@ -127,11 +127,11 @@ export default function ProjectsList() {
     <div className="no-scrollbar flex max-h-[75vh] flex-col space-y-2 overflow-y-auto">
       <div className="relative mx-1 mt-1 flex justify-between space-x-2">
         <Input
-          placeholder="Search project by name"
+          placeholder="Search project"
           className="border-none bg-gray-100 pl-11 placeholder:text-gray-500"
           onChange={(e) => setSearchValue(e.target.value)}
         />
-        <Search size={24} className="absolute left-2 top-2" />
+        <Search size={24} className="absolute left-1 top-2 xl:left-2" />
         <Filters nrResults={data?.length as number} />
       </div>
       <FiltersSelected />
