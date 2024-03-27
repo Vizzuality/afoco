@@ -1,6 +1,6 @@
 describe('share', () => {
   it('share link by twitter', () => {
-    cy.visit('/projects/indonesia-landscape');
+    cy.visit('/projects/AFoCO_010_2016');
     cy.get('[data-cy="share-tooltip-button"]').click();
     cy.get('button[data-cy="share-twitter-button"]').click().wait(1000);
     cy.visit(
@@ -9,7 +9,7 @@ describe('share', () => {
   });
 
   it('copy to clipboard', () => {
-    cy.visit('/projects/indonesia-landscape');
+    cy.visit('/projects/AFoCO_010_2016');
     cy.get('[data-cy="share-tooltip-button"]').click();
     cy.get('button[data-cy="share-link-button"]').click();
     cy.wrap(
@@ -24,7 +24,7 @@ describe('share', () => {
     );
     cy.window().then((win) => {
       win.navigator.clipboard.readText().then((text) => {
-        expect(text).to.eq('http://localhost:3000/projects/indonesia-landscape');
+        expect(text).to.eq('http://localhost:3000/projects/AFoCO_010_2016');
       });
     });
   });
