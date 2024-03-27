@@ -26,6 +26,7 @@ export default function CountriesList() {
     <div className=" flex flex-col space-y-8">
       <div className="relative">
         <Input
+          type="search"
           placeholder="Search country"
           className="border-none bg-gray-100 pl-11 placeholder:text-gray-500"
           onChange={(e) => setSearchValue(e.target.value)}
