@@ -20,6 +20,7 @@ export const basemapSettingsParser = parseAsJson<MapSettings>().withDefault({
 const searchQueryParams = {
   filters: filtersParser,
   layers: layersParser,
+  settings: basemapSettingsParser,
 };
 
 export const serialize = createSerializer(searchQueryParams);

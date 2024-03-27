@@ -6,4 +6,4 @@ export const useSyncFilters = () => useQueryState('filters', filtersParser);
 
 export const useSyncLayers = () => useQueryState('layers', layersParser);
 
-export const useSyncBasemap = () => useQueryState('basemap-settings', basemapSettingsParser);
+export const useSyncBasemap = () => useQueryState('settings', basemapSettingsParser);

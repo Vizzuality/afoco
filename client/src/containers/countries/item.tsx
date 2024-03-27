@@ -42,7 +42,7 @@ export default function CountryItem({ data }: { data: CountryListResponseDataIte
       </div>
       <p>
         <span className="font-semibold">{projectsCountIndicator?.attributes?.value as number}</span>{' '}
-        projects
+        {projectsCountIndicator?.attributes?.value === 1 ? 'project' : 'projects'}
       </p>
     </Link>
   );

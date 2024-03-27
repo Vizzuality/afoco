@@ -46,17 +46,18 @@ export default function CountryDetailPanel() {
     },
     {
       query: {
-        select: (response) =>
-          Object.assign(
+        select: (response) => {
+          return Object.assign(
             {},
             ...(response.data ?? []).map((item) => ({
               [item.attributes?.indicator_name as string]: item.attributes?.value,
+              [`${item.attributes?.indicator_name}_unit` as string]: item.attributes?.unit,
             }))
-          ),
+          );
+        },
       },
     }
   );
-
   const queryParams = useSyncQueryParams();
 
   const jsonToCsv = (json: CountryCountryIndicatorFieldsDataItem['attributes'] & Country) => {
