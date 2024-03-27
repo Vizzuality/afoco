@@ -48,7 +48,6 @@
     "clsx": "^1.2.1",
     "cmdk": "0.2.1",
     "d3-array": "3.2.4",
-    "d3-scale": "^4.0.2",
     "deck.gl": "8.9.19",
     "eslint": "8.42.0",
     "eslint-config-next": "13.4.5",
