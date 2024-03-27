@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { scaleLinear } from 'd3-scale';
 import { BarChart, Bar, Rectangle, XAxis, YAxis, ResponsiveContainer } from 'recharts';
 
 const CustomizedXAxisTick = ({
@@ -46,8 +47,6 @@ export default function BarChartComponent({
   fillBar,
   margin,
   xAxisDataKey,
-
-  yAxisTicks,
 }: {
   data: { [key: string]: unknown }[];
   activeStyles?: { stroke: string };
@@ -56,8 +55,12 @@ export default function BarChartComponent({
   fillBar?: string;
   margin?: { top: number; right: number; bottom: number; left: number };
   xAxisDataKey: string;
-  yAxisTicks?: string[];
 }) {
+  const ticksX = data.map((d) => Number(d[xAxisDataKey])).flat() as number[];
+  const ticksY = data.map((d) => Number(d[barDataKey])).flat() as number[];
+  const maxYtick = Math.round(Math.max(...ticksY) / 10) * 10;
+  const mediumYtick = Math.round(maxYtick / 2 / 10) * 10;
+
   return (
     <ResponsiveContainer width="100%" height="100%">
       <BarChart width={500} height={300} data={data} margin={margin}>
@@ -65,16 +68,15 @@ export default function BarChartComponent({
           dataKey={xAxisDataKey}
           axisLine={false}
           tickLine={false}
-          ticks={
-            [
-              data[0][xAxisDataKey],
-              // data[Math.round((data.length - 1) / 2)][xAxisDataKey],
-              data[data.length - 1][xAxisDataKey],
-            ] as string[]
-          }
+          ticks={scaleLinear().domain(ticksX).ticks(2)}
           tick={CustomizedXAxisTick}
         />
-        <YAxis axisLine={false} tickLine={false} ticks={yAxisTicks} tick={CustomizedYAxisTick} />
+        <YAxis
+          axisLine={false}
+          tickLine={false}
+          ticks={[0, mediumYtick, maxYtick]}
+          tick={CustomizedYAxisTick}
+        />
         <Bar
           dataKey={barDataKey}
           fill={fillBar}

@@ -192,7 +192,6 @@ export default function ProjectDashboard({ id }: { id: string }) {
                       bottom: -4,
                     }}
                     xAxisDataKey="year"
-                    yAxisTicks={['0', '50', '100']}
                   />
                 )}
               </div>
@@ -225,7 +224,6 @@ export default function ProjectDashboard({ id }: { id: string }) {
                       bottom: -4,
                     }}
                     xAxisDataKey="year"
-                    yAxisTicks={['0', '50', '100']}
                   />
                 )}
               </div>
