@@ -9,11 +9,12 @@ import { useGetCountries } from '@/types/generated/country';
 import CountryItem from '@/containers/countries/item';
 
 import { Input } from '@/components/ui/input';
+import ContentLoader from '@/components/ui/loader';
 
 export default function CountriesList() {
   const [searchValue, setSearchValue] = useState('');
 
-  const { data } = useGetCountries({
+  const { data, isFetching, isFetched, isError } = useGetCountries({
     populate: '*',
     filters: {
       name: {
@@ -23,19 +24,30 @@ export default function CountriesList() {
   });
 
   return (
-    <div className=" flex flex-col space-y-8">
-      <div className="relative">
-        <Input
-          placeholder="Search country"
-          className="border-none bg-gray-100 pl-11 placeholder:text-gray-500"
-          onChange={(e) => setSearchValue(e.target.value)}
-        />
-        <Search size={24} className="absolute left-1 top-2" />
+    <ContentLoader
+      data={data?.data}
+      isPlaceholderData={false}
+      isFetching={isFetching}
+      isFetched={isFetched}
+      isError={isError}
+    >
+      <div className="flex flex-col space-y-8">
+        <div className="relative">
+          <Input
+            placeholder="Search country"
+            className="border-none bg-gray-100 pl-11 placeholder:text-gray-500"
+            onChange={(e) => setSearchValue(e.target.value)}
+          />
+          <Search size={24} className="absolute left-1 top-2" />
+        </div>
+
+        <div className="flex flex-col space-y-2">
+          <p className="text-xs text-gray-500">Select a country</p>
+          {data?.data?.map((country) => (
+            <CountryItem key={country.id} data={country} />
+          ))}
+        </div>
       </div>
-      <div className="flex flex-col space-y-2">
-        <p className="text-xs text-gray-500">Select a country</p>
-        {data?.data && data.data.map((country) => <CountryItem key={country.id} data={country} />)}
-      </div>
-    </div>
+    </ContentLoader>
   );
 }
