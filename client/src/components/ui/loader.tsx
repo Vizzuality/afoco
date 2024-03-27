@@ -46,12 +46,10 @@ const ContentLoader = ({
           </svg>
         </div>
       )}
-
-      {isError && isFetched && !isFetching && 'Error'}
-
+      {/* //!TODO: Style errors and no data messages */}
+      {/* {isError && isFetched && !isFetching && 'Error'} */}
       {!isPlaceholderData && !isError && isFetched && !!data && children}
-
-      {!isPlaceholderData && !isError && isFetched && !data && 'No data'}
+      {/* {!isPlaceholderData && !isError && isFetched && !data && 'No data'} */}
     </div>
   );
 };
