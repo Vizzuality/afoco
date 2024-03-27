@@ -46,7 +46,7 @@ export default function BarChartComponent({
   fillBar,
   margin,
   xAxisDataKey,
-  xAxisTicks,
+
   yAxisTicks,
 }: {
   data: { [key: string]: unknown }[];
@@ -56,7 +56,6 @@ export default function BarChartComponent({
   fillBar?: string;
   margin?: { top: number; right: number; bottom: number; left: number };
   xAxisDataKey: string;
-  xAxisTicks?: string[];
   yAxisTicks?: string[];
 }) {
   return (
@@ -66,7 +65,13 @@ export default function BarChartComponent({
           dataKey={xAxisDataKey}
           axisLine={false}
           tickLine={false}
-          ticks={xAxisTicks}
+          ticks={
+            [
+              data[0][xAxisDataKey],
+              // data[Math.round((data.length - 1) / 2)][xAxisDataKey],
+              data[data.length - 1][xAxisDataKey],
+            ] as string[]
+          }
           tick={CustomizedXAxisTick}
         />
         <YAxis axisLine={false} tickLine={false} ticks={yAxisTicks} tick={CustomizedYAxisTick} />

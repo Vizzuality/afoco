@@ -246,6 +246,7 @@ export default function CountryDetailPanel() {
               </div>
 
               <p className="py-4 text-3xl font-extrabold">
+                {/* //!TODO: This value should come from API. */}
                 {formatCompactNumber(
                   indicators.area_plantation_total +
                     indicators.area_protected_total +
@@ -262,7 +263,16 @@ export default function CountryDetailPanel() {
 
                       <div
                         className="h-2 rounded-3xl bg-[#FFCC73]"
-                        style={{ width: indicators[value] * 0.5 }}
+                        style={{
+                          width: !!indicators[value]
+                            ? `${
+                                (indicators[value] * 100) /
+                                (indicators.area_plantation_total +
+                                  indicators.area_protected_total +
+                                  indicators.area_reforested_total)
+                              }%`
+                            : '0%',
+                        }}
                       />
                     </div>
 
@@ -304,7 +314,6 @@ export default function CountryDetailPanel() {
                       bottom: -4,
                     }}
                     xAxisDataKey="year"
-                    xAxisTicks={['2020', '2022', '2024']}
                     yAxisTicks={['0', '250', '500']}
                   />
                 </div>
@@ -339,7 +348,6 @@ export default function CountryDetailPanel() {
                       bottom: -4,
                     }}
                     xAxisDataKey="year"
-                    xAxisTicks={['2020', '2022', '2024']}
                     yAxisTicks={['0', '250', '500']}
                   />
                 </div>
@@ -357,7 +365,9 @@ export default function CountryDetailPanel() {
                     href={
                       link === 'gfw_link'
                         ? data?.data?.attributes?.gfw_link
-                        : data?.data?.attributes?.country_information_link
+                        : link === 'country_information_link'
+                        ? data?.data?.attributes?.country_information_link
+                        : link
                     }
                     target="_blank"
                     rel="noreferrer"

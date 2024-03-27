@@ -69,7 +69,16 @@ export default function Stats() {
 
                     <div
                       className="h-2 rounded-3xl bg-[#FFCC73]"
-                      style={{ width: indicators[value] * 0.1 }}
+                      style={{
+                        width: !!indicators[value]
+                          ? `${
+                              (indicators[value] * 100) /
+                              (indicators.area_plantation_total +
+                                indicators.area_protected_total +
+                                indicators.area_reforested_total)
+                            }%`
+                          : '0%',
+                      }}
                     />
                   </div>
 
@@ -114,7 +123,6 @@ export default function Stats() {
                     bottom: -4,
                   }}
                   xAxisDataKey="year"
-                  xAxisTicks={Object.keys(indicators.beneficiaries)}
                   yAxisTicks={[
                     '0',
                     (
@@ -162,7 +170,6 @@ export default function Stats() {
                     bottom: -4,
                   }}
                   xAxisDataKey="year"
-                  xAxisTicks={Object.keys(indicators.jobs)}
                   yAxisTicks={[
                     '0',
                     (

@@ -10,9 +10,6 @@ import { HelpCircle } from 'lucide-react';
 
 import { cn } from '@/lib/classnames';
 
-import { useGetCountries } from '@/types/generated/country';
-import { useGetProjects } from '@/types/generated/project';
-
 import { useSyncQueryParams } from '@/hooks/datasets';
 import { useSyncLayers } from '@/hooks/datasets/sync-query';
 
@@ -21,9 +18,6 @@ import { TABS } from '@/containers/sidebar/constants';
 
 export default function Sidebar() {
   const pathname = usePathname();
-
-  const { data: projects } = useGetProjects({ populate: '*' });
-  const { data: countries } = useGetCountries({ populate: '*' });
 
   const queryParams = useSyncQueryParams();
   const [layers] = useSyncLayers();
@@ -68,30 +62,6 @@ export default function Sidebar() {
                     })}
                   >
                     {layers.length}
-                  </div>
-                )}
-
-                {name === 'projects' && !!projects?.data?.length && (
-                  <div
-                    className={cn({
-                      'absolute bottom-1 left-4 h-4 w-4 rounded-full bg-yellow-300 text-xs font-semibold text-yellow-700':
-                        true,
-                      'bg-yellow-300 text-white': sidebarTab === name,
-                    })}
-                  >
-                    {projects?.data?.length}
-                  </div>
-                )}
-
-                {name === 'countries' && !!countries?.data?.length && (
-                  <div
-                    className={cn({
-                      'absolute bottom-1 left-4 h-4 w-4 rounded-full bg-yellow-300 text-xs font-semibold text-yellow-700':
-                        true,
-                      'bg-yellow-300 text-white': sidebarTab === name,
-                    })}
-                  >
-                    {countries?.data?.length}
                   </div>
                 )}
               </div>
