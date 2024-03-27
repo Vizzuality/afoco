@@ -56,10 +56,12 @@ export default function BarChartComponent({
   margin?: { top: number; right: number; bottom: number; left: number };
   xAxisDataKey: string;
 }) {
-  const ticksX = data.map((d) => Number(d[xAxisDataKey])).flat() as number[];
-  const ticksY = data.map((d) => Number(d[barDataKey])).flat() as number[];
-  const maxYtick = Math.round(Math.max(...ticksY) / 10) * 10;
+  const Xticks = data.map((d) => Number(d[xAxisDataKey])).flat() as number[];
+  const Yticks = data.map((d) => Number(d[barDataKey])).flat() as number[];
+  const scaleXticks = scaleLinear().domain(Xticks).ticks(2).map(String);
+  const maxYtick = Math.round(Math.max(...Yticks) / 10) * 10;
   const mediumYtick = Math.round(maxYtick / 2 / 10) * 10;
+  const scaleYticks = [0, mediumYtick, maxYtick];
 
   return (
     <ResponsiveContainer width="100%" height="100%">
@@ -68,15 +70,10 @@ export default function BarChartComponent({
           dataKey={xAxisDataKey}
           axisLine={false}
           tickLine={false}
-          ticks={scaleLinear().domain(ticksX).ticks(2)}
+          ticks={scaleXticks}
           tick={CustomizedXAxisTick}
         />
-        <YAxis
-          axisLine={false}
-          tickLine={false}
-          ticks={[0, mediumYtick, maxYtick]}
-          tick={CustomizedYAxisTick}
-        />
+        <YAxis axisLine={false} tickLine={false} ticks={scaleYticks} tick={CustomizedYAxisTick} />
         <Bar
           dataKey={barDataKey}
           fill={fillBar}
