@@ -4,10 +4,8 @@ import { PropsWithChildren } from 'react';
 
 import { cn } from '@/lib/classnames';
 
-import { Skeleton } from '@/components/ui/skeleton';
-
 export interface ContentLoaderProps extends PropsWithChildren {
-  skeletonClassName?: string;
+  loaderClassName?: string;
   data: unknown | undefined;
   isPlaceholderData: boolean;
   isFetching: boolean;
@@ -16,7 +14,7 @@ export interface ContentLoaderProps extends PropsWithChildren {
 }
 
 const ContentLoader = ({
-  skeletonClassName,
+  loaderClassName,
   children,
   data,
   isPlaceholderData,
@@ -27,7 +25,10 @@ const ContentLoader = ({
   return (
     <div className="relative">
       {isFetching && !isFetched && (
-        <div role="status" className="mt-[50%] flex items-center justify-center space-x-3">
+        <div
+          role="status"
+          className={cn('mt-[50%] flex items-center justify-center space-x-3', loaderClassName)}
+        >
           <svg
             aria-hidden="true"
             className="inline h-6 w-6 animate-spin fill-yellow-600 text-gray-200"
