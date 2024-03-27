@@ -20,6 +20,7 @@ export default function DatasetsList() {
       isFetching={isFetching}
       isFetched={isFetched}
       isError={isError}
+      loaderClassName="mt-40"
     >
       <h3 className="text-xs text-gray-500">Activate data layers on the map</h3>
       <div className="mt-2 flex flex-col">

@@ -46,6 +46,7 @@ export default function Stats() {
       isFetching={isFetching}
       isFetched={isFetched}
       isError={isError}
+      loaderClassName="mt-28"
     >
       {data && (
         <div className="flex flex-col space-y-2">

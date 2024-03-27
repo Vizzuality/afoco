@@ -187,6 +187,7 @@ export default function ProjectDetailPanel() {
         isFetching={isFetching || indicatorsIsFetching}
         isFetched={isFetched && indicatorsIsFetched}
         isError={isError || indicatorIsFetched}
+        loaderClassName="mt-52"
       >
         <div className="flex flex-col space-y-8">
           <p className="mt-72 pt-2 text-sm text-gray-500">{data?.short_description}</p>

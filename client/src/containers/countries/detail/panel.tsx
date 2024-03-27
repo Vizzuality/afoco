@@ -156,6 +156,7 @@ export default function CountryDetailPanel() {
         isFetching={isFetching || indicatorsIsFetching}
         isFetched={isFetched && indicatorsIsFetched}
         isError={isError || indicatorIsFetched}
+        loaderClassName="mt-52"
       >
         <>
           <div className="mt-16 flex items-center space-x-3 pt-7">

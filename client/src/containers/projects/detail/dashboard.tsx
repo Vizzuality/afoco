@@ -53,6 +53,7 @@ export default function ProjectDashboard({ id }: { id: string }) {
         isFetching={isFetching}
         isFetched={isFetched}
         isError={isError}
+        loaderClassName="mt-[35%]"
       >
         <h3 className="mb-2 text-xl font-extrabold text-gray-400">Overview</h3>
 

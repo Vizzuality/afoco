@@ -27,11 +27,11 @@ const ContentLoader = ({
       {isFetching && !isFetched && (
         <div
           role="status"
-          className={cn('mt-[50%] flex items-center justify-center space-x-3', loaderClassName)}
+          className={cn('flex h-full items-center justify-center space-x-3', loaderClassName)}
         >
           <svg
             aria-hidden="true"
-            className="inline h-6 w-6 animate-spin fill-yellow-600 text-gray-200"
+            className="inline h-10 w-10 animate-spin fill-yellow-300 text-yellow-50"
             viewBox="0 0 100 101"
             fill="none"
           >
@@ -44,7 +44,6 @@ const ContentLoader = ({
               fill="currentFill"
             />
           </svg>
-          <span className="text-sm text-gray-400">Loading...</span>
         </div>
       )}
 

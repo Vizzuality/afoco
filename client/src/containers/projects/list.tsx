@@ -131,6 +131,7 @@ export default function ProjectsList() {
       isFetching={isFetching}
       isFetched={isFetched}
       isError={isError}
+      loaderClassName="mt-28"
     >
       <div className="no-scrollbar flex max-h-[75vh] flex-col space-y-2 overflow-y-auto">
         <div className="relative mx-1 mt-1 flex justify-between space-x-2">

@@ -30,6 +30,7 @@ export default function CountriesList() {
       isFetching={isFetching}
       isFetched={isFetched}
       isError={isError}
+      loaderClassName="mt-52"
     >
       <div className="flex flex-col space-y-8">
         <div className="relative">
