@@ -203,18 +203,6 @@ export default function Stats() {
                     bottom: -4,
                   }}
                   xAxisDataKey="year"
-                  yAxisTicks={[
-                    '0',
-                    (
-                      Object.values(indicators?.beneficiaries as number[]).sort(
-                        (a: number, b: number) => b - a
-                      )[0] / 2
-                    ).toString(),
-
-                    Object.values(indicators?.beneficiaries as number[])
-                      .sort((a: number, b: number) => b - a)[0]
-                      .toString(),
-                  ]}
                 />
               )}
             </div>
@@ -273,18 +261,6 @@ export default function Stats() {
                     bottom: -4,
                   }}
                   xAxisDataKey="year"
-                  yAxisTicks={[
-                    '0',
-                    (
-                      Object.values(indicators?.jobs as number[]).sort(
-                        (a: number, b: number) => b - a
-                      )[0] / 2
-                    ).toString(),
-
-                    Object.values(indicators?.jobs as number[])
-                      .sort((a: number, b: number) => b - a)[0]
-                      .toString(),
-                  ]}
                 />
               )}
             </div>
