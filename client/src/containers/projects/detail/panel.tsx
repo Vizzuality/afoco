@@ -8,6 +8,7 @@ import { useAtom } from 'jotai';
 import { ArrowLeft, ChevronRight, Share as Download, X } from 'lucide-react';
 
 import { formatCompactNumber } from '@/lib/utils/formats';
+import { DescriptionWithoutMarkdown } from '@/lib/utils/markdown';
 
 import { dashboardAtom } from '@/store';
 
@@ -169,7 +170,9 @@ export default function ProjectDetailPanel() {
         </div>
       </div>
       <div className="flex flex-col space-y-8">
-        <p className="mt-72 pt-2 text-sm text-gray-500">{data?.short_description}</p>
+        <p className="mt-72 pt-2 text-sm text-gray-500">
+          <DescriptionWithoutMarkdown description={data?.description} />
+        </p>
         <div>
           <div className="flex justify-between border-b-2 border-dotted border-gray-400 py-4">
             <p className="text-xs font-medium uppercase text-gray-500">Status</p>

@@ -11,6 +11,7 @@ import { ArrowLeft, Download, ExternalLink, Info } from 'lucide-react';
 import remarkGfm from 'remark-gfm';
 
 import { formatCompactNumber } from '@/lib/utils/formats';
+import { DescriptionWithoutMarkdown } from '@/lib/utils/markdown';
 
 import { useGetCountriesId } from '@/types/generated/country';
 import { useGetCountryIndicatorFields } from '@/types/generated/country-indicator-field';
@@ -36,7 +37,6 @@ import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip
 export default function CountryDetailPanel() {
   const params = useParams<{ id: string }>();
   const { data } = useGetCountriesId(Number(params.id));
-
   const { data: indicators } = useGetCountryIndicatorFields(
     {
       populate: '*',
@@ -151,7 +151,7 @@ export default function CountryDetailPanel() {
         </h2>
       </div>
       <p className="my-4 line-clamp-5 text-sm text-gray-500">
-        {data?.data?.attributes?.short_description}
+        <DescriptionWithoutMarkdown description={data?.data?.attributes?.description} />
       </p>
 
       <Dialog>
