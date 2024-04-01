@@ -24,6 +24,7 @@ import { useSyncQueryParams } from '@/hooks/datasets';
 import { COLUMNS, CSV_COLUMNS_ORDER } from '@/containers/projects/detail/constants';
 import Share from '@/containers/share';
 
+import DescriptionWithoutMarkdown from '@/components/description-without-markdown';
 import { Button } from '@/components/ui/button';
 import { Drawer, DrawerClose, DrawerContent, DrawerTrigger } from '@/components/ui/drawer';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
@@ -169,7 +170,9 @@ export default function ProjectDetailPanel() {
         </div>
       </div>
       <div className="flex flex-col space-y-8">
-        <p className="mt-72 pt-2 text-sm text-gray-500">{data?.short_description}</p>
+        <p className="mt-72 pt-2 text-sm text-gray-500">
+          <DescriptionWithoutMarkdown description={data?.description} />
+        </p>
         <div>
           <div className="flex justify-between border-b-2 border-dotted border-gray-400 py-4">
             <p className="text-xs font-medium uppercase text-gray-500">Status</p>
