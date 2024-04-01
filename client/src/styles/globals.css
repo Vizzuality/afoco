@@ -76,6 +76,12 @@
       width: var(--radix-popover-trigger-width);
       max-height: var(--radix-popover-content-available-height);
     }
+
+    .markdown-links {
+      a {
+        word-break: break-all;
+      }
+    }
 }
 
 input[type="search"]::-webkit-search-decoration,
