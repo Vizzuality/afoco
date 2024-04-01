@@ -1,4 +1,5 @@
 import('./src/env.mjs');
+import withMDX from '@next/mdx';
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -6,6 +7,7 @@ const nextConfig = {
   images: {
     domains: ['api.mapbox.com'],
   },
+  pageExtensions: ['js', 'jsx', 'mdx', 'ts', 'tsx'],
   async redirects() {
     return [
       {
@@ -20,4 +22,4 @@ const nextConfig = {
   },
 };
 
-export default nextConfig;
+export default withMDX(nextConfig);

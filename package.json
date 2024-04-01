@@ -15,5 +15,13 @@
   },
   "engines": {
     "node": ">= 18.17"
+  },
+  "devDependencies": {
+    "@next/mdx": "^14.1.4"
+  },
+  "dependencies": {
+    "@mdx-js/loader": "^3.0.1",
+    "@mdx-js/react": "^3.0.1",
+    "@types/mdx": "^2.0.12"
   }
 }
