@@ -8,6 +8,7 @@ import { useAtom } from 'jotai';
 import { ArrowLeft, ChevronRight, Share as Download, X } from 'lucide-react';
 
 import { formatCompactNumber } from '@/lib/utils/formats';
+import { DescriptionWithoutMarkdown } from '@/lib/utils/markdown';
 
 import { dashboardAtom } from '@/store';
 
@@ -24,7 +25,6 @@ import { useSyncQueryParams } from '@/hooks/datasets';
 import { COLUMNS, CSV_COLUMNS_ORDER } from '@/containers/projects/detail/constants';
 import Share from '@/containers/share';
 
-import DescriptionWithoutMarkdown from '@/components/description-without-markdown';
 import { Button } from '@/components/ui/button';
 import { Drawer, DrawerClose, DrawerContent, DrawerTrigger } from '@/components/ui/drawer';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
