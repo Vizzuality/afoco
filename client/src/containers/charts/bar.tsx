@@ -1,8 +1,8 @@
 import React from 'react';
 
+import { extent } from 'd3-array';
 import { scaleLinear } from 'd3-scale';
 import { BarChart, Bar, Rectangle, XAxis, YAxis, ResponsiveContainer } from 'recharts';
-
 const CustomizedXAxisTick = ({
   x,
   y,
@@ -56,21 +56,25 @@ export default function BarChartComponent({
   margin?: { top: number; right: number; bottom: number; left: number };
   xAxisDataKey: string;
 }) {
-  const Xticks = data.map((d) => Number(d[xAxisDataKey])).flat() as number[];
   const Yticks = data.map((d) => Number(d[barDataKey])).flat() as number[];
-  const scaleXticks = scaleLinear().domain(Xticks).ticks(2).map(String);
   const maxYtick = Math.round(Math.max(...Yticks) / 10) * 10;
   const mediumYtick = Math.round(maxYtick / 2 / 10) * 10;
+  const ext = extent(data, (d) => Number(d.year)) as [number, number];
   const scaleYticks = [0, mediumYtick, maxYtick];
+
+  const scale = scaleLinear().domain(ext);
 
   return (
     <ResponsiveContainer width="100%" height="100%">
       <BarChart width={500} height={300} data={data} margin={margin}>
         <XAxis
-          dataKey={xAxisDataKey}
+          dataKey="year"
           axisLine={false}
           tickLine={false}
-          ticks={scaleXticks}
+          scale={scale}
+          ticks={scale.ticks(5)}
+          domain={ext}
+          includeHidden
           tick={CustomizedXAxisTick}
         />
         <YAxis axisLine={false} tickLine={false} ticks={scaleYticks} tick={CustomizedYAxisTick} />
