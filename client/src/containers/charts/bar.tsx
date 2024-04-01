@@ -2,7 +2,8 @@ import React from 'react';
 
 import { extent } from 'd3-array';
 import { scaleLinear } from 'd3-scale';
-import { BarChart, Bar, Rectangle, XAxis, YAxis, ResponsiveContainer } from 'recharts';
+import { BarChart, Bar, Rectangle, XAxis, YAxis, ResponsiveContainer, Tooltip } from 'recharts';
+
 const CustomizedXAxisTick = ({
   x,
   y,
@@ -20,7 +21,6 @@ const CustomizedXAxisTick = ({
     </g>
   );
 };
-
 const CustomizedYAxisTick = ({
   x,
   y,
@@ -32,16 +32,38 @@ const CustomizedYAxisTick = ({
 }) => {
   return (
     <g transform={`translate(${x},${y})`}>
-      <text x={0} y={0} dy={0} dx={-2} textAnchor="middle" fill="#7C828A" fontSize={12}>
+      <text x={0 - 10} y={0} dy={0} dx={-2} textAnchor="middle" fill="#7C828A" fontSize={12}>
         {payload.value}
       </text>
     </g>
   );
 };
 
+const CustomTooltip = ({
+  active,
+  label,
+  payload,
+}: {
+  active: boolean;
+  label: string;
+  payload: { value: string }[];
+}) => {
+  if (!active || !payload || !payload.length) return null;
+  return (
+    <div className="shadow-tooltip m-auto rounded-md border bg-gradient-to-t p-2">
+      <p className="text-center">{label}</p>
+      <div className="flex space-x-2">
+        <p>Total</p>
+        <p>{payload[0].value}</p>
+      </div>
+    </div>
+  );
+};
+
+const getExt = (data: number[]) => extent(data) as [number, number];
+
 export default function BarChartComponent({
   data,
-  activeStyles,
   barDataKey,
   barRadius,
   fillBar,
@@ -49,40 +71,55 @@ export default function BarChartComponent({
   xAxisDataKey,
 }: {
   data: { [key: string]: unknown }[];
-  activeStyles?: { stroke: string };
   barDataKey: string;
   barRadius?: [number, number, number, number];
   fillBar?: string;
   margin?: { top: number; right: number; bottom: number; left: number };
   xAxisDataKey: string;
 }) {
-  const Yticks = data.map((d) => Number(d[barDataKey])).flat() as number[];
-  const maxYtick = Math.round(Math.max(...Yticks) / 10) * 10;
-  const mediumYtick = Math.round(maxYtick / 2 / 10) * 10;
-  const ext = extent(data, (d) => Number(d.year)) as [number, number];
-  const scaleYticks = [0, mediumYtick, maxYtick];
+  const xData = data.map((d) => Number(d[xAxisDataKey]));
+  const extX = getExt(xData);
 
-  const scale = scaleLinear().domain(ext);
+  const xScale = scaleLinear()
+    .domain([extX[0] - 1, extX[1] + 1])
+    .nice();
+
+  const xTicks = xScale.ticks(3);
+
+  const ticksY = data.map((d) => Number(d[barDataKey])).flat() as number[];
+  const maxYtick = Math.round(Math.max(...ticksY) / 10) * 10;
+  const mediumYtick = Math.round(maxYtick / 2 / 10) * 10;
 
   return (
     <ResponsiveContainer width="100%" height="100%">
       <BarChart width={500} height={300} data={data} margin={margin}>
         <XAxis
-          dataKey="year"
+          dataKey={xAxisDataKey}
           axisLine={false}
           tickLine={false}
-          scale={scale}
-          ticks={scale.ticks(5)}
-          domain={ext}
-          includeHidden
           tick={CustomizedXAxisTick}
+          ticks={xTicks}
+          scale={xScale}
+          domain={extX}
+          type="number"
         />
-        <YAxis axisLine={false} tickLine={false} ticks={scaleYticks} tick={CustomizedYAxisTick} />
+        <YAxis
+          axisLine={false}
+          tickLine={false}
+          ticks={[0, mediumYtick, maxYtick]}
+          tick={CustomizedYAxisTick}
+        />
+        <Tooltip
+          cursor={{ fill: 'transparent' }}
+          content={<CustomTooltip label={xAxisDataKey} active={false} payload={[]} />}
+        />
         <Bar
           dataKey={barDataKey}
           fill={fillBar}
           radius={barRadius}
-          activeBar={<Rectangle stroke={activeStyles?.stroke} />}
+          activeBar={<Rectangle stroke="#D48D00" strokeWidth={2} />}
+          barSize={19.75}
+          alignmentBaseline="middle"
         />
       </BarChart>
     </ResponsiveContainer>

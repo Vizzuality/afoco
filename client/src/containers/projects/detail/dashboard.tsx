@@ -179,16 +179,13 @@ export default function ProjectDashboard({ id }: { id: string }) {
                       year,
                       uv,
                     }))}
-                    activeStyles={{
-                      stroke: 'yellow',
-                    }}
                     barDataKey="uv"
                     barRadius={[20, 20, 20, 20]}
                     fillBar="#70CCB0"
                     margin={{
                       top: 2,
-                      right: 2,
-                      left: -40,
+                      right: 10,
+                      left: -20,
                       bottom: -4,
                     }}
                     xAxisDataKey="year"
@@ -211,16 +208,13 @@ export default function ProjectDashboard({ id }: { id: string }) {
                       year,
                       uv,
                     }))}
-                    activeStyles={{
-                      stroke: 'yellow',
-                    }}
                     barDataKey="uv"
                     barRadius={[20, 20, 20, 20]}
                     fillBar="#70B6CC"
                     margin={{
                       top: 2,
-                      right: 2,
-                      left: -40,
+                      right: 10,
+                      left: -20,
                       bottom: -4,
                     }}
                     xAxisDataKey="year"
