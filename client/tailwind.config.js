@@ -84,6 +84,10 @@ module.exports = {
           900: '#B00000',
         },
       },
+      backgroundImage: {
+        'gradient-to-b': 'linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%)',
+        'gradient-to-t': 'linear-gradient(0deg, #FFFFFF, #FFFFFF)',
+      },
       boxShadow: {
         sm: '0px 1px 2px 0px #0000000D',
         base: '0px 1px 3px 0px #0000001A, 0px 1px 2px 0px #0000000F',
@@ -93,6 +97,7 @@ module.exports = {
         '2xl': '0px 25px 50px -12px #00000040',
         inner: '0px 0px 5px 1px #00000029 inset',
         legend: '0px 0px 10px 0px rgba(193, 186, 186, 0.25)',
+        tooltip: '0px 1px 8px 0px rgba(83, 85, 155, 0.18)',
       },
       borderRadius: {
         '4xl': '32px',
