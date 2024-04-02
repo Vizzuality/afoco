@@ -7,12 +7,11 @@ export const PANEL_OVERVIEW_ITEMS = [
   {
     title: 'National Forest Area',
     value: 'tree_cover_extent_2010_ha',
-    unit: 'ha',
     percentage: 'forest_area_pct',
     note: 'of land)',
   },
   {
-    title: 'Net carbon 2001 - 2022 (MtCO₂e/year)',
+    title: 'Net carbon 2001 - 2022',
     value: 'net_flux_co2e_year',
     note: '(emission)',
   },
@@ -23,19 +22,16 @@ export const RESUME_ITEMS = [
   {
     title: 'Completed',
     value: 'projects_completed',
-    unit: null,
     icon: CHECK_SVG,
   },
   {
     title: 'Planted area',
     value: 'area_plantation_total',
-    unit: 'ha',
     icon: AREA_SVG,
   },
   {
     title: 'Trees planted',
     value: 'trees_planted_total',
-    unit: null,
     icon: SEEDS_SVG,
   },
 ];

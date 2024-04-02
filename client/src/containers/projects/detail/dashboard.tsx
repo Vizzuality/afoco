@@ -32,7 +32,10 @@ export default function ProjectDashboard({ id }: { id: string }) {
           Object.assign(
             {},
             ...(response.data ?? []).map((item) => ({
-              [item.attributes?.indicator_name as string]: item.attributes?.value,
+              [item.attributes?.indicator_name as string]: {
+                value: item.attributes?.value,
+                unit: item.attributes?.unit,
+              },
             }))
           ),
       },
@@ -60,8 +63,14 @@ export default function ProjectDashboard({ id }: { id: string }) {
               </div>
               <div className="flex flex-col">
                 <div className="flex items-end space-x-0.5">
-                  <p className="text-5xl font-extrabold text-green-400">{indicators[value]}</p>
-                  {unit && <p className="mb-0.5 text-base font-normal text-green-400">{unit}</p>}
+                  <p className="text-5xl font-extrabold text-green-400">
+                    {indicators[value].value}
+                  </p>
+                  {unit && (
+                    <p className="mb-0.5 text-base font-normal text-green-400">
+                      {indicators[value].unit}
+                    </p>
+                  )}
                 </div>
                 <p>{title}</p>
               </div>
@@ -113,7 +122,7 @@ export default function ProjectDashboard({ id }: { id: string }) {
                   )}
                 </Dialog>
               </div>
-              <SingleBar data={indicators.project_funding} />
+              <SingleBar data={indicators.project_funding['value']} />
             </div>
             <div className="w-1/2 rounded-xl bg-white p-4 shadow-sm">
               <div className="flex items-center justify-between">
@@ -123,11 +132,11 @@ export default function ProjectDashboard({ id }: { id: string }) {
 
               <p className="py-4 text-3xl font-extrabold">
                 {formatCompactNumber(
-                  indicators.area_plantation_total +
-                    indicators.area_protected_total +
-                    indicators.area_reforested_total
+                  indicators.area_plantation_total['value'] +
+                    indicators.area_protected_total['value'] +
+                    indicators.area_reforested_total['value']
                 )}{' '}
-                ha
+                {indicators.area_plantation_total['unit']}
               </p>
 
               <div className="space-y-3">
@@ -141,10 +150,10 @@ export default function ProjectDashboard({ id }: { id: string }) {
                         style={{
                           width: !!indicators[value]
                             ? `${
-                                (indicators[value] * 100) /
-                                (indicators.area_plantation_total +
-                                  indicators.area_protected_total +
-                                  indicators.area_reforested_total)
+                                (indicators[value].value * 100) /
+                                (indicators.area_plantation_total.value +
+                                  indicators.area_protected_total.value +
+                                  indicators.area_reforested_total.value)
                               }%`
                             : '0%',
                         }}
@@ -152,7 +161,7 @@ export default function ProjectDashboard({ id }: { id: string }) {
                     </div>
 
                     <p className="w-10 text-right font-extrabold">
-                      {Math.round(indicators[value])}
+                      {Math.round(indicators[value]['value'])}
                     </p>
                   </div>
                 ))}
@@ -170,12 +179,12 @@ export default function ProjectDashboard({ id }: { id: string }) {
                 <Info className="h-5 w-5 text-green-800" />
               </div>
               <p className="py-4 text-3xl font-extrabold">
-                {formatCompactNumber(indicators.beneficiaries_total) || 0}
+                {formatCompactNumber(indicators.beneficiaries_total['value']) || 0}
               </p>
               <div className="h-32">
                 {indicators.beneficiaries && (
                   <BarsChart
-                    data={Object.entries(indicators.beneficiaries).map(([year, uv]) => ({
+                    data={Object.entries(indicators.beneficiaries['value']).map(([year, uv]) => ({
                       year,
                       uv,
                     }))}
@@ -199,12 +208,12 @@ export default function ProjectDashboard({ id }: { id: string }) {
                 <Info className="h-5 w-5 text-green-800" />
               </div>
               <p className="py-4 text-3xl font-extrabold">
-                {formatCompactNumber(indicators.jobs_total) || 0}
+                {formatCompactNumber(indicators.jobs_total['value']) || 0}
               </p>
               <div className="h-32">
                 {indicators.jobs && (
                   <BarsChart
-                    data={Object.entries(indicators.jobs).map(([year, uv]) => ({
+                    data={Object.entries(indicators.jobs['value']).map(([year, uv]) => ({
                       year,
                       uv,
                     }))}

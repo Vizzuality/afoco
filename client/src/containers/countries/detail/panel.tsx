@@ -50,8 +50,10 @@ export default function CountryDetailPanel() {
           return Object.assign(
             {},
             ...(response.data ?? []).map((item) => ({
-              [item.attributes?.indicator_name as string]: item.attributes?.value,
-              [`${item.attributes?.indicator_name}_unit` as string]: item.attributes?.unit,
+              [item.attributes?.indicator_name as string]: {
+                value: item.attributes?.value,
+                unit: item.attributes?.unit,
+              },
             }))
           );
         },
@@ -59,7 +61,6 @@ export default function CountryDetailPanel() {
     }
   );
   const queryParams = useSyncQueryParams();
-
   const jsonToCsv = (json: CountryCountryIndicatorFieldsDataItem['attributes'] & Country) => {
     let csv = '';
 
@@ -150,7 +151,8 @@ export default function CountryDetailPanel() {
           {data?.data?.attributes?.name}
         </h2>
       </div>
-      <p className="my-4 line-clamp-5 text-sm text-gray-500">
+
+      <p className="my-4 line-clamp-5 border text-sm text-gray-500">
         <DescriptionWithoutMarkdown description={data?.data?.attributes?.description} />
       </p>
 
@@ -185,47 +187,59 @@ export default function CountryDetailPanel() {
 
       {indicators && (
         <div className="flex flex-col justify-center">
-          {PANEL_OVERVIEW_ITEMS.map(({ title, value, note, percentage, unit }) => (
-            <div
-              key={title}
-              className="flex h-10 items-center justify-between border-b-2 border-dotted border-green-50 py-4 first:border-t-2"
-            >
-              <p className="text-xs font-medium uppercase text-gray-500">{title}</p>
-              <div className="flex items-end space-x-1">
-                <p className="text-sm text-yellow-900">
-                  {formatCompactNumber(Math.round(indicators[value]))} {unit}
-                </p>
-
-                <p className="text-2xs flex text-gray-500">
-                  {percentage && <span>({Math.round(indicators[percentage])}%</span>}
-                  <span>{note}</span>
-                </p>
-              </div>
-            </div>
-          ))}
-          <div className="grid grid-cols-2 grid-rows-2 gap-2 py-4">
-            {RESUME_ITEMS.map(({ title, icon, value, unit }) => (
+          {PANEL_OVERVIEW_ITEMS.map(({ title, value, note, percentage }) => {
+            const unitValue = indicators[value]['unit'];
+            return (
               <div
                 key={title}
-                className="relative flex items-center space-x-6 rounded-xl bg-white p-4 text-sm text-green-800 shadow-sm"
+                className="flex h-10 items-center justify-between border-b-2 border-dotted border-green-50 py-4 first:border-t-2"
               >
-                <div className="flex flex-col">
-                  <div className="flex items-end space-x-0.5">
-                    <p className="text-2xl font-extrabold text-green-400">{indicators[value]}</p>
+                <p className="text-xs font-medium uppercase text-gray-500">
+                  {title} ({unitValue})
+                </p>
+                <div className="flex items-end space-x-1">
+                  <p className="text-sm text-yellow-900">
+                    {formatCompactNumber(Math.round(indicators[value]['value']))}{' '}
+                  </p>
 
-                    {unit && <p className="mb-0.5 text-base font-normal text-green-400">{unit}</p>}
-                  </div>
-                  <p>{title}</p>
+                  <p className="text-2xs mb-[1.7px] flex text-gray-500">
+                    {percentage && <span>({Math.round(indicators[percentage]['value'])}%</span>}
+                    <span>{note}</span>
+                  </p>
                 </div>
-                <Image
-                  src={icon}
-                  alt={title}
-                  width={24}
-                  height={34}
-                  className="absolute right-4 top-4"
-                />
               </div>
-            ))}
+            );
+          })}
+          <div className="grid grid-cols-2 grid-rows-2 gap-2 py-4">
+            {RESUME_ITEMS.map(({ title, icon, value }) => {
+              const unit = indicators[value]['unit'];
+              return (
+                <div
+                  key={title}
+                  className="relative flex items-center space-x-6 rounded-xl bg-white p-4 text-sm text-green-800 shadow-sm"
+                >
+                  <div className="flex flex-col">
+                    <div className="flex items-end space-x-0.5">
+                      <p className="text-2xl font-extrabold text-green-400">
+                        {indicators[value]['value']}
+                      </p>
+
+                      {unit && (
+                        <p className="mb-0.5 text-base font-normal text-green-400">{unit}</p>
+                      )}
+                    </div>
+                    <p>{title}</p>
+                  </div>
+                  <Image
+                    src={icon}
+                    alt={title}
+                    width={24}
+                    height={34}
+                    className="absolute right-4 top-4"
+                  />
+                </div>
+              );
+            })}
           </div>
 
           <div className="flex flex-col space-y-2">
@@ -279,7 +293,6 @@ export default function CountryDetailPanel() {
                     <div className="border-b border-t border-gray-100 py-2.5">
                       <p className="px-6 text-sm text-yellow-900">
                         <Markdown remarkPlugins={[remarkGfm]} className="prose">
-                          {/* <p className="px-6 text-sm text-yellow-900">{props.attributes.info}</p> */}
                           The total areas of project activities conducted in the AFoCO Member
                           Countries
                         </Markdown>
@@ -299,11 +312,12 @@ export default function CountryDetailPanel() {
               <p className="py-4 text-3xl font-extrabold">
                 {/* //!TODO: This value should come from API. */}
                 {formatCompactNumber(
-                  indicators.area_plantation_total +
-                    indicators.area_protected_total +
-                    indicators.area_reforested_total
+                  indicators.area_plantation_total['value'] +
+                    indicators.area_protected_total['value'] +
+                    indicators.area_reforested_total['value']
                 )}{' '}
-                ha
+                {/* //!TODO: This value should come from API. */}
+                {indicators.area_plantation_total['unit']}
               </p>
 
               <div className="space-y-4">
@@ -317,21 +331,23 @@ export default function CountryDetailPanel() {
                         style={{
                           width: !!indicators[value]
                             ? `${
-                                (indicators[value] * 100) /
-                                (indicators.area_plantation_total +
-                                  indicators.area_protected_total +
-                                  indicators.area_reforested_total)
+                                (indicators[value].value * 100) /
+                                (indicators.area_plantation_total.value +
+                                  indicators.area_protected_total.value +
+                                  indicators.area_reforested_total.value)
                               }%`
                             : '0%',
                         }}
                       />
                     </div>
 
-                    <p className="w-10 text-right font-extrabold">{indicators[value]}</p>
+                    <p className="w-10 text-right font-extrabold">{indicators[value]['value']}</p>
                   </div>
                 ))}
                 <div>
-                  <p className="text-right text-xs text-gray-500">ha</p>
+                  <p className="text-right text-xs text-gray-500">
+                    {indicators.area_plantation_total['unit']}
+                  </p>
                 </div>
               </div>
             </div>
@@ -368,12 +384,12 @@ export default function CountryDetailPanel() {
               </div>
 
               <p className="py-4 text-3xl font-extrabold">
-                {formatCompactNumber(indicators.beneficiaries_total)}
+                {formatCompactNumber(indicators.beneficiaries_total['value'])}
               </p>
               {indicators.beneficiaries && (
                 <div className="h-44">
                   <BarsChart
-                    data={Object.entries(indicators.beneficiaries).map(([year, uv]) => ({
+                    data={Object.entries(indicators.beneficiaries['value']).map(([year, uv]) => ({
                       year,
                       uv,
                     }))}
@@ -421,12 +437,12 @@ export default function CountryDetailPanel() {
               </div>
 
               <p className="py-4 text-3xl font-extrabold">
-                {formatCompactNumber(indicators.jobs_total)}
+                {formatCompactNumber(indicators.jobs_total['value'])}
               </p>
               {indicators.jobs && (
                 <div className="h-44">
                   <BarsChart
-                    data={Object.entries(indicators.jobs).map(([year, uv]) => ({
+                    data={Object.entries(indicators.jobs['value']).map(([year, uv]) => ({
                       year,
                       uv,
                     }))}
