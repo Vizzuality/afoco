@@ -169,10 +169,13 @@ export default function ProjectDetailPanel() {
           <Share />
         </div>
       </div>
-      <div className="flex flex-col space-y-8">
-        <p className="mt-72 pt-2 text-sm text-gray-500">
-          <DescriptionWithoutMarkdown description={data?.description} />
-        </p>
+      <div className="mt-72 flex flex-col space-y-8">
+        {data?.description && (
+          <p className="pt-2 text-sm text-gray-500">
+            <DescriptionWithoutMarkdown description={data?.description} />
+          </p>
+        )}
+
         <div>
           <div className="flex justify-between border-b-2 border-dotted border-gray-400 py-4">
             <p className="text-xs font-medium uppercase text-gray-500">Status</p>

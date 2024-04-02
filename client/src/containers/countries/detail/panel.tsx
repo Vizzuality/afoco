@@ -151,7 +151,8 @@ export default function CountryDetailPanel() {
           {data?.data?.attributes?.name}
         </h2>
       </div>
-      <p className="my-4 line-clamp-5 text-sm text-gray-500">
+
+      <p className="my-4 line-clamp-5 border text-sm text-gray-500">
         <DescriptionWithoutMarkdown description={data?.data?.attributes?.description} />
       </p>
 
