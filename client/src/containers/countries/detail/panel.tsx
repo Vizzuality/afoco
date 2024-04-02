@@ -32,12 +32,18 @@ import Share from '@/containers/share';
 
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogTrigger, DialogClose } from '@/components/ui/dialog';
+import ContentLoader from '@/components/ui/loader';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 
 export default function CountryDetailPanel() {
   const params = useParams<{ id: string }>();
-  const { data } = useGetCountriesId(Number(params.id));
-  const { data: indicators } = useGetCountryIndicatorFields(
+  const { data, isFetching, isFetched, isError } = useGetCountriesId(Number(params.id));
+  const {
+    data: indicators,
+    isFetching: indicatorsIsFetching,
+    isFetched: indicatorsIsFetched,
+    isError: indicatorIsFetched,
+  } = useGetCountryIndicatorFields(
     {
       populate: '*',
       filters: {
