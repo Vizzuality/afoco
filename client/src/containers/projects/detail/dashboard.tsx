@@ -131,12 +131,8 @@ export default function ProjectDashboard({ id }: { id: string }) {
               </div>
 
               <p className="py-4 text-3xl font-extrabold">
-                {formatCompactNumber(
-                  indicators.area_plantation_total['value'] +
-                    indicators.area_protected_total['value'] +
-                    indicators.area_reforested_total['value']
-                )}{' '}
-                {indicators.area_plantation_total['unit']}
+                {formatCompactNumber(indicators.intervention_area_total['value'])}{' '}
+                {indicators.intervention_area_total['unit']}
               </p>
 
               <div className="space-y-3">
@@ -151,9 +147,7 @@ export default function ProjectDashboard({ id }: { id: string }) {
                           width: !!indicators[value]
                             ? `${
                                 (indicators[value].value * 100) /
-                                (indicators.area_plantation_total.value +
-                                  indicators.area_protected_total.value +
-                                  indicators.area_reforested_total.value)
+                                indicators.intervention_area_total['value']
                               }%`
                             : '0%',
                         }}

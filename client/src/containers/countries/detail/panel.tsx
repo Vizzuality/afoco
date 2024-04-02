@@ -60,6 +60,7 @@ export default function CountryDetailPanel() {
       },
     }
   );
+
   const queryParams = useSyncQueryParams();
   const jsonToCsv = (json: CountryCountryIndicatorFieldsDataItem['attributes'] & Country) => {
     let csv = '';
@@ -310,14 +311,8 @@ export default function CountryDetailPanel() {
               </div>
 
               <p className="py-4 text-3xl font-extrabold">
-                {/* //!TODO: This value should come from API. */}
-                {formatCompactNumber(
-                  indicators.area_plantation_total['value'] +
-                    indicators.area_protected_total['value'] +
-                    indicators.area_reforested_total['value']
-                )}{' '}
-                {/* //!TODO: This value should come from API. */}
-                {indicators.area_plantation_total['unit']}
+                {formatCompactNumber(indicators.intervention_area_total['value'])}{' '}
+                {indicators.intervention_area_total['unit']}
               </p>
 
               <div className="space-y-4">
@@ -332,9 +327,7 @@ export default function CountryDetailPanel() {
                           width: !!indicators[value]
                             ? `${
                                 (indicators[value].value * 100) /
-                                (indicators.area_plantation_total.value +
-                                  indicators.area_protected_total.value +
-                                  indicators.area_reforested_total.value)
+                                indicators.intervention_area_total['value']
                               }%`
                             : '0%',
                         }}
