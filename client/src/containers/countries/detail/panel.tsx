@@ -331,10 +331,10 @@ export default function CountryDetailPanel() {
                         style={{
                           width: !!indicators[value]
                             ? `${
-                                (indicators[value] * 100) /
-                                (indicators.area_plantation_total['value'] +
-                                  indicators.area_protected_total['value'] +
-                                  indicators.area_reforested_total['value'])
+                                (indicators[value].value * 100) /
+                                (indicators.area_plantation_total.value +
+                                  indicators.area_protected_total.value +
+                                  indicators.area_reforested_total.value)
                               }%`
                             : '0%',
                         }}
