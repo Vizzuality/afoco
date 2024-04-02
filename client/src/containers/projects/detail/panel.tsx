@@ -27,6 +27,7 @@ import Share from '@/containers/share';
 
 import { Button } from '@/components/ui/button';
 import { Drawer, DrawerClose, DrawerContent, DrawerTrigger } from '@/components/ui/drawer';
+import ContentLoader from '@/components/ui/loader';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 
 import ProjectDashboard from './dashboard';
@@ -37,7 +38,7 @@ export default function ProjectDetailPanel() {
   const queryParams = useSyncQueryParams();
   const [dashboard, setDashboard] = useAtom(dashboardAtom);
 
-  const { data } = useGetProjects(
+  const { data, isFetching, isFetched, isError } = useGetProjects(
     {
       populate: '*',
       filters: {
@@ -50,7 +51,13 @@ export default function ProjectDetailPanel() {
       },
     }
   );
-  const { data: indicators } = useGetIndicatorFields(
+
+  const {
+    data: indicators,
+    isFetching: indicatorsIsFetching,
+    isFetched: indicatorsIsFetched,
+    isError: indicatorIsFetched,
+  } = useGetIndicatorFields(
     {
       populate: '*',
       filters: {
@@ -135,16 +142,20 @@ export default function ProjectDetailPanel() {
   return (
     <div className="no-scrollbar h-full overflow-x-hidden rounded-3xl bg-neutral-50 p-6 pb-40">
       <div className="absolute left-0 top-0 w-full">
-        <div className="relative">
-          <Image
-            src="/images/projects/detail/placeholder.png"
-            alt="AFOCO"
-            width={300}
-            height={300}
-            className="w-full rounded-t-[24px]"
-          />
-          <h2 className="absolute bottom-6 mx-6 text-xl font-semibold text-white">{data?.name}</h2>
-        </div>
+        {data && indicators && (
+          <div className="relative">
+            <Image
+              src="/images/projects/detail/placeholder.png"
+              alt="AFOCO"
+              width={300}
+              height={300}
+              className="w-full rounded-t-[24px]"
+            />
+            <h2 className="absolute bottom-6 mx-6 text-xl font-semibold text-white">
+              {data?.name}
+            </h2>
+          </div>
+        )}
       </div>
       <div className="absolute left-6 right-6 top-4 z-10 flex justify-between">
         <Link
@@ -154,44 +165,54 @@ export default function ProjectDetailPanel() {
           <ArrowLeft className="h-4 w-4 text-yellow-900" />
           <p>Back</p>
         </Link>
-        <div className="flex items-center space-x-2">
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button variant="ghost" className="rounded-full" onClick={downloadCSVProjectData}>
-                <Download className="rotate-180 text-yellow-900" size={18} />
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent side={'left'} sideOffset={20}>
-              <p className="text-sm text-yellow-900">Download project</p>
-            </TooltipContent>
-          </Tooltip>
+        {data && indicators && (
+          <div className="flex items-center space-x-2">
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button variant="ghost" className="rounded-full" onClick={downloadCSVProjectData}>
+                  <Download className="rotate-180 text-yellow-900" size={18} />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent side={'left'} sideOffset={20}>
+                <p className="text-sm text-yellow-900">Download project</p>
+              </TooltipContent>
+            </Tooltip>
 
-          <Share />
-        </div>
-      </div>
-      <div className="mt-72 flex flex-col space-y-8">
-        {data?.description && (
-          <p className="pt-2 text-sm text-gray-500">
-            <DescriptionWithoutMarkdown description={data?.description} />
-          </p>
-        )}
-
-        <div>
-          <div className="flex justify-between border-b-2 border-dotted border-gray-400 py-4">
-            <p className="text-xs font-medium uppercase text-gray-500">Status</p>
-            <p className="text-sm text-yellow-900">{data?.status}</p>
+            <Share />
           </div>
-          {/* <div className="flex justify-between border-b-2 border-dotted border-gray-400 py-4">
+        )}
+      </div>
+      <ContentLoader
+        data={data && indicators}
+        isPlaceholderData={false}
+        isFetching={isFetching || indicatorsIsFetching}
+        isFetched={isFetched && indicatorsIsFetched}
+        isError={isError || indicatorIsFetched}
+        loaderClassName="mt-52"
+      >
+        <div className="mt-72 flex flex-col space-y-8">
+          {data?.description && (
+            <p className="pt-2 text-sm text-gray-500">
+              <DescriptionWithoutMarkdown description={data?.description} />
+            </p>
+          )}
+
+          <div>
+            <div className="flex justify-between border-b-2 border-dotted border-gray-400 py-4">
+              <p className="text-xs font-medium uppercase text-gray-500">Status</p>
+              <p className="text-sm text-yellow-900">{data?.status}</p>
+            </div>
+            {/* <div className="flex justify-between border-b-2 border-dotted border-gray-400 py-4">
             <p className="text-xs font-medium uppercase text-gray-500">Priority areas</p>
             <p className="text-sm text-yellow-900">{}</p>
           </div> */}
-          <div className="flex justify-between border-b-2 border-dotted border-gray-400 py-4">
-            <p className="text-xs font-medium uppercase text-gray-500">Location</p>
-            <p className="text-sm text-yellow-900">
-              {data?.countries?.data?.map((d) => d?.attributes?.name).join(', ')}
-            </p>
+            <div className="flex justify-between border-b-2 border-dotted border-gray-400 py-4">
+              <p className="text-xs font-medium uppercase text-gray-500">Location</p>
+              <p className="text-sm text-yellow-900">
+                {data?.countries?.data?.map((d) => d?.attributes?.name).join(', ')}
+              </p>
 
-            {/* <Tooltip>
+              {/* <Tooltip>
               <TooltipTrigger asChild>
                 <p className="cursor-pointer text-sm text-yellow-900 underline hover:no-underline">
                   {value}
@@ -210,91 +231,92 @@ export default function ProjectDetailPanel() {
                 <TooltipArrow className="fill-white" />
               </TooltipContent>
             </Tooltip> */}
+            </div>
+            <div className="flex justify-between border-b-2 border-dotted border-gray-400 py-4">
+              <p className="text-xs font-medium uppercase text-gray-500">Duration</p>
+              <p className="text-sm text-yellow-900">{data?.duration}</p>
+            </div>
+            <div className="flex justify-between border-b-2 border-dotted border-gray-400 py-4">
+              <p className="text-xs font-medium uppercase text-gray-500">Donors</p>
+              <p className="text-sm text-yellow-900">{data?.donors}</p>
+            </div>
+            <div className="flex justify-between border-b-2 border-dotted border-gray-400 py-4">
+              <p className="text-xs font-medium uppercase text-gray-500">Investment</p>
+              <p className="text-sm text-yellow-900">
+                {formatCompactNumber(indicators?.project_funding?.total_funding)}
+              </p>
+            </div>
           </div>
-          <div className="flex justify-between border-b-2 border-dotted border-gray-400 py-4">
-            <p className="text-xs font-medium uppercase text-gray-500">Duration</p>
-            <p className="text-sm text-yellow-900">{data?.duration}</p>
-          </div>
-          <div className="flex justify-between border-b-2 border-dotted border-gray-400 py-4">
-            <p className="text-xs font-medium uppercase text-gray-500">Donors</p>
-            <p className="text-sm text-yellow-900">{data?.donors}</p>
-          </div>
-          <div className="flex justify-between border-b-2 border-dotted border-gray-400 py-4">
-            <p className="text-xs font-medium uppercase text-gray-500">Investment</p>
-            <p className="text-sm text-yellow-900">
-              {formatCompactNumber(indicators?.project_funding?.total_funding)}
+          <div className="flex flex-col space-y-2">
+            <h4 className="text-xs font-medium uppercase text-yellow-900">Project Gallery</h4>
+            <div className="flex space-x-1">
+              <Image
+                src="/images/projects/detail/placeholder.png"
+                alt="AFOCO"
+                width={170}
+                height={170}
+              />
+              <div className="grid grid-cols-2 grid-rows-2 gap-1">
+                <Image
+                  src="/images/projects/detail/placeholder.png"
+                  alt="AFOCO"
+                  width={86}
+                  height={86}
+                />
+                <Image
+                  src="/images/projects/detail/placeholder.png"
+                  alt="AFOCO"
+                  width={86}
+                  height={86}
+                />
+                <Image
+                  src="/images/projects/detail/placeholder.png"
+                  alt="AFOCO"
+                  width={86}
+                  height={86}
+                />
+                <Image
+                  src="/images/projects/detail/placeholder.png"
+                  alt="AFOCO"
+                  width={86}
+                  height={86}
+                />
+              </div>
+            </div>
+            <p className="text-sm text-gray-500">
+              If you have pictures of this project to share, please sent them to{' '}
+              <a className="underline hover:no-underline" href="mailto:email@afoco.com">
+                email@afoco.com
+              </a>
             </p>
           </div>
         </div>
-        <div className="flex flex-col space-y-2">
-          <h4 className="text-xs font-medium uppercase text-yellow-900">Project Gallery</h4>
-          <div className="flex space-x-1">
-            <Image
-              src="/images/projects/detail/placeholder.png"
-              alt="AFOCO"
-              width={170}
-              height={170}
-            />
-            <div className="grid grid-cols-2 grid-rows-2 gap-1">
-              <Image
-                src="/images/projects/detail/placeholder.png"
-                alt="AFOCO"
-                width={86}
-                height={86}
-              />
-              <Image
-                src="/images/projects/detail/placeholder.png"
-                alt="AFOCO"
-                width={86}
-                height={86}
-              />
-              <Image
-                src="/images/projects/detail/placeholder.png"
-                alt="AFOCO"
-                width={86}
-                height={86}
-              />
-              <Image
-                src="/images/projects/detail/placeholder.png"
-                alt="AFOCO"
-                width={86}
-                height={86}
-              />
-            </div>
-          </div>
-          <p className="text-sm text-gray-500">
-            If you have pictures of this project to share, please sent them to{' '}
-            <a className="underline hover:no-underline" href="mailto:email@afoco.com">
-              email@afoco.com
-            </a>
-          </p>
-        </div>
-      </div>
-      <Drawer>
-        <DrawerTrigger asChild className="group">
-          <Button
-            variant="primary"
-            className="fixed bottom-6 right-6 z-50 w-48 space-x-2"
-            size="base"
-            data-cy="project-dashboard-button"
-            onClick={() => setDashboard(!dashboard)}
-          >
-            <p className="block group-data-[state=open]:hidden">{'Show dashboard'}</p>
-            <p className="block group-data-[state=closed]:hidden">{'Hide dashboard'}</p>
-            <ChevronRight className="h-4 w-4 text-yellow-900 group-hover:text-yellow-50" />
-          </Button>
-        </DrawerTrigger>
-        <DrawerContent className="left-[514px] w-[calc(100vw-570px)]">
-          <ProjectDashboard id={params.id} />
-          <DrawerClose
-            className="focus:ring-ring absolute -right-6 top-7 z-50 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:pointer-events-none"
-            onClick={() => setDashboard(false)}
-          >
-            <X className="h-4 w-4 text-yellow-400" />
-            <span className="sr-only">Close</span>
-          </DrawerClose>
-        </DrawerContent>
-      </Drawer>
+        <Drawer>
+          <DrawerTrigger asChild className="group">
+            <Button
+              variant="primary"
+              className="fixed bottom-6 right-6 z-50 w-48 space-x-2"
+              size="base"
+              data-cy="project-dashboard-button"
+              onClick={() => setDashboard(!dashboard)}
+            >
+              <p className="block group-data-[state=open]:hidden">{'Show dashboard'}</p>
+              <p className="block group-data-[state=closed]:hidden">{'Hide dashboard'}</p>
+              <ChevronRight className="h-4 w-4 text-yellow-900 group-hover:text-yellow-50" />
+            </Button>
+          </DrawerTrigger>
+          <DrawerContent className="left-[514px] w-[calc(100vw-570px)]">
+            <ProjectDashboard id={params.id} />
+            <DrawerClose
+              className="focus:ring-ring absolute -right-6 top-7 z-50 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:pointer-events-none"
+              onClick={() => setDashboard(false)}
+            >
+              <X className="h-4 w-4 text-yellow-400" />
+              <span className="sr-only">Close</span>
+            </DrawerClose>
+          </DrawerContent>
+        </Drawer>
+      </ContentLoader>
     </div>
   );
 }
