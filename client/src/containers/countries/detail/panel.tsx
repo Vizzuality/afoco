@@ -186,21 +186,22 @@ export default function CountryDetailPanel() {
 
       {indicators && (
         <div className="flex flex-col justify-center">
-          {PANEL_OVERVIEW_ITEMS.map(({ title, value, note, percentage, unit }) => {
+          {PANEL_OVERVIEW_ITEMS.map(({ title, value, note, percentage }) => {
             const unitValue = indicators[value]['unit'];
             return (
               <div
                 key={title}
                 className="flex h-10 items-center justify-between border-b-2 border-dotted border-green-50 py-4 first:border-t-2"
               >
-                <p className="text-xs font-medium uppercase text-gray-500">{title}</p>
+                <p className="text-xs font-medium uppercase text-gray-500">
+                  {title} ({unitValue})
+                </p>
                 <div className="flex items-end space-x-1">
                   <p className="text-sm text-yellow-900">
                     {formatCompactNumber(Math.round(indicators[value]['value']))}{' '}
-                    {unit && unitValue}
                   </p>
 
-                  <p className="text-2xs flex text-gray-500">
+                  <p className="text-2xs mb-[1.7px] flex text-gray-500">
                     {percentage && <span>({Math.round(indicators[percentage]['value'])}%</span>}
                     <span>{note}</span>
                   </p>

@@ -9,13 +9,11 @@ export const PANEL_OVERVIEW_ITEMS = [
     value: 'tree_cover_extent_2010_ha',
     percentage: 'forest_area_pct',
     note: 'of land)',
-    unit: true,
   },
   {
-    title: 'Net carbon 2001 - 2022 (MtCO₂e/year)',
+    title: 'Net carbon 2001 - 2022',
     value: 'net_flux_co2e_year',
     note: '(emission)',
-    unit: false,
   },
 ];
 
