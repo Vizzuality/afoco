@@ -6,6 +6,8 @@ import { cn } from '@/lib/classnames';
 
 export interface ContentLoaderProps extends PropsWithChildren {
   loaderClassName?: string;
+  noDataClassName?: string;
+  errorClassName?: string;
   data: unknown | undefined;
   isPlaceholderData: boolean;
   isFetching: boolean;
@@ -15,6 +17,8 @@ export interface ContentLoaderProps extends PropsWithChildren {
 
 const ContentLoader = ({
   loaderClassName,
+  noDataClassName,
+  errorClassName,
   children,
   data,
   isPlaceholderData,
@@ -46,12 +50,22 @@ const ContentLoader = ({
           </svg>
         </div>
       )}
-      {/* //!TODO: Style errors and no data messages */}
-      {/* {isError && isFetched && !isFetching && 'Error'} */}
+
+      {isError && isFetched && !isFetching && (
+        <div className={cn('mt-10 flex h-full w-full items-center justify-center', errorClassName)}>
+          <p className="text-base text-gray-500">Error</p>
+        </div>
+      )}
 
       {!isPlaceholderData && !isError && isFetched && !!data && children}
 
-      {/* {!isPlaceholderData && !isError && isFetched && !data && 'No data'} */}
+      {!isPlaceholderData && !isError && isFetched && !data && (
+        <div
+          className={cn('mt-10 flex h-full w-full items-center justify-center', noDataClassName)}
+        >
+          <p className="text-base text-gray-500">No data</p>
+        </div>
+      )}
     </div>
   );
 };
