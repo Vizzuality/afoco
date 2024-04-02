@@ -292,7 +292,6 @@ export default function CountryDetailPanel() {
                     <div className="border-b border-t border-gray-100 py-2.5">
                       <p className="px-6 text-sm text-yellow-900">
                         <Markdown remarkPlugins={[remarkGfm]} className="prose">
-                          {/* <p className="px-6 text-sm text-yellow-900">{props.attributes.info}</p> */}
                           The total areas of project activities conducted in the AFoCO Member
                           Countries
                         </Markdown>

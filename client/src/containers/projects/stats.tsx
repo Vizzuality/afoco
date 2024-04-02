@@ -31,7 +31,10 @@ export default function Stats() {
           Object.assign(
             {},
             ...(response.data ?? []).map((item) => ({
-              [item.attributes?.indicator_name as string]: item.attributes?.value,
+              [item.attributes?.indicator_name as string]: {
+                value: item.attributes?.value,
+                unit: item.attributes?.unit,
+              },
             }))
           ),
       },
@@ -72,7 +75,7 @@ export default function Stats() {
                 </DialogContent>
               </Dialog>{' '}
             </div>
-            <SingleBar data={indicators?.project_funding} />
+            <SingleBar data={indicators?.project_funding['value']} />
           </div>
         </div>
         <div className="flex flex-col space-y-2">
@@ -109,11 +112,11 @@ export default function Stats() {
 
             <p className="py-4 text-3xl font-extrabold">
               {formatCompactNumber(
-                indicators.area_plantation_total +
-                  indicators.area_protected_total +
-                  indicators.area_reforested_total
+                indicators.area_plantation_total['value'] +
+                  indicators.area_protected_total['value'] +
+                  indicators.area_reforested_total['value']
               )}{' '}
-              ha
+              {indicators.area_plantation_total['unit']}
             </p>
 
             <div className="space-y-4">
@@ -127,10 +130,10 @@ export default function Stats() {
                       style={{
                         width: !!indicators[value]
                           ? `${
-                              (indicators[value] * 100) /
-                              (indicators.area_plantation_total +
-                                indicators.area_protected_total +
-                                indicators.area_reforested_total)
+                              (indicators[value].value * 100) /
+                              (indicators.area_plantation_total.value +
+                                indicators.area_protected_total.value +
+                                indicators.area_reforested_total.value)
                             }%`
                           : '0%',
                       }}
@@ -138,10 +141,11 @@ export default function Stats() {
                   </div>
 
                   <p className="w-10 text-right font-extrabold">
-                    {formatCompactNumber(Math.round(indicators[value]))}
+                    {formatCompactNumber(Math.round(indicators[value]['value']))}
                   </p>
                 </div>
               ))}
+
               <div>
                 <p className="text-right text-xs text-gray-500">ha</p>
               </div>
@@ -180,13 +184,13 @@ export default function Stats() {
               </Dialog>{' '}
             </div>
             <p className="py-4 text-3xl font-extrabold">
-              {formatCompactNumber(indicators.beneficiaries_total)}
+              {formatCompactNumber(indicators.beneficiaries_total['value'])}
             </p>
 
             <div className="h-44">
               {indicators.beneficiaries && (
                 <BarsChart
-                  data={Object.entries(indicators.beneficiaries).map(([year, uv]) => ({
+                  data={Object.entries(indicators.beneficiaries['value']).map(([year, uv]) => ({
                     year,
                     uv,
                   }))}
@@ -236,12 +240,12 @@ export default function Stats() {
               </Dialog>{' '}
             </div>
             <p className="py-4 text-3xl font-extrabold">
-              {formatCompactNumber(indicators.jobs_total)}
+              {formatCompactNumber(indicators.jobs_total['value'])}
             </p>{' '}
             <div className="h-44">
               {indicators.jobs && (
                 <BarsChart
-                  data={Object.entries(indicators.jobs).map(([year, uv]) => ({
+                  data={Object.entries(indicators.jobs['value']).map(([year, uv]) => ({
                     year,
                     uv,
                   }))}
