@@ -50,7 +50,7 @@ const CustomTooltip = ({
 }) => {
   if (!active || !payload || !payload.length) return null;
   return (
-    <div className="shadow-tooltip m-auto rounded-md border bg-gradient-to-t p-2">
+    <div className="shadow-tooltip bg-gradient-tooltip m-auto rounded-md border p-2">
       <p className="text-center">{label}</p>
       <div className="flex space-x-2">
         <p>Total</p>
