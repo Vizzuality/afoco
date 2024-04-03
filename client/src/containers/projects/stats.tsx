@@ -120,12 +120,8 @@ export default function Stats() {
               </div>
 
               <p className="py-4 text-3xl font-extrabold">
-                {formatCompactNumber(
-                  data.area_plantation_total['value'] +
-                    data.area_protected_total['value'] +
-                    data.area_reforested_total['value']
-                )}{' '}
-                {data.area_plantation_total['unit']}
+                {formatCompactNumber(data.intervention_area_total['value'])}{' '}
+                {data.intervention_area_total['unit']}
               </p>
 
               <div className="space-y-4">
@@ -139,10 +135,7 @@ export default function Stats() {
                         style={{
                           width: !!data[value]
                             ? `${
-                                (data[value].value * 100) /
-                                (data.area_plantation_total.value +
-                                  data.area_protected_total.value +
-                                  data.area_reforested_total.value)
+                                (data[value].value * 100) / data.intervention_area_total['value']
                               }%`
                             : '0%',
                         }}
