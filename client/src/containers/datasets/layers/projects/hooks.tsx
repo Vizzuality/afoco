@@ -12,6 +12,7 @@ export function useLayers({
       id: 'projects_points_shadow',
       type: 'circle',
       source: 'projects',
+      filter: ['==', ['get', 'type'], 'centroid'],
       'source-layer': 'afoco_locations_full',
       paint: {
         'circle-radius': 5,
@@ -27,6 +28,7 @@ export function useLayers({
     {
       id: 'projects',
       type: 'circle',
+      filter: ['==', ['get', 'type'], 'centroid'],
       source: 'projects',
       'source-layer': 'afoco_locations_full',
       paint: {
@@ -53,13 +55,12 @@ export function useLayers({
       source: 'projects',
       'source-layer': 'afoco_locations_full',
       paint: {
-        // 'line-color': [
-        //   'case',
-        //   ['boolean', ['feature-state', 'hover'], false],
-        //   '#176252',
-        //   '#170099',
-        // ],
-        'line-color': '#176252',
+        'line-color': [
+          'case',
+          ['boolean', ['feature-state', 'hover'], false],
+          '#EFB82A',
+          '#176252',
+        ],
         'line-opacity': opacity,
         'line-width': 1.5,
       },
@@ -75,13 +76,12 @@ export function useLayers({
       source: 'projects',
       'source-layer': 'afoco_locations_full',
       paint: {
-        // 'fill-color': [
-        //   'case',
-        //   ['boolean', ['feature-state', 'hover'], false],
-        //   '#176252',
-        //   '#170099',
-        // ],
-        'fill-color': '#176252',
+        'fill-color': [
+          'case',
+          ['boolean', ['feature-state', 'hover'], false],
+          '#EFB82A',
+          '#176252',
+        ],
         'fill-opacity': opacity * 0.4,
       },
       layout: {

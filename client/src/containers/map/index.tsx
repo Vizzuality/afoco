@@ -113,14 +113,25 @@ export default function MapContainer() {
   );
 
   let hoveredStateIdProjectsCircle: string | null = null;
+  let hoveredStateIdProjectsFill: string | null = null;
 
   const handleMouseMove = useCallback(
     (e: MapLayerMouseEvent) => {
       const ProjectsLayer = e?.features && e?.features.find(({ layer }) => layer.id === 'projects');
+
+      const ProjectsFillLayer =
+        e?.features && e?.features.find(({ layer }) => layer.id === 'projects_fill');
+
+      console.log(ProjectsFillLayer, e?.features);
       // *ON MOUSE ENTER
       if (e.features && map && ProjectsLayer) {
         setCursor('pointer');
         setHoveredProject(ProjectsLayer.properties?.project_code);
+      }
+
+      if (e.features && map && ProjectsFillLayer) {
+        setCursor('pointer');
+        setHoveredProject(ProjectsFillLayer.properties?.project_code);
       }
 
       if (ProjectsLayer && map) {
@@ -145,6 +156,28 @@ export default function MapContainer() {
           { hover: true }
         );
       }
+      if (ProjectsFillLayer && map) {
+        if (hoveredStateIdProjectsFill !== null) {
+          map?.setFeatureState(
+            {
+              sourceLayer: 'afoco_locations_full',
+              source: 'projects',
+              id: hoveredStateIdProjectsFill,
+            },
+            { hover: false }
+          );
+        }
+
+        hoveredStateIdProjectsFill = ProjectsFillLayer?.properties?.project_code as string;
+        map?.setFeatureState(
+          {
+            sourceLayer: 'afoco_locations_full',
+            source: 'projects',
+            id: hoveredStateIdProjectsFill,
+          },
+          { hover: true }
+        );
+      }
 
       // *ON MOUSE LEAVE
 
@@ -165,8 +198,21 @@ export default function MapContainer() {
         );
         hoveredStateIdProjectsCircle = null;
       }
+      if (!ProjectsFillLayer && map && hoveredStateIdProjectsFill) {
+        setHoveredProject(null);
+
+        map?.setFeatureState(
+          {
+            sourceLayer: 'afoco_locations_full',
+            source: 'projects',
+            id: hoveredStateIdProjectsFill,
+          },
+          { hover: false }
+        );
+        hoveredStateIdProjectsFill = null;
+      }
     },
-    [setCursor, map, hoveredStateIdProjectsCircle]
+    [setCursor, map, hoveredStateIdProjectsCircle, hoveredStateIdProjectsFill]
   );
 
   return (
