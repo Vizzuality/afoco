@@ -5,11 +5,9 @@ import { useCallback, useState, MouseEvent } from 'react';
 import { useSetAtom } from 'jotai';
 import { Search, X } from 'lucide-react';
 
-<<<<<<< HEAD
-import { hoveredProjectListAtom } from '@/store';
-=======
 import { cn } from '@/lib/classnames';
->>>>>>> 2a04087 (projects list scroll bar)
+
+import { hoveredProjectListAtom } from '@/store';
 
 import { useGetProjects } from '@/types/generated/project';
 
@@ -134,7 +132,6 @@ export default function ProjectsList() {
     }
   );
 
-<<<<<<< HEAD
   const handleHover = useCallback(
     (e: MouseEvent<HTMLElement>) => {
       const currentValue = e.currentTarget.getAttribute('data-value');
@@ -142,12 +139,11 @@ export default function ProjectsList() {
     },
     [setHoveredProjectList]
   );
-=======
+
   const filtersLength = Object.entries(filtersSettings)
     .flat()
     .filter((el) => typeof el === 'object')
     .flat().length;
->>>>>>> 2a04087 (projects list scroll bar)
 
   return (
     <ContentLoader
@@ -190,18 +186,20 @@ export default function ProjectsList() {
             'h-[56vh] 2xl:h-[64vh]': filtersLength >= 2,
           })}
         >
-          {data &&
-          data.map((project) => (
-            <button
-              type="button"
-              key={project?.id}
-              data-value={project?.attributes?.project_code}
-              onMouseEnter={handleHover}
-              onMouseLeave={() => setHoveredProjectList(null)}
-            >
-              <ProjectItem data={project} />
-            </button>
-          ))}
+          <div className="flex flex-col space-y-2">
+            {data &&
+              data.map((project) => (
+                <button
+                  type="button"
+                  key={project?.id}
+                  data-value={project?.attributes?.project_code}
+                  onMouseEnter={handleHover}
+                  onMouseLeave={() => setHoveredProjectList(null)}
+                >
+                  <ProjectItem data={project} />
+                </button>
+              ))}
+          </div>
         </ScrollArea>
       </div>
     </ContentLoader>

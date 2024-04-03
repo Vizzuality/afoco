@@ -10,6 +10,7 @@ import CountryItem from '@/containers/countries/item';
 
 import { Input } from '@/components/ui/input';
 import ContentLoader from '@/components/ui/loader';
+import { ScrollArea } from '@/components/ui/scroll-area';
 
 export default function CountriesList() {
   const [searchValue, setSearchValue] = useState<string | null>(null);
@@ -56,9 +57,13 @@ export default function CountriesList() {
 
         <div className="flex flex-col space-y-2">
           <p className="text-xs text-gray-500">Select a country</p>
-          {data?.data?.map((country) => (
-            <CountryItem key={country.id} data={country} />
-          ))}
+          <ScrollArea className="h-[70vh] 2xl:h-[75vh]">
+            <div className="flex flex-col space-y-1">
+              {data?.data?.map((country) => (
+                <CountryItem key={country.id} data={country} />
+              ))}
+            </div>
+          </ScrollArea>
         </div>
       </div>
     </ContentLoader>
