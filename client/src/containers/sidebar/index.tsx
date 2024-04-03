@@ -25,10 +25,14 @@ export default function Sidebar() {
   const [sidebarTab, setSidebarTab] = useState<'projects' | 'countries' | 'datasets'>('projects');
 
   return (
-    <div className="rounded-8xl absolute bottom-0 left-4 top-0 z-20 my-2 w-20 bg-yellow-700 py-10 text-xs text-yellow-50">
+    <div className="rounded-8xl absolute bottom-0 left-4 top-0 z-20 my-2 w-16 bg-yellow-700 py-10 text-xs text-yellow-50 xl:w-20">
       <div className="h-[88%]">
-        <div className="flex flex-col items-center pb-12">
-          <Image src="/images/logo.svg" alt="logo" width={62} height={29} />
+        <div className="flex hidden flex-col items-center pb-12 xl:block">
+          <Image src="/images/logo.svg" alt="logo" width={35} height={29} />
+        </div>
+
+        <div className="block flex flex-col items-center pb-12 xl:hidden">
+          <Image src="/images/logo.svg" alt="logo" width={48} height={19} />
         </div>
 
         <ul className="flex h-full flex-col">
@@ -38,7 +42,7 @@ export default function Sidebar() {
               key={name}
               data-cy={`sidebar-tab-${name}`}
               className={cn({
-                'rounded-8xl mx-2 mt-2 flex flex-col items-center space-y-1 border-2 border-transparent py-10 text-center hover:border-yellow-50':
+                'xl:rounded-8xl mx-2 mt-2 flex flex-col items-center space-y-1 rounded-full border-2 border-transparent py-2 text-center hover:border-yellow-50 xl:py-10':
                   true,
                 'bg-yellow-600': pathname.includes(name),
               })}
@@ -50,7 +54,7 @@ export default function Sidebar() {
                   alt={name}
                   width={24}
                   height={24}
-                  className="h-6 w-6"
+                  className="h-7 h-8 xl:h-6 xl:w-6"
                 />
 
                 {name === 'datasets' && layers.length > 0 && (
@@ -65,7 +69,7 @@ export default function Sidebar() {
                   </div>
                 )}
               </div>
-              <p className="capitalize">{name}</p>
+              <p className="hidden capitalize xl:block">{name}</p>
             </Link>
           ))}
           <div className="mt-auto flex flex-col items-center space-y-2">

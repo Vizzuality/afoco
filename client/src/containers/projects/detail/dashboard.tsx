@@ -48,7 +48,7 @@ export default function ProjectDashboard({ id }: { id: string }) {
   return (
     <div
       data-cy="project-dashboard"
-      className="z-50 box-content h-full w-full rounded-3xl bg-neutral-50 p-6 shadow-md"
+      className="no-scrollbar z-50 box-content h-full w-full overflow-x-hidden rounded-3xl bg-neutral-50 p-6 shadow-md xl:overflow-y-auto"
     >
       <ContentLoader
         data={data}
