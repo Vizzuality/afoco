@@ -3,6 +3,8 @@ import { useState } from 'react';
 
 import { Search, X } from 'lucide-react';
 
+import { cn } from '@/lib/classnames';
+
 import { useGetProjects } from '@/types/generated/project';
 
 import { useSyncFilters } from '@/hooks/datasets/sync-query';
@@ -11,12 +13,18 @@ import Filters from '@/containers/filters';
 import ProjectItem from '@/containers/projects/item';
 
 import { Input } from '@/components/ui/input';
+import { ScrollArea } from '@/components/ui/scroll-area';
 
 import FiltersSelected from '../filters/selected';
 
 export default function ProjectsList() {
   const [searchValue, setSearchValue] = useState<string | null>(null);
   const [filtersSettings] = useSyncFilters();
+
+  const filtersLength = Object.entries(filtersSettings)
+    .flat()
+    .filter((el) => typeof el === 'object')
+    .flat().length;
 
   const { data } = useGetProjects(
     {
@@ -124,7 +132,7 @@ export default function ProjectsList() {
   );
 
   return (
-    <div className="no-scrollbar flex max-h-[75vh] flex-col space-y-2 overflow-y-auto">
+    <div className="flex flex-col space-y-2">
       <div className="mx-1 mt-1 flex justify-between space-x-2">
         <div className="relative w-full">
           <Input
@@ -149,7 +157,15 @@ export default function ProjectsList() {
         <Filters nrResults={data?.length as number} />
       </div>
       <FiltersSelected />
-      {data && data.map((project) => <ProjectItem key={project?.id} data={project} />)}
+      <ScrollArea
+        className={cn({
+          'h-[67vh] 2xl:h-[73vh]': true,
+          'h-[60vh] 2xl:h-[68vh]': filtersLength >= 1,
+          'h-[56vh] 2xl:h-[64vh]': filtersLength >= 2,
+        })}
+      >
+        {data && data.map((project) => <ProjectItem key={project?.id} data={project} />)}
+      </ScrollArea>
     </div>
   );
 }

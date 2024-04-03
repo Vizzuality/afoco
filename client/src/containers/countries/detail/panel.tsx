@@ -175,7 +175,7 @@ export default function CountryDetailPanel() {
               <p>{data?.data?.attributes?.name}</p>
             </div>
             <div className='after:rounded-b-4xl z-10 flex flex-col after:absolute after:bottom-0.5 after:left-0 after:h-10 after:w-full after:bg-gradient-to-b after:from-white/0 after:to-white/100 after:content-[""]'>
-              <div className="no-scrollbar max-h-[65vh] overflow-y-auto pb-10 text-sm text-gray-900">
+              <div className="max-h-[65vh] overflow-y-auto pb-10 text-sm text-gray-900">
                 <Markdown remarkPlugins={[remarkGfm]} className="prose markdown-links">
                   {data?.data?.attributes?.description}
                 </Markdown>
