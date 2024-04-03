@@ -60,7 +60,7 @@ export default function Panel({ children }: { children: React.ReactNode }) {
       <div
         ref={scrollRef}
         className={cn({
-          'no-scrollbar my-1 flex grow scroll-pt-28 flex-col overflow-y-auto': true,
+          'my-1 flex grow scroll-pt-28 flex-col': true,
           'opacity-100': open,
           'opacity-0': !open,
         })}
