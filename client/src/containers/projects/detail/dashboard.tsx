@@ -90,7 +90,10 @@ export default function ProjectDashboard({ id }: { id: string }) {
             <div className="flex h-1/2 w-full gap-4">
               <div className="w-1/2 rounded-xl bg-white p-4 shadow-sm">
                 <div className="flex items-center justify-between">
-                  <h3 className="text-lg text-green-800">Total project value (USD)</h3>
+                  <h3 className="text-base text-green-800">
+                    Total funding{' '}
+                    {data.project_funding.unit && <span>({data.project_funding.unit})</span>}
+                  </h3>
 
                   <Tooltip>
                     <TooltipTrigger className="flex items-center justify-center rounded-full p-2 hover:bg-yellow-50 data-[state=open]:bg-yellow-50">
@@ -106,7 +109,7 @@ export default function ProjectDashboard({ id }: { id: string }) {
                     </TooltipContent>
                   </Tooltip>
                 </div>
-                <SingleBar data={data.project_funding['value']} />
+                <SingleBar data={data.project_funding} />
               </div>
               <div className="w-1/2 rounded-xl bg-white p-4 shadow-sm">
                 <div className="flex items-center justify-between">
