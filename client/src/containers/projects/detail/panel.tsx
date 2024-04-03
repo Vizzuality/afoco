@@ -305,7 +305,7 @@ export default function ProjectDetailPanel() {
               <ChevronRight className="h-4 w-4 text-yellow-900 group-hover:text-yellow-50" />
             </Button>
           </DrawerTrigger>
-          <DrawerContent className="left-[514px] w-[calc(100vw-570px)]">
+          <DrawerContent className="left-[432px] w-[calc(100vw-490px)] xl:left-[514px] xl:w-[calc(100vw-570px)]">
             <ProjectDashboard id={params.id} />
             <DrawerClose
               className="focus:ring-ring absolute -right-6 top-7 z-50 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:pointer-events-none"
