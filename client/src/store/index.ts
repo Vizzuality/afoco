@@ -15,7 +15,7 @@ export const tmpBboxAtom = atom<readonly [number, number, number, number] | null
 
 // Map layers
 
-export const layersInteractiveIdsAtom = atom<string[]>(['projects', 'projects_fill']);
+export const layersInteractiveIdsAtom = atom<number[]>([]);
 
 export const popupAtom = atom<MapLayerMouseEvent | null>(null);
 

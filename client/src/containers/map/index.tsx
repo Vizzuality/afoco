@@ -122,7 +122,6 @@ export default function MapContainer() {
       const ProjectsFillLayer =
         e?.features && e?.features.find(({ layer }) => layer.id === 'projects_fill');
 
-      console.log(ProjectsFillLayer, e?.features);
       // *ON MOUSE ENTER
       if (e.features && map && ProjectsLayer) {
         setCursor('pointer');

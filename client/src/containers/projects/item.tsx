@@ -25,9 +25,9 @@ export default function ProjectItem({ data }: { data: ProjectListResponseDataIte
         className={cn({
           'flex space-x-4 rounded-lg border border-gray-100 bg-white py-2 pl-2 pr-4 shadow-sm transition-all duration-300 hover:border-yellow-500':
             true,
-          'border-yellow-500': hoveredProject === data?.id?.toString(),
+          'border-yellow-500': hoveredProject === data?.attributes?.project_code,
         })}
-        id={data?.id?.toString()}
+        id={data?.attributes?.project_code}
       >
         <Image
           src="/images/projects/placeholder.png"

@@ -1,4 +1,12 @@
+import { useCallback } from 'react';
+
 import { Layer } from 'react-map-gl';
+
+import { useSetAtom } from 'jotai';
+
+import { layersInteractiveIdsAtom } from '@/store';
+
+import type { LayerProps } from '@/types/layers';
 
 import { useSyncLayers } from '@/hooks/datasets/sync-query';
 
@@ -9,6 +17,23 @@ import { DeckMapboxOverlayProvider } from '@/components/map/provider';
 const LayerManager = () => {
   const [layers] = useSyncLayers();
   const layersIds = layers.map((l) => l.id);
+  const setInteractiveLayerIds = useSetAtom(layersInteractiveIdsAtom);
+
+  const handleAdd = useCallback(
+    (styleIds: LayerProps['id'][]) => {
+      setInteractiveLayerIds((prevInteractiveIds) => [...prevInteractiveIds, ...styleIds]);
+    },
+    [setInteractiveLayerIds]
+  );
+
+  const handleRemove = useCallback(
+    (styleIds: LayerProps['id'][]) => {
+      setInteractiveLayerIds((prevInteractiveIds) => [
+        ...prevInteractiveIds.filter((id) => !styleIds.includes(id)),
+      ]);
+    },
+    [setInteractiveLayerIds]
+  );
 
   return (
     <DeckMapboxOverlayProvider>
@@ -40,7 +65,15 @@ const LayerManager = () => {
           const LayerComponent = LAYERS[l];
           const beforeId = i === 0 ? 'custom-layers' : `${layersIds[i - 1]}-layer`;
 
-          return <LayerComponent id={l} key={l} beforeId={beforeId} />;
+          return (
+            <LayerComponent
+              id={l}
+              key={l}
+              beforeId={beforeId}
+              onAdd={handleAdd}
+              onRemove={handleRemove}
+            />
+          );
         })}
       </>
     </DeckMapboxOverlayProvider>

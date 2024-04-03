@@ -1,4 +1,6 @@
-import { Layer as DeckLayer } from '@deck.gl/core/typed';
+import type { LayerProps as RMGLLayerProps } from 'react-map-gl';
+
+import type { Layer as DeckLayer } from '@deck.gl/core/typed';
 import type { AnyLayer, AnySourceData } from 'mapbox-gl';
 
 export type Config = {
@@ -51,8 +53,8 @@ export type InteractionConfig = {
 export type LayerProps = {
   id: number;
   zIndex?: number;
-  onAdd?: () => void;
-  onRemove?: (ids: string[]) => void;
+  onAdd?: (ids: RMGLLayerProps['id'][]) => void;
+  onRemove?: (ids: RMGLLayerProps['id'][]) => void;
   beforeId: string;
   settings?: { opacity: LayerSettings['opacity']; visibility: LayerSettings['visibility'] };
 };
