@@ -5,7 +5,11 @@ import { useCallback, useState, MouseEvent } from 'react';
 import { useSetAtom } from 'jotai';
 import { Search, X } from 'lucide-react';
 
+<<<<<<< HEAD
 import { hoveredProjectListAtom } from '@/store';
+=======
+import { cn } from '@/lib/classnames';
+>>>>>>> 2a04087 (projects list scroll bar)
 
 import { useGetProjects } from '@/types/generated/project';
 
@@ -16,6 +20,7 @@ import ProjectItem from '@/containers/projects/item';
 
 import { Input } from '@/components/ui/input';
 import ContentLoader from '@/components/ui/loader';
+import { ScrollArea } from '@/components/ui/scroll-area';
 
 import FiltersSelected from '../filters/selected';
 
@@ -129,6 +134,7 @@ export default function ProjectsList() {
     }
   );
 
+<<<<<<< HEAD
   const handleHover = useCallback(
     (e: MouseEvent<HTMLElement>) => {
       const currentValue = e.currentTarget.getAttribute('data-value');
@@ -136,6 +142,12 @@ export default function ProjectsList() {
     },
     [setHoveredProjectList]
   );
+=======
+  const filtersLength = Object.entries(filtersSettings)
+    .flat()
+    .filter((el) => typeof el === 'object')
+    .flat().length;
+>>>>>>> 2a04087 (projects list scroll bar)
 
   return (
     <ContentLoader
@@ -146,7 +158,7 @@ export default function ProjectsList() {
       isError={isError}
       loaderClassName="mt-28"
     >
-      <div className="no-scrollbar flex max-h-[75vh] flex-col space-y-2 overflow-y-auto">
+      <div className="flex flex-col space-y-2">
         <div className="mx-1 mt-1 flex justify-between space-x-2">
           <div className="relative w-full">
             <Input
@@ -171,7 +183,14 @@ export default function ProjectsList() {
           <Filters nrResults={data?.length as number} />
         </div>
         <FiltersSelected />
-        {data &&
+        <ScrollArea
+          className={cn({
+            'h-[67vh] 2xl:h-[73vh]': true,
+            'h-[60vh] 2xl:h-[68vh]': filtersLength >= 1,
+            'h-[56vh] 2xl:h-[64vh]': filtersLength >= 2,
+          })}
+        >
+          {data &&
           data.map((project) => (
             <button
               type="button"
@@ -183,6 +202,7 @@ export default function ProjectsList() {
               <ProjectItem data={project} />
             </button>
           ))}
+        </ScrollArea>
       </div>
     </ContentLoader>
   );
