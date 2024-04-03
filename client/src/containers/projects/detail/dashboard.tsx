@@ -208,6 +208,7 @@ export default function ProjectDashboard({ id }: { id: string }) {
                   )}
                 </div>
               </div>
+
               <div className="w-1/2 rounded-xl bg-white p-4 shadow-sm">
                 <div className="flex items-center justify-between">
                   <h3 className="text-lg text-green-800">Total jobs</h3>
