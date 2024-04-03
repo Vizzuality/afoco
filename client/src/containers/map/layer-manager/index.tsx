@@ -6,8 +6,6 @@ import { useSetAtom } from 'jotai';
 
 import { layersInteractiveIdsAtom } from '@/store';
 
-import type { LayerProps } from '@/types/layers';
-
 import { useSyncLayers } from '@/hooks/datasets/sync-query';
 
 import { LAYERS } from '@/containers/datasets/layers';
@@ -20,14 +18,14 @@ const LayerManager = () => {
   const setInteractiveLayerIds = useSetAtom(layersInteractiveIdsAtom);
 
   const handleAdd = useCallback(
-    (styleIds: LayerProps['id'][]) => {
+    (styleIds: string[]) => {
       setInteractiveLayerIds((prevInteractiveIds) => [...prevInteractiveIds, ...styleIds]);
     },
     [setInteractiveLayerIds]
   );
 
   const handleRemove = useCallback(
-    (styleIds: LayerProps['id'][]) => {
+    (styleIds: string[]) => {
       setInteractiveLayerIds((prevInteractiveIds) => [
         ...prevInteractiveIds.filter((id) => !styleIds.includes(id)),
       ]);

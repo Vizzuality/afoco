@@ -7,23 +7,23 @@ import { ChevronLeft } from 'lucide-react';
 
 import { cn } from '@/lib/classnames';
 
-import { dashboardAtom, hoveredProjectAtom } from '@/store';
+import { dashboardAtom, hoveredProjectMapAtom } from '@/store';
 import { openAtom } from '@/store';
 
 import { Button } from '@/components/ui/button';
 
 export default function Panel({ children }: { children: React.ReactNode }) {
   const dashboard = useAtomValue(dashboardAtom);
-  const hoveredProject = useAtomValue(hoveredProjectAtom);
+  const hoveredProjectMap = useAtomValue(hoveredProjectMapAtom);
   const [open, setOpen] = useAtom(openAtom);
 
   const scrollRef = useRef(null);
 
   useEffect(() => {
-    if (!hoveredProject) return;
-    const element = document.getElementById(hoveredProject);
+    if (!hoveredProjectMap) return;
+    const element = document.getElementById(hoveredProjectMap);
     element?.scrollIntoView({ behavior: 'smooth' });
-  }, [hoveredProject]);
+  }, [hoveredProjectMap]);
 
   return (
     <div

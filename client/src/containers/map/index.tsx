@@ -10,7 +10,7 @@ import { useParams, useRouter } from 'next/navigation';
 import bbox from '@turf/bbox';
 import { useAtomValue, useSetAtom, useAtom } from 'jotai';
 
-import { bboxAtom, hoveredProjectAtom, layersInteractiveIdsAtom, tmpBboxAtom } from '@/store';
+import { bboxAtom, hoveredProjectMapAtom, layersInteractiveIdsAtom, tmpBboxAtom } from '@/store';
 
 import { Bbox } from '@/types/map';
 
@@ -55,7 +55,7 @@ export default function MapContainer() {
   const params = useParams<{ id: string }>();
 
   const layersInteractiveIds = useAtomValue(layersInteractiveIdsAtom);
-  const setHoveredProject = useSetAtom(hoveredProjectAtom);
+  const setHoveredProjectMap = useSetAtom(hoveredProjectMapAtom);
   const [cursor, setCursor] = useState<'grab' | 'pointer'>('grab');
 
   const [bboxA, setBbox] = useAtom(bboxAtom);
@@ -125,12 +125,12 @@ export default function MapContainer() {
       // *ON MOUSE ENTER
       if (e.features && map && ProjectsLayer) {
         setCursor('pointer');
-        setHoveredProject(ProjectsLayer.properties?.project_code);
+        setHoveredProjectMap(ProjectsLayer.properties?.project_code);
       }
 
       if (e.features && map && ProjectsFillLayer) {
         setCursor('pointer');
-        setHoveredProject(ProjectsFillLayer.properties?.project_code);
+        setHoveredProjectMap(ProjectsFillLayer.properties?.project_code);
       }
 
       if (ProjectsLayer && map) {
@@ -185,7 +185,7 @@ export default function MapContainer() {
       }
 
       if (!ProjectsLayer && map && hoveredStateIdProjectsCircle) {
-        setHoveredProject(null);
+        setHoveredProjectMap(null);
 
         map?.setFeatureState(
           {
@@ -198,7 +198,7 @@ export default function MapContainer() {
         hoveredStateIdProjectsCircle = null;
       }
       if (!ProjectsFillLayer && map && hoveredStateIdProjectsFill) {
-        setHoveredProject(null);
+        setHoveredProjectMap(null);
 
         map?.setFeatureState(
           {

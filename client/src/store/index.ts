@@ -15,7 +15,7 @@ export const tmpBboxAtom = atom<readonly [number, number, number, number] | null
 
 // Map layers
 
-export const layersInteractiveIdsAtom = atom<number[]>([]);
+export const layersInteractiveIdsAtom = atom<string[]>([]);
 
 export const popupAtom = atom<MapLayerMouseEvent | null>(null);
 
@@ -26,7 +26,11 @@ export const mapSettingsAtom = atom<MapSettings>({
   roads: false,
 });
 
-export const hoveredProjectAtom = atom<string | null>(null);
+// set project code when hovering a project in the map
+export const hoveredProjectMapAtom = atom<string | null>(null);
+
+// set project code when hovering a project from projects list in sidebar
+export const hoveredProjectListAtom = atom<string | null>(null);
 
 export const DEFAULT_SETTINGS = {
   expand: true,

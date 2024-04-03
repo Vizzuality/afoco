@@ -7,14 +7,14 @@ import { useAtomValue } from 'jotai';
 
 import { cn } from '@/lib/classnames';
 
-import { hoveredProjectAtom } from '@/store';
+import { hoveredProjectMapAtom } from '@/store';
 
 import { ProjectListResponseDataItem } from '@/types/generated/strapi.schemas';
 
 import { useSyncQueryParams } from '@/hooks/datasets';
 
 export default function ProjectItem({ data }: { data: ProjectListResponseDataItem }) {
-  const hoveredProject = useAtomValue(hoveredProjectAtom);
+  const hoveredProjectMap = useAtomValue(hoveredProjectMapAtom);
   const queryParams = useSyncQueryParams();
 
   return (
@@ -25,7 +25,7 @@ export default function ProjectItem({ data }: { data: ProjectListResponseDataIte
         className={cn({
           'flex space-x-4 rounded-lg border border-gray-100 bg-white py-2 pl-2 pr-4 shadow-sm transition-all duration-300 hover:border-yellow-500':
             true,
-          'border-yellow-500': hoveredProject === data?.attributes?.project_code,
+          'border-yellow-500': hoveredProjectMap === data?.attributes?.project_code,
         })}
         id={data?.attributes?.project_code}
       >
