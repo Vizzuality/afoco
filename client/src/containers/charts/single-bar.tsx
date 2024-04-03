@@ -1,5 +1,7 @@
 import { formatCompactNumber } from '@/lib/utils/formats';
 
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
+
 export default function SingleBar({
   data,
 }: {
@@ -12,16 +14,42 @@ export default function SingleBar({
           {formatCompactNumber(data.total_funding || 0)}
         </p>
 
-        <div
-          className="h-10 w-full rounded-[4px]"
-          style={{
-            background: `linear-gradient(to right, #70CCB0 0%, #70CCB0 ${
-              (data.afoco_funding * 100) / data.total_funding
-            }%, #FFCC73 ${(data.afoco_funding * 100) / data.total_funding}%, #FFCC73 ${
-              (data.national_funding * 100) / data.total_funding
-            }%)`,
-          }}
-        />
+        <div className="flex h-10 w-full rounded-[4px]">
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <div
+                className="h-full cursor-pointer bg-[#70CCB0]"
+                style={{
+                  width: `${(data.afoco_funding * 100) / data.total_funding}%`,
+                }}
+              />
+            </TooltipTrigger>
+
+            <TooltipContent side="top" align="end">
+              <div className="flex flex-col items-center p-2 text-base">
+                <p>{formatCompactNumber(data.afoco_funding || 0)}</p>
+                <p>{((data.afoco_funding * 100) / data.total_funding).toFixed()}%</p>
+              </div>
+            </TooltipContent>
+          </Tooltip>
+
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <div
+                className="h-full cursor-pointer bg-[#FFCC73]"
+                style={{
+                  width: `${(data.national_funding * 100) / data.total_funding}%`,
+                }}
+              />
+            </TooltipTrigger>
+            <TooltipContent side="top" align="end">
+              <div className="flex flex-col items-center p-2 text-base">
+                <p>{formatCompactNumber(data.national_funding || 0)}</p>
+                <p>{((data.national_funding * 100) / data.total_funding).toFixed()}%</p>
+              </div>
+            </TooltipContent>
+          </Tooltip>
+        </div>
         <div className="mt-2 flex w-full items-center justify-between text-xs text-gray-500">
           <p>0</p>
           <p>20</p>
