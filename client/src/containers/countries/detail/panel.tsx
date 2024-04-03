@@ -31,7 +31,7 @@ import { COLUMNS, CSV_COLUMNS_ORDER } from '@/containers/countries/detail/consta
 import Share from '@/containers/share';
 
 import { Button } from '@/components/ui/button';
-import { Dialog, DialogContent, DialogTrigger, DialogClose } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import ContentLoader from '@/components/ui/loader';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 
@@ -262,32 +262,20 @@ export default function CountryDetailPanel() {
               <div className="w-full rounded-xl bg-white p-4 shadow-sm">
                 <div className="flex items-center justify-between">
                   <h3 className="text-base text-green-800">Total funding (USD)</h3>
-                  <Dialog>
-                    <DialogTrigger className="flex items-center justify-center rounded-full p-2 hover:bg-yellow-50 data-[state=open]:bg-yellow-50">
+                  <Tooltip>
+                    <TooltipTrigger className="flex items-center justify-center rounded-full p-2 hover:bg-yellow-50 data-[state=open]:bg-yellow-50">
                       <Info className="text-green-800" size={20} />
-                    </DialogTrigger>
+                    </TooltipTrigger>
 
-                    <DialogContent className="p-0">
-                      <h3 className="px-6 pt-4 text-xl font-medium text-green-900">
-                        Total funding (USD)
-                      </h3>
-                      <div className="border-b border-t border-gray-100 py-2.5">
-                        <p className="px-6 text-sm text-yellow-900">
-                          <Markdown remarkPlugins={[remarkGfm]} className="prose">
-                            {/* <p className="px-6 text-sm text-yellow-900">{props.attributes.info}</p> */}
-                            The total value invested to AFoCO projects of the country
-                          </Markdown>
-                        </p>
-                      </div>
-                      <div className="flex w-full px-6 pb-4">
-                        <DialogClose asChild>
-                          <Button variant="primary" size="base" className="ml-auto w-12 self-end">
-                            Ok
-                          </Button>
-                        </DialogClose>
-                      </div>
-                    </DialogContent>
-                  </Dialog>
+                    <TooltipContent className="max-w-[200px] p-2">
+                      <p className="text-sm text-yellow-900">
+                        <Markdown remarkPlugins={[remarkGfm]} className="prose text-xs">
+                          The total areas of project activities conducted in the AFoCO Member
+                          Countries.
+                        </Markdown>
+                      </p>
+                    </TooltipContent>
+                  </Tooltip>
                 </div>
                 <div className="h-52">
                   <SingleBar data={indicators.country_funding} />
@@ -297,32 +285,19 @@ export default function CountryDetailPanel() {
               <div className="w-full rounded-xl bg-white p-4 shadow-sm">
                 <div className="flex items-center justify-between pb-6">
                   <h3 className="text-base text-green-800">Total intervention area</h3>
-                  <Dialog>
-                    <DialogTrigger className="flex items-center justify-center rounded-full p-2 hover:bg-yellow-50 data-[state=open]:bg-yellow-50">
+                  <Tooltip>
+                    <TooltipTrigger className="flex items-center justify-center rounded-full p-2 hover:bg-yellow-50 data-[state=open]:bg-yellow-50">
                       <Info className="text-green-800" size={20} />
-                    </DialogTrigger>
-
-                    <DialogContent className="p-0">
-                      <h3 className="px-6 pt-4 text-xl font-medium text-green-900">
-                        Total intervention area
-                      </h3>
-                      <div className="border-b border-t border-gray-100 py-2.5">
-                        <p className="px-6 text-sm text-yellow-900">
-                          <Markdown remarkPlugins={[remarkGfm]} className="prose">
-                            The total areas of project activities conducted in the AFoCO Member
-                            Countries
-                          </Markdown>
-                        </p>
-                      </div>
-                      <div className="flex w-full px-6 pb-4">
-                        <DialogClose asChild>
-                          <Button variant="primary" size="base" className="ml-auto w-12 self-end">
-                            Ok
-                          </Button>
-                        </DialogClose>
-                      </div>
-                    </DialogContent>
-                  </Dialog>{' '}
+                    </TooltipTrigger>
+                    <TooltipContent className="max-w-[200px] p-2">
+                      <p className="text-sm text-yellow-900">
+                        <Markdown remarkPlugins={[remarkGfm]} className="prose text-xs">
+                          The total areas of project activities conducted in the AFoCO Member
+                          Countries.
+                        </Markdown>
+                      </p>
+                    </TooltipContent>
+                  </Tooltip>
                 </div>
 
                 <p className="py-4 text-3xl font-extrabold">
@@ -363,32 +338,20 @@ export default function CountryDetailPanel() {
               <div className="w-full rounded-xl bg-white p-4 shadow-sm">
                 <div className="flex items-center justify-between pb-2">
                   <h3 className="text-base text-green-800">Total beneficiaries</h3>
-                  <Dialog>
-                    <DialogTrigger className="flex items-center justify-center rounded-full p-2 hover:bg-yellow-50 data-[state=open]:bg-yellow-50">
+                  <Tooltip>
+                    <TooltipTrigger className="flex items-center justify-center rounded-full p-2 hover:bg-yellow-50 data-[state=open]:bg-yellow-50">
                       <Info className="text-green-800" size={20} />
-                    </DialogTrigger>
+                    </TooltipTrigger>
 
-                    <DialogContent className="p-0">
-                      <h3 className="px-6 pt-4 text-xl font-medium text-green-900">
-                        Total beneficiaries
-                      </h3>
-                      <div className="border-b border-t border-gray-100 py-2.5">
-                        <p className="px-6 text-sm text-yellow-900">
-                          <Markdown remarkPlugins={[remarkGfm]} className="prose">
-                            The total number of short- and long-term jobs generated by the project
-                            interventions in the AFoCO Member Countries
-                          </Markdown>
-                        </p>
-                      </div>
-                      <div className="flex w-full px-6 pb-4">
-                        <DialogClose asChild>
-                          <Button variant="primary" size="base" className="ml-auto w-12 self-end">
-                            Ok
-                          </Button>
-                        </DialogClose>
-                      </div>
-                    </DialogContent>
-                  </Dialog>{' '}
+                    <TooltipContent className="max-w-[200px] p-2">
+                      <p className="text-sm text-yellow-900">
+                        <Markdown remarkPlugins={[remarkGfm]} className="prose text-xs">
+                          The total number of short- and long-term jobs generated by the project
+                          interventions in the AFoCO Member Countries
+                        </Markdown>
+                      </p>
+                    </TooltipContent>
+                  </Tooltip>
                 </div>
 
                 <p className="py-4 text-3xl font-extrabold">
@@ -418,30 +381,20 @@ export default function CountryDetailPanel() {
               <div className="w-full rounded-xl bg-white p-4 shadow-sm">
                 <div className="flex items-center justify-between pb-2">
                   <h3 className="text-base text-green-800">Total jobs</h3>
-                  <Dialog>
-                    <DialogTrigger className="flex items-center justify-center rounded-full p-2 hover:bg-yellow-50 data-[state=open]:bg-yellow-50">
+                  <Tooltip>
+                    <TooltipTrigger className="flex items-center justify-center rounded-full p-2 hover:bg-yellow-50 data-[state=open]:bg-yellow-50">
                       <Info className="text-green-800" size={20} />
-                    </DialogTrigger>
+                    </TooltipTrigger>
 
-                    <DialogContent className="p-0">
-                      <h3 className="px-6 pt-4 text-xl font-medium text-green-900">Total jobs</h3>
-                      <div className="border-b border-t border-gray-100 py-2.5">
-                        <p className="px-6 text-sm text-yellow-900">
-                          <Markdown remarkPlugins={[remarkGfm]} className="prose">
-                            The total number of short- and long-term jobs generated by the project
-                            interventions in the country
-                          </Markdown>
-                        </p>
-                      </div>
-                      <div className="flex w-full px-6 pb-4">
-                        <DialogClose asChild>
-                          <Button variant="primary" size="base" className="ml-auto w-12 self-end">
-                            Ok
-                          </Button>
-                        </DialogClose>
-                      </div>
-                    </DialogContent>
-                  </Dialog>{' '}
+                    <TooltipContent className="max-w-[200px] p-2">
+                      <p className="text-sm text-yellow-900">
+                        <Markdown remarkPlugins={[remarkGfm]} className="prose text-xs">
+                          The total number of short- and long-term jobs generated by the project
+                          interventions in the AFoCO Member Countries.
+                        </Markdown>
+                      </p>
+                    </TooltipContent>
+                  </Tooltip>
                 </div>
 
                 <p className="py-4 text-3xl font-extrabold">
