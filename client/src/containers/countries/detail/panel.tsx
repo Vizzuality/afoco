@@ -211,7 +211,7 @@ export default function CountryDetailPanel() {
                   className="flex h-10 items-center justify-between border-b-2 border-dotted border-green-50 py-4 first:border-t-2"
                 >
                   <p className="text-xs font-medium uppercase text-gray-500">
-                    {title} ({unitValue})
+                    {title} <span className="normal-case">({unitValue})</span>
                   </p>
                   <div className="flex items-end space-x-1">
                     <p className="text-sm text-yellow-900">
