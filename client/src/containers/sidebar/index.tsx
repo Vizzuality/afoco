@@ -25,13 +25,13 @@ export default function Sidebar() {
   const [sidebarTab, setSidebarTab] = useState<'projects' | 'countries' | 'datasets'>('projects');
 
   return (
-    <div className="rounded-8xl absolute bottom-0 left-4 top-0 z-20 my-2 w-16 bg-yellow-700 py-10 text-xs text-yellow-50 xl:w-20">
+    <div className="rounded-8xl absolute bottom-0 left-2 top-0 z-20 my-2 w-16 bg-yellow-700 py-10 text-xs text-yellow-50 xl:left-4 xl:w-20">
       <div className="h-[88%]">
-        <div className="flex hidden flex-col items-center pb-12 xl:block">
-          <Image src="/images/logo.svg" alt="logo" width={35} height={29} />
+        <div className="mx-2 flex hidden items-center pb-12 xl:block">
+          <Image src="/images/logo.svg" alt="logo" width={60} height={29} />
         </div>
 
-        <div className="block flex flex-col items-center pb-12 xl:hidden">
+        <div className="mx-2 block flex items-center pb-12 xl:hidden">
           <Image src="/images/logo.svg" alt="logo" width={48} height={19} />
         </div>
 
@@ -42,7 +42,7 @@ export default function Sidebar() {
               key={name}
               data-cy={`sidebar-tab-${name}`}
               className={cn({
-                'xl:rounded-8xl mx-2 mt-2 flex flex-col items-center space-y-1 rounded-full border-2 border-transparent py-2 text-center hover:border-yellow-50 xl:py-10':
+                'xl:rounded-8xl mx-auto mt-2 flex h-12 w-12 flex-col items-center justify-center space-y-1 rounded-full border-2 border-transparent text-center hover:border-yellow-50 xl:mx-2 xl:h-32 xl:w-auto xl:py-10 xl:py-2':
                   true,
                 'bg-yellow-600': pathname.includes(name),
               })}
