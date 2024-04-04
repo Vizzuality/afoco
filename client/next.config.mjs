@@ -2,7 +2,7 @@ import('./src/env.mjs');
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  transpilePackages: ['@serverless-app-scaffold/types', 'lucide-react'],
+  transpilePackages: ['@serverless-app-scaffold/types', 'lucide-react', 'hi'],
   images: {
     domains: ['api.mapbox.com'],
   },

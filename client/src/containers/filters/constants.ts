@@ -28,3 +28,15 @@ export const AREAS = [
     label: '>500',
   },
 ];
+
+export const FILTERS_INFO = {
+  intervention:
+    'The project category its aims to support for forest management within each Member Country.',
+  country: 'AFoCO Member Country.',
+  area_restored:
+    'The dimensions of the implementation for restored or reforested area, including total conservation and plantation area, consistent with the outline in the project proposal.',
+  area_protected:
+    'The dimensions of the implementation for conservation and protection area consistent with the specifications detailed in the project proposal.',
+  area_plantation:
+    'The dimensions of the implementation for plantation area consistent with the specifications detailed in the project proposal.',
+};
