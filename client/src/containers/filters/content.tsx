@@ -2,6 +2,11 @@
 
 import { useCallback } from 'react';
 
+import Markdown from 'react-markdown';
+
+import { InformationCircleIcon } from '@heroicons/react/24/solid';
+import remarkGfm from 'remark-gfm';
+
 import { useGetCountries } from '@/types/generated/country';
 
 import { useSyncFilters } from '@/hooks/datasets/sync-query';
@@ -17,9 +22,9 @@ import {
   SelectValue,
   SelectTrigger,
 } from '@/components/ui/select';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 
-import { AREAS, INTERVENTION_TYPES } from './constants';
-
+import { AREAS, INTERVENTION_TYPES, FILTERS_INFO } from './constants';
 const FiltersCheckbox = ({
   type,
   title,
@@ -58,7 +63,22 @@ const FiltersCheckbox = ({
 
   return (
     <div className="flex flex-col space-y-2">
-      <span className="font-extrabold leading-5">{title}</span>
+      <div className="flex items-center space-x-2">
+        <span className="font-extrabold leading-5">{title}</span>
+        <Tooltip>
+          <TooltipTrigger className="flex items-center justify-center rounded-full p-2">
+            <InformationCircleIcon className="h-4 w-4 text-yellow-900 hover:text-yellow-800" />
+          </TooltipTrigger>
+
+          <TooltipContent className="max-w-[200px] p-2">
+            <p className="text-sm text-yellow-900">
+              <Markdown remarkPlugins={[remarkGfm]} className="prose text-xs">
+                {FILTERS_INFO[type]}
+              </Markdown>
+            </p>
+          </TooltipContent>
+        </Tooltip>
+      </div>
       <div className="flex flex-wrap items-center gap-2 text-gray-900">
         {options.map(({ id, label }) => (
           <div key={id} className="flex items-center space-x-2 pr-2 last:pr-0">
@@ -102,8 +122,22 @@ export default function FiltersContent() {
     <div className="flex flex-col space-y-6 text-sm">
       <FiltersCheckbox type="intervention" title="Intervention type" options={INTERVENTION_TYPES} />
       <div className="flex flex-col">
-        <span className="font-extrabold leading-5">Country</span>
+        <div className="flex items-center space-x-2">
+          <span className="font-extrabold leading-5">Country</span>
+          <Tooltip>
+            <TooltipTrigger className="flex items-center justify-center rounded-full p-2">
+              <InformationCircleIcon className="h-4 w-4 text-yellow-900 hover:text-yellow-800" />
+            </TooltipTrigger>
 
+            <TooltipContent className="max-w-[200px] p-2">
+              <p className="text-sm text-yellow-900">
+                <Markdown remarkPlugins={[remarkGfm]} className="prose text-xs">
+                  {FILTERS_INFO['country']}
+                </Markdown>
+              </p>
+            </TooltipContent>
+          </Tooltip>
+        </div>
         <Select onValueChange={handleSingleValueChange}>
           <SelectTrigger className="flex h-10 items-center justify-between rounded border border-gray-400 px-4">
             <div>
