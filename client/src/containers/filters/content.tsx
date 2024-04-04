@@ -67,7 +67,7 @@ const FiltersCheckbox = ({
         <span className="font-extrabold leading-5">{title}</span>
         <Tooltip>
           <TooltipTrigger className="flex items-center justify-center rounded-full p-2">
-            <InformationCircleIcon className="h-4 w-4 text-yellow-900" />
+            <InformationCircleIcon className="h-4 w-4 text-yellow-900 hover:text-yellow-800" />
           </TooltipTrigger>
 
           <TooltipContent className="max-w-[200px] p-2">
@@ -126,7 +126,7 @@ export default function FiltersContent() {
           <span className="font-extrabold leading-5">Country</span>
           <Tooltip>
             <TooltipTrigger className="flex items-center justify-center rounded-full p-2">
-              <InformationCircleIcon className="h-4 w-4 text-yellow-900" />
+              <InformationCircleIcon className="h-4 w-4 text-yellow-900 hover:text-yellow-800" />
             </TooltipTrigger>
 
             <TooltipContent className="max-w-[200px] p-2">
