@@ -211,7 +211,7 @@ export default function CountryDetailPanel() {
                   className="flex h-10 items-center justify-between border-b-2 border-dotted border-green-50 py-4 first:border-t-2"
                 >
                   <p className="text-xs font-medium uppercase text-gray-500">
-                    {title} ({unitValue})
+                    {title} <span className="normal-case">({unitValue})</span>
                   </p>
                   <div className="flex items-end space-x-1">
                     <p className="text-sm text-yellow-900">
@@ -261,7 +261,12 @@ export default function CountryDetailPanel() {
             <div className="flex flex-col space-y-2">
               <div className="w-full rounded-xl bg-white p-4 shadow-sm">
                 <div className="flex items-center justify-between">
-                  <h3 className="text-base text-green-800">Total funding (USD)</h3>
+                  <h3 className="text-base text-green-800">
+                    Total funding{' '}
+                    {indicators.country_funding.unit && (
+                      <span>({indicators.country_funding.unit})</span>
+                    )}
+                  </h3>
                   <Tooltip>
                     <TooltipTrigger className="flex items-center justify-center rounded-full p-2 hover:bg-yellow-50 data-[state=open]:bg-yellow-50">
                       <Info className="text-green-800" size={20} />
@@ -283,7 +288,7 @@ export default function CountryDetailPanel() {
               </div>
 
               <div className="w-full rounded-xl bg-white p-4 shadow-sm">
-                <div className="flex items-center justify-between pb-6">
+                <div className="flex items-center justify-between pb-2">
                   <h3 className="text-base text-green-800">Total intervention area</h3>
                   <Tooltip>
                     <TooltipTrigger className="flex items-center justify-center rounded-full p-2 hover:bg-yellow-50 data-[state=open]:bg-yellow-50">
@@ -314,7 +319,7 @@ export default function CountryDetailPanel() {
                         <div
                           className="h-2 rounded-3xl bg-[#FFCC73]"
                           style={{
-                            width: !!indicators[value]
+                            width: !!indicators[value].value
                               ? `${
                                   (indicators[value].value * 100) /
                                   indicators.intervention_area_total['value']

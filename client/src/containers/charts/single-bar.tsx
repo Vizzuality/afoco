@@ -5,13 +5,20 @@ import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip
 export default function SingleBar({
   data,
 }: {
-  data: { total_funding: number; afoco_funding: number; national_funding: number };
+  data: {
+    unit: string;
+    value: {
+      total_funding: number;
+      afoco_funding: number;
+      national_funding: number;
+    };
+  };
 }) {
   return (
     data && (
       <>
         <p className="py-4 text-3xl font-extrabold">
-          {formatCompactNumber(data.total_funding || 0)}
+          {formatCompactNumber(data['value'].total_funding || 0)}
         </p>
 
         <div className="flex h-10 w-full rounded-[4px]">
@@ -20,15 +27,17 @@ export default function SingleBar({
               <div
                 className="h-full cursor-pointer bg-[#70CCB0]"
                 style={{
-                  width: `${(data.afoco_funding * 100) / data.total_funding}%`,
+                  width: `${(data['value'].afoco_funding * 100) / data['value'].total_funding}%`,
                 }}
               />
             </TooltipTrigger>
 
             <TooltipContent side="top" align="end">
               <div className="flex flex-col items-center p-2 text-base">
-                <p>{formatCompactNumber(data.afoco_funding || 0)}</p>
-                <p>{((data.afoco_funding * 100) / data.total_funding).toFixed()}%</p>
+                <p>{formatCompactNumber(data['value'].afoco_funding || 0)}</p>
+                <p>
+                  {((data['value'].afoco_funding * 100) / data['value'].total_funding).toFixed()}%
+                </p>
               </div>
             </TooltipContent>
           </Tooltip>
@@ -38,14 +47,17 @@ export default function SingleBar({
               <div
                 className="h-full cursor-pointer bg-[#FFCC73]"
                 style={{
-                  width: `${(data.national_funding * 100) / data.total_funding}%`,
+                  width: `${(data['value'].national_funding * 100) / data['value'].total_funding}%`,
                 }}
               />
             </TooltipTrigger>
             <TooltipContent side="top" align="end">
               <div className="flex flex-col items-center p-2 text-base">
-                <p>{formatCompactNumber(data.national_funding || 0)}</p>
-                <p>{((data.national_funding * 100) / data.total_funding).toFixed()}%</p>
+                <p>{formatCompactNumber(data['value'].national_funding || 0)}</p>
+                <p>
+                  {((data['value'].national_funding * 100) / data['value'].total_funding).toFixed()}
+                  %
+                </p>
               </div>
             </TooltipContent>
           </Tooltip>

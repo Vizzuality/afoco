@@ -56,7 +56,10 @@ export default function Stats() {
           <div className="flex flex-col space-y-2">
             <div className="w-full rounded-xl bg-white p-4 shadow-sm">
               <div className="flex items-center justify-between">
-                <h3 className="text-base text-green-800">Total projects value (USD)</h3>
+                <h3 className="text-base text-green-800">
+                  Total funding{' '}
+                  {data.project_funding.unit && <span>({data.project_funding.unit})</span>}
+                </h3>
                 <Tooltip>
                   <TooltipTrigger className="flex items-center justify-center rounded-full p-2 hover:bg-yellow-50 data-[state=open]:bg-yellow-50">
                     <Info className="text-green-800" size={20} />
@@ -71,7 +74,7 @@ export default function Stats() {
                   </TooltipContent>
                 </Tooltip>
               </div>
-              <SingleBar data={data?.project_funding['value']} />
+              <SingleBar data={data?.project_funding} />
             </div>
           </div>
           <div className="flex flex-col space-y-2">
