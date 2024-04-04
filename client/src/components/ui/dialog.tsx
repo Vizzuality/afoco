@@ -48,17 +48,16 @@ const DialogContent = React.forwardRef<
       {...props}
     >
       {children}
-      <DialogPrimitive.Close className="ring-offset-background focus:ring-ring data-[state=open]:bg-accent absolute right-6 top-6 rounded-sm opacity-70 transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:text-green-900">
-        <X className="h-4 w-4 text-yellow-400" />
-        <span className="sr-only">Close</span>
-      </DialogPrimitive.Close>
     </DialogPrimitive.Content>
   </DialogPortal>
 ));
 DialogContent.displayName = DialogPrimitive.Content.displayName;
 
 const DialogHeader = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => (
-  <div className={cn('flex flex-col space-y-1.5 text-center sm:text-left', className)} {...props} />
+  <div
+    className={cn('flex flex-col items-center space-y-1.5 text-center sm:text-left', className)}
+    {...props}
+  />
 );
 DialogHeader.displayName = 'DialogHeader';
 
@@ -76,16 +75,25 @@ const DialogTitle = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Title>,
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Title>
 >(({ className, children, ...props }, ref) => (
-  <div className="w-full space-y-4 pb-6">
-    <DialogPrimitive.Title
-      ref={ref}
-      className={cn('relative w-full text-lg font-semibold leading-none tracking-tight', className)}
-      {...props}
-    >
-      {children}
-    </DialogPrimitive.Title>
-    <div className="absolute left-0 right-0 h-0.5 bg-gray-100" />
-  </div>
+  <>
+    <div className="flex h-16 w-full items-center pb-6">
+      <DialogPrimitive.Title
+        ref={ref}
+        className={cn(
+          'relative w-full text-lg font-semibold leading-none tracking-tight',
+          className
+        )}
+        {...props}
+      >
+        {children}
+      </DialogPrimitive.Title>
+      <DialogPrimitive.Close className="ring-offset-background focus:ring-ring data-[state=open]:bg-accent rounded-sm opacity-70 transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:text-green-900">
+        <X className="h-4 w-4 text-yellow-400" />
+        <span className="sr-only">Close</span>
+      </DialogPrimitive.Close>
+    </div>
+    <div className="absolute left-0 right-0 top-16 h-0.5 bg-gray-100" />
+  </>
 ));
 DialogTitle.displayName = DialogPrimitive.Title.displayName;
 
