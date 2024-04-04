@@ -172,10 +172,7 @@ export default function ProjectsList() {
       </div>
 
       <FiltersSelected />
-      <p className="pt-4 text-xs text-gray-500">
-        All <span className="rounded-xl bg-yellow-200 px-1 text-yellow-700">{data?.length}</span>{' '}
-        projects
-      </p>
+
       <ContentLoader
         data={data}
         isPlaceholderData={false}
@@ -184,6 +181,10 @@ export default function ProjectsList() {
         isError={isError}
         loaderClassName="mt-28"
       >
+        <p className="pt-4 text-xs text-gray-500">
+          All <span className="rounded-xl bg-yellow-200 px-1 text-yellow-700">{data?.length}</span>{' '}
+          projects
+        </p>
         <ScrollArea
           className={cn({
             'h-[67vh] 2xl:h-[73vh]': true,
