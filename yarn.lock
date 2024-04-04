@@ -2034,7 +2034,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@heroicons/react@npm:^2.1.3":
+"@heroicons/react@npm:2.1.3":
   version: 2.1.3
   resolution: "@heroicons/react@npm:2.1.3"
   peerDependencies:
@@ -7277,9 +7277,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "afoco@workspace:."
   dependencies:
-    "@heroicons/react": ^2.1.3
-    heroicons: ^2.1.3
-    heroicons-react: ^1.4.1
+    "@heroicons/react": 2.1.3
   languageName: unknown
   linkType: soft
 
@@ -12865,22 +12863,6 @@ __metadata:
   version: 6.2.0
   resolution: "helmet@npm:6.2.0"
   checksum: cf01e024244205bd10d70fd2f3874244b72ba37a10a4604e4383bbd63fe1438ee24bae7672c4ee5c5e16e6cd88ac58003274034fab0ba199761471555a322b37
-  languageName: node
-  linkType: hard
-
-"heroicons-react@npm:^1.4.1":
-  version: 1.4.1
-  resolution: "heroicons-react@npm:1.4.1"
-  peerDependencies:
-    react: ">=16.13"
-  checksum: b27892ee0f0d48951b60b892d6d7258c4e41665f0122e07f0a82dca56502f189ffcc1d2bbcb86a139ef5a7a9197bddf614b32e98c097addb528974f2ecf4bce2
-  languageName: node
-  linkType: hard
-
-"heroicons@npm:^2.1.3":
-  version: 2.1.3
-  resolution: "heroicons@npm:2.1.3"
-  checksum: 5b84398ebff5bd914b07d184c7b9b11d9c22dff9fd545bad2b055289eb08ed1bd6333f5759c12849d79a255b6c0a6ec4d5db87ea53289107db75a5bb38d3af8d
   languageName: node
   linkType: hard
 
