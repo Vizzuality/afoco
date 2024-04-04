@@ -36,8 +36,11 @@ export default function ProjectItem({ data }: { data: ProjectListResponseDataIte
           height={300}
           className="w-1/3"
         />
-        <div className="flex w-2/3 flex-col space-y-2">
-          <h3 className="line-clamp-4 text-sm font-bold text-yellow-900" id="project-detail-title">
+        <div className="flex w-2/3 flex-col justify-between">
+          <h3
+            className="line-clamp-4 text-left text-sm font-bold text-yellow-900"
+            id="project-detail-title"
+          >
             {data?.attributes?.name}
           </h3>
           <div className="text-2xs flex space-x-6 pb-2.5 text-gray-500">
