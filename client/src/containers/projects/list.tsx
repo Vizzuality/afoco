@@ -1,7 +1,11 @@
 'use client';
-import { useState } from 'react';
 
+import { useCallback, useState, MouseEvent } from 'react';
+
+import { useSetAtom } from 'jotai';
 import { Search, X } from 'lucide-react';
+
+import { hoveredProjectListAtom } from '@/store';
 
 import { useGetProjects } from '@/types/generated/project';
 
@@ -18,6 +22,7 @@ import FiltersSelected from '../filters/selected';
 export default function ProjectsList() {
   const [searchValue, setSearchValue] = useState<string | null>(null);
   const [filtersSettings] = useSyncFilters();
+  const setHoveredProjectList = useSetAtom(hoveredProjectListAtom);
 
   const { data, isFetching, isFetched, isError } = useGetProjects(
     {
@@ -124,6 +129,14 @@ export default function ProjectsList() {
     }
   );
 
+  const handleHover = useCallback(
+    (e: MouseEvent<HTMLElement>) => {
+      const currentValue = e.currentTarget.getAttribute('data-value');
+      setHoveredProjectList(currentValue);
+    },
+    [setHoveredProjectList]
+  );
+
   return (
     <ContentLoader
       data={data}
@@ -158,7 +171,18 @@ export default function ProjectsList() {
           <Filters nrResults={data?.length as number} />
         </div>
         <FiltersSelected />
-        {data && data.map((project) => <ProjectItem key={project?.id} data={project} />)}
+        {data &&
+          data.map((project) => (
+            <button
+              type="button"
+              key={project?.id}
+              data-value={project?.attributes?.project_code}
+              onMouseEnter={handleHover}
+              onMouseLeave={() => setHoveredProjectList(null)}
+            >
+              <ProjectItem data={project} />
+            </button>
+          ))}
       </div>
     </ContentLoader>
   );
