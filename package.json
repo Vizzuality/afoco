@@ -15,8 +15,5 @@
   },
   "engines": {
     "node": ">= 18.17"
-  },
-  "dependencies": {
-    "@heroicons/react": "2.1.3"
   }
 }
