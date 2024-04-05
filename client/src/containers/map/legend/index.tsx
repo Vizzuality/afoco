@@ -37,7 +37,7 @@ const MapLegends = ({ className = '' }) => {
       {openLegend && (
         <Legend
           className={cn(
-            'max-h-[calc(100vh_-_theme(space.16)_-_theme(space.6)_-_theme(space.48))]',
+            'animate-in fade-in-50 max-h-[calc(100vh_-_theme(space.16)_-_theme(space.6)_-_theme(space.48))] duration-300',
             className
           )}
           sortable={{
