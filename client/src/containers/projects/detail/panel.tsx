@@ -141,17 +141,18 @@ export default function ProjectDetailPanel() {
   }
 
   return (
-    <div className="h-full rounded-3xl bg-neutral-50 py-6 pb-6">
+    <div className="h-full rounded-3xl bg-neutral-50 py-6">
       <div className="absolute left-0 top-0 w-full">
         {data && indicators && (
           <div className="relative">
             <Image
-              src="/images/projects/detail/placeholder.png"
+              src={data.main_image?.data?.attributes?.url ?? '/images/projects/placeholder.png'}
               alt="AFOCO"
               width={300}
               height={300}
-              className="w-full rounded-t-[24px]"
+              className="h-72 w-full rounded-t-[24px] object-cover"
             />
+
             <h2 className="absolute bottom-6 mx-6 text-xl font-semibold text-white">
               {data?.name}
             </h2>
@@ -208,26 +209,6 @@ export default function ProjectDetailPanel() {
               <p className="text-sm text-yellow-900">
                 {data?.countries?.data?.map((d) => d?.attributes?.name).join(', ')}
               </p>
-
-              {/* <Tooltip>
-              <TooltipTrigger asChild>
-                <p className="cursor-pointer text-sm text-yellow-900 underline hover:no-underline">
-                  {value}
-                </p>
-              </TooltipTrigger>
-              <TooltipContent side={'top'} sideOffset={4} className="rounded-lg border-none p-4">
-                <ol className="text-sm text-yellow-900">
-                  {PANEL_OVERVIEW_ITEMS.find((item) => item.title === title)?.items?.map(
-                    (item, idx) => (
-                      <li key={idx}>
-                        {idx + 1}. {item.title}
-                      </li>
-                    )
-                  )}
-                </ol>
-                <TooltipArrow className="fill-white" />
-              </TooltipContent>
-            </Tooltip> */}
             </div>
             <div className="flex justify-between border-b-2 border-dotted border-gray-400 py-4">
               <p className="text-xs font-medium uppercase text-gray-500">Duration</p>
@@ -246,38 +227,27 @@ export default function ProjectDetailPanel() {
           </div>
           <div className="flex flex-col space-y-2 pt-6">
             <h4 className="text-xs font-medium uppercase text-yellow-900">Project Gallery</h4>
-            <div className="flex space-x-1">
+            <div className="flex space-x-1 border border-transparent">
               <Image
-                src="/images/projects/detail/placeholder.png"
+                src={
+                  data?.gallery?.data?.[0]?.attributes?.url ?? '/images/projects/placeholder.png'
+                }
                 alt="AFOCO"
-                width={170}
-                height={170}
+                width={165}
+                height={165}
+                className="h-full w-1/2 object-cover"
               />
               <div className="grid grid-cols-2 grid-rows-2 gap-1">
-                <Image
-                  src="/images/projects/detail/placeholder.png"
-                  alt="AFOCO"
-                  width={86}
-                  height={86}
-                />
-                <Image
-                  src="/images/projects/detail/placeholder.png"
-                  alt="AFOCO"
-                  width={86}
-                  height={86}
-                />
-                <Image
-                  src="/images/projects/detail/placeholder.png"
-                  alt="AFOCO"
-                  width={86}
-                  height={86}
-                />
-                <Image
-                  src="/images/projects/detail/placeholder.png"
-                  alt="AFOCO"
-                  width={86}
-                  height={86}
-                />
+                {data?.gallery?.data?.slice(1).map((image, idx) => (
+                  <Image
+                    key={idx}
+                    src={image?.attributes?.url ?? '/images/projects/placeholder.png'}
+                    alt="AFOCO"
+                    width={86}
+                    height={86}
+                    className="h-full w-full object-cover"
+                  />
+                ))}
               </div>
             </div>
             <p className="pb-16 text-sm text-gray-500">

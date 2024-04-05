@@ -34,8 +34,8 @@ export default function FiltersSelected() {
   return (
     <div className="space-y-2">
       {filtersToDisplay && !!filtersToDisplay.length && (
-        <div className="space-y-2 text-xs text-gray-500">
-          <span className="-tracking-wide">Filtered by</span>
+        <div className="space-y-2 px-5 text-xs text-gray-500">
+          <span className="px-1 -tracking-wide">Filtered by</span>
           <ul className="flex flex-wrap gap-2">
             {filtersToDisplay.map((filter) => (
               <li key={Object.keys(filter)[0]}>
