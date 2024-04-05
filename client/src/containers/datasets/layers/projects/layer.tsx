@@ -11,7 +11,7 @@ import { useLayers } from './hooks';
 const SOURCE: SourceProps = {
   promoteId: 'project_code',
   type: 'vector',
-  url: 'mapbox://afoco.1xqij8g6',
+  url: 'mapbox://afoco.di5ddx18',
   id: 'projects',
 };
 
