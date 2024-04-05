@@ -9,12 +9,14 @@ const MapLegendItem = ({ settings }: { settings: LayerSettings }) => {
   const LegendDetailComponent = LEGENDS[id];
 
   return (
-    <div
-      key={id}
-      className="shadow-legend flex w-full items-center justify-between rounded bg-white px-4 py-2"
-    >
-      {LegendDetailComponent && <LegendDetailComponent settings={settings} />}
-    </div>
+    LegendDetailComponent && (
+      <div
+        key={id}
+        className="shadow-legend flex w-full items-center justify-between rounded bg-white px-4 py-2"
+      >
+        <LegendDetailComponent settings={settings} />
+      </div>
+    )
   );
 };
 

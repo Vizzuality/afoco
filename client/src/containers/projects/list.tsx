@@ -146,39 +146,45 @@ export default function ProjectsList() {
     .flat().length;
 
   return (
-    <ContentLoader
-      data={data}
-      isPlaceholderData={false}
-      isFetching={isFetching}
-      isFetched={isFetched}
-      isError={isError}
-      loaderClassName="mt-28"
-    >
-      <div className="flex flex-col space-y-2">
-        <div className="mx-1 mt-1 flex justify-between space-x-2">
-          <div className="relative w-full">
-            <Input
-              type="search"
-              placeholder="Search project by name"
-              className="border-none bg-gray-100 pl-11 placeholder:text-gray-500"
-              onChange={(e) => setSearchValue(e.target.value)}
-              value={searchValue || ''}
-            />
-            <Search size={24} className="absolute left-2 top-2" />
-            {!!searchValue && (
-              <button
-                type="button"
-                className="absolute right-3 top-3"
-                aria-label="reset-search"
-                onClick={() => setSearchValue(null)}
-              >
-                <X className="h-3.5 w-3.5 cursor-pointer text-yellow-900" />
-              </button>
-            )}
-          </div>
-          <Filters nrResults={data?.length as number} />
+    <div className="no-scrollbar flex max-h-[75vh] flex-col space-y-2 overflow-y-auto">
+      <div className="ml-1 mt-1 flex justify-between space-x-2">
+        <div className="relative w-full">
+          <Input
+            type="search"
+            placeholder="Search project"
+            className="border-none bg-gray-100 pl-11 placeholder:text-gray-500"
+            onChange={(e) => setSearchValue(e.target.value)}
+            value={searchValue || ''}
+          />
+          <Search size={24} className="absolute left-2 top-2" />
+          {!!searchValue && (
+            <button
+              type="button"
+              className="absolute right-3 top-3"
+              aria-label="reset-search"
+              onClick={() => setSearchValue(null)}
+            >
+              <X className="h-3.5 w-3.5 cursor-pointer text-yellow-900" />
+            </button>
+          )}
         </div>
-        <FiltersSelected />
+        <Filters nrResults={data?.length as number} />
+      </div>
+
+      <FiltersSelected />
+
+      <ContentLoader
+        data={data}
+        isPlaceholderData={false}
+        isFetching={isFetching}
+        isFetched={isFetched}
+        isError={isError}
+        loaderClassName="mt-28"
+      >
+        <p className="py-4 text-xs text-gray-500">
+          All <span className="rounded-xl bg-yellow-200 px-1 text-yellow-700">{data?.length}</span>{' '}
+          projects
+        </p>
         <ScrollArea
           className={cn({
             'h-[67vh] 2xl:h-[73vh]': true,
@@ -201,7 +207,7 @@ export default function ProjectsList() {
               ))}
           </div>
         </ScrollArea>
-      </div>
-    </ContentLoader>
+      </ContentLoader>
+    </div>
   );
 }
