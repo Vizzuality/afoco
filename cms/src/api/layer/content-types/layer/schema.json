@@ -27,14 +27,14 @@
     "legend_config": {
       "type": "json"
     },
-    "description": {
-      "type": "string"
-    },
-    "info": {
-      "type": "json"
-    },
     "slug": {
       "type": "string"
+    },
+    "description": {
+      "type": "richtext"
+    },
+    "dialog": {
+      "type": "richtext"
     }
   }
 }
