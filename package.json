@@ -15,8 +15,5 @@
   },
   "engines": {
     "node": ">= 18.17"
-  },
-  "dependencies": {
-    "@radix-ui/react-scroll-area": "1.0.5"
   }
 }
