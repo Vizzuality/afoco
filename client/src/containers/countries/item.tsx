@@ -40,6 +40,7 @@ export default function CountryItem({ data }: { data: CountryListResponseDataIte
 
         <h3>{data.attributes?.name}</h3>
       </div>
+
       {projectsCountIndicator?.attributes && (
         <p>
           <span className="font-semibold">
