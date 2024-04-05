@@ -4,7 +4,7 @@ import('./src/env.mjs');
 const nextConfig = {
   transpilePackages: ['@serverless-app-scaffold/types', 'lucide-react', 'hi'],
   images: {
-    domains: ['api.mapbox.com'],
+    domains: ['api.mapbox.com', 'afoco-staging-assets.s3.ap-northeast-2.amazonaws.com'],
   },
   async redirects() {
     return [
