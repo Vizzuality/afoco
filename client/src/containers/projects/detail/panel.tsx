@@ -28,6 +28,7 @@ import Share from '@/containers/share';
 import { Button } from '@/components/ui/button';
 import { Drawer, DrawerClose, DrawerContent, DrawerTrigger } from '@/components/ui/drawer';
 import ContentLoader from '@/components/ui/loader';
+import { ScrollArea } from '@/components/ui/scroll-area';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 
 import ProjectDashboard from './dashboard';
@@ -140,7 +141,7 @@ export default function ProjectDetailPanel() {
   }
 
   return (
-    <div className="no-scrollbar h-full overflow-x-hidden rounded-3xl bg-neutral-50 p-6 pb-40">
+    <div className="h-full rounded-3xl bg-neutral-50 p-6 pb-40">
       <div className="absolute left-0 top-0 w-full">
         {data && indicators && (
           <div className="relative">
@@ -190,7 +191,7 @@ export default function ProjectDetailPanel() {
         isError={isError || indicatorIsFetched}
         loaderClassName="mt-52"
       >
-        <div className="mt-72 flex flex-col space-y-8">
+        <ScrollArea className="mt-64 flex flex-col space-y-8">
           {data?.description && (
             <p className="pt-2 text-sm text-gray-500">
               <DescriptionWithoutMarkdown description={data?.description} />
@@ -202,10 +203,6 @@ export default function ProjectDetailPanel() {
               <p className="text-xs font-medium uppercase text-gray-500">Status</p>
               <p className="text-sm text-yellow-900">{data?.status}</p>
             </div>
-            {/* <div className="flex justify-between border-b-2 border-dotted border-gray-400 py-4">
-            <p className="text-xs font-medium uppercase text-gray-500">Priority areas</p>
-            <p className="text-sm text-yellow-900">{}</p>
-          </div> */}
             <div className="flex justify-between border-b-2 border-dotted border-gray-400 py-4">
               <p className="text-xs font-medium uppercase text-gray-500">Location</p>
               <p className="text-sm text-yellow-900">
@@ -247,7 +244,7 @@ export default function ProjectDetailPanel() {
               </p>
             </div>
           </div>
-          <div className="flex flex-col space-y-2">
+          <div className="flex flex-col space-y-2 pt-6">
             <h4 className="text-xs font-medium uppercase text-yellow-900">Project Gallery</h4>
             <div className="flex space-x-1">
               <Image
@@ -290,7 +287,7 @@ export default function ProjectDetailPanel() {
               </a>
             </p>
           </div>
-        </div>
+        </ScrollArea>
         <Drawer>
           <DrawerTrigger asChild className="group">
             <Button

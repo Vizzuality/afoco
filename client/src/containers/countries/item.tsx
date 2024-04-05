@@ -40,10 +40,14 @@ export default function CountryItem({ data }: { data: CountryListResponseDataIte
 
         <h3>{data.attributes?.name}</h3>
       </div>
-      <p>
-        <span className="font-semibold">{projectsCountIndicator?.attributes?.value as number}</span>{' '}
-        {projectsCountIndicator?.attributes?.value === 1 ? 'project' : 'projects'}
-      </p>
+      {projectsCountIndicator?.attributes && (
+        <p>
+          <span className="font-semibold">
+            {projectsCountIndicator?.attributes?.value as number}
+          </span>{' '}
+          {projectsCountIndicator?.attributes?.value === 1 ? 'project' : 'projects'}
+        </p>
+      )}
     </Link>
   );
 }
