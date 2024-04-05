@@ -141,7 +141,7 @@ export default function ProjectDetailPanel() {
   }
 
   return (
-    <div className="h-full rounded-3xl bg-neutral-50 p-6 pb-40">
+    <div className="h-full rounded-3xl bg-neutral-50 py-6 pb-6">
       <div className="absolute left-0 top-0 w-full">
         {data && indicators && (
           <div className="relative">
@@ -191,7 +191,7 @@ export default function ProjectDetailPanel() {
         isError={isError || indicatorIsFetched}
         loaderClassName="mt-52"
       >
-        <ScrollArea className="mt-64 flex flex-col space-y-8">
+        <ScrollArea className="mt-64 flex h-[58vh] flex-col space-y-8 px-5 xl:h-[57vh]">
           {data?.description && (
             <p className="pt-2 text-sm text-gray-500">
               <DescriptionWithoutMarkdown description={data?.description} />
@@ -280,7 +280,7 @@ export default function ProjectDetailPanel() {
                 />
               </div>
             </div>
-            <p className="text-sm text-gray-500">
+            <p className="pb-16 text-sm text-gray-500">
               If you have pictures of this project to share, please sent them to{' '}
               <a className="underline hover:no-underline" href="mailto:email@afoco.com">
                 email@afoco.com

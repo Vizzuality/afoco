@@ -147,7 +147,7 @@ export default function ProjectsList() {
 
   return (
     <div className="no-scrollbar flex max-h-[75vh] flex-col space-y-2 overflow-y-auto">
-      <div className="ml-1 mt-1 flex justify-between space-x-2">
+      <div className="ml-1 mt-1 flex justify-between space-x-2 px-5">
         <div className="relative w-full">
           <Input
             type="search"
@@ -181,13 +181,13 @@ export default function ProjectsList() {
         isError={isError}
         loaderClassName="mt-28"
       >
-        <p className="py-4 text-xs text-gray-500">
+        <p className="px-6 py-4 text-xs text-gray-500">
           All <span className="rounded-xl bg-yellow-200 px-1 text-yellow-700">{data?.length}</span>{' '}
           projects
         </p>
         <ScrollArea
           className={cn({
-            'h-[67vh] 2xl:h-[73vh]': true,
+            'h-[67vh] px-5 2xl:h-[73vh]': true,
             'h-[60vh] 2xl:h-[68vh]': filtersLength >= 1,
             'h-[56vh] 2xl:h-[64vh]': filtersLength >= 2,
           })}
