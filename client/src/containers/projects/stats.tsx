@@ -53,8 +53,8 @@ export default function Stats() {
     >
       {data && (
         <div className="flex flex-col space-y-2">
-          <h3 className="mb-2 text-lg font-extrabold text-gray-400">Overview</h3>
-          <ScrollArea className="h-[69vh] 2xl:h-[75vh]">
+          <h3 className="mb-2 px-5 text-lg font-extrabold text-gray-400">Overview</h3>
+          <ScrollArea className="h-[69vh] px-5 2xl:h-[75vh]">
             <div className="flex flex-col space-y-2">
               <div className="flex flex-col space-y-2">
                 <div className="w-full rounded-xl bg-white p-4 shadow-sm">

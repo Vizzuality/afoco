@@ -14,10 +14,10 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 export default function Projects() {
   return (
     <Panel>
-      <div className="space-y-5 px-5 py-7">
-        <h2 className="text-3xl font-normal">Projects</h2>
+      <div className="space-y-5 py-7">
+        <h2 className="px-5 text-3xl font-normal">Projects</h2>
         <Tabs defaultValue="statistics">
-          <TabsList className="w-full">
+          <TabsList className="w-full px-5">
             <TabsTrigger
               value="statistics"
               className="rounded-l-lg"

@@ -125,8 +125,8 @@ export default function CountryDetailPanel() {
   }
 
   return (
-    <div className="p-5 pt-0">
-      <div className="bg-background absolute left-0 right-0 top-0 z-10 flex w-full justify-between rounded-t-3xl px-5 pt-4">
+    <div className="py-5 pt-0">
+      <div className="bg-background absolute left-0 right-0 top-0 z-10 flex w-full justify-between rounded-t-3xl px-5 px-5 pt-4">
         <Link
           href={`/countries${queryParams}`}
           className="flex items-center space-x-3 rounded px-2 py-1 text-xs text-yellow-900 transition-all hover:bg-yellow-100"
@@ -160,7 +160,7 @@ export default function CountryDetailPanel() {
         isError={isError || indicatorIsFetched}
         loaderClassName="mt-52"
       >
-        <ScrollArea className="h-[94vh] 2xl:h-[96vh]">
+        <ScrollArea className="h-[94vh] px-5 2xl:h-[96vh]">
           <div className="mt-16 flex items-center space-x-3 pt-7">
             {data?.data?.attributes?.iso && (
               <Flag code={data?.data?.attributes.iso} height="40" width="48" className="rounded" />

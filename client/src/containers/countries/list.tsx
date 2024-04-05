@@ -27,7 +27,7 @@ export default function CountriesList() {
 
   return (
     <div className="flex flex-col space-y-8">
-      <div className="relative">
+      <div className="relative px-5">
         <Input
           type="search"
           placeholder="Search country"
@@ -35,7 +35,7 @@ export default function CountriesList() {
           onChange={(e) => setSearchValue(e.target.value)}
           value={searchValue || ''}
         />
-        <Search size={24} className="absolute left-1 top-2" />
+        <Search size={24} className="absolute left-6 top-2" />
         {!!searchValue && (
           <button
             type="button"
@@ -56,8 +56,8 @@ export default function CountriesList() {
         loaderClassName="mt-52"
       >
         <div className="flex flex-col space-y-2">
-          <p className="text-xs text-gray-500">Select a country</p>
-          <ScrollArea className="h-[70vh] 2xl:h-[75vh]">
+          <p className="px-5 text-xs text-gray-500">Select a country</p>
+          <ScrollArea className="h-[70vh] px-5 2xl:h-[75vh]">
             <div className="flex flex-col space-y-1">
               {data?.data?.map((country) => (
                 <CountryItem key={country.id} data={country} />
