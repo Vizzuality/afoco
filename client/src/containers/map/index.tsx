@@ -59,6 +59,7 @@ export default function MapContainer() {
     popup: null,
     info: null,
   });
+  console.log(locationPopUp, 'locationPopUp');
   const { [id]: map } = useMap();
   const { push } = useRouter();
   const params = useParams<{ id: string }>();
@@ -141,8 +142,10 @@ export default function MapContainer() {
         sourceLayer: string,
         stateIdVar: any
       ) => {
+        console.log('stateIdVar', stateIdVar);
         if (layer && map) {
           setCursor('pointer');
+          console.log('layer', layer.properties);
           const projectCode = layer.properties?.project_code;
           setHoveredProjectMap(projectCode);
           setLocationPopUp({
@@ -232,6 +235,7 @@ export default function MapContainer() {
               <Popup
                 longitude={locationPopUp?.popup[1]}
                 latitude={locationPopUp?.popup[0]}
+                className="c-location-popup"
                 // onClose={() => removePopup('location')}
               >
                 {locationPopUp?.info}
