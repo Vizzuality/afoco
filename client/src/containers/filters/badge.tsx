@@ -8,7 +8,7 @@ import { useSyncFilters } from '@/hooks/datasets/sync-query';
 
 import type { FiltersType, FilterValues } from '@/containers/filters/types';
 
-import { CATEGORIES_FILTERS_DICTIONARY } from './constants';
+import { CATEGORIES_FILTERS_DICTIONARY, INTERVENTION_TYPES } from './constants';
 
 export default function FiltersBadge({
   category,
@@ -61,9 +61,13 @@ export default function FiltersBadge({
         className="flex items-center space-x-2 px-1"
         onClick={() => handleResetFilter(category as FiltersType, filterValue as FilterValues)}
       >
-        <div className="space-x-1">
+        <div className="space-x-1 text-[11px] xl:text-sm">
           <span>{CATEGORIES_FILTERS_DICTIONARY[category]}</span>
-          <span className="font-bold">{filterValue}</span>
+          <span className="font-bold">
+            {category === 'intervention'
+              ? INTERVENTION_TYPES.find((it) => it.id === filterValue)?.label
+              : filterValue}
+          </span>
         </div>
         <X className="h-2 w-2 fill-current stroke-yellow-900 text-yellow-900" />
       </button>
