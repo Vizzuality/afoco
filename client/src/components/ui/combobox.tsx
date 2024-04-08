@@ -6,6 +6,8 @@ import { Check } from 'lucide-react';
 
 import { cn } from '@/lib/classnames';
 
+import { FiltersType } from '@/containers/filters/types';
+
 import {
   Command,
   CommandEmpty,
@@ -18,10 +20,12 @@ import Search from '@/components/ui/search';
 
 export function Combobox({
   placeholder = 'Search',
+  type,
   options,
   onClick,
 }: {
   icon?: boolean;
+  type?: FiltersType;
   placeholder: string;
   options: Record<string, string>[];
   onClick?: (e: string) => void;
@@ -50,6 +54,7 @@ export function Combobox({
               <CommandItem
                 key={option.value}
                 value={option.value}
+                data-cy={`filter-${type}-${option.value}`}
                 onSelect={(currentValue) => {
                   setValue(option.value);
                   setOpen(false);
