@@ -59,8 +59,9 @@ export default function FiltersBadge({
     >
       <button
         type="button"
-        className="flex items-center space-x-2 px-1"
+        className="pointer-events-auto flex items-center space-x-2 px-1"
         onClick={() => handleResetFilter(category as FiltersType, filterValue as FilterValues)}
+        data-cy={`filters-remove-badge-${category}-${filterValue}`}
       >
         <div className="space-x-1 text-[11px] xl:text-sm">
           <span>{CATEGORIES_FILTERS_DICTIONARY[category]}</span>
