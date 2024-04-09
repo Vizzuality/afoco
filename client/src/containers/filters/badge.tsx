@@ -53,8 +53,7 @@ export default function FiltersBadge({
 
   return (
     <li
-      key={`${category}-${filterValue}`}
-      className="rounded-2xl border-yellow-500 bg-yellow-50 p-1 text-yellow-800"
+      className="rounded-2xl border-yellow-500 bg-yellow-50 px-1.5 py-1 text-yellow-800"
       data-cy={`filters-badge-${category}-${filterValue}`}
     >
       <button
@@ -63,7 +62,7 @@ export default function FiltersBadge({
         onClick={() => handleResetFilter(category as FiltersType, filterValue as FilterValues)}
         data-cy={`filters-remove-badge-${category}-${filterValue}`}
       >
-        <div className="space-x-1 text-[11px] xl:text-sm">
+        <div className="max-w-[328px] space-x-1 truncate text-left text-[11px] xl:text-sm">
           <span>{CATEGORIES_FILTERS_DICTIONARY[category]}</span>
           <span className="font-bold">
             {category === 'intervention'

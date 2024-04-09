@@ -55,6 +55,7 @@ const FiltersCheckbox = ({
             filtersToUpdate?.filter((f) => f !== e.currentTarget.id)
           : [e.currentTarget.id, ...filtersToUpdate];
         const update = { ...filtersSettings, [type]: updatedFilters };
+
         setFiltersToURL(update);
       }
     },
