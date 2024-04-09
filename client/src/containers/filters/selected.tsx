@@ -1,5 +1,7 @@
 'use client';
 
+import { useMemo } from 'react';
+
 import flatten from 'lodash-es/flatten';
 
 import { useSyncFilters } from '@/hooks/datasets/sync-query';
@@ -27,9 +29,9 @@ export default function FiltersSelected() {
 
   const hasMoreThanThree = filtersSettingsParsed.length > 3;
   const remainingFiltersCount = hasMoreThanThree ? filtersSettingsParsed.length - 3 : 0;
-  const filtersToDisplay = hasMoreThanThree
-    ? filtersSettingsParsed.slice(0, 3)
-    : filtersSettingsParsed;
+  const filtersToDisplay = useMemo(() => {
+    return hasMoreThanThree ? [...filtersSettingsParsed.slice(0, 3)] : filtersSettingsParsed;
+  }, [filtersSettingsParsed, hasMoreThanThree]);
 
   return (
     <div className="space-y-2">
@@ -37,8 +39,8 @@ export default function FiltersSelected() {
         <div className="space-y-2 px-5 text-xs text-gray-500">
           <span className="px-1 -tracking-wide">Filtered by</span>
           <ul className="flex flex-wrap gap-2">
-            {filtersToDisplay.map((filter) => (
-              <li key={Object.keys(filter)[0]}>
+            {filtersToDisplay.map((filter, idx) => (
+              <li key={idx}>
                 <FiltersBadge
                   category={Object.keys(filter)[0] as FiltersType}
                   filterValue={Object.values(filter)[0] as string}

@@ -53,7 +53,6 @@ export default function FiltersBadge({
 
   return (
     <li
-      key={`${category}-${filterValue}`}
       className="rounded-2xl border-yellow-500 bg-yellow-50 px-1.5 py-1 text-yellow-800"
       data-cy={`filters-badge-${category}-${filterValue}`}
     >
