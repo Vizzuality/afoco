@@ -629,10 +629,12 @@ a.mapboxgl-ctrl-logo.mapboxgl-compact {
 }
 
 
-#home-globe .mapboxgl-ctrl-logo {
-  display: none;
+
+
+.mapboxgl-ctrl-attrib {
+  font-size: 12px;
 }
 
-.mapboxgl-ctrl-attrib-inner {
-  display: none;
+.mapboxgl-ctrl.mapboxgl-ctrl-attrib {
+  margin: 0 22px 16px 0;
 }
