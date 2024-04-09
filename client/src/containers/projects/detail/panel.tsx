@@ -227,7 +227,7 @@ export default function ProjectDetailPanel() {
           </div>
           <div className="flex flex-col space-y-1 pt-6">
             <h4 className="pb-1 text-xs font-medium uppercase text-yellow-900">Project Gallery</h4>
-            {data?.gallery?.data?.length && (
+            {!!data?.gallery?.data?.length && (
               <>
                 <div className="flex h-32 space-x-1">
                   <Image
