@@ -9,6 +9,7 @@ import { useParams, useRouter } from 'next/navigation';
 
 import bbox from '@turf/bbox';
 import { useAtomValue, useSetAtom, useAtom } from 'jotai';
+import { MapboxGeoJSONFeature } from 'mapbox-gl';
 
 import { bboxAtom, hoveredProjectMapAtom, layersInteractiveIdsAtom, tmpBboxAtom } from '@/store';
 
@@ -52,7 +53,7 @@ export default function MapContainer() {
   const [locationPopUp, setLocationPopUp] = useState<{
     position: { x: number; y: number } | null;
     popup: number[] | null;
-    info: string;
+    info: string | null;
   }>({
     position: null,
     popup: null,
@@ -131,11 +132,15 @@ export default function MapContainer() {
 
   const handleMouseMove = useCallback(
     (e: MapLayerMouseEvent) => {
-      const findLayer = (layerId) => e?.features?.find(({ layer }) => layer.id === layerId);
+      const findLayer = (layerId: string) => e?.features?.find(({ layer }) => layer.id === layerId);
       const ProjectsLayer = findLayer('projects_circle');
       const ProjectsFillLayer = findLayer('projects_fill');
 
-      const handleLayerInteraction = (layer, sourceLayer, stateIdVar) => {
+      const handleLayerInteraction = (
+        layer: MapboxGeoJSONFeature | undefined,
+        sourceLayer: string,
+        stateIdVar: any
+      ) => {
         if (layer && map) {
           setCursor('pointer');
           const projectCode = layer.properties?.project_code;
