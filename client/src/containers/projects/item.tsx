@@ -30,13 +30,15 @@ export default function ProjectItem({ data }: { data: ProjectListResponseDataIte
         id={data?.attributes?.project_code}
       >
         <Image
-          src="/images/projects/placeholder.png"
+          src={
+            data.attributes?.main_image?.data?.attributes?.url || '/images/projects/placeholder.png'
+          }
           alt="Project Image"
           width={350}
           height={300}
-          className="w-1/3"
+          className="w-28 rounded-lg object-cover"
         />
-        <div className="flex w-2/3 flex-col justify-between">
+        <div className="flex h-32 w-2/3 flex-col justify-between">
           <h3
             className="line-clamp-4 text-left text-sm font-bold text-yellow-900"
             id="project-detail-title"

@@ -141,17 +141,18 @@ export default function ProjectDetailPanel() {
   }
 
   return (
-    <div className="h-full rounded-3xl bg-neutral-50 py-6 pb-6">
+    <div className="h-full rounded-3xl bg-neutral-50 py-6">
       <div className="absolute left-0 top-0 w-full">
         {data && indicators && (
           <div className="relative">
             <Image
-              src="/images/projects/detail/placeholder.png"
+              src={data.main_image?.data?.attributes?.url ?? '/images/projects/placeholder.png'}
               alt="AFOCO"
               width={300}
               height={300}
-              className="w-full rounded-t-[24px]"
+              className="h-72 w-full rounded-t-[24px] object-cover"
             />
+
             <h2 className="absolute bottom-6 mx-6 text-xl font-semibold text-white">
               {data?.name}
             </h2>
@@ -208,26 +209,6 @@ export default function ProjectDetailPanel() {
               <p className="text-sm text-yellow-900">
                 {data?.countries?.data?.map((d) => d?.attributes?.name).join(', ')}
               </p>
-
-              {/* <Tooltip>
-              <TooltipTrigger asChild>
-                <p className="cursor-pointer text-sm text-yellow-900 underline hover:no-underline">
-                  {value}
-                </p>
-              </TooltipTrigger>
-              <TooltipContent side={'top'} sideOffset={4} className="rounded-lg border-none p-4">
-                <ol className="text-sm text-yellow-900">
-                  {PANEL_OVERVIEW_ITEMS.find((item) => item.title === title)?.items?.map(
-                    (item, idx) => (
-                      <li key={idx}>
-                        {idx + 1}. {item.title}
-                      </li>
-                    )
-                  )}
-                </ol>
-                <TooltipArrow className="fill-white" />
-              </TooltipContent>
-            </Tooltip> */}
             </div>
             <div className="flex justify-between border-b-2 border-dotted border-gray-400 py-4">
               <p className="text-xs font-medium uppercase text-gray-500">Duration</p>
@@ -244,42 +225,48 @@ export default function ProjectDetailPanel() {
               </p>
             </div>
           </div>
-          <div className="flex flex-col space-y-2 pt-6">
-            <h4 className="text-xs font-medium uppercase text-yellow-900">Project Gallery</h4>
-            <div className="flex space-x-1">
-              <Image
-                src="/images/projects/detail/placeholder.png"
-                alt="AFOCO"
-                width={170}
-                height={170}
-              />
-              <div className="grid grid-cols-2 grid-rows-2 gap-1">
-                <Image
-                  src="/images/projects/detail/placeholder.png"
-                  alt="AFOCO"
-                  width={86}
-                  height={86}
-                />
-                <Image
-                  src="/images/projects/detail/placeholder.png"
-                  alt="AFOCO"
-                  width={86}
-                  height={86}
-                />
-                <Image
-                  src="/images/projects/detail/placeholder.png"
-                  alt="AFOCO"
-                  width={86}
-                  height={86}
-                />
-                <Image
-                  src="/images/projects/detail/placeholder.png"
-                  alt="AFOCO"
-                  width={86}
-                  height={86}
-                />
+          <div className="flex flex-col space-y-1 pt-6">
+            <h4 className="pb-1 text-xs font-medium uppercase text-yellow-900">Project Gallery</h4>
+            <div className="flex w-full space-x-1">
+              <div className="flex w-1/2 flex-col space-y-[1px]">
+                {!!data?.gallery?.data?.length &&
+                  data.gallery.data.map((img, index) => (
+                    <div key={index}>
+                      {index >= 0 && index % 5 === 0 && (
+                        <div className="flex h-[132px] space-x-1">
+                          <Image
+                            src={img?.attributes?.url ?? '/images/projects/placeholder.png'}
+                            alt="AFOCO"
+                            width={165}
+                            height={170}
+                            className="h-full w-full object-cover"
+                          />
+                        </div>
+                      )}
+                    </div>
+                  ))}
+              </div>
+
+              <div className="mb-auto grid w-1/2 grid-cols-2 gap-1">
+                {!!data?.gallery?.data?.length &&
+                  data.gallery.data.map(
+                    (img, index) =>
+                      index > 0 &&
+                      index % 5 != 0 && (
+                        <div key={index} className="flex h-16 w-full space-x-1">
+                          <Image
+                            src={img?.attributes?.url ?? '/images/projects/placeholder.png'}
+                            alt="AFOCO"
+                            width={165}
+                            height={165}
+                            className="h-full w-full object-cover"
+                          />
+                        </div>
+                      )
+                  )}
               </div>
             </div>
+
             <p className="pb-16 text-sm text-gray-500">
               If you have pictures of this project to share, please sent them to{' '}
               <a className="underline hover:no-underline" href="mailto:email@afoco.com">
