@@ -16,6 +16,7 @@ import SoilCarbonDensityLegend from '@/containers/datasets/layers/soil-carbon-de
 import TreeCoverLayer from '@/containers/datasets/layers/tree-cover/layer';
 import TreeCoverLegend from '@/containers/datasets/layers/tree-cover/legend';
 import TreeCoverLossLayer from '@/containers/datasets/layers/tree-cover-loss/layer';
+import TreeCoverLossLegend from '@/containers/datasets/layers/tree-cover-loss/legend';
 
 import LandDegradationInfo from './constants/land-degradation';
 import TreeCoverInfo from './constants/tree-cover';
@@ -57,6 +58,7 @@ export const LEGENDS: LegendIndex = {
   2: BiomassDensityLegend,
   4: SoilCarbonDensityLegend,
   6: LandDegradationLegend,
+  7: TreeCoverLossLegend,
 };
 
 export const INFO: InfoIndex = {

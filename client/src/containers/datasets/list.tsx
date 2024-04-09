@@ -12,7 +12,7 @@ export default function DatasetsList() {
   });
 
   const layers = data?.data || [];
-
+  console.log(layers, 'layers');
   return (
     <ContentLoader
       data={data}

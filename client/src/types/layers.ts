@@ -14,6 +14,7 @@ export type ParamsConfigValue = {
 export type LayerId =
   | 'projects'
   | 'tree-cover'
+  | 'tree-cover-loss'
   | 'net-forest-carbon-flux'
   | 'biomass-density'
   | 'net-forest-carbon-flux'
