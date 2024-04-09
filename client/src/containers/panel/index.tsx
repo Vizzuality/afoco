@@ -44,14 +44,15 @@ export default function Panel({ children }: { children: React.ReactNode }) {
         <Button
           variant="ghost"
           size="small"
-          className="rounded-l-none bg-yellow-100 px-1"
+          className="h-10 w-6 rounded-l-none bg-yellow-100 px-[1px]"
           onClick={() => {
             setOpen(!open);
           }}
         >
           <ChevronLeft
+            strokeWidth={1.2}
             className={cn({
-              'h-4 w-4 transition-transform': true,
+              'h-6 w-6 transition-transform': true,
               'rotate-180': !open,
             })}
           />
