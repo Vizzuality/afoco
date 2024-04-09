@@ -46,7 +46,11 @@ export default function FiltersSelected() {
               </li>
             ))}
           </ul>
-          {hasMoreThanThree && <p data-cy="remaning-filters">and {remainingFiltersCount} more</p>}
+          {hasMoreThanThree && (
+            <p data-cy="remaning-filters" className="px-1">
+              and {remainingFiltersCount} more
+            </p>
+          )}
         </div>
       )}
     </div>
