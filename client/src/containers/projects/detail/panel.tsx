@@ -227,60 +227,46 @@ export default function ProjectDetailPanel() {
           </div>
           <div className="flex flex-col space-y-1 pt-6">
             <h4 className="pb-1 text-xs font-medium uppercase text-yellow-900">Project Gallery</h4>
-            {!!data?.gallery?.data?.length && (
-              <>
-                <div className="flex h-32 space-x-1">
-                  <Image
-                    src={
-                      data?.gallery?.data?.[0]?.attributes?.url ??
-                      '/images/projects/placeholder.png'
-                    }
-                    alt="AFOCO"
-                    width={165}
-                    height={165}
-                    className="h-full w-1/2 object-cover"
-                  />
-                  <div className="grid grid-cols-2 grid-rows-2 gap-1">
-                    {data?.gallery?.data?.slice(1, 5).map((image, idx) => (
-                      <Image
-                        key={idx}
-                        src={image?.attributes?.url ?? '/images/projects/placeholder.png'}
-                        alt="AFOCO"
-                        width={86}
-                        height={86}
-                        className="h-full w-full object-cover"
-                      />
-                    ))}
-                  </div>
-                </div>
-                {data?.gallery?.data?.length > 5 && (
-                  <div className="flex h-32 space-x-1">
-                    <Image
-                      src={
-                        data?.gallery?.data?.[5]?.attributes?.url ??
-                        '/images/projects/placeholder.png'
-                      }
-                      alt="AFOCO"
-                      width={165}
-                      height={165}
-                      className="h-full w-1/2 object-cover"
-                    />
-                    <div className="grid grid-cols-2 grid-rows-2 gap-1">
-                      {data?.gallery?.data?.slice(6, 9).map((image, idx) => (
-                        <Image
-                          key={idx}
-                          src={image?.attributes?.url ?? '/images/projects/placeholder.png'}
-                          alt="AFOCO"
-                          width={86}
-                          height={86}
-                          className="h-full w-full object-cover"
-                        />
-                      ))}
+            <div className="flex w-full space-x-1">
+              <div className="flex w-1/2 flex-col space-y-[1px]">
+                {!!data?.gallery?.data?.length &&
+                  data.gallery.data.map((img, index) => (
+                    <div key={index}>
+                      {index >= 0 && index % 5 === 0 && (
+                        <div className="flex h-[132px] space-x-1">
+                          <Image
+                            src={img?.attributes?.url ?? '/images/projects/placeholder.png'}
+                            alt="AFOCO"
+                            width={165}
+                            height={170}
+                            className="h-full w-full object-cover"
+                          />
+                        </div>
+                      )}
                     </div>
-                  </div>
-                )}
-              </>
-            )}
+                  ))}
+              </div>
+
+              <div className="mb-auto grid w-1/2 grid-cols-2 gap-1">
+                {!!data?.gallery?.data?.length &&
+                  data.gallery.data.map(
+                    (img, index) =>
+                      index > 0 &&
+                      index % 5 != 0 && (
+                        <div key={index} className="flex h-16 w-full space-x-1">
+                          <Image
+                            src={img?.attributes?.url ?? '/images/projects/placeholder.png'}
+                            alt="AFOCO"
+                            width={165}
+                            height={165}
+                            className="h-full w-full object-cover"
+                          />
+                        </div>
+                      )
+                  )}
+              </div>
+            </div>
+
             <p className="pb-16 text-sm text-gray-500">
               If you have pictures of this project to share, please sent them to{' '}
               <a className="underline hover:no-underline" href="mailto:email@afoco.com">
