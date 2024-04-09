@@ -2,7 +2,7 @@ import type { LayerProps } from 'react-map-gl';
 
 import { useAtomValue } from 'jotai';
 
-import { hoveredProjectListAtom } from '@/store';
+import { hoveredProjectMapAtom } from '@/store';
 
 import type { LayerSettings } from '@/types/layers';
 
@@ -11,20 +11,7 @@ export function useLayers({
 }: {
   settings: { opacity: LayerSettings['opacity']; visibility: LayerSettings['visibility'] };
 }): LayerProps[] {
-  const hoveredProject = useAtomValue(hoveredProjectListAtom);
-
-  let filterProjectCentroid;
-  if (hoveredProject === null) {
-    // Apply filter by type == 'centroid' only
-    filterProjectCentroid = ['==', ['get', 'type'], 'centroid'];
-  } else {
-    // Apply filter by both type == 'centroid' and project_code == hoveredProject
-    filterProjectCentroid = [
-      'all',
-      ['==', ['get', 'type'], 'centroid'],
-      ['==', ['get', 'project_code'], hoveredProject],
-    ];
-  }
+  const hoveredProject = useAtomValue(hoveredProjectMapAtom);
 
   // The layer is designed to react both to hover events directly on the map and to hover events over a specific project listed in a sidebar.
 
@@ -33,19 +20,14 @@ export function useLayers({
 
   // Reactivity to Hover Events in the Sidebar:
   // Similarly, When a user hovers over the a project in the sidebar, both point and geometry representations within the layer are programmed to change in color and/or size.
-
-  // Filtering Mechanism:
-  // Alongside the visual changes, hovering over a project in the sidebar also activates a filtering mechanism on the map layer.
-  // This filter hides the rest of the projects on the map.
   return [
     {
       id: 'projects_points_shadow',
       type: 'circle',
       source: 'projects',
-      filter: filterProjectCentroid,
-      'source-layer': 'afoco_locations_full',
+      'source-layer': 'areas_centroids_c',
       paint: {
-        'circle-radius': 5,
+        'circle-radius': 16,
         'circle-color': '#ccc',
         'circle-blur': 1,
         'circle-opacity': opacity,
@@ -53,14 +35,13 @@ export function useLayers({
       layout: {
         visibility: visibility,
       },
-      maxzoom: 6,
+      maxzoom: 8,
     },
     {
-      id: 'projects',
+      id: 'projects_circle',
       type: 'circle',
-      filter: filterProjectCentroid,
       source: 'projects',
-      'source-layer': 'afoco_locations_full',
+      'source-layer': 'areas_centroids_c',
       paint: {
         'circle-stroke-color': '#ffffff',
         'circle-stroke-width': [
@@ -77,20 +58,20 @@ export function useLayers({
           'case',
           ['boolean', ['feature-state', 'hover'], false],
           13,
-          ['==', ['get', 'project_code'], hoveredProject],
+          ['all', ['to-boolean', hoveredProject], ['!=', ['get', 'project_code'], hoveredProject]],
+          10,
+          ['all', ['to-boolean', hoveredProject], ['==', ['get', 'project_code'], hoveredProject]],
           13,
-          ['boolean', [!hoveredProject], false],
-          40,
-          7,
+          10,
         ],
         'circle-color': '#176252',
         'circle-stroke-opacity': [
           'case',
           ['boolean', ['feature-state', 'hover'], false],
           1,
-          ['!=', ['get', 'project_code'], hoveredProject],
+          ['all', ['to-boolean', hoveredProject], ['!=', ['get', 'project_code'], hoveredProject]],
           0.2,
-          ['==', ['get', 'project_code'], hoveredProject],
+          ['all', ['to-boolean', hoveredProject], ['==', ['get', 'project_code'], hoveredProject]],
           1,
           opacity,
         ],
@@ -98,11 +79,9 @@ export function useLayers({
           'case',
           ['boolean', ['feature-state', 'hover'], false],
           1,
-          ['!=', ['get', 'project_code'], hoveredProject],
+          ['all', ['to-boolean', hoveredProject], ['!=', ['get', 'project_code'], hoveredProject]],
           0.2,
-          ['boolean', [!hoveredProject], false],
-          0.2,
-          ['==', ['get', 'project_code'], hoveredProject],
+          ['all', ['to-boolean', hoveredProject], ['==', ['get', 'project_code'], hoveredProject]],
           1,
           opacity,
         ],
@@ -110,32 +89,30 @@ export function useLayers({
       layout: {
         visibility: visibility,
       },
-      maxzoom: 6,
+      maxzoom: 8,
     },
     {
       id: 'projects_fill',
       type: 'fill',
       source: 'projects',
-      'source-layer': 'afoco_locations_full',
-      // ...(!!hoveredProject && { filter: ['==', ['get', 'project_code'], hoveredProject] }),
+      'source-layer': 'areas_centroids_l',
       paint: {
         'fill-color': '#176252',
         'fill-opacity': [
           'case',
           ['boolean', ['feature-state', 'hover'], false],
           1,
-          ['!=', ['get', 'project_code'], hoveredProject],
+          ['all', ['to-boolean', hoveredProject], ['!=', ['get', 'project_code'], hoveredProject]],
           0.2,
-          ['==', ['get', 'project_code'], hoveredProject],
+          ['all', ['to-boolean', hoveredProject], ['==', ['get', 'project_code'], hoveredProject]],
           1,
-          opacity * 0.4,
+          opacity,
         ],
       },
       layout: {
         visibility: visibility,
       },
-      maxzoom: 18,
-      minzoom: 6,
+      minzoom: 8,
     },
   ];
 }

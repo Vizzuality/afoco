@@ -7,7 +7,7 @@ import { Search, X } from 'lucide-react';
 
 import { cn } from '@/lib/classnames';
 
-import { hoveredProjectListAtom } from '@/store';
+import { hoveredProjectMapAtom } from '@/store';
 
 import { useGetProjects } from '@/types/generated/project';
 
@@ -25,7 +25,7 @@ import FiltersSelected from '../filters/selected';
 export default function ProjectsList() {
   const [searchValue, setSearchValue] = useState<string | null>(null);
   const [filtersSettings] = useSyncFilters();
-  const setHoveredProjectList = useSetAtom(hoveredProjectListAtom);
+  const setHoveredProjectList = useSetAtom(hoveredProjectMapAtom);
 
   const { data, isFetching, isFetched, isError } = useGetProjects(
     {
