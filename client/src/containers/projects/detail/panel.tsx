@@ -150,10 +150,10 @@ export default function ProjectDetailPanel() {
               alt="AFOCO"
               width={300}
               height={300}
-              className="h-72 w-full rounded-t-[24px] object-cover"
+              className="h-52 w-full rounded-t-[24px] object-cover"
             />
 
-            <h2 className="absolute bottom-6 mx-6 text-xl font-semibold text-white">
+            <h2 className="absolute bottom-6 mx-6 text-lg font-semibold leading-6 text-white">
               {data?.name}
             </h2>
           </div>
@@ -192,7 +192,7 @@ export default function ProjectDetailPanel() {
         isError={isError || indicatorIsFetched}
         loaderClassName="mt-52"
       >
-        <ScrollArea className="mt-64 flex h-[58vh] flex-col space-y-8 px-5 xl:h-[57vh]">
+        <ScrollArea className="mt-40 flex h-[58vh] flex-col space-y-8 px-5 xl:h-[57vh]">
           {data?.description && (
             <p className="pt-2 text-sm text-gray-500">
               <DescriptionWithoutMarkdown description={data?.description} />
