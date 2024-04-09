@@ -62,7 +62,7 @@ const FiltersCheckbox = ({
   );
 
   return (
-    <div className="flex flex-col space-y-2">
+    <div className="flex flex-col space-y-2" data-cy="filters-content">
       <div className="flex items-center space-x-2">
         <span className="font-extrabold leading-5">{title}</span>
         <Tooltip>
@@ -79,6 +79,7 @@ const FiltersCheckbox = ({
           </TooltipContent>
         </Tooltip>
       </div>
+
       <div className="flex flex-wrap items-center gap-2 text-gray-900">
         {options.map(({ id, label }) => (
           <div key={id} className="flex items-center space-x-2 pr-2 last:pr-0">
@@ -86,6 +87,7 @@ const FiltersCheckbox = ({
               id={id}
               onClick={handleChange}
               checked={filtersSettings?.[type]?.includes(id)}
+              data-cy={`filter-${type}-${id}`}
             />
             <Label htmlFor={id}>{label}</Label>
           </div>
@@ -139,7 +141,10 @@ export default function FiltersContent() {
           </Tooltip>
         </div>
         <Select onValueChange={handleSingleValueChange}>
-          <SelectTrigger className="flex h-10 items-center justify-between rounded border border-gray-400 px-4">
+          <SelectTrigger
+            className="flex h-10 items-center justify-between rounded border border-gray-400 px-4"
+            data-cy="filter-country-select"
+          >
             <div>
               <SelectValue placeholder="Select country"> </SelectValue>
               {filtersSettings.country}
@@ -148,7 +153,12 @@ export default function FiltersContent() {
           <SelectContent className="no-scrollbar max-h-96 overflow-y-auto border-none shadow-md">
             {countries &&
               countries.map((country) => (
-                <SelectItem key={country} value={country as string} className="cursor-pointer">
+                <SelectItem
+                  key={country}
+                  value={country as string}
+                  className="cursor-pointer"
+                  data-cy={`filter-country-${country}`}
+                >
                   {country}
                 </SelectItem>
               ))}

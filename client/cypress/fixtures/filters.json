@@ -1,0 +1,61 @@
+{
+  "intervention": [
+    { "id": "climate-change-adaptation", "label": "Climate change adaptation" },
+    { "id": "livelihood-improvement", "label": "Livelihood improvement" },
+    { "id": "forest-disaster-management", "label": "Forest disaster management" },
+    { "id": "strengthening-institution-capabilities", "label": "Strengthening institution capabilities" },
+    { "id": "restoration-and-reforestation", "label": "Restoration and reforestation" }
+  ],
+  "country": [
+      {
+          "id": "Myanmar",
+          "label": "Myanmar"
+      },
+      {
+          "id": "Bhutan",
+          "label": "Bhutan"
+      }
+  ],
+  "area_restored": [
+      {
+          "id": "<200",
+          "label": "<200"
+      },
+      {
+          "id": "200-500",
+          "label": "200-500"
+      },
+      {
+          "id": ">500",
+          "label": ">500"
+      }
+  ],
+  "area_protected": [
+      {
+          "id": "<200",
+          "label": "<200"
+      },
+      {
+          "id": "200-500",
+          "label": "200-500"
+      },
+      {
+          "id": ">500",
+          "label": ">500"
+      }
+  ],
+  "area_plantation": [
+      {
+          "id": "<200",
+          "label": "<200"
+      },
+      {
+          "id": "200-500",
+          "label": "200-500"
+      },
+      {
+          "id": ">500",
+          "label": ">500"
+      }
+  ]
+}

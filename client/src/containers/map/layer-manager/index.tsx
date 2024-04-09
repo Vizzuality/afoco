@@ -14,7 +14,9 @@ import { DeckMapboxOverlayProvider } from '@/components/map/provider';
 
 const LayerManager = () => {
   const [layers] = useSyncLayers();
+
   const layersIds = layers.map((l) => l.id);
+
   const setInteractiveLayerIds = useSetAtom(layersInteractiveIdsAtom);
 
   const handleAdd = useCallback(
@@ -61,7 +63,12 @@ const LayerManager = () => {
 
         {layersIds.map((l, i) => {
           const LayerComponent = LAYERS[l];
-          const beforeId = i === 0 ? 'custom-layers' : `${layersIds[i - 1]}-layer`;
+          const beforeId =
+            l === 5
+              ? 'continent-label-dark'
+              : i === 0
+              ? 'custom-layers'
+              : `${layersIds[i - 1]}-layer`;
 
           return (
             <LayerComponent

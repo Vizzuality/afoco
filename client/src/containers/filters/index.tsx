@@ -31,7 +31,7 @@ export default function Filters({ nrResults = 0 }: { nrResults: number }) {
         <div className=" flex space-x-2">
           <Dialog>
             <DialogTrigger aria-label="Show filters" asChild>
-              <Button variant="outline" size="base">
+              <Button variant="outline" size="base" data-cy="show-filters-btn">
                 <Filter className="hidden stroke-[1.5px] xl:block" />
                 <span>Filters</span>
               </Button>
@@ -43,7 +43,7 @@ export default function Filters({ nrResults = 0 }: { nrResults: number }) {
               </DialogHeader>
               <FiltersContent />
               <DialogFooter>
-                <button type="button" onClick={handleResetFilters}>
+                <button type="button" onClick={handleResetFilters} data-cy="clear-filters-button">
                   Clear all
                 </button>
                 <DialogClose>
