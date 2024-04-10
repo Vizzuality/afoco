@@ -145,13 +145,17 @@ export default function ProjectDetailPanel() {
       <div className="absolute left-0 top-0 w-full">
         {data && indicators && (
           <div className="relative">
-            <Image
-              src={data.main_image?.data?.attributes?.url ?? '/images/projects/placeholder.png'}
-              alt="AFOCO"
-              width={300}
-              height={300}
-              className="h-52 w-full rounded-t-[24px] object-cover"
-            />
+            {data.main_image?.data?.attributes?.url ? (
+              <Image
+                src={data.main_image?.data?.attributes?.url}
+                alt="AFOCO"
+                width={300}
+                height={300}
+                className="h-52 w-full rounded-t-[24px] object-cover"
+              />
+            ) : (
+              <div className="h-[208px] w-full rounded-t-[24px] bg-gray-200" />
+            )}
 
             <h2 className="absolute bottom-6 mx-6 text-lg font-semibold leading-6 text-white">
               {data?.name}
@@ -236,10 +240,10 @@ export default function ProjectDetailPanel() {
                 {!!data?.gallery?.data?.length &&
                   data.gallery.data.map((img, index) => (
                     <div key={index}>
-                      {index >= 0 && index % 5 === 0 && (
+                      {index >= 0 && index % 5 === 0 && img?.attributes?.url && (
                         <div className="flex h-[132px] space-x-1">
                           <Image
-                            src={img?.attributes?.url ?? '/images/projects/placeholder.png'}
+                            src={img?.attributes?.url}
                             alt="AFOCO"
                             width={165}
                             height={170}
@@ -256,10 +260,11 @@ export default function ProjectDetailPanel() {
                   data.gallery.data.map(
                     (img, index) =>
                       index > 0 &&
-                      index % 5 != 0 && (
+                      index % 5 != 0 &&
+                      img?.attributes?.url && (
                         <div key={index} className="flex h-16 w-full space-x-1">
                           <Image
-                            src={img?.attributes?.url ?? '/images/projects/placeholder.png'}
+                            src={img?.attributes?.url}
                             alt="AFOCO"
                             width={165}
                             height={165}
