@@ -12,7 +12,6 @@ export function useLayers({
   settings: { opacity: LayerSettings['opacity']; visibility: LayerSettings['visibility'] };
 }): LayerProps[] {
   const hoveredProject = useAtomValue(hoveredProjectMapAtom);
-
   // The layer is designed to react both to hover events directly on the map and to hover events over a specific project listed in a sidebar.
 
   // Reactivity to Hover Events on the Map:
@@ -58,10 +57,10 @@ export function useLayers({
           'case',
           ['boolean', ['feature-state', 'hover'], false],
           13,
-          ['all', ['to-boolean', hoveredProject], ['!=', ['get', 'project_code'], hoveredProject]],
-          10,
-          ['all', ['to-boolean', hoveredProject], ['==', ['get', 'project_code'], hoveredProject]],
-          13,
+          // ['all', ['to-boolean', hoveredProject], ['!=', ['get', 'project_code'], hoveredProject]],
+          // 10,
+          // ['all', ['to-boolean', hoveredProject], ['==', ['get', 'project_code'], hoveredProject]],
+          // 10,
           10,
         ],
         'circle-color': '#176252',
