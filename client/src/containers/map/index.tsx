@@ -257,7 +257,7 @@ export default function MapContainer() {
                 longitude={locationPopUp?.popup[1]}
                 latitude={locationPopUp?.popup[0]}
                 info={projectTitle}
-                header="Project Name"
+                header="Project"
               />
             )}
           </>
