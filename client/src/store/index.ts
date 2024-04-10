@@ -26,11 +26,8 @@ export const mapSettingsAtom = atom<MapSettings>({
   roads: false,
 });
 
-// set project code when hovering a project in the map
+// set project code when hovering a project in the map or over sidebar list
 export const hoveredProjectMapAtom = atom<string | null>(null);
-
-// set project code when hovering a project from projects list in sidebar
-export const hoveredProjectListAtom = atom<string | null>(null);
 
 export const DEFAULT_SETTINGS = {
   expand: true,

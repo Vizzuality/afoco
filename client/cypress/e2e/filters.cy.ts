@@ -8,7 +8,7 @@ interface Filters {
 }
 
 interface FiltersParam {
-  [category: string]: string[];
+  [category: string]: string[] | string;
 }
 
 type FilterWithCategory = {
@@ -163,22 +163,22 @@ describe('Filter selection and removal URL update', () => {
       });
 
       // Construct the expected URL part for verification after all filters are selected
-      const filtersParam: FiltersParam = selectedFilters.reduce(
-        (
-          acc: FiltersParam,
-          filter: {
-            category: string;
-            id: string;
-          }
-        ) => {
-          if (!acc[filter.category]) {
-            acc[filter.category] = [];
-          }
-          acc[filter.category].push(filter.id);
-          return acc;
-        },
-        {}
-      );
+      // const filtersParam: FiltersParam = selectedFilters.reduce(
+      //   (
+      //     acc: FiltersParam,
+      //     filter: {
+      //       category: string;
+      //       id: string;
+      //     }
+      //   ) => {
+      //     if (!acc[filter.category]) {
+      //       acc[filter.category] = [];
+      //     }
+      //     acc[filter.category].push(filter.id);
+      //     return acc;
+      //   },
+      //   {}
+      // );
 
       // const expectedUrlPart = `filters=${encodeURIComponent(JSON.stringify(filtersParam))}`;
 
@@ -249,7 +249,12 @@ describe('Filter selection URL update', () => {
           if (!acc[filter.category]) {
             acc[filter.category] = [];
           }
-          acc[filter.category].push(filter.id);
+          if (filter.category === 'country') {
+            acc[filter.category] = filter.id;
+          }
+          if (filter.category !== 'country' && Array.isArray(acc[filter.category])) {
+            (acc[filter.category] as string[]).push(filter.id);
+          }
           return acc;
         },
         {}
@@ -295,22 +300,22 @@ describe('Filter selection and removal URL update with dropdown interaction', ()
     // Verify the URL includes the expected filters
     // Construct the expected URL part for verification
     const selectedFilters = [{ category: 'country', id: 'Indonesia' }]; // Add other selected filters as necessary
-    const filtersParam: FiltersParam = selectedFilters.reduce(
-      (
-        acc: FiltersParam,
-        filter: {
-          category: string;
-          id: string;
-        }
-      ) => {
-        if (!acc[filter.category]) {
-          acc[filter.category] = [];
-        }
-        acc[filter.category].push(filter.id);
-        return acc;
-      },
-      {}
-    );
+    // const filtersParam: FiltersParam = selectedFilters.reduce(
+    //   (
+    //     acc: FiltersParam,
+    //     filter: {
+    //       category: string;
+    //       id: string;
+    //     }
+    //   ) => {
+    //     if (!acc[filter.category]) {
+    //       acc[filter.category] = [];
+    //     }
+    //     acc[filter.category].push(filter.id);
+    //     return acc;
+    //   },
+    //   {}
+    // );
 
     // const expectedUrlPart = `filters={${encodeURIComponent(JSON.stringify(filtersParam).replace(/[\[\]']+/g,''))}}`;
 

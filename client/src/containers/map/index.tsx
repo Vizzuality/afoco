@@ -9,13 +9,16 @@ import { useParams, useRouter } from 'next/navigation';
 
 import bbox from '@turf/bbox';
 import { useAtomValue, useSetAtom, useAtom } from 'jotai';
+import { MapboxGeoJSONFeature } from 'mapbox-gl';
 
 import { bboxAtom, hoveredProjectMapAtom, layersInteractiveIdsAtom, tmpBboxAtom } from '@/store';
 
+import { useGetProjects } from '@/types/generated/project';
 import { Bbox } from '@/types/map';
 
 import { useSyncQueryParams } from '@/hooks/datasets';
 
+import PopupContainer from '@/containers/map/popup';
 import MapSettingsManager from '@/containers/map/settings/manager';
 
 import Map from '@/components/map';
@@ -49,6 +52,15 @@ const DEFAULT_PROPS: CustomMapProps = {
 export default function MapContainer() {
   const { id, initialViewState, minZoom, maxZoom } = DEFAULT_PROPS;
   const queryParams = useSyncQueryParams();
+  const [locationPopUp, setLocationPopUp] = useState<{
+    position: { x: number; y: number } | null;
+    popup: number[] | null;
+    info: string | null;
+  }>({
+    position: null,
+    popup: null,
+    info: null,
+  });
 
   const { [id]: map } = useMap();
   const { push } = useRouter();
@@ -84,6 +96,20 @@ export default function MapContainer() {
     }
   }, [params.id, map, tmpBbox, setBbox, initialViewState]);
 
+  const { data: projectTitle } = useGetProjects(
+    {
+      populate: 'name, project_code',
+    },
+    {
+      query: {
+        select: (response) =>
+          response?.data
+            ?.map((project) => project.attributes)
+            .find((project) => project?.project_code === locationPopUp.info)?.name,
+      },
+    }
+  );
+
   const handleMapViewStateChange = useCallback(() => {
     if (map) {
       const b = map
@@ -101,9 +127,15 @@ export default function MapContainer() {
   const handleMapClick = useCallback(
     (e: MapLayerMouseEvent) => {
       const ProjectData = e.features && e.features.find(({ layer }) => layer.id === 'projects');
+      const ProjectsDataGeometry = e.features?.find(({ layer }) => layer.id === 'projects_fill');
       if (e.features && e.features.length && map) {
-        if (ProjectData) {
-          push(`/projects/${ProjectData.properties?.project_code}${queryParams}`);
+        if (ProjectData || ProjectsDataGeometry) {
+          push(
+            `/projects/${
+              ProjectData?.properties?.project_code ||
+              ProjectsDataGeometry?.properties?.project_code
+            }${queryParams}`
+          );
         }
         const bboxTurf = bbox(e.features[0]) as LngLatBoundsLike;
         map.fitBounds(bboxTurf, { padding: 100, maxZoom: 9 });
@@ -117,79 +149,56 @@ export default function MapContainer() {
 
   const handleMouseMove = useCallback(
     (e: MapLayerMouseEvent) => {
-      const ProjectsLayer = e?.features && e?.features.find(({ layer }) => layer.id === 'projects');
+      const findLayer = (layerId: string) => e?.features?.find(({ layer }) => layer.id === layerId);
+      const ProjectsLayer = findLayer('projects_circle');
+      const ProjectsFillLayer = findLayer('projects_fill');
 
-      const ProjectsFillLayer =
-        e?.features && e?.features.find(({ layer }) => layer.id === 'projects_fill');
+      const handleLayerInteraction = (
+        layer: MapboxGeoJSONFeature | undefined,
+        sourceLayer: string,
+        stateIdVar: any | null
+      ) => {
+        if (layer && map) {
+          setCursor('pointer');
 
-      // *ON MOUSE ENTER
-      if (e.features && map && ProjectsLayer) {
-        setCursor('pointer');
-        setHoveredProjectMap(ProjectsLayer.properties?.project_code);
-      }
+          const projectCode = layer.properties?.project_code;
+          setHoveredProjectMap(projectCode);
+          setLocationPopUp({
+            popup: [e?.lngLat.lat, e?.lngLat.lng],
+            position: { x: e.point.x, y: e.point.y },
+            info: projectCode,
+          });
 
-      if (e.features && map && ProjectsFillLayer) {
-        setCursor('pointer');
-        setHoveredProjectMap(ProjectsFillLayer.properties?.project_code);
-      }
+          if (stateIdVar !== null) {
+            map.setFeatureState(
+              { sourceLayer, source: 'projects', id: stateIdVar },
+              { hover: false }
+            );
+          }
 
-      if (ProjectsLayer && map) {
-        if (hoveredStateIdProjectsCircle !== null) {
-          map?.setFeatureState(
-            {
-              sourceLayer: 'afoco_locations_full',
-              source: 'projects',
-              id: hoveredStateIdProjectsCircle,
-            },
-            { hover: false }
-          );
+          stateIdVar = projectCode;
+          map.setFeatureState({ sourceLayer, source: 'projects', id: stateIdVar }, { hover: true });
         }
+      };
 
-        hoveredStateIdProjectsCircle = ProjectsLayer?.properties?.project_code as string;
-        map?.setFeatureState(
-          {
-            sourceLayer: 'afoco_locations_full',
-            source: 'projects',
-            id: hoveredStateIdProjectsCircle,
-          },
-          { hover: true }
-        );
-      }
-      if (ProjectsFillLayer && map) {
-        if (hoveredStateIdProjectsFill !== null) {
-          map?.setFeatureState(
-            {
-              sourceLayer: 'afoco_locations_full',
-              source: 'projects',
-              id: hoveredStateIdProjectsFill,
-            },
-            { hover: false }
-          );
-        }
-
-        hoveredStateIdProjectsFill = ProjectsFillLayer?.properties?.project_code as string;
-        map?.setFeatureState(
-          {
-            sourceLayer: 'afoco_locations_full',
-            source: 'projects',
-            id: hoveredStateIdProjectsFill,
-          },
-          { hover: true }
-        );
-      }
+      handleLayerInteraction(ProjectsLayer, 'areas_centroids_c', hoveredStateIdProjectsCircle);
+      handleLayerInteraction(ProjectsFillLayer, 'areas_centroids_l', hoveredStateIdProjectsFill);
 
       // *ON MOUSE LEAVE
-
       if (e.features?.length === 0) {
         setCursor('grab');
+        setHoveredProjectMap(null);
+        setLocationPopUp({
+          popup: null,
+          position: null,
+          info: null,
+        });
       }
 
       if (!ProjectsLayer && map && hoveredStateIdProjectsCircle) {
-        setHoveredProjectMap(null);
-
-        map?.setFeatureState(
+        map.setFeatureState(
           {
-            sourceLayer: 'afoco_locations_full',
+            sourceLayer: 'areas_centroids_c',
             source: 'projects',
             id: hoveredStateIdProjectsCircle,
           },
@@ -197,15 +206,10 @@ export default function MapContainer() {
         );
         hoveredStateIdProjectsCircle = null;
       }
-      if (!ProjectsFillLayer && map && hoveredStateIdProjectsFill) {
-        setHoveredProjectMap(null);
 
-        map?.setFeatureState(
-          {
-            sourceLayer: 'afoco_locations_full',
-            source: 'projects',
-            id: hoveredStateIdProjectsFill,
-          },
+      if (!ProjectsFillLayer && map && hoveredStateIdProjectsFill) {
+        map.setFeatureState(
+          { sourceLayer: 'areas_centroids_l', source: 'projects', id: hoveredStateIdProjectsFill },
           { hover: false }
         );
         hoveredStateIdProjectsFill = null;
@@ -247,6 +251,15 @@ export default function MapContainer() {
             <MapSettingsManager />
 
             <Legend />
+
+            {locationPopUp.popup && (
+              <PopupContainer
+                longitude={locationPopUp?.popup[1]}
+                latitude={locationPopUp?.popup[0]}
+                info={projectTitle}
+                header="Project"
+              />
+            )}
           </>
         )}
       </Map>

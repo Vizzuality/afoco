@@ -2,6 +2,8 @@
 
 import { useCallback } from 'react';
 
+import Markdown from 'react-markdown';
+
 import { Info as InfoIcon } from 'lucide-react';
 
 import type { LayerListResponseDataItem } from '@/types/generated/strapi.schemas';
@@ -77,7 +79,9 @@ export default function DatasetsItem(props: LayerListResponseDataItem) {
         )}
       </div>
       <div>
-        <p className="ml-10 mr-5 text-xs leading-4 text-gray-500">{props.attributes.description}</p>
+        <p className="whitespace ml-10 mr-5 flex-nowrap break-words text-xs leading-4 text-gray-500">
+          <Markdown>{props.attributes.description}</Markdown>
+        </p>
       </div>
     </div>
   );
