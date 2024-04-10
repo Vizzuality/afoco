@@ -59,8 +59,9 @@ export default function DatasetsItem(props: LayerListResponseDataItem) {
                 {props.attributes.name}
               </h3>
               <div className="border-b border-t border-gray-100 py-2.5">
-                <Info />
-                {/* <p className="px-6 text-sm text-yellow-900">{props.attributes.info}</p> */}
+                {props.attributes.dialog && (
+                  <div dangerouslySetInnerHTML={{ __html: props.attributes.dialog }} />
+                )}
               </div>
               <div className="flex w-full px-6 pb-4">
                 <DialogClose asChild>
