@@ -5,6 +5,7 @@ import { useCallback } from 'react';
 import Markdown from 'react-markdown';
 
 import { Info as InfoIcon } from 'lucide-react';
+import remarkGfm from 'remark-gfm';
 
 import type { LayerListResponseDataItem } from '@/types/generated/strapi.schemas';
 
@@ -58,9 +59,16 @@ export default function DatasetsItem(props: LayerListResponseDataItem) {
                 {/* {props.attributes.title} */}
                 {props.attributes.name}
               </h3>
-              <div className="border-b border-t border-gray-100 py-2.5">
+              <div className="border-b border-t border-gray-100">
+                {/* <Info /> */}
+
                 {props.attributes.dialog && (
-                  <div dangerouslySetInnerHTML={{ __html: props.attributes.dialog }} />
+                  <Markdown
+                    remarkPlugins={[remarkGfm]}
+                    className="prose info-dialog px-6 py-4 text-xs"
+                  >
+                    {props.attributes.dialog}
+                  </Markdown>
                 )}
               </div>
               <div className="flex w-full px-6 pb-4">
