@@ -162,17 +162,21 @@ export default function ProjectDetailPanel() {
       <div className="absolute left-6 right-6 top-4 z-10 flex justify-between">
         <Link
           href={`/projects${queryParams}`}
-          className="flex items-center space-x-3 rounded px-2 py-1 text-xs text-yellow-900 transition-all hover:bg-yellow-100"
+          className="flex items-center space-x-1 rounded bg-yellow-100 px-2 py-1 text-xs text-yellow-900 transition-all hover:bg-yellow-400"
         >
           <ArrowLeft className="h-4 w-4 text-yellow-900" />
-          <p>Back</p>
+          <p className="leading-6">Back</p>
         </Link>
         {data && indicators && (
           <div className="flex items-center space-x-2">
             <Tooltip>
               <TooltipTrigger asChild>
-                <Button variant="ghost" className="rounded-full" onClick={downloadCSVProjectData}>
-                  <Download className="rotate-180 text-yellow-900" size={18} />
+                <Button
+                  variant="secondary"
+                  className="rounded-full"
+                  onClick={downloadCSVProjectData}
+                >
+                  <Download className="rotate-180 text-yellow-900" size={14} />
                 </Button>
               </TooltipTrigger>
               <TooltipContent side={'left'} sideOffset={20}>

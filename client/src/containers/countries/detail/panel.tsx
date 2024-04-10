@@ -129,10 +129,10 @@ export default function CountryDetailPanel() {
       <div className="bg-background absolute left-0 right-0 top-0 z-10 flex w-full justify-between rounded-t-3xl px-5 px-5 pt-4">
         <Link
           href={`/countries${queryParams}`}
-          className="flex items-center space-x-3 rounded px-2 py-1 text-xs text-yellow-900 transition-all hover:bg-yellow-100"
+          className="flex items-center space-x-2 rounded px-2 py-1 text-xs text-yellow-900 transition-all hover:bg-yellow-100"
         >
           <ArrowLeft className="h-4 w-4 text-yellow-900" />
-          <p>Back</p>
+          <p className="leading-6">Back</p>
         </Link>
         {data?.data && indicators && (
           <div className="flex items-center space-x-2">

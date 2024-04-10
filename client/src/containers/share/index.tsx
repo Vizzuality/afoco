@@ -6,6 +6,8 @@ import { usePathname } from 'next/navigation';
 
 import { Facebook, Twitter, Mail, Share2 } from 'lucide-react';
 
+import { cn } from '@/lib/classnames';
+
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
@@ -39,8 +41,13 @@ export default function Share() {
       <DialogTrigger>
         <Tooltip>
           <TooltipTrigger asChild data-cy="share-tooltip-button">
-            <div className="flex h-8 w-8 items-center justify-center rounded-full hover:bg-yellow-100">
-              <Share2 className="text-yellow-900" size={18} />
+            <div
+              className={cn({
+                'flex h-8 w-8 items-center justify-center rounded-full hover:bg-yellow-100': true,
+                'bg-yellow-100 hover:bg-yellow-400': pathname.includes('projects'),
+              })}
+            >
+              <Share2 className="text-yellow-900" size={14} />
             </div>
           </TooltipTrigger>
           <TooltipContent side={'left'} sideOffset={14}>
