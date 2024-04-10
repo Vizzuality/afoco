@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
-import { LngLatBoundsLike, MapLayerMouseEvent, useMap, Popup } from 'react-map-gl';
+import { LngLatBoundsLike, MapLayerMouseEvent, useMap } from 'react-map-gl';
 
 import dynamic from 'next/dynamic';
 import { useParams, useRouter } from 'next/navigation';
@@ -13,10 +13,12 @@ import { MapboxGeoJSONFeature } from 'mapbox-gl';
 
 import { bboxAtom, hoveredProjectMapAtom, layersInteractiveIdsAtom, tmpBboxAtom } from '@/store';
 
+import { useGetProjects } from '@/types/generated/project';
 import { Bbox } from '@/types/map';
 
 import { useSyncQueryParams } from '@/hooks/datasets';
 
+import PopupContainer from '@/containers/map/popup';
 import MapSettingsManager from '@/containers/map/settings/manager';
 
 import Map from '@/components/map';
@@ -59,7 +61,7 @@ export default function MapContainer() {
     popup: null,
     info: null,
   });
-  console.log(locationPopUp, 'locationPopUp');
+
   const { [id]: map } = useMap();
   const { push } = useRouter();
   const params = useParams<{ id: string }>();
@@ -93,6 +95,20 @@ export default function MapContainer() {
       map.fitBounds(initialViewState.bounds, { padding: 100 });
     }
   }, [params.id, map, tmpBbox, setBbox, initialViewState]);
+
+  const { data: projectTitle } = useGetProjects(
+    {
+      populate: 'name, project_code',
+    },
+    {
+      query: {
+        select: (response) =>
+          response?.data
+            ?.map((project) => project.attributes)
+            .find((project) => project?.project_code === locationPopUp.info)?.name,
+      },
+    }
+  );
 
   const handleMapViewStateChange = useCallback(() => {
     if (map) {
@@ -140,12 +156,11 @@ export default function MapContainer() {
       const handleLayerInteraction = (
         layer: MapboxGeoJSONFeature | undefined,
         sourceLayer: string,
-        stateIdVar: any
+        stateIdVar: any | null
       ) => {
-        console.log('stateIdVar', stateIdVar);
         if (layer && map) {
           setCursor('pointer');
-          console.log('layer', layer.properties);
+
           const projectCode = layer.properties?.project_code;
           setHoveredProjectMap(projectCode);
           setLocationPopUp({
@@ -232,14 +247,12 @@ export default function MapContainer() {
 
             <Legend />
             {locationPopUp && locationPopUp.popup && (
-              <Popup
+              <PopupContainer
                 longitude={locationPopUp?.popup[1]}
                 latitude={locationPopUp?.popup[0]}
-                className="c-location-popup"
-                // onClose={() => removePopup('location')}
-              >
-                {locationPopUp?.info}
-              </Popup>
+                info={projectTitle}
+                header="Project Name"
+              />
             )}
           </>
         )}
