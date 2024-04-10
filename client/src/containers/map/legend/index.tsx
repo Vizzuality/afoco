@@ -6,10 +6,10 @@ import { cn } from '@/lib/classnames';
 
 import { useSyncLayers } from '@/hooks/datasets/sync-query';
 
+import MapLegendItem from '@/containers/map/legend/legend-item';
+
 import Legend from '@/components/map/legend';
 import { Button } from '@/components/ui/button';
-
-import MapLegendItem from './item';
 
 const MapLegends = ({ className = '' }) => {
   const [layers] = useSyncLayers();

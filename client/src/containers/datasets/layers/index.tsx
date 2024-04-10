@@ -1,22 +1,15 @@
-import type { LayerProps, DeckGLLayerProps, LayerSettings } from '@/types/layers';
+import type { LayerProps, DeckGLLayerProps } from '@/types/layers';
 
 import BiomassDensity from '@/containers/datasets/layers/biomass-density/layer';
-import BiomassDensityLegend from '@/containers/datasets/layers/biomass-density/legend';
 import BiomassDensityInfo from '@/containers/datasets/layers/constants/biomass-density';
 import NetForestCarbonFluxInfo from '@/containers/datasets/layers/constants/net-flux-carbon';
 import SoilCarbonDensityInfo from '@/containers/datasets/layers/constants/soil-carbon-density';
 import { LandDegradationLayer } from '@/containers/datasets/layers/land-degradation/layer';
-import LandDegradationLegend from '@/containers/datasets/layers/land-degradation/legend';
 import NetForestCarbonFluxLayer from '@/containers/datasets/layers/net-forest-carbon-flux/layer';
-import NetForestCarbonFluxLegend from '@/containers/datasets/layers/net-forest-carbon-flux/legend';
 import { ProjectsLayer } from '@/containers/datasets/layers/projects/layer';
-import ProjectsLegend from '@/containers/datasets/layers/projects/legend';
 import SoilCarbonDensityLayer from '@/containers/datasets/layers/soil-carbon-density/layer';
-import SoilCarbonDensityLegend from '@/containers/datasets/layers/soil-carbon-density/legend';
 import TreeCoverLayer from '@/containers/datasets/layers/tree-cover/layer';
-import TreeCoverLegend from '@/containers/datasets/layers/tree-cover/legend';
 import TreeCoverLossLayer from '@/containers/datasets/layers/tree-cover-loss/layer';
-import TreeCoverLossLegend from '@/containers/datasets/layers/tree-cover-loss/legend';
 
 import LandDegradationInfo from './constants/land-degradation';
 import TreeCoverInfo from './constants/tree-cover';
@@ -27,10 +20,6 @@ type DeckGLLayerIndex<T> = {
 
 type SimpleLayerIndex = {
   [key: number]: React.ComponentType<LayerProps>;
-};
-
-type LegendIndex = {
-  [key: string]: React.ComponentType<{ settings: LayerSettings }>;
 };
 
 type InfoIndex = {
@@ -49,16 +38,6 @@ const SIMPLE_LAYERS: SimpleLayerIndex = {
   5: ProjectsLayer,
   4: SoilCarbonDensityLayer,
   6: LandDegradationLayer,
-};
-
-export const LEGENDS: LegendIndex = {
-  5: ProjectsLegend,
-  1: TreeCoverLegend,
-  3: NetForestCarbonFluxLegend,
-  2: BiomassDensityLegend,
-  4: SoilCarbonDensityLegend,
-  6: LandDegradationLegend,
-  7: TreeCoverLossLegend,
 };
 
 export const INFO: InfoIndex = {

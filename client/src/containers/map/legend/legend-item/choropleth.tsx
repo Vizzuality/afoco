@@ -1,16 +1,19 @@
-import { useGetLayersId } from '@/types/generated/layer';
-import type { LayerSettings, LegendType } from '@/types/layers';
+'use-client';
+
+import type { LayerSettings } from '@/types/layers';
+import type { Legend } from '@/types/map';
 
 import LegendSettings from '@/containers/legend-settings';
 
-export default function Legend({ settings }: { settings: LayerSettings }) {
-  const { data } = useGetLayersId(Number(settings.id));
-
-  if (!data?.data?.attributes) return null;
-
-  const { legend_config, name } = data.data.attributes;
-  const { items } = legend_config as LegendType;
-
+const ChoroplethLegendItem = ({
+  name,
+  settings,
+  items,
+}: {
+  name: Legend['name'];
+  settings: LayerSettings;
+  items: Legend['items'];
+}) => {
   return (
     <div className="flex w-full flex-col space-y-2">
       <div className="flex w-full items-start justify-between">
@@ -47,4 +50,6 @@ export default function Legend({ settings }: { settings: LayerSettings }) {
       </div>
     </div>
   );
-}
+};
+
+export default ChoroplethLegendItem;
