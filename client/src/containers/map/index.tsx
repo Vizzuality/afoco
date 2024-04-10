@@ -229,7 +229,7 @@ export default function MapContainer() {
         cursor={cursor}
         minZoom={minZoom}
         maxZoom={maxZoom}
-        mapStyle="mapbox://styles/afoco/clsnhf69q005s01pk9czq8d8v?fresh=always"
+        mapStyle="mapbox://styles/afoco/clsnhf69q005s01pk9czq8d8v"
         interactiveLayerIds={layersInteractiveIds}
         onClick={handleMapClick}
         onMapViewStateChange={handleMapViewStateChange}

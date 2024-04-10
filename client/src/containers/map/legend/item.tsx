@@ -7,7 +7,6 @@ import { LEGENDS } from '@/containers/datasets/layers';
 const MapLegendItem = ({ settings }: { settings: LayerSettings }) => {
   const { id } = settings;
   const LegendDetailComponent = LEGENDS[id];
-
   return (
     LegendDetailComponent && (
       <div

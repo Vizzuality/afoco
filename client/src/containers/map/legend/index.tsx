@@ -33,7 +33,7 @@ const MapLegends = ({ className = '' }) => {
   const sortable = layers?.length > 1;
 
   return (
-    <div className="absolute bottom-6 right-6 z-10 flex w-full max-w-xs space-x-2">
+    <div className="absolute bottom-12 right-6 z-10 flex w-full max-w-xs space-x-2">
       {openLegend && (
         <Legend
           className={cn(

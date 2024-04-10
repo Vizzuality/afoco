@@ -25,7 +25,7 @@ export default function Sidebar() {
   const [sidebarTab, setSidebarTab] = useState<'projects' | 'countries' | 'datasets'>('projects');
 
   return (
-    <div className="rounded-8xl absolute bottom-0 left-2 top-0 z-20 my-2 w-16 bg-yellow-700 py-10 text-xs text-yellow-50 xl:left-4 xl:w-20">
+    <div className="rounded-8xl absolute bottom-0 left-2 top-0 z-20 my-2 w-16 bg-yellow-700 py-10 text-xs text-yellow-50 xl:left-3 xl:w-20">
       <div className="h-[88%]">
         <div className="mx-2 flex hidden items-center pb-12 xl:block">
           <Image src="/images/logo.svg" alt="logo" width={60} height={29} />
