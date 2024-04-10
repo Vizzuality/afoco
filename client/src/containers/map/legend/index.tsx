@@ -56,7 +56,7 @@ const MapLegends = ({ className = '' }) => {
         <Button
           variant="primary"
           size="base"
-          className="ml-auto mt-auto h-8 w-8 rounded-full p-0"
+          className="ml-auto mt-auto h-8 w-8 shrink-0 rounded-full p-0"
           onClick={handleOpenLegend}
         >
           {openLegend ? <ChevronsRight size={12} /> : <ChevronsLeft size={12} />}
