@@ -7,6 +7,7 @@ import { notFound, useParams } from 'next/navigation';
 import { useAtom } from 'jotai';
 import { ArrowLeft, ChevronRight, Share as Download, X } from 'lucide-react';
 
+import { cn } from '@/lib/classnames';
 import { formatCompactNumber } from '@/lib/utils/formats';
 import { DescriptionWithoutMarkdown } from '@/lib/utils/markdown';
 
@@ -157,7 +158,12 @@ export default function ProjectDetailPanel() {
               <div className="h-[208px] w-full rounded-t-[24px] bg-gray-200" />
             )}
 
-            <h2 className="absolute bottom-6 mx-6 text-lg font-semibold leading-6 text-white">
+            <h2
+              className={cn({
+                'absolute bottom-6 mx-6 text-lg font-semibold leading-6 text-white': true,
+                'text-base': !!data?.name?.length && data?.name?.length > 130,
+              })}
+            >
               {data?.name}
             </h2>
           </div>
@@ -200,7 +206,7 @@ export default function ProjectDetailPanel() {
         isError={isError || indicatorIsFetched}
         loaderClassName="mt-52"
       >
-        <ScrollArea className="mt-40 flex h-[58vh] flex-col space-y-8 px-5 xl:h-[57vh]">
+        <ScrollArea className="mt-40 flex h-[67vh] flex-col space-y-8 px-5 2xl:h-[74vh]">
           {data?.description && (
             <p className="pt-2 text-sm text-gray-500">
               <DescriptionWithoutMarkdown description={data?.description} />
@@ -234,47 +240,50 @@ export default function ProjectDetailPanel() {
             </div>
           </div>
           <div className="flex flex-col space-y-1 pt-6">
-            <h4 className="pb-1 text-xs font-medium uppercase text-yellow-900">Project Gallery</h4>
-            <div className="flex w-full space-x-1">
-              <div className="flex w-1/2 flex-col space-y-[1px]">
-                {!!data?.gallery?.data?.length &&
-                  data.gallery.data.map((img, index) => (
-                    <div key={index}>
-                      {index >= 0 && index % 5 === 0 && img?.attributes?.url && (
-                        <div className="flex h-[132px] space-x-1">
-                          <Image
-                            src={img?.attributes?.url}
-                            alt="AFOCO"
-                            width={165}
-                            height={170}
-                            className="h-full w-full object-cover"
-                          />
-                        </div>
-                      )}
-                    </div>
-                  ))}
-              </div>
+            {!!data?.gallery?.data?.length && (
+              <>
+                <h4 className="pb-1 text-xs font-medium uppercase text-yellow-900">
+                  Project Gallery
+                </h4>
+                <div className="flex w-full space-x-1">
+                  <div className="flex w-1/2 flex-col space-y-[1px]">
+                    {data.gallery.data.map((img, index) => (
+                      <div key={index}>
+                        {index >= 0 && index % 5 === 0 && (
+                          <div className="flex h-[132px] space-x-1">
+                            <Image
+                              src={img?.attributes?.url ?? '/images/projects/placeholder.png'}
+                              alt="AFOCO"
+                              width={165}
+                              height={170}
+                              className="h-full w-full object-cover"
+                            />
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
 
-              <div className="mb-auto grid w-1/2 grid-cols-2 gap-1">
-                {!!data?.gallery?.data?.length &&
-                  data.gallery.data.map(
-                    (img, index) =>
-                      index > 0 &&
-                      index % 5 != 0 &&
-                      img?.attributes?.url && (
-                        <div key={index} className="flex h-16 w-full space-x-1">
-                          <Image
-                            src={img?.attributes?.url}
-                            alt="AFOCO"
-                            width={165}
-                            height={165}
-                            className="h-full w-full object-cover"
-                          />
-                        </div>
-                      )
-                  )}
-              </div>
-            </div>
+                  <div className="mb-auto grid w-1/2 grid-cols-2 gap-1">
+                    {data.gallery.data.map(
+                      (img, index) =>
+                        index > 0 &&
+                        index % 5 != 0 && (
+                          <div key={index} className="flex h-16 w-full space-x-1">
+                            <Image
+                              src={img?.attributes?.url ?? '/images/projects/placeholder.png'}
+                              alt="AFOCO"
+                              width={165}
+                              height={165}
+                              className="h-full w-full object-cover"
+                            />
+                          </div>
+                        )
+                    )}
+                  </div>
+                </div>
+              </>
+            )}
 
             <p className="pb-16 text-sm text-gray-500">
               If you have pictures of this project to share, please sent them to{' '}
