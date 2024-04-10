@@ -246,7 +246,7 @@ export default function MapContainer() {
             <MapSettingsManager />
 
             <Legend />
-            {locationPopUp && locationPopUp.popup && (
+            {locationPopUp && locationPopUp.popup && projectTitle && (
               <PopupContainer
                 longitude={locationPopUp?.popup[1]}
                 latitude={locationPopUp?.popup[0]}
