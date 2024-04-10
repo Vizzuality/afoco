@@ -127,8 +127,10 @@ export default function MapContainer() {
 
   const handleMapClick = useCallback(
     (e: MapLayerMouseEvent) => {
-      const ProjectData = e.features && e.features.find(({ layer }) => layer.id === 'projects');
+      const ProjectData =
+        e.features && e.features.find(({ layer }) => layer.id === 'projects_circle');
       const ProjectsDataGeometry = e.features?.find(({ layer }) => layer.id === 'projects_fill');
+
       if (e.features && e.features.length && map) {
         if (ProjectData || ProjectsDataGeometry) {
           push(
