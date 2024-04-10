@@ -2,6 +2,7 @@
 
 import { cn } from '@/lib/classnames';
 
+import type { Layer } from '@/types/generated/strapi.schemas';
 import type { LayerSettings } from '@/types/layers';
 import type { Legend } from '@/types/map';
 
@@ -9,13 +10,10 @@ import LegendSettings from '@/containers/legend-settings';
 
 const GradientLegendItem = ({
   name,
-  items,
+  legend_config,
   settings,
-}: {
-  name: Legend['name'];
-  items: Legend['items'];
-  settings: LayerSettings;
-}) => {
+}: Layer & { settings: LayerSettings }) => {
+  const { items } = legend_config as Legend;
   return (
     <div className="flex w-full flex-col space-y-2">
       <div className="flex w-full items-start justify-between">

@@ -1,5 +1,6 @@
 'use-client';
 
+import type { Layer } from '@/types/generated/strapi.schemas';
 import type { LayerSettings } from '@/types/layers';
 import type { Legend } from '@/types/map';
 
@@ -7,13 +8,10 @@ import LegendSettings from '@/containers/legend-settings';
 
 const ChoroplethLegendItem = ({
   name,
+  legend_config,
   settings,
-  items,
-}: {
-  name: Legend['name'];
-  settings: LayerSettings;
-  items: Legend['items'];
-}) => {
+}: Layer & { settings: LayerSettings }) => {
+  const { items } = legend_config as Legend;
   return (
     <div className="flex w-full flex-col space-y-2">
       <div className="flex w-full items-start justify-between">

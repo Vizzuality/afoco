@@ -15,7 +15,7 @@ import { INFO } from '@/containers/datasets/layers';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogClose, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import { Switch } from '@/components/ui/switch';
-// TODO: replace with real type DatasetItemResonseDataItem
+
 export default function DatasetsItem(props: LayerListResponseDataItem) {
   const [layers, setLayersToURL] = useSyncLayers();
 

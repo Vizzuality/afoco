@@ -1484,9 +1484,9 @@ export interface Layer {
   params_config?: unknown;
   decode_function?: string;
   legend_config?: unknown;
-  description?: string;
-  info?: string;
   slug?: string;
+  description?: string;
+  dialog?: string;
   createdAt?: string;
   updatedAt?: string;
   publishedAt?: string;
@@ -1687,9 +1687,9 @@ export type LayerRequestData = {
   params_config?: unknown;
   decode_function?: string;
   legend_config?: unknown;
-  description?: string;
-  info?: unknown;
   slug?: string;
+  description?: string;
+  dialog?: string;
 };
 
 export interface LayerRequest {
