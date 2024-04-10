@@ -147,7 +147,9 @@ export default function FiltersContent() {
             data-cy="filter-country-select"
           >
             <div>
-              <SelectValue placeholder="Select country"> </SelectValue>
+              <SelectValue placeholder={filtersSettings.country ? '' : 'Select country'}>
+                {' '}
+              </SelectValue>
               {filtersSettings.country}
             </div>
           </SelectTrigger>
