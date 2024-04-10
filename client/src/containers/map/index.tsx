@@ -188,6 +188,11 @@ export default function MapContainer() {
       if (e.features?.length === 0) {
         setCursor('grab');
         setHoveredProjectMap(null);
+        setLocationPopUp({
+          popup: null,
+          position: null,
+          info: null,
+        });
       }
 
       if (!ProjectsLayer && map && hoveredStateIdProjectsCircle) {
@@ -246,7 +251,8 @@ export default function MapContainer() {
             <MapSettingsManager />
 
             <Legend />
-            {locationPopUp && locationPopUp.popup && projectTitle && (
+
+            {locationPopUp.popup && (
               <PopupContainer
                 longitude={locationPopUp?.popup[1]}
                 latitude={locationPopUp?.popup[0]}
