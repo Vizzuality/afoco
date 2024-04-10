@@ -3,6 +3,7 @@
 import { useGetLayers } from '@/types/generated/layer';
 
 import ContentLoader from '@/components/ui/loader';
+import { ScrollArea } from '@/components/ui/scroll-area';
 
 import DatasetsItem from './item';
 
@@ -24,19 +25,21 @@ export default function DatasetsList() {
       isError={isError}
       loaderClassName="mt-40"
     >
-      <h3 className="text-xs text-gray-500">Activate data layers on the map</h3>
-      <div className="mt-2 flex flex-col">
-        {layers
-          .sort((a, b) => {
-            if (a?.attributes?.slug === 'projects') return -1;
-            if (b?.attributes?.slug === 'projects') return 1;
-            return 0;
-          })
-          .map((l) => {
-            if (!l.id || !l.attributes) return null;
-            return <DatasetsItem key={l.id} {...l} />;
-          })}
-      </div>
+      <ScrollArea className="h-[84vh]">
+        <h3 className="text-xs text-gray-500">Activate data layers on the map</h3>
+        <div className="mb-10 mt-2 flex flex-col">
+          {layers
+            .sort((a, b) => {
+              if (a?.attributes?.slug === 'projects') return -1;
+              if (b?.attributes?.slug === 'projects') return 1;
+              return 0;
+            })
+            .map((l) => {
+              if (!l.id || !l.attributes) return null;
+              return <DatasetsItem key={l.id} {...l} />;
+            })}
+        </div>
+      </ScrollArea>
     </ContentLoader>
   );
 }
