@@ -67,7 +67,7 @@ export default function CountryDetailPanel() {
       },
     }
   );
-  const queryParams = useSyncQueryParams({ filters: true });
+  const queryParams = useSyncQueryParams();
   const jsonToCsv = (json: CountryCountryIndicatorFieldsDataItem['attributes'] & Country) => {
     let csv = '';
 

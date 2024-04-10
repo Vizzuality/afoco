@@ -15,7 +15,7 @@ import { useSyncQueryParams } from '@/hooks/datasets';
 
 export default function ProjectItem({ data }: { data: ProjectListResponseDataItem }) {
   const hoveredProjectMap = useAtomValue(hoveredProjectMapAtom);
-  const queryParams = useSyncQueryParams({ filters: true });
+  const queryParams = useSyncQueryParams();
 
   return (
     data && (
