@@ -1,18 +1,19 @@
+'use-client';
+
 import { cn } from '@/lib/classnames';
 
-import { useGetLayersId } from '@/types/generated/layer';
-import { LayerSettings, LegendType } from '@/types/layers';
+import type { Layer } from '@/types/generated/strapi.schemas';
+import type { LayerSettings } from '@/types/layers';
+import type { Legend } from '@/types/map';
 
 import LegendSettings from '@/containers/legend-settings';
 
-export default function Legend({ settings }: { settings: LayerSettings }) {
-  const { data } = useGetLayersId(Number(settings.id));
-
-  if (!data?.data?.attributes) return null;
-
-  const { legend_config, name } = data.data.attributes;
-  const { items } = legend_config as LegendType;
-
+const GradientLegendItem = ({
+  name,
+  legend_config,
+  settings,
+}: Layer & { settings: LayerSettings }) => {
+  const { items } = legend_config as Legend;
   return (
     <div className="flex w-full flex-col space-y-2">
       <div className="flex w-full items-start justify-between">
@@ -47,4 +48,6 @@ export default function Legend({ settings }: { settings: LayerSettings }) {
       </div>
     </div>
   );
-}
+};
+
+export default GradientLegendItem;

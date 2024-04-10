@@ -96,9 +96,11 @@ export interface SortableItemProps extends PropsWithChildren {
 
 export interface LegendTypeProps {
   className?: string;
+  type: 'choropleth' | 'gradient' | 'basic';
   items: Array<{
     value: string;
     color: string;
+    label?: string;
   }>;
 }
 

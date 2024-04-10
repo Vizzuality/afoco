@@ -13,6 +13,8 @@ export default function DatasetsList() {
 
   const layers = data?.data || [];
 
+  if (!layers.length) return null;
+
   return (
     <ContentLoader
       data={data}
