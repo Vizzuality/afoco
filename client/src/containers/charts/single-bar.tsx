@@ -21,11 +21,11 @@ export default function SingleBar({
           {formatCompactNumber(data['value'].total_funding || 0)}
         </p>
 
-        <div className="flex h-10 w-full rounded-[4px]">
+        <div className="flex h-10 w-full">
           <Tooltip>
             <TooltipTrigger asChild>
               <div
-                className="h-full cursor-pointer bg-[#70CCB0]"
+                className="h-full cursor-pointer rounded-bl-[4px] rounded-tl-[4px] bg-[#70CCB0] hover:border-2 hover:border-[#D48D00]"
                 style={{
                   width: `${(data['value'].afoco_funding * 100) / data['value'].total_funding}%`,
                 }}
@@ -45,7 +45,7 @@ export default function SingleBar({
           <Tooltip>
             <TooltipTrigger asChild>
               <div
-                className="h-full cursor-pointer bg-[#FFCC73]"
+                className="h-full cursor-pointer rounded-br-[4px] rounded-tr-[4px] bg-[#FFCC73] hover:border-2 hover:border-[#D48D00]"
                 style={{
                   width: `${(data['value'].national_funding * 100) / data['value'].total_funding}%`,
                 }}
