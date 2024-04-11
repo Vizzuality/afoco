@@ -10,18 +10,13 @@ import { useParams, useRouter } from 'next/navigation';
 import bbox from '@turf/bbox';
 import { useAtomValue, useSetAtom, useAtom } from 'jotai';
 
-import {
-  bboxAtom,
-  hoveredProjectMapAtom,
-  layersInteractiveIdsAtom,
-  openAtom,
-  tmpBboxAtom,
-} from '@/store';
+import { hoveredProjectMapAtom, layersInteractiveIdsAtom, openAtom, tmpBboxAtom } from '@/store';
 
 import { useGetProjects } from '@/types/generated/project';
 import { Bbox } from '@/types/map';
 
 import { useSyncQueryParams } from '@/hooks/datasets';
+import { useSyncBbox } from '@/hooks/datasets/sync-query';
 
 import PopupContainer from '@/containers/map/popup';
 import MapSettingsManager from '@/containers/map/settings/manager';
@@ -77,7 +72,8 @@ export default function MapContainer() {
   const setHoveredProjectMap = useSetAtom(hoveredProjectMapAtom);
   const [cursor, setCursor] = useState<'grab' | 'pointer'>('grab');
 
-  const [bboxA, setBbox] = useAtom(bboxAtom); // !TODO: useSyncQueryParams
+  const [bboxURL, setBboxURL] = useSyncBbox();
+
   const [tmpBbox, setTmpBbox] = useAtom(tmpBboxAtom);
   const sidebarOpen = useAtomValue(openAtom);
 
@@ -102,7 +98,7 @@ export default function MapContainer() {
     if (!params.id && map && initialViewState && initialViewState.bounds) {
       map.fitBounds(initialViewState.bounds, { padding: 100 });
     }
-  }, [params.id, map, tmpBbox, setBbox, initialViewState]);
+  }, [params.id, map, tmpBbox, setBboxURL, initialViewState]);
 
   const { data: projectTitle } = useGetProjects(
     {
@@ -127,10 +123,10 @@ export default function MapContainer() {
         .map((v: number) => {
           return parseFloat(v.toFixed(2));
         }) as Bbox;
-      setBbox(b);
+      setBboxURL(b);
       setTmpBbox(null);
     }
-  }, [map, setBbox, setTmpBbox]);
+  }, [map, setBboxURL, setTmpBbox]);
 
   useEffect(() => {
     if (map && map.getSource('projects') && params.id) {
@@ -292,8 +288,8 @@ export default function MapContainer() {
         data-cy="map"
         initialViewState={{
           ...initialViewState,
-          ...(bboxA && {
-            bounds: bboxA as LngLatBoundsLike,
+          ...(bboxURL && {
+            bounds: bboxURL as LngLatBoundsLike,
           }),
         }}
         bounds={tmpBounds}
