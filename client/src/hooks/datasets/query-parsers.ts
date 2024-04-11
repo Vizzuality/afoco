@@ -5,6 +5,8 @@ import type { MapSettings } from '@/types/map';
 
 import type { FilterSettings } from '@/containers/filters/types';
 
+export type ProjectsTab = 'statistics' | 'list';
+
 export const filtersParser = parseAsJson<FilterSettings>().withDefault({});
 
 export const layersParser = parseAsJson<LayerSettings[]>().withDefault([
@@ -17,6 +19,8 @@ export const basemapSettingsParser = parseAsJson<MapSettings>().withDefault({
   boundaries: false,
   roads: false,
 });
+
+export const projectsTabParser = parseAsJson<ProjectsTab>().withDefault('statistics');
 
 // query params parsers
 const searchQueryParams = {

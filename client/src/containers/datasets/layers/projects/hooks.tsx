@@ -3,7 +3,6 @@ import { useState } from 'react';
 import type { LayerProps } from 'react-map-gl';
 
 import { useAtomValue } from 'jotai';
-import { useSetAtom } from 'jotai';
 
 import { hoveredProjectMapAtom } from '@/store';
 

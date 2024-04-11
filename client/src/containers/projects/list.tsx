@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useState, MouseEvent } from 'react';
+import { MouseEvent, useCallback, useState } from 'react';
 
 import { useSetAtom } from 'jotai';
 import { Search, X } from 'lucide-react';
