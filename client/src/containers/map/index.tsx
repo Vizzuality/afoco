@@ -5,17 +5,18 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { LngLatBoundsLike, MapLayerMouseEvent, useMap } from 'react-map-gl';
 
 import dynamic from 'next/dynamic';
-import { useParams, useRouter } from 'next/navigation';
+import { useParams, usePathname, useRouter } from 'next/navigation';
 
 import bbox from '@turf/bbox';
 import { useAtomValue, useSetAtom, useAtom } from 'jotai';
 
-import { bboxAtom, hoveredProjectMapAtom, layersInteractiveIdsAtom, tmpBboxAtom } from '@/store';
+import { hoveredProjectMapAtom, layersInteractiveIdsAtom, openAtom, tmpBboxAtom } from '@/store';
 
 import { useGetProjects } from '@/types/generated/project';
 import { Bbox } from '@/types/map';
 
 import { useSyncQueryParams } from '@/hooks/datasets';
+import { useSyncBbox } from '@/hooks/datasets/sync-query';
 
 import PopupContainer from '@/containers/map/popup';
 import MapSettingsManager from '@/containers/map/settings/manager';
@@ -66,13 +67,16 @@ export default function MapContainer() {
   const { [id]: map } = useMap();
   const { push } = useRouter();
   const params = useParams<{ id: string }>();
+  const pathname = usePathname();
 
   const layersInteractiveIds = useAtomValue(layersInteractiveIdsAtom);
   const setHoveredProjectMap = useSetAtom(hoveredProjectMapAtom);
   const [cursor, setCursor] = useState<'grab' | 'pointer'>('grab');
 
-  const [bboxA, setBbox] = useAtom(bboxAtom);
+  const [bboxURL, setBboxURL] = useSyncBbox();
+
   const [tmpBbox, setTmpBbox] = useAtom(tmpBboxAtom);
+  const sidebarOpen = useAtomValue(openAtom);
 
   const tmpBounds: CustomMapProps['bounds'] = useMemo(() => {
     if (tmpBbox) {
@@ -82,20 +86,20 @@ export default function MapContainer() {
           padding: {
             top: 50,
             bottom: 50,
-            // left: sidebarOpen ? 640 + 50 : 50,
-            left: 50,
+            left: sidebarOpen ? 550 : 50,
             right: 50,
           },
+          maxZoom: 9,
         },
       };
     }
-  }, [tmpBbox]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [tmpBbox, sidebarOpen]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     if (!params.id && map && initialViewState && initialViewState.bounds) {
       map.fitBounds(initialViewState.bounds, { padding: 100 });
     }
-  }, [params.id, map, tmpBbox, setBbox, initialViewState]);
+  }, [params.id, map, tmpBbox, setBboxURL, initialViewState]);
 
   const { data: projectTitle } = useGetProjects(
     {
@@ -120,10 +124,25 @@ export default function MapContainer() {
         .map((v: number) => {
           return parseFloat(v.toFixed(2));
         }) as Bbox;
-      setBbox(b);
+      setBboxURL(b);
       setTmpBbox(null);
     }
-  }, [map, setBbox, setTmpBbox]);
+  }, [map, setBboxURL, setTmpBbox]);
+
+  useEffect(() => {
+    if (map && map.getSource('projects') && params.id && pathname.includes('projects')) {
+      const projectFeatures = map?.querySourceFeatures('projects', {
+        sourceLayer: 'areas_centroids_c',
+        filter: ['==', 'project_code', params.id],
+      });
+
+      const bboxTurf = bbox({
+        type: 'FeatureCollection',
+        features: projectFeatures,
+      });
+      setTmpBbox(bboxTurf as Bbox);
+    }
+  }, [map, params.id, setTmpBbox, pathname]);
 
   const handleMapClick = useCallback(
     (e: MapLayerMouseEvent) => {
@@ -141,10 +160,11 @@ export default function MapContainer() {
           );
         }
         const bboxTurf = bbox(e.features[0]) as LngLatBoundsLike;
-        map.fitBounds(bboxTurf, { padding: 100, maxZoom: 9 });
+        // map.fitBounds(bboxTurf, { padding: 100, maxZoom: 9 });
+        setTmpBbox(bboxTurf as Bbox);
       }
     },
-    [map, push, queryParams]
+    [map, push, queryParams, setTmpBbox]
   );
 
   let hoveredStateIdProjectsCircle: string | null = null;
@@ -269,8 +289,8 @@ export default function MapContainer() {
         data-cy="map"
         initialViewState={{
           ...initialViewState,
-          ...(bboxA && {
-            bounds: bboxA as LngLatBoundsLike,
+          ...(bboxURL && {
+            bounds: bboxURL as LngLatBoundsLike,
           }),
         }}
         bounds={tmpBounds}

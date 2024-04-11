@@ -22,11 +22,17 @@ export const basemapSettingsParser = parseAsJson<MapSettings>().withDefault({
 
 export const projectsTabParser = parseAsJson<ProjectsTab>().withDefault('statistics');
 
+export const bboxParser = parseAsJson<[number, number, number, number]>().withDefault([
+  68.711178, -11.476973, 131.333249, 21.087406,
+]);
+
 // query params parsers
 const searchQueryParams = {
   filters: filtersParser,
   layers: layersParser,
   settings: basemapSettingsParser,
+  tab: projectsTabParser,
+  box: bboxParser,
 };
 
 export const serialize = createSerializer(searchQueryParams);
