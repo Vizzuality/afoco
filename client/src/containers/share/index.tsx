@@ -4,12 +4,13 @@ import { EmailShareButton, FacebookShareButton, TwitterShareButton } from 'react
 
 import { usePathname } from 'next/navigation';
 
+import { X } from 'lucide-react';
 import { Facebook, Twitter, Mail, Share2 } from 'lucide-react';
 
 import { cn } from '@/lib/classnames';
 
 import { Button } from '@/components/ui/button';
-import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
+import { Dialog, DialogClose, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 
 export default function Share() {
@@ -114,6 +115,9 @@ export default function Share() {
             </Button>
           </div>
         </div>
+        <DialogClose className="ring-offset-background focus:ring-ring data-[state=open]:bg-accent absolute right-7 top-6 rounded-sm opacity-70 transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:text-green-900">
+          <X className="h-4 w-4 text-yellow-400" />
+        </DialogClose>
       </DialogContent>
     </Dialog>
   );
