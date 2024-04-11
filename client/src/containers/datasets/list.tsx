@@ -25,7 +25,7 @@ export default function DatasetsList() {
       isError={isError}
       loaderClassName="mt-40"
     >
-      <ScrollArea className="h-[84vh]">
+      <ScrollArea className="h-[84vh] px-6">
         <h3 className="text-xs text-gray-500">Activate data layers on the map</h3>
         <div className="mb-10 mt-2 flex flex-col">
           {layers
