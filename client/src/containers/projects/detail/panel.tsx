@@ -146,7 +146,7 @@ export default function ProjectDetailPanel() {
       <div className="absolute left-0 top-0 w-full">
         {data && indicators && (
           <div className="relative">
-            <div className="bg-gradient-image absolute z-10 h-52 w-full" />
+            <div className="bg-gradient-image absolute z-10 h-52 w-full rounded-t-[24px] bg-[#2B1A0066]" />
             {data.main_image?.data?.attributes?.url ? (
               <Image
                 src={data.main_image?.data?.attributes?.url}
