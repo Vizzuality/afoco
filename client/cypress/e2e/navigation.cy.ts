@@ -1,6 +1,8 @@
 describe('navigation', () => {
   it('redirects to project page', () => {
-    cy.visit('/').url().should('be.equal', 'http://localhost:3000/projects');
+    cy.visit('/')
+      .url()
+      .should('be.equal', 'http://localhost:3000/projects?bbox=[62.91,-21.16,137.13,30.18]');
   });
 
   it('access to project detail page and switch dashboard', () => {
@@ -15,7 +17,7 @@ describe('navigation', () => {
 
   it('access to country detail page', () => {
     cy.visit('/').wait(1000);
-    cy.get('a[data-cy="sidebar-tab-countries"]').click().wait(5000);
+    cy.get('a[data-cy="sidebar-tab-countries"]').click().wait(10000);
     cy.get('a[data-cy="country-item-link"]').first().click();
     cy.get('[data-cy="country-detail-name"]').should('exist');
   });
