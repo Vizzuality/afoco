@@ -146,6 +146,7 @@ export default function ProjectDetailPanel() {
       <div className="absolute left-0 top-0 w-full">
         {data && indicators && (
           <div className="relative">
+            <div className="bg-gradient-image absolute z-10 h-52 w-full" />
             {data.main_image?.data?.attributes?.url ? (
               <Image
                 src={data.main_image?.data?.attributes?.url}
@@ -160,7 +161,7 @@ export default function ProjectDetailPanel() {
 
             <h2
               className={cn({
-                'absolute bottom-6 mx-6 text-lg font-semibold leading-6 text-white': true,
+                'absolute bottom-6 z-20 mx-6 text-lg font-semibold leading-6 text-white': true,
                 'text-base': !!data?.name?.length && data?.name?.length > 130,
               })}
             >

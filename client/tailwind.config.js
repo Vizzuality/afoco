@@ -88,6 +88,7 @@ module.exports = {
         'gradient-to-b': 'linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%)',
         'gradient-tooltip': 'linear-gradient(0deg, #FFFFFF, #FFFFFF)',
         'gradient-to-t': 'linear-gradient(0deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%)',
+        'gradient-image': 'linear-gradient(0deg, #7E6230 0%, transparent 90%)',
       },
       boxShadow: {
         sm: '0px 1px 2px 0px #0000000D',
