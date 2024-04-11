@@ -1,6 +1,8 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
 import type { LayerProps } from 'react-map-gl';
+
+import { useParams } from 'next/navigation';
 
 import { useAtomValue } from 'jotai';
 
@@ -17,7 +19,7 @@ export function useLayers({
   settings: { opacity: LayerSettings['opacity']; visibility: LayerSettings['visibility'] };
 }): LayerProps[] {
   const hoveredProject = useAtomValue(hoveredProjectMapAtom);
-
+  const params = useParams<{ id: string }>();
   // To - Do add search to global state here and in filters component
   const [searchValue] = useState<string | null>(null);
   const [filtersSettings] = useSyncFilters();
@@ -126,7 +128,9 @@ export function useLayers({
     }
   );
 
-  const filteredProjects = data?.map((project) => project.attributes?.project_code);
+  const filteredProjects = useMemo(() => {
+    return params.id ? [params.id] : data?.map((project) => project.attributes?.project_code) || [];
+  }, [data, params.id]);
 
   // The layer is designed to react both to hover events directly on the map and to hover events over a specific project listed in a sidebar.
 

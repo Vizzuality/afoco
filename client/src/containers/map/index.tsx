@@ -82,7 +82,6 @@ export default function MapContainer() {
           padding: {
             top: 50,
             bottom: 50,
-            // left: sidebarOpen ? 640 + 50 : 50,
             left: 50,
             right: 50,
           },
@@ -125,6 +124,21 @@ export default function MapContainer() {
     }
   }, [map, setBbox, setTmpBbox]);
 
+  useEffect(() => {
+    if (map && map.getSource('projects') && params.id) {
+      const projectFeatures = map?.querySourceFeatures('projects', {
+        sourceLayer: 'areas_centroids_c',
+        filter: ['==', 'project_code', params.id],
+      });
+
+      const bboxTurf = bbox({
+        type: 'FeatureCollection',
+        features: projectFeatures,
+      }) as LngLatBoundsLike;
+      map.fitBounds(bboxTurf, { padding: 100, maxZoom: 9 });
+    }
+  }, [map, params.id]);
+
   const handleMapClick = useCallback(
     (e: MapLayerMouseEvent) => {
       const ProjectData =
@@ -141,6 +155,7 @@ export default function MapContainer() {
           );
         }
         const bboxTurf = bbox(e.features[0]) as LngLatBoundsLike;
+        console.log('bboxTurf', bboxTurf, 'e.features[0]', e.features[0]);
         map.fitBounds(bboxTurf, { padding: 100, maxZoom: 9 });
       }
     },
