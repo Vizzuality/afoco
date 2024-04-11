@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { MouseEvent, useCallback, useState } from 'react';
 
 import { useSetAtom } from 'jotai';
 import { Search, X } from 'lucide-react';
@@ -132,6 +132,14 @@ export default function ProjectsList() {
     }
   );
 
+  const handleHover = useCallback(
+    (e: MouseEvent<HTMLElement>) => {
+      const currentValue = e.currentTarget.getAttribute('data-value');
+      setHoveredProjectList(currentValue);
+    },
+    [setHoveredProjectList]
+  );
+
   const filtersLength = Object.entries(filtersSettings)
     .flat()
     .filter((el) => typeof el === 'object')
@@ -191,6 +199,7 @@ export default function ProjectsList() {
                   type="button"
                   key={project?.id}
                   data-value={project?.attributes?.project_code}
+                  onMouseEnter={handleHover}
                   onMouseLeave={() => setHoveredProjectList(null)}
                 >
                   <ProjectItem data={project} />
