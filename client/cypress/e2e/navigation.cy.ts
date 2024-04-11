@@ -18,7 +18,7 @@ describe('navigation', () => {
   it('access to country detail page', () => {
     cy.visit('/').wait(10000);
     cy.get('a[data-cy="sidebar-tab-countries"]').click({ force: true }).wait(1000);
-    cy.get('a[data-cy="country-item-link"]').first().click();
+    cy.get('a[data-cy="country-item-link"]').first().click().wait(10000);
     cy.get('[data-cy="country-detail-name"]').should('exist');
   });
 

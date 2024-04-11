@@ -5,7 +5,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { LngLatBoundsLike, MapLayerMouseEvent, useMap } from 'react-map-gl';
 
 import dynamic from 'next/dynamic';
-import { useParams, useRouter } from 'next/navigation';
+import { useParams, usePathname, useRouter } from 'next/navigation';
 
 import bbox from '@turf/bbox';
 import { useAtomValue, useSetAtom, useAtom } from 'jotai';
@@ -67,6 +67,7 @@ export default function MapContainer() {
   const { [id]: map } = useMap();
   const { push } = useRouter();
   const params = useParams<{ id: string }>();
+  const pathname = usePathname();
 
   const layersInteractiveIds = useAtomValue(layersInteractiveIdsAtom);
   const setHoveredProjectMap = useSetAtom(hoveredProjectMapAtom);
@@ -129,7 +130,7 @@ export default function MapContainer() {
   }, [map, setBboxURL, setTmpBbox]);
 
   useEffect(() => {
-    if (map && map.getSource('projects') && params.id) {
+    if (map && map.getSource('projects') && params.id && pathname.includes('projects')) {
       const projectFeatures = map?.querySourceFeatures('projects', {
         sourceLayer: 'areas_centroids_c',
         filter: ['==', 'project_code', params.id],
@@ -141,7 +142,7 @@ export default function MapContainer() {
       });
       setTmpBbox(bboxTurf as Bbox);
     }
-  }, [map, params.id, setTmpBbox]);
+  }, [map, params.id, setTmpBbox, pathname]);
 
   const handleMapClick = useCallback(
     (e: MapLayerMouseEvent) => {
