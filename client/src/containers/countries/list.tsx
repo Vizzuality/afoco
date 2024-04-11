@@ -39,7 +39,7 @@ export default function CountriesList() {
         {!!searchValue && (
           <button
             type="button"
-            className="absolute right-3 top-3"
+            className="absolute right-8 top-3.5"
             aria-label="reset-search"
             onClick={() => setSearchValue(null)}
           >
