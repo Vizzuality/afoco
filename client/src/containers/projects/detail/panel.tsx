@@ -288,7 +288,7 @@ export default function ProjectDetailPanel() {
             <p className="pb-16 text-sm text-gray-500">
               If you have pictures of this project to share, please sent them to{' '}
               <a className="underline hover:no-underline" href="mailto:email@afoco.com">
-                email@afoco.com
+                contact@afocosec.org
               </a>
             </p>
           </div>
