@@ -10,7 +10,13 @@ import { useParams, useRouter } from 'next/navigation';
 import bbox from '@turf/bbox';
 import { useAtomValue, useSetAtom, useAtom } from 'jotai';
 
-import { bboxAtom, hoveredProjectMapAtom, layersInteractiveIdsAtom, tmpBboxAtom } from '@/store';
+import {
+  bboxAtom,
+  hoveredProjectMapAtom,
+  layersInteractiveIdsAtom,
+  openAtom,
+  tmpBboxAtom,
+} from '@/store';
 
 import { useGetProjects } from '@/types/generated/project';
 import { Bbox } from '@/types/map';
@@ -71,8 +77,9 @@ export default function MapContainer() {
   const setHoveredProjectMap = useSetAtom(hoveredProjectMapAtom);
   const [cursor, setCursor] = useState<'grab' | 'pointer'>('grab');
 
-  const [bboxA, setBbox] = useAtom(bboxAtom);
+  const [bboxA, setBbox] = useAtom(bboxAtom); // !TODO: useSyncQueryParams
   const [tmpBbox, setTmpBbox] = useAtom(tmpBboxAtom);
+  const sidebarOpen = useAtomValue(openAtom);
 
   const tmpBounds: CustomMapProps['bounds'] = useMemo(() => {
     if (tmpBbox) {
@@ -82,13 +89,14 @@ export default function MapContainer() {
           padding: {
             top: 50,
             bottom: 50,
-            left: 50,
+            left: sidebarOpen ? 550 : 50,
             right: 50,
           },
+          maxZoom: 9,
         },
       };
     }
-  }, [tmpBbox]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [tmpBbox, sidebarOpen]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     if (!params.id && map && initialViewState && initialViewState.bounds) {
@@ -134,10 +142,10 @@ export default function MapContainer() {
       const bboxTurf = bbox({
         type: 'FeatureCollection',
         features: projectFeatures,
-      }) as LngLatBoundsLike;
-      map.fitBounds(bboxTurf, { padding: 100, maxZoom: 9 });
+      });
+      setTmpBbox(bboxTurf as Bbox);
     }
-  }, [map, params.id]);
+  }, [map, params.id, setTmpBbox]);
 
   const handleMapClick = useCallback(
     (e: MapLayerMouseEvent) => {
@@ -155,11 +163,11 @@ export default function MapContainer() {
           );
         }
         const bboxTurf = bbox(e.features[0]) as LngLatBoundsLike;
-        console.log('bboxTurf', bboxTurf, 'e.features[0]', e.features[0]);
-        map.fitBounds(bboxTurf, { padding: 100, maxZoom: 9 });
+        // map.fitBounds(bboxTurf, { padding: 100, maxZoom: 9 });
+        setTmpBbox(bboxTurf as Bbox);
       }
     },
-    [map, push, queryParams]
+    [map, push, queryParams, setTmpBbox]
   );
 
   let hoveredStateIdProjectsCircle: string | null = null;
