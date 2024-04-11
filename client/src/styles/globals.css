@@ -88,3 +88,33 @@ input[type="search"]::-webkit-search-decoration,
 input[type="search"]::-webkit-search-cancel-button,
 input[type="search"]::-webkit-search-results-button,
 input[type="search"]::-webkit-search-results-decoration { display: none; }
+
+.info-dialog {
+  color: #9CA3AF;
+  font-size: 12px;
+  max-width: none;
+
+  h3 {
+    color: #9CA3AF;
+    font-size: 12px;
+    font-weight: 600;
+    margin-top: 10px;
+    text-transform: uppercase;
+  }
+
+  a {
+    color: #EFB82A;
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  p {
+    border-bottom: dashed 1px #D8E4E2;
+    padding-bottom: 12px;
+  }
+
+  p:last-of-type {
+    border-bottom: none;
+  }
+}
