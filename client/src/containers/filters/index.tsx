@@ -37,7 +37,7 @@ export default function Filters({ nrResults = 0 }: { nrResults: number }) {
               </Button>
             </DialogTrigger>
 
-            <DialogContent>
+            <DialogContent overlay>
               <DialogHeader className="text-xl font-semibold leading-7 text-green-900">
                 <DialogTitle>Filters</DialogTitle>
               </DialogHeader>

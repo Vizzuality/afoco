@@ -51,10 +51,13 @@ const CustomTooltip = ({
   if (!active || !payload || !payload.length) return null;
   return (
     <div className="shadow-tooltip bg-gradient-tooltip m-auto rounded-md border p-2">
-      <p className="text-center">{label}</p>
       <div className="flex space-x-2">
-        <p>Total</p>
-        <p>{payload[0].value}</p>
+        <p>Value</p>
+        <p className="font-bold">{payload[0].value}</p>
+      </div>
+      <div className="flex space-x-2">
+        <p>Year:</p>
+        <p className="font-bold">{label}</p>
       </div>
     </div>
   );
