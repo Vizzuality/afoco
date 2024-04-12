@@ -34,15 +34,23 @@ export default function SingleBar({
 
             <TooltipContent side="top" align="end">
               <div className="flex flex-col items-center p-2 text-base">
-                <p>{formatCompactNumber(data['value'].afoco_funding || 0)}</p>
                 <p>
-                  {((data['value'].afoco_funding * 100) / data['value'].total_funding).toFixed()}%
+                  Funding:
+                  <span className="font-bold">
+                    {' '}
+                    {formatCompactNumber(data['value'].afoco_funding || 0)}
+                  </span>
+                  <span>
+                    {' '}
+                    ({((data['value'].afoco_funding * 100) / data['value'].total_funding).toFixed()}
+                    %)
+                  </span>
                 </p>
               </div>
             </TooltipContent>
           </Tooltip>
 
-          <Tooltip>
+          <Tooltip delayDuration={0}>
             <TooltipTrigger asChild>
               <div
                 className="h-full cursor-pointer rounded-br-[4px] rounded-tr-[4px] bg-[#FFCC73] hover:border-2 hover:border-[#D48D00]"
@@ -53,10 +61,21 @@ export default function SingleBar({
             </TooltipTrigger>
             <TooltipContent side="top" align="end">
               <div className="flex flex-col items-center p-2 text-base">
-                <p>{formatCompactNumber(data['value'].national_funding || 0)}</p>
                 <p>
-                  {((data['value'].national_funding * 100) / data['value'].total_funding).toFixed()}
-                  %
+                  Funding:
+                  <span className="font-bold">
+                    {' '}
+                    {formatCompactNumber(data['value'].national_funding || 0)}
+                  </span>
+                  <span>
+                    {' '}
+                    (
+                    {(
+                      (data['value'].national_funding * 100) /
+                      data['value'].total_funding
+                    ).toFixed()}
+                    %)
+                  </span>
                 </p>
               </div>
             </TooltipContent>

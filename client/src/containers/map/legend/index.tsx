@@ -35,8 +35,8 @@ const MapLegends = ({ className = '' }) => {
 
   return (
     <div className="absolute bottom-12 right-6 z-10 flex w-full max-w-xs space-x-2">
-      <ScrollArea className="flex h-72 w-full max-w-xs flex-col xl:h-full">
-        {openLegend && (
+      {openLegend && (
+        <ScrollArea className="flex h-72 w-full max-w-xs flex-col xl:h-full">
           <Legend
             className={cn(
               'animate-in fade-in-50 max-h-[calc(100vh_-_theme(space.16)_-_theme(space.6)_-_theme(space.48))] duration-300',
@@ -57,8 +57,8 @@ const MapLegends = ({ className = '' }) => {
               return <MapLegendItem key={layer.id} settings={settings} />;
             })}
           </Legend>
-        )}
-      </ScrollArea>
+        </ScrollArea>
+      )}
       {layers.length > 0 && (
         <Button
           variant="primary"
