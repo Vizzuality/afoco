@@ -10,6 +10,7 @@ import MapLegendItem from '@/containers/map/legend/legend-item';
 
 import Legend from '@/components/map/legend';
 import { Button } from '@/components/ui/button';
+import { ScrollArea } from '@/components/ui/scroll-area';
 
 const MapLegends = ({ className = '' }) => {
   const [layers] = useSyncLayers();
@@ -34,24 +35,30 @@ const MapLegends = ({ className = '' }) => {
 
   return (
     <div className="absolute bottom-12 right-6 z-10 flex w-full max-w-xs space-x-2">
-      {openLegend && (
-        <Legend
-          className={cn(
-            'animate-in fade-in-50 max-h-[calc(100vh_-_theme(space.16)_-_theme(space.6)_-_theme(space.48))] duration-300',
-            className
-          )}
-          sortable={{
-            enabled: sortable,
-            handle: true,
-          }}
-          onChangeOrder={handleChangeOrder}
-        >
-          {layers.map((layer) => {
-            const settings = { opacity: layer.opacity, visibility: layer.visibility, id: layer.id };
-            return <MapLegendItem key={layer.id} settings={settings} />;
-          })}
-        </Legend>
-      )}
+      <ScrollArea className="flex h-72 w-full max-w-xs flex-col xl:h-full">
+        {openLegend && (
+          <Legend
+            className={cn(
+              'animate-in fade-in-50 max-h-[calc(100vh_-_theme(space.16)_-_theme(space.6)_-_theme(space.48))] duration-300',
+              className
+            )}
+            sortable={{
+              enabled: sortable,
+              handle: true,
+            }}
+            onChangeOrder={handleChangeOrder}
+          >
+            {layers.map((layer) => {
+              const settings = {
+                opacity: layer.opacity,
+                visibility: layer.visibility,
+                id: layer.id,
+              };
+              return <MapLegendItem key={layer.id} settings={settings} />;
+            })}
+          </Legend>
+        )}
+      </ScrollArea>
       {layers.length > 0 && (
         <Button
           variant="primary"
