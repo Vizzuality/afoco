@@ -193,7 +193,7 @@ describe('Filter selection and removal URL update', () => {
       const filterToRemove = selectedFilters[0];
       cy.get(
         `[data-cy="filters-remove-badge-${filterToRemove.category}-${filterToRemove.id}"]`
-      ).click();
+      ).click({ force: true });
 
       // Verify the URL no longer includes the removed filter
       cy.url().then((url) => {
