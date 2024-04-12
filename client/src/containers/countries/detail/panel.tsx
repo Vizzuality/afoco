@@ -7,6 +7,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { notFound, useParams } from 'next/navigation';
 
+import { X } from 'lucide-react';
 import { ArrowLeft, Download, ExternalLink, Info } from 'lucide-react';
 import remarkGfm from 'remark-gfm';
 
@@ -31,7 +32,7 @@ import { COLUMNS, CSV_COLUMNS_ORDER } from '@/containers/countries/detail/consta
 import Share from '@/containers/share';
 
 import { Button } from '@/components/ui/button';
-import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
+import { Dialog, DialogClose, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import ContentLoader from '@/components/ui/loader';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
@@ -192,7 +193,7 @@ export default function CountryDetailPanel() {
                   )}
                   <p>{data?.data?.attributes?.name}</p>
                 </div>
-                <div className='after:rounded-b-4xl z-10 flex flex-col after:absolute after:bottom-0.5 after:left-0 after:h-10 after:w-full after:bg-gradient-to-b after:from-white/0 after:to-white/100 after:content-[""]'>
+                <div className='after:rounded-b-4xl z-10 flex flex-col after:absolute after:bottom-0.5 after:left-0 after:h-10 after:w-full after:bg-gradient-to-t after:from-white/0 after:to-white/100 after:content-[""]'>
                   <div className="no-scrollbar max-h-[65vh] overflow-y-auto pb-10 text-sm text-gray-900">
                     <Markdown remarkPlugins={[remarkGfm]} className="prose markdown-links">
                       {data?.data?.attributes?.description}
@@ -200,6 +201,9 @@ export default function CountryDetailPanel() {
                   </div>
                 </div>
               </div>
+              <DialogClose className="ring-offset-background focus:ring-ring data-[state=open]:bg-accent absolute right-8 top-9 rounded-sm opacity-70 transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:text-green-900">
+                <X className="h-4 w-4 text-yellow-400" />
+              </DialogClose>
             </DialogContent>
           </Dialog>
 
