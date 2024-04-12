@@ -146,22 +146,36 @@ export default function ProjectDetailPanel() {
       <div className="absolute left-0 top-0 w-full">
         {data && indicators && (
           <div className="relative">
-            {data.main_image?.data?.attributes?.url ? (
-              <Image
-                src={data.main_image?.data?.attributes?.url}
-                alt="AFOCO"
-                width={300}
-                height={300}
-                className="h-52 w-full rounded-t-[24px] object-cover"
-              />
-            ) : (
-              <div className="h-[208px] w-full rounded-t-[24px] bg-gray-200" />
+            {data.main_image?.data?.attributes?.url && (
+              <div>
+                <div className="bg-gradient-image absolute z-10 h-52 w-full rounded-t-[24px] bg-[#2B1A0066]" />
+
+                <Image
+                  src={data.main_image?.data?.attributes?.url}
+                  alt="AFOCO"
+                  width={300}
+                  height={300}
+                  className="h-52 w-full rounded-t-[24px] object-cover"
+                />
+              </div>
+            )}
+            {!data.main_image?.data?.attributes?.url && (
+              <div>
+                <Image
+                  src={'/images/projects/detail-placeholder.png'}
+                  alt="AFOCO"
+                  width={300}
+                  height={300}
+                  className="h-52 w-full rounded-t-[24px] object-cover"
+                />
+              </div>
             )}
 
             <h2
               className={cn({
-                'absolute bottom-6 mx-6 text-lg font-semibold leading-6 text-white': true,
-                'text-base': !!data?.name?.length && data?.name?.length > 130,
+                'absolute bottom-6 z-20 mx-6 text-lg font-semibold leading-6 text-white': true,
+                'text-base': !!data?.name?.length && data?.name?.length > 120,
+                'text-yellow-900': !data.main_image?.data?.attributes?.url,
               })}
             >
               {data?.name}
