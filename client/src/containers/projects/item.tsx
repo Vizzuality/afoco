@@ -31,7 +31,8 @@ export default function ProjectItem({ data }: { data: ProjectListResponseDataIte
       >
         <Image
           src={
-            data.attributes?.main_image?.data?.attributes?.url || '/images/projects/placeholder.png'
+            data.attributes?.main_image?.data?.attributes?.url ||
+            '/images/projects/item-placeholder.png'
           }
           alt="Project Image"
           width={350}
