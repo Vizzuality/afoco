@@ -72,10 +72,18 @@ export default function Sidebar() {
               <p className="hidden capitalize xl:block">{name}</p>
             </Link>
           ))}
-          <div className="mt-auto flex flex-col items-center space-y-2">
-            <HelpCircle className="text-yellow-50" size={24} strokeWidth={1} />
+          <a
+            className="mt-auto flex flex-col items-center space-y-2"
+            href="https://afocosec.org/contact/"
+            target="_blank"
+          >
+            <HelpCircle
+              className="rounded-full text-yellow-50 hover:bg-yellow-50 hover:text-yellow-600"
+              size={24}
+              strokeWidth={1}
+            />
             <p className="text-base">Help</p>
-          </div>
+          </a>
         </ul>
       </div>
     </div>
