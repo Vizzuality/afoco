@@ -72,12 +72,10 @@ export default function MapContainer() {
   const layersInteractiveIds = useAtomValue(layersInteractiveIdsAtom);
   const setHoveredProjectMap = useSetAtom(hoveredProjectMapAtom);
   const [cursor, setCursor] = useState<'grab' | 'pointer'>('grab');
-
   const [bboxURL, setBboxURL] = useSyncBbox();
 
   const [tmpBbox, setTmpBbox] = useAtom(tmpBboxAtom);
   const sidebarOpen = useAtomValue(openAtom);
-
   const tmpBounds: CustomMapProps['bounds'] = useMemo(() => {
     if (tmpBbox) {
       return {
@@ -94,12 +92,6 @@ export default function MapContainer() {
       };
     }
   }, [tmpBbox, sidebarOpen]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  useEffect(() => {
-    if (!params.id && map && initialViewState && initialViewState.bounds) {
-      map.fitBounds(initialViewState.bounds, { padding: 100 });
-    }
-  }, [params.id, map, tmpBbox, setBboxURL, initialViewState]);
 
   const { data: projectTitle } = useGetProjects(
     {
@@ -130,7 +122,7 @@ export default function MapContainer() {
   }, [map, setBboxURL, setTmpBbox]);
 
   useEffect(() => {
-    if (map && map.getSource('projects') && params.id && pathname.includes('projects')) {
+    if (map && map?.getSource('projects') && params.id && pathname.includes('projects')) {
       const projectFeatures = map?.querySourceFeatures('projects', {
         sourceLayer: 'areas_centroids_c',
         filter: ['==', 'project_code', params.id],

@@ -22,7 +22,7 @@ export const popupAtom = atom<MapLayerMouseEvent | null>(null);
 export const mapSettingsAtom = atom<MapSettings>({
   basemap: 'basemap-light',
   labels: 'dark',
-  boundaries: false,
+  boundaries: true,
   roads: false,
 });
 

@@ -1,8 +1,8 @@
 'use client';
 
 import Image from 'next/image';
-import Link from 'next/link';
 import { notFound, useParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
 import { useAtom } from 'jotai';
 import { ArrowLeft, ChevronRight, Share as Download, X } from 'lucide-react';
@@ -21,8 +21,6 @@ import {
   ProjectProjectIndicatorFields,
 } from '@/types/generated/strapi.schemas';
 
-import { useSyncQueryParams } from '@/hooks/datasets';
-
 import { COLUMNS, CSV_COLUMNS_ORDER } from '@/containers/projects/detail/constants';
 import Share from '@/containers/share';
 
@@ -36,8 +34,7 @@ import ProjectDashboard from './dashboard';
 
 export default function ProjectDetailPanel() {
   const params = useParams<{ id: string }>();
-
-  const queryParams = useSyncQueryParams();
+  const router = useRouter();
   const [dashboard, setDashboard] = useAtom(dashboardAtom);
 
   const { data, isFetching, isFetched, isError } = useGetProjects(
@@ -184,13 +181,14 @@ export default function ProjectDetailPanel() {
         )}
       </div>
       <div className="absolute left-6 right-6 top-4 z-10 flex justify-between">
-        <Link
-          href={`/projects${queryParams}`}
+        <button
           className="flex items-center space-x-1 rounded bg-yellow-100 px-2 py-1 text-xs text-yellow-900 transition-all hover:bg-yellow-400"
+          type="button"
+          onClick={() => router.back()}
         >
           <ArrowLeft className="h-4 w-4 text-yellow-900" />
           <p className="leading-6">Back</p>
-        </Link>
+        </button>
         {data && indicators && (
           <div className="flex items-center space-x-2">
             <Tooltip>

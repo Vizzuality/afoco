@@ -69,7 +69,7 @@ export const MapMapbox: FC<CustomMapProps> = ({
       // enabling fly mode avoids the map to be interrupted during the bounds transition
       setFlying(true);
 
-      mapRef.fitBounds(
+      mapRef?.fitBounds(
         [
           [bbox[0], bbox[1]],
           [bbox[2], bbox[3]],

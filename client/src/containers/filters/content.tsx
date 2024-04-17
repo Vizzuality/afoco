@@ -105,7 +105,8 @@ export default function FiltersContent() {
     { populate: 'name' },
     {
       query: {
-        select: (response) => response?.data && response?.data.map((d) => d?.attributes?.name),
+        select: (response) =>
+          response?.data && response?.data.map((d) => d?.attributes?.name)?.sort(),
       },
     }
   );

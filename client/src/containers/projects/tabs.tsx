@@ -9,6 +9,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 export default function ProjectsTabs() {
   const [projectsTab, setProjectsTab] = useSyncProjectsTab();
+
   return (
     <Tabs defaultValue={projectsTab}>
       <TabsList className="w-full px-5">

@@ -1,27 +1,27 @@
 'use client';
 
-import { useState } from 'react';
+// import { useState } from 'react';
 
-import { Search, X } from 'lucide-react';
+// import { Search, X } from 'lucide-react';
 
 import { useGetCountries } from '@/types/generated/country';
 
 import CountryItem from '@/containers/countries/item';
 
-import { Input } from '@/components/ui/input';
+// import { Input } from '@/components/ui/input';
 import ContentLoader from '@/components/ui/loader';
 import { ScrollArea } from '@/components/ui/scroll-area';
 
 export default function CountriesList() {
-  const [searchValue, setSearchValue] = useState<string | null>(null);
+  // const [searchValue, setSearchValue] = useState<string | null>(null);
 
   const { data, isFetching, isFetched, isError } = useGetCountries({
     populate: '*',
-    filters: {
-      name: {
-        $containsi: searchValue,
-      },
-    },
+    // filters: {
+    //   name: {
+    //     $containsi: searchValue,
+    //   },
+    // },
     sort: 'name',
   });
 
