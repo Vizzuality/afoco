@@ -27,7 +27,7 @@ export default function CountriesList() {
 
   return (
     <div className="flex flex-col space-y-8">
-      <div className="relative px-5">
+      {/* <div className="relative px-5">
         <Input
           type="search"
           placeholder="Search country"
@@ -46,7 +46,7 @@ export default function CountriesList() {
             <X className="h-3.5 w-3.5 cursor-pointer text-yellow-900" />
           </button>
         )}
-      </div>
+      </div> */}
       <ContentLoader
         data={data?.data}
         isPlaceholderData={false}
