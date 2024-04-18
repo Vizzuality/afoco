@@ -164,6 +164,7 @@ export default function MapContainer() {
 
   const handleMouseMove = useCallback(
     (e: MapLayerMouseEvent) => {
+      console.log(map?.getStyle()?.layers);
       const ProjectsLayer =
         e?.features && e?.features.find(({ layer }) => layer.id === 'projects_circle');
       const ProjectsFillLayer =
