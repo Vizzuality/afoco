@@ -70,7 +70,11 @@ export default function Stats() {
                       <TooltipContent className="max-w-[200px] p-2">
                         <p className="text-sm text-yellow-900">
                           <Markdown remarkPlugins={[remarkGfm]} className="prose text-xs">
-                            The total value invested to the projects in the AFoCO Member Countries.
+                            The total amount of funds invested in programs and projects in AFoCO
+                            Member Countries is composed of AFoCO Funding (from the Korea Forest
+                            Service), Other Funds (from other development aid agencies), and
+                            National Contributions (in the form of either cash and/or in-kind
+                            contributions from Member Countries).
                           </Markdown>
                         </p>
                       </TooltipContent>
