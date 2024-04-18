@@ -16,7 +16,7 @@ export const layersParser = parseAsJson<LayerSettings[]>().withDefault([
 export const basemapSettingsParser = parseAsJson<MapSettings>().withDefault({
   basemap: 'basemap-light',
   labels: 'dark',
-  boundaries: false,
+  boundaries: true,
   roads: false,
 });
 
