@@ -109,7 +109,21 @@ export default function CountryDetailPanel() {
   };
 
   const downloadCSVCountryData = () => {
-    const dataToDownload = { ...indicators, ...data?.data?.attributes };
+    const parsedIndicatorsData = Object.fromEntries(
+      Object.entries(indicators as { [key: string]: { value: unknown; unit: string } })
+        .filter(([key, { unit }]) => unit !== '') // Keep only entries with non-empty units
+        .map(([key, { value, unit }]) => {
+          // If value is an object, maintain its structure and append the unit separately
+          if (typeof value === 'object' && value !== null) {
+            return [key, { ...value, unit }];
+          } else {
+            // For simple values, format as string with the unit
+            return [key, `${value} ${unit}`];
+          }
+        })
+    );
+
+    const dataToDownload = { ...parsedIndicatorsData, ...data?.data?.attributes };
 
     const csvData = jsonToCsv(dataToDownload || {}); // Provide a default value of an empty object if data is undefined
     const blob = new Blob([csvData], { type: 'text/csv' });
