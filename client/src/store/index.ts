@@ -1,8 +1,6 @@
 import { atom } from 'jotai';
 import { MapLayerMouseEvent } from 'mapbox-gl';
 
-import type { MapSettings } from '@/types/map';
-
 // Sidebar and menus
 export const openAtom = atom<boolean>(true);
 
@@ -18,13 +16,6 @@ export const tmpBboxAtom = atom<readonly [number, number, number, number] | null
 export const layersInteractiveIdsAtom = atom<string[]>([]);
 
 export const popupAtom = atom<MapLayerMouseEvent | null>(null);
-
-export const mapSettingsAtom = atom<MapSettings>({
-  basemap: 'basemap-light',
-  labels: 'dark',
-  boundaries: false,
-  roads: false,
-});
 
 // set project code when hovering a project in the map or over sidebar list
 export const hoveredProjectMapAtom = atom<string | null>(null);

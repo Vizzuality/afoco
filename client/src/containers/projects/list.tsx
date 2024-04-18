@@ -181,9 +181,11 @@ export default function ProjectsList() {
         isError={isError}
         loaderClassName="mt-28"
       >
+        {/* To - Do add total of projects to API */}
         <p className="px-6 py-4 text-xs text-gray-500">
-          All <span className="rounded-xl bg-yellow-200 px-1 text-yellow-700">{data?.length}</span>{' '}
-          projects
+          Showing{' '}
+          <span className="rounded-xl bg-yellow-200 px-1 text-yellow-700">{data?.length}</span> out
+          of all 46 projects
         </p>
         <ScrollArea
           className={cn({

@@ -1,33 +1,33 @@
 'use client';
 
-import { useState } from 'react';
+// import { useState } from 'react';
 
-import { Search, X } from 'lucide-react';
+// import { Search, X } from 'lucide-react';
 
 import { useGetCountries } from '@/types/generated/country';
 
 import CountryItem from '@/containers/countries/item';
 
-import { Input } from '@/components/ui/input';
+// import { Input } from '@/components/ui/input';
 import ContentLoader from '@/components/ui/loader';
 import { ScrollArea } from '@/components/ui/scroll-area';
 
 export default function CountriesList() {
-  const [searchValue, setSearchValue] = useState<string | null>(null);
+  // const [searchValue, setSearchValue] = useState<string | null>(null);
 
   const { data, isFetching, isFetched, isError } = useGetCountries({
     populate: '*',
-    filters: {
-      name: {
-        $containsi: searchValue,
-      },
-    },
+    // filters: {
+    //   name: {
+    //     $containsi: searchValue,
+    //   },
+    // },
     sort: 'name',
   });
 
   return (
     <div className="flex flex-col space-y-8">
-      <div className="relative px-5">
+      {/* <div className="relative px-5">
         <Input
           type="search"
           placeholder="Search country"
@@ -46,7 +46,7 @@ export default function CountriesList() {
             <X className="h-3.5 w-3.5 cursor-pointer text-yellow-900" />
           </button>
         )}
-      </div>
+      </div> */}
       <ContentLoader
         data={data?.data}
         isPlaceholderData={false}

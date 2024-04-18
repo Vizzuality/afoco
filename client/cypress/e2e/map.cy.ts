@@ -102,7 +102,7 @@ describe('Map - settings. Updates URL accordingly on basemap selection', () => {
 describe('Map - settings. Updates URL accordingly on layers selection', () => {
   it('Updates URL on roads layer selection', () => {
     cy.visit(
-      '/projects?basemap-settings={"basemap":"basemap-light","labels":"light","boundaries":false,"roads":false}'
+      '/projects?basemap-settings={"basemap":"basemap-light","labels":"light","boundaries":true,"roads":false}'
     );
     cy.get('[data-cy="map-settings-button"]').click();
     cy.get('[data-cy="map-settings-content"]').should('be.visible');
@@ -129,19 +129,13 @@ describe('Map - settings. Updates URL accordingly on layers selection', () => {
 
   it('Updates URL on boundaries selection', () => {
     cy.visit(
-      '/projects?basemap-settings={"basemap":"basemap-light","labels":"light","boundaries":false,"roads":false}'
+      '/projects?basemap-settings={"basemap":"basemap-light","labels":"light","boundaries":true,"roads":false}'
     );
     cy.get('[data-cy="map-settings-button"]').click();
     cy.get('[data-cy="map-settings-content"]').should('be.visible');
     cy.get('[data-cy="map-settings-labels"]').should('be.visible');
 
     // Boundaries layer should be off by default
-    cy.url().should((url) => {
-      const decodedUrl = decodeURIComponent(url);
-      expect(decodedUrl).to.include('"boundaries":false');
-    });
-
-    cy.get('[data-cy="map-settings-boundaries-switcher"]').click();
     cy.url().should((url) => {
       const decodedUrl = decodeURIComponent(url);
       expect(decodedUrl).to.include('"boundaries":true');
@@ -151,6 +145,12 @@ describe('Map - settings. Updates URL accordingly on layers selection', () => {
     cy.url().should((url) => {
       const decodedUrl = decodeURIComponent(url);
       expect(decodedUrl).to.include('"boundaries":false');
+    });
+
+    cy.get('[data-cy="map-settings-boundaries-switcher"]').click();
+    cy.url().should((url) => {
+      const decodedUrl = decodeURIComponent(url);
+      expect(decodedUrl).to.include('"boundaries":true');
     });
   });
 });
