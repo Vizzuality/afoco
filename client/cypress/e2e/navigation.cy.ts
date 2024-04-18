@@ -1,8 +1,6 @@
 describe('navigation', () => {
   it('redirects to project page', () => {
-    cy.visit('/')
-      .url()
-      .should('be.equal', 'http://localhost:3000/projects?bbox=[62.91,-21.16,137.13,30.18]');
+    cy.visit('/').url().should('be.equal', 'http://localhost:3000/projects');
   });
 
   it('access to project detail page and switch dashboard', () => {

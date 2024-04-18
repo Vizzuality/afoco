@@ -28,7 +28,7 @@ const Roads = () => {
       />
 
       <Label className="text-sm leading-5" htmlFor="roads-checkbox">
-        Roads
+        Roads <span className="font-light text-gray-400">(Visible only at big zoom levels)</span>
       </Label>
     </div>
   );

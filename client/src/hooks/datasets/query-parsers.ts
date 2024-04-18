@@ -5,6 +5,8 @@ import type { MapSettings } from '@/types/map';
 
 import type { FilterSettings } from '@/containers/filters/types';
 
+import { DEFAULT_BBOX } from '@/components/map/constants';
+
 export type ProjectsTab = 'statistics' | 'list';
 
 export const filtersParser = parseAsJson<FilterSettings>().withDefault({});
@@ -22,9 +24,7 @@ export const basemapSettingsParser = parseAsJson<MapSettings>().withDefault({
 
 export const projectsTabParser = parseAsJson<ProjectsTab>().withDefault('statistics');
 
-export const bboxParser = parseAsJson<[number, number, number, number]>().withDefault([
-  68.711178, -11.476973, 131.333249, 21.087406,
-]);
+export const bboxParser = parseAsJson<[number, number, number, number]>().withDefault(DEFAULT_BBOX);
 
 // query params parsers
 const searchQueryParams = {

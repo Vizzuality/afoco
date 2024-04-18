@@ -4,10 +4,14 @@ import { useCallback } from 'react';
 
 import Markdown from 'react-markdown';
 
+import { useSetAtom } from 'jotai';
 import { Info as InfoIcon } from 'lucide-react';
 import remarkGfm from 'remark-gfm';
 
+import { tmpBboxAtom } from '@/store';
+
 import type { LayerListResponseDataItem } from '@/types/generated/strapi.schemas';
+import type { Bbox } from '@/types/map';
 
 import { useSyncLayers } from '@/hooks/datasets/sync-query';
 
@@ -17,16 +21,20 @@ import { Switch } from '@/components/ui/switch';
 
 export default function DatasetsItem(props: LayerListResponseDataItem) {
   const [layers, setLayersToURL] = useSyncLayers();
+  const setTmpBbox = useSetAtom(tmpBboxAtom);
 
   const handleLayerChange = useCallback(() => {
     if (!layers.some((l) => l.id === props.id)) {
       setLayersToURL([...layers, { id: props.id, opacity: 1, visibility: 'visible' }]);
+      if (props.id === 6) {
+        setTmpBbox([99.05, 19.5, 107.31, 23.25] as Bbox);
+      }
     }
     if (layers.some((l) => l.id === props.id)) {
       const newLayers = layers.filter((l) => l.id !== props.id);
       setLayersToURL(newLayers);
     }
-  }, [layers, setLayersToURL, props.id]);
+  }, [layers, setLayersToURL, props.id, setTmpBbox]);
 
   if (!props.attributes) return null;
 
@@ -51,7 +59,6 @@ export default function DatasetsItem(props: LayerListResponseDataItem) {
 
             <DialogContent className="p-0" data-cy={`info-${props.attributes.slug}-dialog`}>
               <h3 className="px-6 pt-4 text-xl font-medium text-green-900">
-                {/* {props.attributes.title} */}
                 {props.attributes.name}
               </h3>
               <div className="border-b border-t border-gray-100">

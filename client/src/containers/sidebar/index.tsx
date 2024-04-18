@@ -1,35 +1,51 @@
 'use client';
 
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
+import { useSetAtom } from 'jotai';
 import { HelpCircle } from 'lucide-react';
 
 import { cn } from '@/lib/classnames';
 
+import { tmpBboxAtom } from '@/store';
+
 import { useSyncQueryParams } from '@/hooks/datasets';
 import { useSyncLayers } from '@/hooks/datasets/sync-query';
 
-import type { SidebarTab } from '@/containers/sidebar/constants';
 import { TABS } from '@/containers/sidebar/constants';
+import type { SidebarTab } from '@/containers/sidebar/constants';
+
+import { DEFAULT_BBOX } from '@/components/map/constants';
 
 export default function Sidebar() {
   const pathname = usePathname();
-
+  const router = useRouter();
   const queryParams = useSyncQueryParams();
+  const setTmpBbox = useSetAtom(tmpBboxAtom);
+
   const [layers] = useSyncLayers();
 
   const [sidebarTab, setSidebarTab] = useState<'projects' | 'countries' | 'datasets'>('projects');
 
+  const handleClick = useCallback(() => {
+    router.push('/');
+    setTmpBbox(DEFAULT_BBOX);
+  }, [router, setTmpBbox]);
+
   return (
     <div className="rounded-8xl absolute bottom-0 left-2 top-0 z-20 my-2 w-16 bg-yellow-700 py-10 text-xs text-yellow-50 xl:left-3 xl:w-20">
       <div className="h-[88%]">
-        <div className="mx-2 hidden items-center pb-12 xl:block">
+        <button
+          type="button"
+          onClick={handleClick}
+          className="mx-2 hidden items-center pb-12 xl:block"
+        >
           <Image src="/images/logo.svg" alt="logo" width={60} height={29} />
-        </div>
+        </button>
 
         <div className="mx-2 flex items-center pb-12 xl:hidden">
           <Image src="/images/logo.svg" alt="logo" width={48} height={19} />

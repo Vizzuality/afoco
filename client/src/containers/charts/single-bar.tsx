@@ -91,7 +91,7 @@ export default function SingleBar({
             <Tooltip delayDuration={0}>
               <TooltipTrigger asChild>
                 <div
-                  className="h-full cursor-pointer rounded-br-[4px] rounded-tr-[4px] bg-[#F87171] hover:border-2 hover:border-[#D48D00]"
+                  className="h-full cursor-pointer rounded-br-[4px] rounded-tr-[4px] bg-[#70B6CC] hover:border-2 hover:border-[#D48D00]"
                   style={{
                     width: `${(data['value'].other_funding * 100) / data['value'].total_funding}%`,
                   }}
@@ -139,7 +139,7 @@ export default function SingleBar({
           </div>
           {data['value']?.other_funding && (
             <div className="flex items-center space-x-1.5">
-              <div className="flex h-3 w-3 rounded-full bg-[#F87171]" />
+              <div className="flex h-3 w-3 rounded-full bg-[70B6CC]" />
               <p className="">Other Funding</p>
             </div>
           )}
