@@ -50,8 +50,8 @@ export const usefulLinks = [
   },
   {
     title: 'Country Information Hub',
-    description:
-      'Archive of forestry and forestry-related laws, strategies, plans and policies in each Party.',
+    // description:
+    //   'Archive of forestry and forestry-related laws, strategies, plans and policies in each Party.',
     link: 'country_information_link',
   },
   {
@@ -59,6 +59,10 @@ export const usefulLinks = [
     description:
       'Explore interactive maps and charts that summarise key statistics about the Indonesia’s forest.',
     link: 'gfw_link',
+  },
+  {
+    title: 'AFoCo Projects and Programs',
+    link: 'p&p_link',
   },
 ];
 

@@ -139,7 +139,7 @@ export default function SingleBar({
           </div>
           {data['value']?.other_funding && (
             <div className="flex items-center space-x-1.5">
-              <div className="flex h-3 w-3 rounded-full bg-[70B6CC]" />
+              <div className="flex h-3 w-3 rounded-full bg-[#70B6CC]" />
               <p className="">Other Funding</p>
             </div>
           )}

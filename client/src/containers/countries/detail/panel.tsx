@@ -40,6 +40,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip
 export default function CountryDetailPanel() {
   const params = useParams<{ id: string }>();
   const { data, isFetching, isFetched, isError } = useGetCountriesId(Number(params.id));
+
   const {
     data: indicators,
     isFetching: indicatorsIsFetching,
@@ -451,31 +452,39 @@ export default function CountryDetailPanel() {
                   )}
                 </div>
 
-                <div className="flex flex-col space-y-2 pb-8 pt-4">
+                <div className="flex flex-col space-y-2 py-4">
                   <h3 className="text-base text-green-800">Useful links</h3>
-                  {usefulLinks.map(({ title, description, link }) => (
-                    <div
-                      key={title}
-                      className="flex w-full flex-col space-y-2 rounded-xl bg-white p-2 shadow-sm"
-                    >
-                      <a
-                        href={
-                          link === 'gfw_link'
-                            ? data?.data?.attributes?.gfw_link
-                            : link === 'country_information_link'
-                            ? data?.data?.attributes?.country_information_link
-                            : link
-                        }
-                        target="_blank"
-                        rel="noreferrer"
-                        className="flex w-full cursor-pointer items-center justify-between"
+                  {usefulLinks.map(({ title, description, link }) => {
+                    const href =
+                      link === 'gfw_link'
+                        ? data?.data?.attributes?.gfw_link
+                        : link === 'country_information_link'
+                        ? data?.data?.attributes?.country_information_link
+                        : link === 'p&p_link'
+                        ? 'https://afocosec.org/programs-projects/projects/'
+                        : link.startsWith('http')
+                        ? link
+                        : undefined;
+
+                    return href ? (
+                      <div
+                        key={title}
+                        className="flex w-full flex-col space-y-2 rounded-xl bg-white p-2 shadow-sm"
                       >
-                        <h4 className="text-sm text-yellow-900">{title}</h4>
-                        <ExternalLink size={16} className="text-yellow-900" />
-                      </a>
-                      <p className="mr-6 text-xs text-gray-500">{description}</p>
-                    </div>
-                  ))}
+                        <a
+                          href={href}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="flex w-full cursor-pointer items-center justify-between"
+                        >
+                          <h4 className="text-sm text-yellow-900">{title}</h4>
+                          <ExternalLink size={16} className="text-yellow-900" />
+                        </a>
+
+                        {description && <p className="mr-6 text-xs text-gray-500">{description}</p>}
+                      </div>
+                    ) : null;
+                  })}
                 </div>
               </div>
             </div>
