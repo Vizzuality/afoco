@@ -8,8 +8,10 @@ import { Search, X } from 'lucide-react';
 import { cn } from '@/lib/classnames';
 
 import { hoveredProjectMapAtom } from '@/store';
+import { tmpBboxAtom } from '@/store';
 
 import { useGetProjects } from '@/types/generated/project';
+import { Bbox } from '@/types/map';
 
 import { useSyncFilters } from '@/hooks/datasets/sync-query';
 
@@ -24,6 +26,7 @@ import FiltersSelected from '../filters/selected';
 
 export default function ProjectsList() {
   const [searchValue, setSearchValue] = useState<string | null>(null);
+  const setTempBbox = useSetAtom(tmpBboxAtom);
   const [filtersSettings] = useSyncFilters();
   const setHoveredProjectList = useSetAtom(hoveredProjectMapAtom);
 
@@ -140,6 +143,17 @@ export default function ProjectsList() {
     [setHoveredProjectList]
   );
 
+  const handleClick = useCallback(
+    (e: MouseEvent<HTMLElement>) => {
+      const value = e.currentTarget?.getAttribute('data-bbox');
+      if (value) {
+        const currentValue = value.split(',').map((num) => parseFloat(num)) as Bbox;
+        setTempBbox(currentValue);
+      }
+    },
+    [setTempBbox]
+  );
+
   const filtersLength = Object.entries(filtersSettings)
     .flat()
     .filter((el) => typeof el === 'object')
@@ -201,6 +215,8 @@ export default function ProjectsList() {
                   type="button"
                   key={project?.id}
                   data-value={project?.attributes?.project_code}
+                  data-bbox={project?.attributes?.bbox}
+                  onClick={handleClick}
                   onMouseEnter={handleHover}
                   onMouseLeave={() => setHoveredProjectList(null)}
                 >
