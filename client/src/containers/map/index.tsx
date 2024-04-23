@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 
 import { LngLatBoundsLike, MapLayerMouseEvent, useMap } from 'react-map-gl';
 
@@ -120,21 +120,6 @@ export default function MapContainer() {
       setTmpBbox(null);
     }
   }, [map, setBboxURL, setTmpBbox]);
-
-  useEffect(() => {
-    if (map && map?.getSource('projects') && params.id && pathname.includes('projects')) {
-      const projectFeatures = map?.querySourceFeatures('projects', {
-        sourceLayer: 'areas_centroids_c',
-        filter: ['==', 'project_code', params.id],
-      });
-
-      const bboxTurf = bbox({
-        type: 'FeatureCollection',
-        features: projectFeatures,
-      });
-      setTmpBbox(bboxTurf as Bbox);
-    }
-  }, [map, params.id, setTmpBbox, pathname]);
 
   const handleMapClick = useCallback(
     (e: MapLayerMouseEvent) => {
