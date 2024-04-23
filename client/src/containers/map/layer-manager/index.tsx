@@ -9,7 +9,6 @@ import { layersInteractiveIdsAtom } from '@/store';
 import { useSyncLayers } from '@/hooks/datasets/sync-query';
 
 import { LAYERS } from '@/containers/datasets/layers';
-import { PointsOfInterestLayer } from '@/containers/datasets/layers/points-of-interest/layer';
 
 import { DeckMapboxOverlayProvider } from '@/components/map/provider';
 
@@ -81,7 +80,6 @@ const LayerManager = () => {
             />
           );
         })}
-        <PointsOfInterestLayer id={0} beforeId="custom-layers" />
       </>
     </DeckMapboxOverlayProvider>
   );
