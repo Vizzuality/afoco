@@ -2,6 +2,8 @@
 
 import { MouseEvent, useCallback, useState } from 'react';
 
+import { useRouter } from 'next/navigation';
+
 import { useSetAtom } from 'jotai';
 import { Search, X } from 'lucide-react';
 
@@ -13,6 +15,7 @@ import { tmpBboxAtom } from '@/store';
 import { useGetProjects } from '@/types/generated/project';
 import { Bbox } from '@/types/map';
 
+import { useSyncQueryParams } from '@/hooks/datasets';
 import { useSyncFilters } from '@/hooks/datasets/sync-query';
 
 import Filters from '@/containers/filters';
@@ -29,6 +32,8 @@ export default function ProjectsList() {
   const setTempBbox = useSetAtom(tmpBboxAtom);
   const [filtersSettings] = useSyncFilters();
   const setHoveredProjectList = useSetAtom(hoveredProjectMapAtom);
+  const router = useRouter();
+  const queryParams = useSyncQueryParams();
 
   const { data, isFetching, isFetched, isError } = useGetProjects(
     {
@@ -146,12 +151,14 @@ export default function ProjectsList() {
   const handleClick = useCallback(
     (e: MouseEvent<HTMLElement>) => {
       const value = e.currentTarget?.getAttribute('data-bbox');
+
       if (value) {
         const currentValue = value.split(',').map((num) => parseFloat(num)) as Bbox;
         setTempBbox(currentValue);
       }
+      router.push(`/projects/${e.currentTarget.getAttribute('data-value')}${queryParams}`);
     },
-    [setTempBbox]
+    [setTempBbox, router, queryParams]
   );
 
   const filtersLength = Object.entries(filtersSettings)

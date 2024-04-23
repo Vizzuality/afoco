@@ -32,7 +32,7 @@ const searchQueryParams = {
   layers: layersParser,
   settings: basemapSettingsParser,
   tab: projectsTabParser,
-  box: bboxParser,
+  bbox: bboxParser,
 };
 
 export const serialize = createSerializer(searchQueryParams);

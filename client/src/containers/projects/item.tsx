@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import Link from 'next/link';
+// import Link from 'next/link';
 
 import { useAtomValue } from 'jotai';
 
@@ -11,16 +11,15 @@ import { hoveredProjectMapAtom } from '@/store';
 
 import { ProjectListResponseDataItem } from '@/types/generated/strapi.schemas';
 
-import { useSyncQueryParams } from '@/hooks/datasets';
+// import { useSyncQueryParams } from '@/hooks/datasets';
 
 export default function ProjectItem({ data }: { data: ProjectListResponseDataItem }) {
   const hoveredProjectMap = useAtomValue(hoveredProjectMapAtom);
-  const queryParams = useSyncQueryParams();
-
+  // const queryParams = useSyncQueryParams({}, { bbox: data.attributes?.bbox });
   return (
     data && (
-      <Link
-        href={`/projects/${data?.attributes?.project_code}${queryParams}`}
+      <div
+        // href={`/projects/${data?.attributes?.project_code}${queryParams}`}
         data-cy="project-item-link"
         className={cn({
           'flex space-x-4 rounded-lg border border-gray-100 bg-white py-2 pl-2 pr-4 shadow-sm transition-all duration-300 hover:border-yellow-500':
@@ -50,7 +49,7 @@ export default function ProjectItem({ data }: { data: ProjectListResponseDataIte
             <p>{data?.attributes?.status}</p>
           </div>
         </div>
-      </Link>
+      </div>
     )
   );
 }

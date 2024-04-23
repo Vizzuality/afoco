@@ -1,4 +1,5 @@
 'use client';
+import { useCallback, useMemo } from 'react';
 
 import { serialize } from './query-parsers';
 import {
@@ -28,33 +29,42 @@ type ExcludeParams = {
 };
 
 export const useSyncQueryParams = (
-  exclude: ExcludeParams = {},
-  defaultValue: Partial<QueryParamsData> = {}
+  exclude: ExcludeParams = {}, // Optional parameter for exclusion
+  defaultValue: Partial<QueryParamsData> = {} // Optional default values
 ) => {
+  // Retrieve data from hooks, possibly undefined
   const [filtersFromURL] = useSyncFilters();
   const [layersFromURL] = useSyncLayers();
   const [settingsFromURL] = useSyncBasemap();
   const [projectsTabFromURL] = useSyncProjectsTab();
   const [bboxFromURL] = useSyncBbox();
 
-  const filters = defaultValue?.filters || filtersFromURL;
-  const layers = defaultValue?.layers || layersFromURL;
-  const settings = defaultValue?.settings || settingsFromURL;
-  const projectsTab = defaultValue?.projectsTab || projectsTabFromURL;
-  const bbox = defaultValue?.bbox || bboxFromURL;
+  // Use useMemo to only recalculate when dependencies change
+  const data: QueryParamsData = useMemo(
+    () => ({
+      // Apply default values if provided, otherwise use values from URL
+      filters: defaultValue?.filters ?? filtersFromURL,
+      layers: defaultValue?.layers ?? layersFromURL,
+      settings: defaultValue?.settings ?? settingsFromURL,
+      projectsTab: defaultValue?.projectsTab ?? projectsTabFromURL,
+      bbox: defaultValue?.bbox ?? bboxFromURL ?? [0, 0, 0, 0], // Include fallback default for bbox
+    }),
+    [filtersFromURL, layersFromURL, settingsFromURL, projectsTabFromURL, bboxFromURL, defaultValue]
+  );
 
-  // Construct the data object with correct typing
-  const data: QueryParamsData = { filters, layers, settings, projectsTab, bbox };
+  // Construct the result by excluding specified keys
+  const result: Partial<QueryParamsData> = useMemo(() => {
+    const filteredResult: Partial<QueryParamsData> = {};
+    Object.keys(data).forEach((key) => {
+      const typedKey = key as keyof QueryParamsData;
+      // Only add key to result if it's not set to be excluded
+      if (!exclude[typedKey]) {
+        filteredResult[typedKey] = data[typedKey];
+      }
+    });
+    return filteredResult;
+  }, [data, exclude]);
 
-  // Filter out excluded keys
-  const result: Partial<QueryParamsData> = {};
-  Object.keys(data).forEach((key) => {
-    if (!(key in exclude && exclude[key as keyof ExcludeParams])) {
-      // Use type assertion here to ensure keys are recognized as valid
-      result[key as keyof QueryParamsData] = data[key as keyof QueryParamsData];
-    }
-  });
-
-  // Return the serialized object
+  // Serialize the result object to make it suitable for query parameters
   return serialize(result);
 };
