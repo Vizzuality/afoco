@@ -2,9 +2,10 @@
 
 import { useCallback, useMemo, useState } from 'react';
 
-import { LngLatBoundsLike, MapLayerMouseEvent, useMap } from 'react-map-gl';
+import { LngLatBoundsLike, MapLayerMouseEvent, useMap, Marker } from 'react-map-gl';
 
 import dynamic from 'next/dynamic';
+import Image from 'next/image';
 import { useParams, usePathname, useRouter } from 'next/navigation';
 
 import bbox from '@turf/bbox';
@@ -26,6 +27,7 @@ import Controls from '@/components/map/controls';
 import SettingsControl from '@/components/map/controls/settings';
 import ZoomControl from '@/components/map/controls/zoom';
 import { CustomMapProps } from '@/components/map/types';
+import { Tooltip, TooltipTrigger, TooltipContent } from '@/components/ui/tooltip';
 
 const LayerManager = dynamic(() => import('@/containers/map/layer-manager'), {
   ssr: false,
@@ -290,6 +292,35 @@ export default function MapContainer() {
             <LayerManager />
 
             <MapSettingsManager />
+            <Marker latitude={17.143622599404814} longitude={96.0012404711645} anchor="bottom">
+              <Tooltip delayDuration={100}>
+                <TooltipTrigger className="flex items-center justify-center rounded-full p-2">
+                  <Image src="/images/pin.svg" alt="AFoCO RETC" width={19.76} height={24.25} />
+                </TooltipTrigger>
+
+                <TooltipContent className="max-w-[200px] p-2">
+                  <p className="text-xs text-yellow-900">AFoCO RETC</p>
+                </TooltipContent>
+              </Tooltip>
+            </Marker>
+            <Marker latitude={37.52292545640524} longitude={126.92946965767372} anchor="bottom">
+              <Tooltip delayDuration={100}>
+                <TooltipTrigger className="flex items-center justify-center rounded-full p-2">
+                  <Image
+                    src="/images/pin.svg"
+                    alt="Asian Forest Cooperation Organization (AFoCO)"
+                    width={19.76}
+                    height={24.25}
+                  />{' '}
+                </TooltipTrigger>
+
+                <TooltipContent className="max-w-[200px] p-2">
+                  <p className="text-xs text-yellow-900">
+                    Asian Forest Cooperation Organization (AFoCO)
+                  </p>
+                </TooltipContent>
+              </Tooltip>
+            </Marker>
 
             <Legend />
 
