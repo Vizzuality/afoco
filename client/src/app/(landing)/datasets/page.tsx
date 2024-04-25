@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export default function DatasetsPage() {
   return (
     <Panel>
-      <div className="space-y-4 py-8">
+      <div className="h-full space-y-4 overflow-hidden py-8">
         <h2 className="px-6 text-3xl font-normal">Datasets</h2>
 
         <DatasetsList />

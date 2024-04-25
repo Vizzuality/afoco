@@ -34,14 +34,11 @@ const MapLegends = ({ className = '' }) => {
   const sortable = layers?.length > 1;
 
   return (
-    <div className="absolute bottom-12 right-6 z-10 flex w-full max-w-xs space-x-2">
+    <div className="absolute bottom-12 right-6 flex w-full max-w-xs overflow-hidden align-bottom">
       {openLegend && (
-        <ScrollArea className="flex h-72 w-full max-w-xs flex-col xl:h-full">
+        <ScrollArea className="flex w-full max-w-xs align-bottom">
           <Legend
-            className={cn(
-              'animate-in fade-in-50 max-h-[calc(100vh_-_theme(space.16)_-_theme(space.6)_-_theme(space.48))] duration-300',
-              className
-            )}
+            className={cn('animate-in fade-in-50 duration-300', className)}
             sortable={{
               enabled: sortable,
               handle: true,
@@ -59,6 +56,7 @@ const MapLegends = ({ className = '' }) => {
           </Legend>
         </ScrollArea>
       )}
+
       {layers.length > 0 && (
         <Button
           variant="primary"

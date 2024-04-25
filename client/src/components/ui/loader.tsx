@@ -27,7 +27,7 @@ const ContentLoader = ({
   isError,
 }: ContentLoaderProps) => {
   return (
-    <div className="relative">
+    <div className="relative h-full">
       {isFetching && !isFetched && (
         <div
           role="status"
