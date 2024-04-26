@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export default function Countries() {
   return (
     <Panel>
-      <div className="space-y-5 py-7">
+      <div className="h-full space-y-5 overflow-hidden py-7">
         <h2 className="px-5 text-3xl font-normal">Country Profile</h2>
         <CountriesList />
       </div>

@@ -139,7 +139,7 @@ export default function ProjectDetailPanel() {
   }
 
   return (
-    <div className="h-full rounded-3xl bg-neutral-50 py-6">
+    <div className="relative h-full rounded-3xl bg-neutral-50">
       <div className="absolute left-0 top-0 w-full">
         {data && indicators && (
           <div className="relative">
@@ -218,93 +218,97 @@ export default function ProjectDetailPanel() {
         isError={isError || indicatorIsFetched}
         loaderClassName="mt-52"
       >
-        <ScrollArea className="mt-40 flex h-[67vh] flex-col space-y-8 px-5 2xl:h-[74vh]">
-          {data?.description && (
-            <p className="pt-2 text-sm text-gray-500">
-              <DescriptionWithoutMarkdown description={data?.description} />
-            </p>
-          )}
+        <div className="relative h-full">
+          <div className="absolute bottom-0 top-0 h-full w-full overflow-hidden">
+            <ScrollArea className="mt-52 flex h-full flex-col space-y-8 px-5 pb-52">
+              {data?.description && (
+                <p className="pt-2 text-sm text-gray-500">
+                  <DescriptionWithoutMarkdown description={data?.description} />
+                </p>
+              )}
 
-          <div>
-            <div className="flex justify-between border-b-2 border-dotted border-gray-400 py-4">
-              <p className="text-xs font-medium uppercase text-gray-500">Status</p>
-              <p className="text-sm text-yellow-900">{data?.status}</p>
-            </div>
-            <div className="flex justify-between border-b-2 border-dotted border-gray-400 py-4">
-              <p className="text-xs font-medium uppercase text-gray-500">Location</p>
-              <p className="text-sm text-yellow-900">
-                {data?.countries?.data?.map((d) => d?.attributes?.name).join(', ')}
-              </p>
-            </div>
-            <div className="flex justify-between border-b-2 border-dotted border-gray-400 py-4">
-              <p className="text-xs font-medium uppercase text-gray-500">Duration</p>
-              <p className="text-sm text-yellow-900">{data?.duration}</p>
-            </div>
-            <div className="flex justify-between border-b-2 border-dotted border-gray-400 py-4">
-              <p className="text-xs font-medium uppercase text-gray-500">Donors</p>
-              <p className="text-sm text-yellow-900">{data?.donors}</p>
-            </div>
-            <div className="flex justify-between border-b-2 border-dotted border-gray-400 py-4">
-              <p className="text-xs font-medium uppercase text-gray-500">Investment</p>
-              <p className="text-sm text-yellow-900">
-                {formatCompactNumber(indicators?.project_funding?.total_funding)}
-              </p>
-            </div>
-          </div>
-          <div className="flex flex-col space-y-1 pt-6">
-            {!!data?.gallery?.data?.length && (
-              <>
-                <h4 className="pb-1 text-xs font-medium uppercase text-yellow-900">
-                  Project Gallery
-                </h4>
-                <div className="flex w-full space-x-1">
-                  <div className="flex w-1/2 flex-col space-y-[1px]">
-                    {data.gallery.data.map((img, index) => (
-                      <div key={index}>
-                        {index >= 0 && index % 5 === 0 && (
-                          <div className="flex h-[132px] space-x-1">
-                            <Image
-                              src={img?.attributes?.url ?? '/images/projects/placeholder.png'}
-                              alt="AFOCO"
-                              width={165}
-                              height={170}
-                              className="h-full w-full object-cover"
-                            />
+              <div>
+                <div className="flex justify-between border-b-2 border-dotted border-gray-400 py-4">
+                  <p className="text-xs font-medium uppercase text-gray-500">Status</p>
+                  <p className="text-sm text-yellow-900">{data?.status}</p>
+                </div>
+                <div className="flex justify-between border-b-2 border-dotted border-gray-400 py-4">
+                  <p className="text-xs font-medium uppercase text-gray-500">Location</p>
+                  <p className="text-sm text-yellow-900">
+                    {data?.countries?.data?.map((d) => d?.attributes?.name).join(', ')}
+                  </p>
+                </div>
+                <div className="flex justify-between border-b-2 border-dotted border-gray-400 py-4">
+                  <p className="text-xs font-medium uppercase text-gray-500">Duration</p>
+                  <p className="text-sm text-yellow-900">{data?.duration}</p>
+                </div>
+                <div className="flex justify-between border-b-2 border-dotted border-gray-400 py-4">
+                  <p className="text-xs font-medium uppercase text-gray-500">Donors</p>
+                  <p className="text-sm text-yellow-900">{data?.donors}</p>
+                </div>
+                <div className="flex justify-between border-b-2 border-dotted border-gray-400 py-4">
+                  <p className="text-xs font-medium uppercase text-gray-500">Investment</p>
+                  <p className="text-sm text-yellow-900">
+                    {formatCompactNumber(indicators?.project_funding?.total_funding)}
+                  </p>
+                </div>
+              </div>
+              <div className="flex flex-col space-y-1 pt-6">
+                {!!data?.gallery?.data?.length && (
+                  <>
+                    <h4 className="pb-1 text-xs font-medium uppercase text-yellow-900">
+                      Project Gallery
+                    </h4>
+                    <div className="flex w-full space-x-1">
+                      <div className="flex w-1/2 flex-col space-y-[1px]">
+                        {data.gallery.data.map((img, index) => (
+                          <div key={index}>
+                            {index >= 0 && index % 5 === 0 && (
+                              <div className="flex h-[132px] space-x-1">
+                                <Image
+                                  src={img?.attributes?.url ?? '/images/projects/placeholder.png'}
+                                  alt="AFOCO"
+                                  width={165}
+                                  height={170}
+                                  className="h-full w-full object-cover"
+                                />
+                              </div>
+                            )}
                           </div>
+                        ))}
+                      </div>
+
+                      <div className="mb-auto grid w-1/2 grid-cols-2 gap-1">
+                        {data.gallery.data.map(
+                          (img, index) =>
+                            index > 0 &&
+                            index % 5 != 0 && (
+                              <div key={index} className="flex h-16 w-full space-x-1">
+                                <Image
+                                  src={img?.attributes?.url ?? '/images/projects/placeholder.png'}
+                                  alt="AFOCO"
+                                  width={165}
+                                  height={165}
+                                  className="h-full w-full object-cover"
+                                />
+                              </div>
+                            )
                         )}
                       </div>
-                    ))}
-                  </div>
+                    </div>
+                  </>
+                )}
 
-                  <div className="mb-auto grid w-1/2 grid-cols-2 gap-1">
-                    {data.gallery.data.map(
-                      (img, index) =>
-                        index > 0 &&
-                        index % 5 != 0 && (
-                          <div key={index} className="flex h-16 w-full space-x-1">
-                            <Image
-                              src={img?.attributes?.url ?? '/images/projects/placeholder.png'}
-                              alt="AFOCO"
-                              width={165}
-                              height={165}
-                              className="h-full w-full object-cover"
-                            />
-                          </div>
-                        )
-                    )}
-                  </div>
-                </div>
-              </>
-            )}
-
-            <p className="pb-16 text-sm text-gray-500">
-              If you have pictures of this project to share, please sent them to{' '}
-              <a className="underline hover:no-underline" href="mailto:contact@afocosec.org">
-                contact@afocosec.org
-              </a>
-            </p>
+                <p className="pb-16 text-sm text-gray-500">
+                  If you have pictures of this project to share, please sent them to{' '}
+                  <a className="underline hover:no-underline" href="mailto:contact@afocosec.org">
+                    contact@afocosec.org
+                  </a>
+                </p>
+              </div>
+            </ScrollArea>
           </div>
-        </ScrollArea>
+        </div>
         <Drawer>
           <DrawerTrigger asChild className="group">
             <Button

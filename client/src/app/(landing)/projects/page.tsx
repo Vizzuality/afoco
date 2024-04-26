@@ -14,7 +14,7 @@ import ProjectsTabs from '@/containers/projects/tabs';
 export default function Projects() {
   return (
     <Panel>
-      <div className="space-y-5 py-7">
+      <div className="h-full space-y-5 overflow-hidden py-7">
         <div className="px-5">
           <h2 className="text-3xl font-normal">Projects</h2>
 

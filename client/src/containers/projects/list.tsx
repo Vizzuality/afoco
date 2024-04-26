@@ -161,13 +161,8 @@ export default function ProjectsList() {
     [setTempBbox, router, queryParams]
   );
 
-  const filtersLength = Object.entries(filtersSettings)
-    .flat()
-    .filter((el) => typeof el === 'object')
-    .flat().length;
-
   return (
-    <div className="no-scrollbar flex max-h-[75vh] flex-col space-y-2 overflow-y-auto">
+    <div className="flex h-full flex-col space-y-2">
       <div className="ml-1 mt-1 flex justify-between space-x-2 px-5">
         <div className="relative w-full">
           <Input
@@ -208,30 +203,28 @@ export default function ProjectsList() {
           <span className="rounded-xl bg-yellow-200 px-1 text-yellow-700">{data?.length}</span> out
           of all 46 projects
         </p>
-        <ScrollArea
-          className={cn({
-            'h-[67vh] px-5 2xl:h-[73vh]': true,
-            'h-[60vh] 2xl:h-[68vh]': filtersLength >= 1,
-            'h-[56vh] 2xl:h-[64vh]': filtersLength >= 2,
-          })}
-        >
-          <div className="flex flex-col space-y-2">
-            {data &&
-              data.map((project) => (
-                <button
-                  type="button"
-                  key={project?.id}
-                  data-value={project?.attributes?.project_code}
-                  data-bbox={project?.attributes?.bbox}
-                  onClick={handleClick}
-                  onMouseEnter={handleHover}
-                  onMouseLeave={() => setHoveredProjectList(null)}
-                >
-                  <ProjectItem data={project} />
-                </button>
-              ))}
+        <div className="relative h-full">
+          <div className="absolute bottom-0 top-0 h-full w-full overflow-hidden">
+            <ScrollArea className="h-full px-5 pb-5">
+              <div className="flex flex-col space-y-2">
+                {data &&
+                  data.map((project) => (
+                    <button
+                      type="button"
+                      key={project?.id}
+                      data-value={project?.attributes?.project_code}
+                      data-bbox={project?.attributes?.bbox}
+                      onClick={handleClick}
+                      onMouseEnter={handleHover}
+                      onMouseLeave={() => setHoveredProjectList(null)}
+                    >
+                      <ProjectItem data={project} />
+                    </button>
+                  ))}
+              </div>
+            </ScrollArea>
           </div>
-        </ScrollArea>
+        </div>
       </ContentLoader>
     </div>
   );

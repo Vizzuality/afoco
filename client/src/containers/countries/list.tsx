@@ -26,7 +26,7 @@ export default function CountriesList() {
   });
 
   return (
-    <div className="flex flex-col space-y-8">
+    <div className="flex h-full flex-col space-y-8">
       {/* <div className="relative px-5">
         <Input
           type="search"
@@ -55,15 +55,19 @@ export default function CountriesList() {
         isError={isError}
         loaderClassName="mt-52"
       >
-        <div className="flex flex-col space-y-2">
+        <div className="relative flex h-full flex-col space-y-2">
           <p className="px-5 text-xs text-gray-500">Select a country</p>
-          <ScrollArea className="h-[70vh] px-5 2xl:h-[75vh]">
-            <div className="flex flex-col space-y-1">
-              {data?.data?.map((country) => (
-                <CountryItem key={country.id} data={country} />
-              ))}
+          <div className="relative h-full">
+            <div className="absolute bottom-0 top-0 h-full w-full overflow-hidden">
+              <ScrollArea className="h-full px-5 pb-10">
+                <div className="flex flex-col space-y-1">
+                  {data?.data?.map((country) => (
+                    <CountryItem key={country.id} data={country} />
+                  ))}
+                </div>
+              </ScrollArea>
             </div>
-          </ScrollArea>
+          </div>
         </div>
       </ContentLoader>
     </div>

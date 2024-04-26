@@ -6,7 +6,7 @@ import { LngLatBoundsLike, MapLayerMouseEvent, useMap, Marker } from 'react-map-
 
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
-import { useParams, usePathname, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
 import bbox from '@turf/bbox';
 import { useAtomValue, useSetAtom, useAtom } from 'jotai';
@@ -68,8 +68,6 @@ export default function MapContainer() {
 
   const { [id]: map } = useMap();
   const { push } = useRouter();
-  const params = useParams<{ id: string }>();
-  const pathname = usePathname();
 
   const layersInteractiveIds = useAtomValue(layersInteractiveIdsAtom);
   const setHoveredProjectMap = useSetAtom(hoveredProjectMapAtom);
@@ -262,7 +260,7 @@ export default function MapContainer() {
   );
 
   return (
-    <div className="absolute left-0 top-0 h-screen w-screen">
+    <div className="relative left-0 top-0 h-screen w-screen">
       <Map
         id={id}
         data-cy="map"

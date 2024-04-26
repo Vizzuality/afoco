@@ -11,7 +11,7 @@ export default function ProjectsTabs() {
   const [projectsTab, setProjectsTab] = useSyncProjectsTab();
 
   return (
-    <Tabs defaultValue={projectsTab}>
+    <Tabs defaultValue={projectsTab} className="relative h-full">
       <TabsList className="w-full px-5">
         <TabsTrigger
           value="statistics"
@@ -30,10 +30,10 @@ export default function ProjectsTabs() {
           List
         </TabsTrigger>
       </TabsList>
-      <TabsContent value="statistics" className="mt-6 space-y-5">
+      <TabsContent value="statistics" className="relative mt-6 h-full space-y-5">
         <Stats />
       </TabsContent>
-      <TabsContent value="list" className="mt-6 space-y-5">
+      <TabsContent value="list" className="relative mt-6 h-full space-y-5">
         <ProjectsList />
       </TabsContent>
     </Tabs>
