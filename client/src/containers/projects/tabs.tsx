@@ -33,7 +33,7 @@ export default function ProjectsTabs() {
       <TabsContent value="statistics" className="relative mt-6 h-full space-y-5">
         <Stats />
       </TabsContent>
-      <TabsContent value="list" className="mt-6 h-full space-y-5">
+      <TabsContent value="list" className="relative mt-6 h-full space-y-5">
         <ProjectsList />
       </TabsContent>
     </Tabs>
