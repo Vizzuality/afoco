@@ -42,6 +42,9 @@
       "relation": "oneToMany",
       "target": "api::country-indicator-field.country-indicator-field",
       "mappedBy": "country"
+    },
+    "bbox": {
+      "type": "json"
     }
   }
 }
