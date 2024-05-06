@@ -37,13 +37,14 @@ export default function CountryItem({ data }: { data: CountryListResponseDataIte
   );
 
   const handleClick = useCallback(() => {
-    push(`/countries/${data.id}${queryParams}&bbox=${data.attributes?.bbox}`);
     setTempBbox(data.attributes?.bbox as Bbox);
+    push(`/countries/${data.id}${queryParams}&bbox=${data.attributes?.bbox}`);
   }, [data, push, queryParams, setTempBbox]);
 
   return (
     <button
-      data-cy="country-item-link"
+      type="button"
+      data-cy="country-item"
       onClick={handleClick}
       className="flex items-center justify-between space-x-4 rounded-lg border border-gray-100 bg-white py-2 pl-2 pr-4 text-sm text-yellow-900 no-underline shadow-sm transition-all duration-300 hover:border-yellow-500"
     >
