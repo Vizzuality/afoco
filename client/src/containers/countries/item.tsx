@@ -37,7 +37,7 @@ export default function CountryItem({ data }: { data: CountryListResponseDataIte
   );
 
   const handleClick = useCallback(() => {
-    push(`/countries/${data.id}${queryParams}`);
+    push(`/countries/${data.id}${queryParams}&bbox=${data.attributes?.bbox}`);
     setTempBbox(data.attributes?.bbox as Bbox);
   }, [data, push, queryParams, setTempBbox]);
 
