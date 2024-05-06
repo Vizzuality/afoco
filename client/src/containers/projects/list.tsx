@@ -7,8 +7,6 @@ import { useRouter } from 'next/navigation';
 import { useSetAtom } from 'jotai';
 import { Search, X } from 'lucide-react';
 
-import { cn } from '@/lib/classnames';
-
 import { hoveredProjectMapAtom } from '@/store';
 import { tmpBboxAtom } from '@/store';
 
