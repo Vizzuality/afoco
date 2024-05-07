@@ -8,7 +8,6 @@ import { Switch } from '@/components/ui/switch';
 const Boundaries = () => {
   const [mapSettings, setMapSettings] = useSyncBasemap();
   const { boundaries } = mapSettings || null;
-
   const handleChange = useCallback(
     (v: boolean) => {
       setMapSettings((prev) => ({

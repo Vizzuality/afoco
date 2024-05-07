@@ -39,7 +39,11 @@ const MapSettingsManager = () => {
         ...metadata['mapbox:groups'][gId],
         id: gId,
       }));
-      const GROUP_TO_DISPLAY = GROUPS_META.find((_group) => _group.name.includes(groupId)) || {};
+
+      const GROUPS_TO_DISPLAY =
+        GROUPS_META.filter((_group) => {
+          return _group.name.includes(groupId);
+        }) || {};
 
       const GROUPS_LAYERS = lys.filter((l) => {
         const { metadata: layerMetadata } = l;
@@ -50,7 +54,9 @@ const MapSettingsManager = () => {
       });
 
       GROUPS_LAYERS.forEach((_layer) => {
-        const match = _layer.metadata['mapbox:group'] === GROUP_TO_DISPLAY.id && visible;
+        const match =
+          GROUPS_TO_DISPLAY.map(({ id }) => id).includes(_layer.metadata['mapbox:group']) &&
+          visible;
         if (!match) {
           map.setLayoutProperty(_layer.id, 'visibility', 'none');
         } else {

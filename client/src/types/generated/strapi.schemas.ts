@@ -4425,6 +4425,7 @@ export interface Country {
   publishedAt?: string;
   createdBy?: CountryCreatedBy;
   updatedBy?: CountryUpdatedBy;
+  bbox: Bbox;
 }
 
 export interface CountryResponseDataObject {
