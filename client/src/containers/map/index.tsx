@@ -23,6 +23,7 @@ import PopupContainer from '@/containers/map/popup';
 import MapSettingsManager from '@/containers/map/settings/manager';
 
 import Map from '@/components/map';
+import { DEFAULT_BBOX } from '@/components/map/constants';
 import Controls from '@/components/map/controls';
 import SettingsControl from '@/components/map/controls/settings';
 import ZoomControl from '@/components/map/controls/zoom';
@@ -45,7 +46,7 @@ const DEFAULT_PROPS: CustomMapProps = {
     zoom: 2,
     pitch: 0,
     bearing: 0,
-    bounds: [68.711178, -11.476973, 131.333249, 21.087406],
+    bounds: DEFAULT_BBOX as Bbox,
   },
   minZoom: 2,
   maxZoom: 20,
@@ -72,7 +73,7 @@ export default function MapContainer() {
   const layersInteractiveIds = useAtomValue(layersInteractiveIdsAtom);
   const setHoveredProjectMap = useSetAtom(hoveredProjectMapAtom);
   const [cursor, setCursor] = useState<'grab' | 'pointer'>('grab');
-  const [bboxURL, setBboxURL] = useSyncBbox();
+  const [bboxFromURL, setBboxFromURL] = useSyncBbox();
 
   const [tmpBbox, setTmpBbox] = useAtom(tmpBboxAtom);
   const sidebarOpen = useAtomValue(openAtom);
@@ -108,6 +109,7 @@ export default function MapContainer() {
   );
 
   const handleMapViewStateChange = useCallback(() => {
+    console.log('handle view state');
     if (map) {
       const b = map
         .getBounds()
@@ -116,10 +118,10 @@ export default function MapContainer() {
         .map((v: number) => {
           return parseFloat(v.toFixed(2));
         }) as Bbox;
-      setBboxURL(b);
+      setBboxFromURL(b);
       setTmpBbox(null);
     }
-  }, [map, setBboxURL, setTmpBbox]);
+  }, [map, setBboxFromURL, setTmpBbox]);
 
   const handleMapClick = useCallback(
     (e: MapLayerMouseEvent) => {
@@ -266,11 +268,14 @@ export default function MapContainer() {
         data-cy="map"
         initialViewState={{
           ...initialViewState,
-          ...(bboxURL && {
-            bounds: bboxURL as LngLatBoundsLike,
+          ...(bboxFromURL && {
+            bounds: bboxFromURL as LngLatBoundsLike,
           }),
         }}
-        bounds={tmpBounds}
+        bounds={{
+          ...tmpBounds,
+          bbox: bboxFromURL as Bbox,
+        }}
         cursor={cursor}
         minZoom={minZoom}
         maxZoom={maxZoom}

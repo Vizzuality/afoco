@@ -352,9 +352,10 @@ export default function CountryDetailPanel() {
                                 className="h-2 rounded-3xl bg-[#FFCC73]"
                                 style={{
                                   width: !!indicators[value].value
-                                    ? `${(indicators[value].value * 100) /
-                                    indicators.intervention_area_total['value']
-                                    }%`
+                                    ? `${
+                                        (indicators[value].value * 100) /
+                                        indicators.intervention_area_total['value']
+                                      }%`
                                     : '0%',
                                 }}
                               />
@@ -469,10 +470,10 @@ export default function CountryDetailPanel() {
                           link === 'gfw_link'
                             ? data?.data?.attributes?.gfw_link
                             : link === 'country_information_link'
-                              ? data?.data?.attributes?.country_information_link
-                                : link.startsWith('http')
-                                  ? link
-                                  : undefined;
+                            ? data?.data?.attributes?.country_information_link
+                            : link.startsWith('http')
+                            ? link
+                            : undefined;
 
                         return href ? (
                           <div
@@ -488,8 +489,6 @@ export default function CountryDetailPanel() {
                               <h4 className="text-sm text-yellow-900">{title}</h4>
                               <ExternalLink size={16} className="text-yellow-900" />
                             </a>
-
-
                           </div>
                         ) : null;
                       })}
