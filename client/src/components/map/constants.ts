@@ -8,4 +8,4 @@ export const DEFAULT_VIEW_STATE: Partial<ViewState> = {
   longitude: 0,
 };
 
-export const DEFAULT_BBOX: Bbox = [68.711178, -11.476973, 131.333249, 21.087406];
+export const DEFAULT_BBOX: Bbox = [-84.05, -46.96, 227.66, 64.23];

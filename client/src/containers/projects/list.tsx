@@ -2,6 +2,7 @@
 
 import { MouseEvent, useCallback, useState } from 'react';
 
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
 import { useSetAtom } from 'jotai';
@@ -31,7 +32,7 @@ export default function ProjectsList() {
   const [filtersSettings] = useSyncFilters();
   const setHoveredProjectList = useSetAtom(hoveredProjectMapAtom);
   const router = useRouter();
-  const queryParams = useSyncQueryParams();
+  const queryParams = useSyncQueryParams({ bbox: true });
 
   const { data, isFetching, isFetched, isError } = useGetProjects(
     {
@@ -207,17 +208,18 @@ export default function ProjectsList() {
               <div className="flex flex-col space-y-2">
                 {data &&
                   data.map((project) => (
-                    <button
-                      type="button"
+                    <Link
+                      legacyBehavior={false}
                       key={project?.id}
                       data-value={project?.attributes?.project_code}
                       data-bbox={project?.attributes?.bbox}
                       onClick={handleClick}
                       onMouseEnter={handleHover}
                       onMouseLeave={() => setHoveredProjectList(null)}
+                      href={`/projects/${project?.attributes?.project_code}${queryParams}&bbox=[${project?.attributes?.bbox}]`}
                     >
                       <ProjectItem data={project} />
-                    </button>
+                    </Link>
                   ))}
               </div>
             </ScrollArea>

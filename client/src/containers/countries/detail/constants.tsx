@@ -42,9 +42,9 @@ export const totalInterventionArea = [
   { name: 'Protection', value: 'area_protected_total' },
 ];
 
-export const usefulLinks = [
+export const usefulLinksCountriesList = [
   {
-    title: 'Publications of AFoCO projects and programs.',
+    title: 'AFoCO publications.',
     description: '',
     link: 'https://afocosec.org/knowledge/publications',
   },
@@ -52,17 +52,26 @@ export const usefulLinks = [
     title: 'Country Information Hub',
     // description:
     //   'Archive of forestry and forestry-related laws, strategies, plans and policies in each Party.',
+    link: 'https://afocosec.org/knowledge/country-information-hub/',
+  },
+];
+
+export const usefulLinksCountry = [
+  {
+    title: 'Country Information Hub',
+    // description:
+    //   'Archive of forestry and forestry-related laws, strategies, plans and policies in each Party.',
     link: 'country_information_link',
   },
   {
-    title: 'Global forest Watch country dashboard',
-    description:
-      'Explore interactive maps and charts that summarise key statistics about the Indonesia’s forest.',
+    title: 'Global Forest Watch Country Dashboard',
+    // description:
+    //   'Explore interactive maps and charts that summarise key statistics about the Indonesia’s forest.',
     link: 'gfw_link',
   },
   {
-    title: 'AFoCo Projects and Programs',
-    link: 'p&p_link',
+    title: 'AFoCO Projects and Programs',
+    link: 'https://afocosec.org/programs-projects/projects/',
   },
 ];
 
