@@ -7,10 +7,12 @@
 import { useGetCountries } from '@/types/generated/country';
 
 import CountryItem from '@/containers/countries/item';
+import { usefulLinksCountriesList } from '@/containers/countries/detail/constants';
 
 // import { Input } from '@/components/ui/input';
 import ContentLoader from '@/components/ui/loader';
 import { ScrollArea } from '@/components/ui/scroll-area';
+import { ExternalLink } from 'lucide-react';
 
 export default function CountriesList() {
   // const [searchValue, setSearchValue] = useState<string | null>(null);
@@ -60,15 +62,44 @@ export default function CountriesList() {
           <div className="relative h-full">
             <div className="absolute bottom-0 top-0 h-full w-full overflow-hidden">
               <ScrollArea className="h-full px-5 pb-10">
+                <div className="h-full space-y-4">
                 <div className="flex flex-col space-y-1">
                   {data?.data?.map((country) => (
                     <CountryItem key={country.id} data={country} />
                   ))}
                 </div>
+                <div className="flex flex-col space-y-2 py-4">
+                  <h3 className="text-base text-green-800">Useful links</h3>
+                  {usefulLinksCountriesList.map(({ title, description, link }) => {
+
+                    return link ? (
+                      <div
+                        key={title}
+                        className="flex w-full flex-col space-y-2 rounded-xl bg-white p-2 shadow-sm"
+                      >
+                        <a
+                          href={link}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="flex w-full cursor-pointer items-center justify-between"
+                        >
+                          <h4 className="text-sm text-yellow-900">{title}</h4>
+                          <ExternalLink size={16} className="text-yellow-900" />
+                        </a>
+
+                        {description && (
+                          <p className="mr-6 text-xs text-gray-500">{description}</p>
+                        )}
+                      </div>
+                    ) : null;
+                  })}
+                </div>
+                </div>
               </ScrollArea>
             </div>
           </div>
         </div>
+
       </ContentLoader>
     </div>
   );

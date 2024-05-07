@@ -27,7 +27,7 @@ import {
   RESUME_ITEMS,
   totalInterventionArea,
 } from '@/containers/countries/detail/constants';
-import { usefulLinks } from '@/containers/countries/detail/constants';
+import { usefulLinksCountry } from '@/containers/countries/detail/constants';
 import { COLUMNS, CSV_COLUMNS_ORDER } from '@/containers/countries/detail/constants';
 import Share from '@/containers/share';
 
@@ -352,10 +352,9 @@ export default function CountryDetailPanel() {
                                 className="h-2 rounded-3xl bg-[#FFCC73]"
                                 style={{
                                   width: !!indicators[value].value
-                                    ? `${
-                                        (indicators[value].value * 100) /
-                                        indicators.intervention_area_total['value']
-                                      }%`
+                                    ? `${(indicators[value].value * 100) /
+                                    indicators.intervention_area_total['value']
+                                    }%`
                                     : '0%',
                                 }}
                               />
@@ -465,17 +464,15 @@ export default function CountryDetailPanel() {
 
                     <div className="flex flex-col space-y-2 py-4">
                       <h3 className="text-base text-green-800">Useful links</h3>
-                      {usefulLinks.map(({ title, description, link }) => {
+                      {usefulLinksCountry.map(({ title, link }) => {
                         const href =
                           link === 'gfw_link'
                             ? data?.data?.attributes?.gfw_link
                             : link === 'country_information_link'
-                            ? data?.data?.attributes?.country_information_link
-                            : link === 'p&p_link'
-                            ? 'https://afocosec.org/programs-projects/projects/'
-                            : link.startsWith('http')
-                            ? link
-                            : undefined;
+                              ? data?.data?.attributes?.country_information_link
+                                : link.startsWith('http')
+                                  ? link
+                                  : undefined;
 
                         return href ? (
                           <div
@@ -485,16 +482,14 @@ export default function CountryDetailPanel() {
                             <a
                               href={href}
                               target="_blank"
-                              rel="noreferrer"
+                              rel="noopener noreferrer"
                               className="flex w-full cursor-pointer items-center justify-between"
                             >
                               <h4 className="text-sm text-yellow-900">{title}</h4>
                               <ExternalLink size={16} className="text-yellow-900" />
                             </a>
 
-                            {description && (
-                              <p className="mr-6 text-xs text-gray-500">{description}</p>
-                            )}
+
                           </div>
                         ) : null;
                       })}
