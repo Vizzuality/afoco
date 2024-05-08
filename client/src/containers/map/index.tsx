@@ -109,7 +109,6 @@ export default function MapContainer() {
   );
 
   const handleMapViewStateChange = useCallback(() => {
-    console.log('handle view state');
     if (map) {
       const b = map
         .getBounds()
@@ -272,10 +271,7 @@ export default function MapContainer() {
             bounds: bboxFromURL as LngLatBoundsLike,
           }),
         }}
-        bounds={{
-          ...tmpBounds,
-          bbox: bboxFromURL as Bbox,
-        }}
+        bounds={tmpBounds}
         cursor={cursor}
         minZoom={minZoom}
         maxZoom={maxZoom}

@@ -24,7 +24,7 @@ export const basemapSettingsParser = parseAsJson<MapSettings>().withDefault({
 
 export const projectsTabParser = parseAsJson<ProjectsTab>().withDefault('statistics');
 
-export const bboxParser = parseAsJson<[number, number, number, number]>().withDefault(DEFAULT_BBOX);
+export const bboxParser = parseAsJson<[number, number, number, number]>();
 
 // query params parsers
 const searchQueryParams = {

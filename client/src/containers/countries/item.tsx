@@ -8,6 +8,7 @@ import { useGetCountryIndicatorFields } from '@/types/generated/country-indicato
 import { CountryListResponseDataItem } from '@/types/generated/strapi.schemas';
 
 import { useSyncQueryParams } from '@/hooks/datasets';
+
 export default function CountryItem({ data }: { data: CountryListResponseDataItem }) {
   const queryParams = useSyncQueryParams({ bbox: true });
 
@@ -28,7 +29,7 @@ export default function CountryItem({ data }: { data: CountryListResponseDataIte
 
   return (
     <Link
-      href={`/countries/${data.id}${queryParams}&bbox=[${data.attributes?.bbox}]`}
+      href={`/countries/${data.id}${queryParams}`}
       data-cy="country-item"
       className="flex items-center justify-between space-x-4 rounded-lg border border-gray-100 bg-white py-2 pl-2 pr-4 text-sm text-yellow-900 no-underline shadow-sm transition-all duration-300 hover:border-yellow-500"
     >

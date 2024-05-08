@@ -3,7 +3,6 @@
 import { MouseEvent, useCallback, useState } from 'react';
 
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 
 import { useSetAtom } from 'jotai';
 import { Search, X } from 'lucide-react';
@@ -31,7 +30,6 @@ export default function ProjectsList() {
   const setTempBbox = useSetAtom(tmpBboxAtom);
   const [filtersSettings] = useSyncFilters();
   const setHoveredProjectList = useSetAtom(hoveredProjectMapAtom);
-  const router = useRouter();
   const queryParams = useSyncQueryParams({ bbox: true });
 
   const { data, isFetching, isFetched, isError } = useGetProjects(
@@ -147,19 +145,6 @@ export default function ProjectsList() {
     [setHoveredProjectList]
   );
 
-  const handleClick = useCallback(
-    (e: MouseEvent<HTMLElement>) => {
-      const value = e.currentTarget?.getAttribute('data-bbox');
-
-      if (value) {
-        const currentValue = value.split(',').map((num) => parseFloat(num)) as Bbox;
-        setTempBbox(currentValue);
-      }
-      router.push(`/projects/${e.currentTarget.getAttribute('data-value')}${queryParams}`);
-    },
-    [setTempBbox, router, queryParams]
-  );
-
   return (
     <div className="flex h-full flex-col space-y-2">
       <div className="ml-1 mt-1 flex justify-between space-x-2 px-5">
@@ -209,14 +194,11 @@ export default function ProjectsList() {
                 {data &&
                   data.map((project) => (
                     <Link
-                      legacyBehavior={false}
                       key={project?.id}
                       data-value={project?.attributes?.project_code}
-                      data-bbox={project?.attributes?.bbox}
-                      onClick={handleClick}
                       onMouseEnter={handleHover}
                       onMouseLeave={() => setHoveredProjectList(null)}
-                      href={`/projects/${project?.attributes?.project_code}${queryParams}&bbox=[${project?.attributes?.bbox}]`}
+                      href={`/projects/${project?.attributes?.project_code}${queryParams}`}
                     >
                       <ProjectItem data={project} />
                     </Link>

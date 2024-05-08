@@ -1,5 +1,7 @@
 'use client';
 
+import { useEffect } from 'react';
+
 import Markdown from 'react-markdown';
 import Flag from 'react-world-flags';
 
@@ -7,6 +9,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { notFound, useParams } from 'next/navigation';
 
+import { useSetAtom } from 'jotai';
 import { X } from 'lucide-react';
 import { ArrowLeft, Download, ExternalLink, Info } from 'lucide-react';
 import remarkGfm from 'remark-gfm';
@@ -14,11 +17,14 @@ import remarkGfm from 'remark-gfm';
 import { formatCompactNumber } from '@/lib/utils/formats';
 import { DescriptionWithoutMarkdown } from '@/lib/utils/markdown';
 
+import { tmpBboxAtom } from '@/store';
+
 import { useGetCountriesId } from '@/types/generated/country';
 import { useGetCountryIndicatorFields } from '@/types/generated/country-indicator-field';
 import { Country, CountryCountryIndicatorFieldsDataItem } from '@/types/generated/strapi.schemas';
 
 import { useSyncQueryParams } from '@/hooks/datasets';
+import { useSyncBbox } from '@/hooks/datasets/sync-query';
 
 import BarsChart from '@/containers/charts/bar';
 import SingleBar from '@/containers/charts/single-bar';
@@ -40,6 +46,14 @@ import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip
 export default function CountryDetailPanel() {
   const params = useParams<{ id: string }>();
   const { data, isFetching, isFetched, isError } = useGetCountriesId(Number(params.id));
+  const setTempBbox = useSetAtom(tmpBboxAtom);
+  const [URLBbox] = useSyncBbox();
+
+  useEffect(() => {
+    if (data?.data?.attributes?.bbox && !URLBbox) {
+      setTempBbox(data?.data?.attributes?.bbox);
+    }
+  }, [data, setTempBbox, URLBbox]);
 
   const {
     data: indicators,
