@@ -31,7 +31,6 @@ export default function ProjectsList() {
   const setTempBbox = useSetAtom(tmpBboxAtom);
   const [filtersSettings] = useSyncFilters();
   const setHoveredProjectList = useSetAtom(hoveredProjectMapAtom);
-  const router = useRouter();
   const queryParams = useSyncQueryParams({ bbox: true });
 
   const { data, isFetching, isFetched, isError } = useGetProjects(
@@ -155,9 +154,8 @@ export default function ProjectsList() {
         const currentValue = value.split(',').map((num) => parseFloat(num)) as Bbox;
         setTempBbox(currentValue);
       }
-      router.push(`/projects/${e.currentTarget.getAttribute('data-value')}${queryParams}`);
     },
-    [setTempBbox, router, queryParams]
+    [setTempBbox]
   );
 
   return (
@@ -209,14 +207,13 @@ export default function ProjectsList() {
                 {data &&
                   data.map((project) => (
                     <Link
-                      legacyBehavior={false}
                       key={project?.id}
                       data-value={project?.attributes?.project_code}
                       data-bbox={project?.attributes?.bbox}
                       onClick={handleClick}
                       onMouseEnter={handleHover}
                       onMouseLeave={() => setHoveredProjectList(null)}
-                      href={`/projects/${project?.attributes?.project_code}${queryParams}&bbox=[${project?.attributes?.bbox}]`}
+                      href={`/projects/${project?.attributes?.project_code}${queryParams}`}
                     >
                       <ProjectItem data={project} />
                     </Link>
