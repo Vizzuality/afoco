@@ -3,7 +3,6 @@
 import { MouseEvent, useCallback, useState } from 'react';
 
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 
 import { useSetAtom } from 'jotai';
 import { Search, X } from 'lucide-react';
@@ -146,18 +145,6 @@ export default function ProjectsList() {
     [setHoveredProjectList]
   );
 
-  const handleClick = useCallback(
-    (e: MouseEvent<HTMLElement>) => {
-      const value = e.currentTarget?.getAttribute('data-bbox');
-
-      if (value) {
-        const currentValue = value.split(',').map((num) => parseFloat(num)) as Bbox;
-        setTempBbox(currentValue);
-      }
-    },
-    [setTempBbox]
-  );
-
   return (
     <div className="flex h-full flex-col space-y-2">
       <div className="ml-1 mt-1 flex justify-between space-x-2 px-5">
@@ -209,8 +196,6 @@ export default function ProjectsList() {
                     <Link
                       key={project?.id}
                       data-value={project?.attributes?.project_code}
-                      data-bbox={project?.attributes?.bbox}
-                      onClick={handleClick}
                       onMouseEnter={handleHover}
                       onMouseLeave={() => setHoveredProjectList(null)}
                       href={`/projects/${project?.attributes?.project_code}${queryParams}`}

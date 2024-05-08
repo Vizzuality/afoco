@@ -1,10 +1,12 @@
 'use client';
 
+import { useEffect } from 'react';
+
 import Image from 'next/image';
 import { notFound, useParams } from 'next/navigation';
 import { useRouter } from 'next/navigation';
 
-import { useAtom } from 'jotai';
+import { useAtom, useSetAtom } from 'jotai';
 import { ArrowLeft, ChevronRight, Share as Download, X } from 'lucide-react';
 
 import { cn } from '@/lib/classnames';
@@ -12,6 +14,7 @@ import { formatCompactNumber } from '@/lib/utils/formats';
 import { DescriptionWithoutMarkdown } from '@/lib/utils/markdown';
 
 import { dashboardAtom } from '@/store';
+import { tmpBboxAtom } from '@/store';
 
 import { useGetIndicatorFields } from '@/types/generated/indicator-field';
 import { useGetProjects } from '@/types/generated/project';
@@ -20,6 +23,8 @@ import {
   Project,
   ProjectProjectIndicatorFields,
 } from '@/types/generated/strapi.schemas';
+
+import { useSyncBbox } from '@/hooks/datasets/sync-query';
 
 import { COLUMNS, CSV_COLUMNS_ORDER } from '@/containers/projects/detail/constants';
 import Share from '@/containers/share';
@@ -36,6 +41,8 @@ export default function ProjectDetailPanel() {
   const params = useParams<{ id: string }>();
   const router = useRouter();
   const [dashboard, setDashboard] = useAtom(dashboardAtom);
+  const setTempBbox = useSetAtom(tmpBboxAtom);
+  const [URLBbox] = useSyncBbox();
 
   const { data, isFetching, isFetched, isError } = useGetProjects(
     {
@@ -50,6 +57,12 @@ export default function ProjectDetailPanel() {
       },
     }
   );
+
+  useEffect(() => {
+    if (data?.bbox && !URLBbox) {
+      setTempBbox(data?.bbox);
+    }
+  }, [data, setTempBbox, URLBbox]);
 
   const {
     data: indicators,
