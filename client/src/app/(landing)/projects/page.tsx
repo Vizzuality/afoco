@@ -26,7 +26,7 @@ export default function Projects() {
               href="https://afocosec.org/programs-projects/projects/"
               className="space-x-2"
             >
-              <span className="underline">AFoCo website</span>
+              <span className="underline">AFoCO website</span>
               <ExternalLink className="mb-0.5 inline-block h-4 w-4 stroke-[1px]" />
             </Link>{' '}
           </p>

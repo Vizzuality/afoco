@@ -44,7 +44,7 @@ export const totalInterventionArea = [
 
 export const usefulLinksCountriesList = [
   {
-    title: 'AFoCO publications.',
+    title: 'AFoCO publications',
     description: '',
     link: 'https://afocosec.org/knowledge/publications',
   },
