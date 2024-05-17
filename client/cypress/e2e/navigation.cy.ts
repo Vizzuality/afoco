@@ -8,9 +8,9 @@ describe('navigation', () => {
     cy.get('[data-cy="projects-list-tab"]').should('exist');
     cy.get('[data-cy="projects-list-tab"]').click();
     cy.get('[data-cy="project-item-link"]').first().click();
-    cy.get('button[data-cy="project-dashboard-button"]').click().wait(3000);
+    cy.get('[data-cy="project-dashboard-button"]').click().wait(3000);
     cy.get('[data-cy="project-dashboard"]').should('exist');
-    cy.get('button[data-cy="project-dashboard-button"]').click();
+    cy.get('[data-cy="project-dashboard-button"]').click();
     cy.get('[data-cy="project-dashboard"]').should('not.exist');
   });
 
