@@ -109,7 +109,6 @@ export default function MapContainer() {
   );
 
   const handleMapViewStateChange = useCallback(() => {
-    console.log('handle view state');
     if (map) {
       const b = map
         .getBounds()

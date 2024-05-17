@@ -1,4 +1,4 @@
-import { parseAsJson, createSerializer } from 'nuqs/parsers';
+import { parseAsJson, createSerializer } from 'nuqs/server';
 
 import type { LayerSettings } from '@/types/layers';
 import type { MapSettings } from '@/types/map';
