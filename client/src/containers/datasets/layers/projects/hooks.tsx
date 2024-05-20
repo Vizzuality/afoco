@@ -226,13 +226,29 @@ export function useLayers({
         'fill-opacity': [
           'case',
           ['boolean', ['feature-state', 'hover'], false],
-          1,
+          0.7,
           ['all', ['to-boolean', hoveredProject], ['!=', ['get', 'project_code'], hoveredProject]],
           0.2,
           ['all', ['to-boolean', hoveredProject], ['==', ['get', 'project_code'], hoveredProject]],
-          1,
-          opacity,
+          0.7,
+          opacity * 0.7,
         ],
+      },
+      layout: {
+        visibility: visibility,
+      },
+      minzoom: 8,
+    },
+    {
+      id: 'projects_line',
+      type: 'line',
+      filter: ['in', ['get', 'project_code'], ['literal', filteredProjects]],
+      source: 'projects',
+      'source-layer': 'areas_centroids_l',
+      paint: {
+        'line-color': '#B45F06',
+        'line-opacity': opacity,
+        'line-width': 1.5,
       },
       layout: {
         visibility: visibility,
