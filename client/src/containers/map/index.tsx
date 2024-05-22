@@ -27,6 +27,7 @@ import { DEFAULT_BBOX } from '@/components/map/constants';
 import Controls from '@/components/map/controls';
 import SettingsControl from '@/components/map/controls/settings';
 import ZoomControl from '@/components/map/controls/zoom';
+import MapDraw from '@/components/map/draw';
 import { CustomMapProps } from '@/components/map/types';
 import { Tooltip, TooltipTrigger, TooltipContent } from '@/components/ui/tooltip';
 
@@ -322,6 +323,7 @@ export default function MapContainer() {
             </Marker>
 
             <Legend />
+            <MapDraw />
 
             {locationPopUp.popup && (
               <PopupContainer
