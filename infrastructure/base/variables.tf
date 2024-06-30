@@ -27,13 +27,25 @@ variable "production_domain" {
   type = string
 }
 
-variable "ga_tracking_id" {
+variable "production_ga_tracking_id" {
   type        = string
   default     = ""
   description = "Google Analytics tracking id"
 }
 
-variable "mapbox_api_token" {
+variable "staging_ga_tracking_id" {
+  type        = string
+  default     = ""
+  description = "Google Analytics tracking id"
+}
+
+variable "production_mapbox_api_token" {
+  type        = string
+  default     = ""
+  description = "Mapbox api token"
+}
+
+variable "staging_mapbox_api_token" {
   type        = string
   default     = ""
   description = "Mapbox api token"

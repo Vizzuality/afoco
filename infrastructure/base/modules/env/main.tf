@@ -8,7 +8,7 @@ locals {
     TRANSFER_TOKEN_SALT = random_password.transfer_token_salt.result
     JWT_SECRET          = random_password.jwt_secret.result
     CMS_URL             = "https://${var.domain}/cms/"
-    NODE_ENV            = "development"
+    NODE_ENV            = var.node_env
 
     # Database
     DATABASE_CLIENT                  = "postgres"
@@ -28,7 +28,7 @@ locals {
     ASSETS_BUCKET_REGIONAL_DOMAIN_NAME = module.assets_bucket.bucket_regional_domain_name
   }
   client_env = {
-    NEXT_PUBLIC_ENVIRONMENT                    = "development"
+    NEXT_PUBLIC_ENVIRONMENT                    = var.node_env
     NEXT_PUBLIC_URL                            = "https://${var.domain}"
     NEXT_PUBLIC_API_URL                        = "https://${var.domain}/cms/api"
     NEXT_PUBLIC_MAPBOX_API_TOKEN               = var.mapbox_api_token
@@ -65,11 +65,11 @@ module "github_values" {
   source    = "../github_values"
   repo_name = var.repo_name
   secret_map = {
-    PIPELINE_USER_ACCESS_KEY_ID     = var.pipeline_user_access_key_id
-    PIPELINE_USER_SECRET_ACCESS_KEY = var.pipeline_user_access_key_secret
-    STAGING_CMS_ENV_FILE            = join("\n", [for key, value in local.cms_env : "${key}=${value}"])
-    STAGING_CLIENT_ENV_FILE         = join("\n", [for key, value in local.client_env : "${key}=${value}"])
-    STAGING_DOMAIN                  = var.domain
+    PIPELINE_USER_ACCESS_KEY_ID                         = var.pipeline_user_access_key_id
+    PIPELINE_USER_SECRET_ACCESS_KEY                     = var.pipeline_user_access_key_secret
+    "${upper(var.environment)}_CMS_ENV_FILE"            = join("\n", [for key, value in local.cms_env : "${key}=${value}"])
+    "${upper(var.environment)}_CLIENT_ENV_FILE"         = join("\n", [for key, value in local.client_env : "${key}=${value}"])
+    "${upper(var.environment)}_DOMAIN"                  = var.domain
   }
   variable_map = {
     AWS_REGION = var.aws_region
@@ -154,4 +154,5 @@ module "beanstalk" {
   rds_security_group_id   = aws_security_group.postgresql_access.id
   domain                  = var.domain
   acm_certificate         = aws_acm_certificate.acm_certificate
+  cert_validated          = var.cert_validated
 }

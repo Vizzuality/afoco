@@ -48,7 +48,7 @@ resource "aws_elastic_beanstalk_application" "application" {
 # Settings for the elastic beanstalk environment
 
 locals {
-  environment_settings = [
+  beanstalk_environment_settings = [
     {
       namespace = "aws:ec2:vpc"
       name      = "VPCId"
@@ -138,7 +138,9 @@ locals {
       namespace = "aws:elasticbeanstalk:cloudwatch:logs"
       name      = "DeleteOnTerminate"
       value     = "false"
-    },
+    }
+  ]
+  beanstalk_environment_settings_certificate = [
     {
       namespace = "aws:elbv2:listener:443"
       name      = "ListenerEnabled"
@@ -155,6 +157,7 @@ locals {
       value     = var.acm_certificate.arn
     }
   ]
+  final_beanstalk_environment_settings = var.cert_validated ? concat(local.beanstalk_environment_settings, local.beanstalk_environment_settings_certificate) : local.beanstalk_environment_settings
 }
 
 # Create elastic beanstalk environment
@@ -167,7 +170,7 @@ resource "aws_elastic_beanstalk_environment" "application_environment" {
   wait_for_ready_timeout = "20m"
 
   dynamic "setting" {
-    for_each = local.environment_settings
+    for_each = local.final_beanstalk_environment_settings
     content {
       namespace = setting.value["namespace"]
       name      = setting.value["name"]
@@ -182,6 +185,7 @@ data "aws_lb_listener" "http_listener" {
 }
 
 resource "aws_lb_listener_rule" "redirect_http_to_https" {
+  count        = var.cert_validated ? 1 : 0
   listener_arn = data.aws_lb_listener.http_listener.arn
   priority     = 1
 

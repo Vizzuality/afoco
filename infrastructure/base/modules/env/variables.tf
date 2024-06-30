@@ -113,3 +113,15 @@ variable "mapbox_api_token" {
   default     = ""
   description = "Mapbox api token"
 }
+
+variable "cert_validated" {
+  type        = bool
+  default     = false
+  description = "Whether certificate is already validated or not"
+}
+
+variable "node_env" {
+  type        = string
+  default     = "production"
+  description = "Node environment"
+}

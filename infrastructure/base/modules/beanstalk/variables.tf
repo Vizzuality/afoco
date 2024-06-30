@@ -64,3 +64,9 @@ variable "acm_certificate" {
   type        = any
   description = "The ACM certificate to use for the environment"
 }
+
+variable "cert_validated" {
+  type        = bool
+  default     = false
+  description = "Whether certificate is already validated or not"
+}

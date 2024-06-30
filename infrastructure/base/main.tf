@@ -76,8 +76,34 @@ module "staging" {
   ec2_disk_size                   = var.ec2_disk_size
   rds_engine_version              = var.rds_engine_version
   rds_instance_class              = var.rds_instance_class
-  mapbox_api_token                = var.mapbox_api_token
-  ga_tracking_id                  = var.ga_tracking_id
+  mapbox_api_token                = var.staging_mapbox_api_token
+  ga_tracking_id                  = var.staging_ga_tracking_id
   pipeline_user_access_key_id     = module.iam.pipeline_user_access_key_id
   pipeline_user_access_key_secret = module.iam.pipeline_user_access_key_secret
+  node_env                        = "development"
+  cert_validated                  = true
+}
+
+module "production" {
+  source                          = "./modules/env"
+  domain                          = var.production_domain
+  project_name                    = var.project_name
+  repo_name                       = var.repo_name
+  environment                     = "production"
+  aws_region                      = var.aws_region
+  vpc                             = data.aws_vpc.default_vpc
+  subnet_ids                      = local.subnets_with_ec2_instance_type_offering_ids
+  availability_zones              = data.aws_availability_zones.azs_with_ec2_instance_type_offering.names
+  beanstalk_platform              = var.beanstalk_platform
+  beanstalk_tier                  = var.beanstalk_tier
+  ec2_instance_type               = var.ec2_instance_type
+  ec2_disk_size                   = var.ec2_disk_size
+  rds_engine_version              = var.rds_engine_version
+  rds_instance_class              = var.rds_instance_class
+  mapbox_api_token                = var.production_mapbox_api_token
+  ga_tracking_id                  = var.production_ga_tracking_id
+  pipeline_user_access_key_id     = module.iam.pipeline_user_access_key_id
+  pipeline_user_access_key_secret = module.iam.pipeline_user_access_key_secret
+  node_env                        = "production"
+  cert_validated                  = false
 }
