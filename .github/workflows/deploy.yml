@@ -162,3 +162,4 @@ jobs:
           region: ap-northeast-2
           version_label: ${{ github.sha }}
           deployment_package: infrastructure/afoco_source_bundle/deploy.zip
+          use_existing_version_if_available: true
