@@ -40,7 +40,7 @@ resource "random_password" "postgresql_superuser" {
 resource "aws_security_group" "postgresql" {
   vpc_id                 = var.vpc_id
   description            = "Security Group for PostgreSQL DB"
-  name                   = "PostgreSQL-ingress"
+  name                   = var.environment == "staging" ? "PostgreSQL-ingress" : "PostgreSQL-${var.environment}-ingress"
   revoke_rules_on_delete = true
   tags = merge(
     {
@@ -91,14 +91,4 @@ data "template_file" "secrets_postgresql-writer" {
 resource "aws_iam_policy" "secrets_postgresql-writer" {
   name   = "${var.project}-${var.environment}-secrets-postgresql-writer"
   policy = data.template_file.secrets_postgresql-writer.rendered
-}
-
-resource "local_file" "username" {
-  content  = aws_db_instance.postgresql.username
-  filename = "rds_username.txt"
-}
-
-resource "local_file" "password" {
-  content  = aws_db_instance.postgresql.password
-  filename = "rds_password.txt"
 }

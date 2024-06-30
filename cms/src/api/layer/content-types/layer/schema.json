@@ -12,44 +12,29 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "title": {
-      "type": "string",
-      "required": true
-    },
-    "type": {
-      "type": "enumeration",
-      "enum": [
-        "deckgl",
-        "mapbox",
-        "carto"
-      ],
-      "required": true,
-      "default": "mapbox"
-    },
-    "dataset": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::dataset.dataset",
-      "inversedBy": "layers"
+    "name": {
+      "type": "string"
     },
     "config": {
-      "type": "json",
-      "required": true
+      "type": "json"
     },
     "params_config": {
       "type": "json"
     },
-    "legend_config": {
-      "type": "json",
-      "required": true
+    "decode_function": {
+      "type": "string"
     },
-    "interaction_config": {
+    "legend_config": {
       "type": "json"
     },
-    "metadata": {
-      "type": "component",
-      "repeatable": false,
-      "component": "documentation.metadata"
+    "slug": {
+      "type": "string"
+    },
+    "description": {
+      "type": "richtext"
+    },
+    "dialog": {
+      "type": "richtext"
     }
   }
 }

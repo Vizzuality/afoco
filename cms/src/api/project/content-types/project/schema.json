@@ -1,0 +1,85 @@
+{
+  "kind": "collectionType",
+  "collectionName": "projects",
+  "info": {
+    "singularName": "project",
+    "pluralName": "projects",
+    "displayName": "Project",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "project_code": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "Completed",
+        "On-going",
+        "Under inception"
+      ]
+    },
+    "main_image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "description": {
+      "type": "richtext"
+    },
+    "short_description": {
+      "type": "string"
+    },
+    "countries": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::country.country",
+      "inversedBy": "projects"
+    },
+    "gallery": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "donors": {
+      "type": "string"
+    },
+    "duration": {
+      "type": "string"
+    },
+    "project_indicator_fields": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::indicator-field.indicator-field",
+      "mappedBy": "project"
+    },
+    "intervention_types": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::intervention-type.intervention-type",
+      "inversedBy": "projects"
+    },
+    "bbox": {
+      "type": "json"
+    }
+  }
+}

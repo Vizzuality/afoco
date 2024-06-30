@@ -9,9 +9,14 @@ variable "allowed_account_id" {
   description = "AWS account id"
 }
 
-variable "project" {
+variable "project_name" {
   type        = string
   description = "Short name of the project, will be used to prefix created resources"
+}
+
+variable "repo_name" {
+  type        = string
+  description = "Name of the Github repository where the code is hosted"
 }
 
 variable "staging_domain" {
@@ -20,6 +25,30 @@ variable "staging_domain" {
 
 variable "production_domain" {
   type = string
+}
+
+variable "production_ga_tracking_id" {
+  type        = string
+  default     = ""
+  description = "Google Analytics tracking id"
+}
+
+variable "staging_ga_tracking_id" {
+  type        = string
+  default     = ""
+  description = "Google Analytics tracking id"
+}
+
+variable "production_mapbox_api_token" {
+  type        = string
+  default     = ""
+  description = "Mapbox api token"
+}
+
+variable "staging_mapbox_api_token" {
+  type        = string
+  default     = ""
+  description = "Mapbox api token"
 }
 
 #
@@ -44,6 +73,12 @@ variable "beanstalk_tier" {
 variable "ec2_instance_type" {
   type        = string
   description = "The type of EC2 instance to launch"
+}
+
+variable "ec2_disk_size" {
+  type        = string
+  default     = "40"
+  description = "The size of the EC2 instance root disk"
 }
 
 #

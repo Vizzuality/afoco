@@ -1,0 +1,37 @@
+{
+  "kind": "collectionType",
+  "collectionName": "country_indicator_fields",
+  "info": {
+    "singularName": "country-indicator-field",
+    "pluralName": "country-indicator-fields",
+    "displayName": "CountryIndicatorField",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "country": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::country.country",
+      "inversedBy": "country_indicator_fields"
+    },
+    "indicator_name": {
+      "type": "string"
+    },
+    "unit": {
+      "type": "string"
+    },
+    "value": {
+      "type": "json"
+    },
+    "using_year": {
+      "type": "boolean"
+    },
+    "filter_tag": {
+      "type": "float"
+    }
+  }
+}

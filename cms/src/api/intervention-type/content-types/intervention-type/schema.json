@@ -1,0 +1,24 @@
+{
+  "kind": "collectionType",
+  "collectionName": "intervention_types",
+  "info": {
+    "singularName": "intervention-type",
+    "pluralName": "intervention-types",
+    "displayName": "InterventionType"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "projects": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::project.project",
+      "mappedBy": "intervention_types"
+    }
+  }
+}

@@ -1,3 +1,5 @@
+import type { LayerSettings } from '@/types/layers';
+
 /**
  * *`setOpacity`*
  * Set opacity
@@ -17,10 +19,10 @@ export const setOpacity = ({ o = 1, base = 1 }: SetOpacityProps) => {
  * @param {String} type
  * @returns {String | Boolean} visibility
  */
-type SetVisibilityProps = { v: boolean; type: 'mapbox' | 'deck' };
-export const setVisibility = ({ v = true, type = 'mapbox' }: SetVisibilityProps) => {
-  if (type === 'mapbox') {
-    return v ? 'visible' : 'none';
+type SetVisibilityProps = { v: LayerSettings['visibility']; type: 'mapbox' | 'deckgl' };
+export const setVisibility = ({ v = 'visible', type = 'mapbox' }: SetVisibilityProps) => {
+  if (type === 'deckgl') {
+    return v === 'visible' ? true : false;
   }
 
   return v;

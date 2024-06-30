@@ -30,3 +30,24 @@ output "staging_acm_certificate_domain_validation_options" {
 output "staging_acm_certificate_arn" {
   value = module.staging.acm_certificate_arn
 }
+
+output "staging_assets_bucket_name" {
+  value = module.staging.assets_bucket_name
+}
+
+output "staging_assets_bucket_region" {
+  value = module.staging.assets_bucket_region
+}
+
+output "staging_assets_bucket_user_access_key" {
+  value = module.staging.assets_bucket_user_access_key
+}
+
+output "staging_assets_bucket_user_secret_key" {
+  value     = module.staging.assets_bucket_user_secret_key
+  sensitive = true
+}
+
+output "staging_assets_bucket_regional_domain_name" {
+  value = module.staging.assets_bucket_regional_domain_name
+}

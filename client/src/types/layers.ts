@@ -1,8 +1,5 @@
+import type { Layer as DeckLayer } from '@deck.gl/core/typed';
 import type { AnyLayer, AnySourceData } from 'mapbox-gl';
-
-import { FormatProps } from '@/lib/utils/formats';
-
-import type { Layer } from '@/types/generated/strapi.schemas';
 
 export type Config = {
   source: AnySourceData;
@@ -13,6 +10,22 @@ export type ParamsConfigValue = {
   key: string;
   default: unknown;
 };
+
+export type LayerId =
+  | 'projects'
+  | 'tree-cover'
+  | 'tree-cover-loss'
+  | 'net-forest-carbon-flux'
+  | 'biomass-density'
+  | 'net-forest-carbon-flux'
+  | 'soil-carbon-density'
+  | 'land-degradation';
+
+export interface LayerSettings {
+  opacity: number;
+  visibility: 'none' | 'visible';
+  id: number;
+}
 
 export type ParamsConfig = Record<string, ParamsConfigValue>[];
 
@@ -31,21 +44,38 @@ export type InteractionConfig = {
     values: {
       key: string;
       label: string;
-      format?: FormatProps;
+      format?: unknown;
     }[];
   }[];
 };
 
 export type LayerProps = {
-  id?: string;
+  id: number;
   zIndex?: number;
-  onAdd?: (props: Config) => void;
-  onRemove?: (props: Config) => void;
+  onAdd?: (ids: (string | undefined)[]) => void;
+  onRemove?: (ids: (string | undefined)[]) => void;
+  beforeId: string;
+  settings?: { opacity: LayerSettings['opacity']; visibility: LayerSettings['visibility'] };
 };
 
-export type LayerTyped = Layer & {
+export type LayerTyped = {
   config: Config;
   params_config: ParamsConfig;
   legend_config: LegendConfig;
   interaction_config: InteractionConfig;
+};
+
+export type DeckGLLayerProps<T> = LayerProps &
+  Partial<T> & {
+    beforeId: string;
+    config: DeckLayer<{ beforeId: string }>;
+  };
+
+export type LegendType = {
+  type: 'basic' | 'gradient' | 'choropleth';
+  items: {
+    name?: string;
+    value: string;
+    color: string;
+  }[];
 };
