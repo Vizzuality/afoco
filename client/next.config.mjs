@@ -5,6 +5,12 @@ const nextConfig = {
   transpilePackages: ['@serverless-app-scaffold/types', 'lucide-react', 'hi'],
   images: {
     domains: ['api.mapbox.com', 'afoco-staging-assets.s3.ap-northeast-2.amazonaws.com'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'climation-staging.afocosec.org',
+      },
+    ],
   },
   async redirects() {
     return [
