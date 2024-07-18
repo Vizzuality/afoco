@@ -105,5 +105,5 @@ module "production" {
   pipeline_user_access_key_id     = module.iam.pipeline_user_access_key_id
   pipeline_user_access_key_secret = module.iam.pipeline_user_access_key_secret
   node_env                        = "production"
-  cert_validated                  = false
+  cert_validated                  = true
 }
