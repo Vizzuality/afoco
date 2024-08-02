@@ -4,11 +4,18 @@ import('./src/env.mjs');
 const nextConfig = {
   transpilePackages: ['@serverless-app-scaffold/types', 'lucide-react', 'hi'],
   images: {
-    domains: ['api.mapbox.com', 'afoco-staging-assets.s3.ap-northeast-2.amazonaws.com'],
     remotePatterns: [
       {
         protocol: 'https',
         hostname: 'climation-staging.afocosec.org',
+      },
+      {
+        protocol: 'https',
+        hostname: 'afoco-staging-assets.s3.ap-northeast-2.amazonaws.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'afoco-production-assets.s3.ap-northeast-2.amazonaws.com',
       },
     ],
   },
