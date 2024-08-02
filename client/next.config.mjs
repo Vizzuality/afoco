@@ -10,6 +10,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'climation-staging.afocosec.org',
       },
+      {
+        protocol: 'https',
+        hostname: 'afoco-staging-assets.s3.ap-northeast-2.amazonaws.com',
+      },
     ],
   },
   async redirects() {
