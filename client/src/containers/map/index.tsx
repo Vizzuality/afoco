@@ -1,8 +1,13 @@
 'use client';
 
+import MapboxDraw, { DrawModeChangeEvent } from '@mapbox/mapbox-gl-draw';
+import { ControlPosition } from 'react-map-gl';
+
+import { Layer } from 'mapbox-gl';
+
 import { useCallback, useMemo, useState } from 'react';
 
-import { LngLatBoundsLike, MapLayerMouseEvent, useMap, Marker } from 'react-map-gl';
+import { LngLatBoundsLike, MapLayerMouseEvent, useMap, Marker, useControl } from 'react-map-gl';
 
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
@@ -27,9 +32,10 @@ import { DEFAULT_BBOX } from '@/components/map/constants';
 import Controls from '@/components/map/controls';
 import SettingsControl from '@/components/map/controls/settings';
 import ZoomControl from '@/components/map/controls/zoom';
+import MapDraw from '@/components/map/draw';
 import { CustomMapProps } from '@/components/map/types';
 import { Tooltip, TooltipTrigger, TooltipContent } from '@/components/ui/tooltip';
-
+import "@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css";
 const LayerManager = dynamic(() => import('@/containers/map/layer-manager'), {
   ssr: false,
 });
@@ -37,6 +43,127 @@ const LayerManager = dynamic(() => import('@/containers/map/layer-manager'), {
 const Legend = dynamic(() => import('@/containers/map/legend'), {
   ssr: false,
 });
+
+const DRAWING_STYLES: Layer[] = [
+  // ACTIVE (being drawn)
+  // line stroke
+  {
+    id: 'gl-draw-line',
+    type: 'line',
+    filter: ['all', ['==', '$type', 'LineString'], ['!=', 'mode', 'static']],
+    layout: {
+      'line-cap': 'round',
+      'line-join': 'round',
+    },
+    paint: {
+      'line-color': '#00857F',
+      'line-width': 3,
+    },
+  },
+  // polygon fill
+  {
+    id: 'gl-draw-polygon-fill',
+    type: 'fill',
+    filter: ['all', ['==', '$type', 'Polygon'], ['!=', 'mode', 'static']],
+    paint: {
+      'fill-color': 'transparent',
+      'fill-outline-color': '#00857F',
+      'fill-opacity': 0.1,
+    },
+  },
+  // polygon outline stroke
+  // This doesn't style the first edge of the polygon, which uses the line stroke styling instead
+  {
+    id: 'gl-draw-polygon-stroke-active',
+    type: 'line',
+    filter: ['all', ['==', '$type', 'Polygon'], ['!=', 'mode', 'static']],
+    layout: {
+      'line-cap': 'round',
+      'line-join': 'round',
+    },
+    paint: {
+      'line-color': '#00857F',
+      'line-width': 3,
+    },
+  },
+  // vertex point halos
+  {
+    id: 'gl-draw-polygon-and-line-vertex-halo-active',
+    type: 'circle',
+    filter: ['all', ['==', 'meta', 'vertex'], ['==', '$type', 'Point'], ['!=', 'mode', 'static']],
+    paint: {
+      'circle-radius': 5,
+      'circle-color': 'white',
+      'circle-stroke-width': 0.5,
+      'circle-stroke-color': 'hsla(0, 0%, 0%, 0.15)',
+    },
+  },
+  // vertex points
+  {
+    id: 'gl-draw-polygon-and-line-vertex-active',
+    type: 'circle',
+    filter: ['all', ['==', 'meta', 'vertex'], ['==', '$type', 'Point'], ['!=', 'mode', 'static']],
+    paint: {
+      'circle-radius': 5,
+      'circle-color': 'white',
+      'circle-stroke-width': 0.5,
+      'circle-stroke-color': 'hsla(0, 0%, 0%, 0.15)',
+    },
+  },
+
+  // INACTIVE (static, already drawn)
+  // line stroke
+  {
+    id: 'gl-draw-line-static',
+    type: 'line',
+    filter: ['all', ['==', '$type', 'LineString'], ['==', 'mode', 'static']],
+    layout: {
+      'line-cap': 'round',
+      'line-join': 'round',
+    },
+    paint: {
+      'line-color': '#000',
+      'line-width': 3,
+    },
+  },
+  // polygon fill
+  {
+    id: 'gl-draw-polygon-fill-static',
+    type: 'fill',
+    filter: ['all', ['==', '$type', 'Polygon'], ['==', 'mode', 'static']],
+    paint: {
+      'fill-color': '#000',
+      'fill-outline-color': '#000',
+      'fill-opacity': 0.1,
+    },
+  },
+  // polygon outline
+  {
+    id: 'gl-draw-polygon-stroke-static',
+    type: 'line',
+    filter: ['all', ['==', '$type', 'Polygon'], ['==', 'mode', 'static']],
+    layout: {
+      'line-cap': 'round',
+      'line-join': 'round',
+    },
+    paint: {
+      'line-color': '#000',
+      'line-width': 3,
+    },
+  },
+] satisfies Layer[];
+
+type DrawControlProps = ConstructorParameters<typeof MapboxDraw>[0] & {
+  position?: ControlPosition;
+  onCreate?: (event: { features: GeoJSON.Feature[] }) => void;
+  onUpdate?: (event: { features: GeoJSON.Feature[]; action: string }) => void;
+  onDelete?: (event: { features: GeoJSON.Feature[] }) => void;
+  onModeChange?: (event: DrawModeChangeEvent) => void;
+  displayControlsDefault?: boolean;
+  customPolygon?: GeoJSON.FeatureCollection;
+  onSetCustomPolygon?: (customPolygon) => void;
+  styles?: typeof DRAWING_STYLES;
+};
 
 const DEFAULT_PROPS: CustomMapProps = {
   id: 'default',
@@ -57,6 +184,14 @@ const INITIAL_PROJECTS_POPUP = {
   popup: null,
   info: null,
 };
+
+function DrawControl(props: DrawControlProps) {
+  useControl(() => new MapboxDraw(props), {
+    position: props.position,
+  });
+
+  return null;
+}
 
 export default function MapContainer() {
   const { id, initialViewState, minZoom, maxZoom } = DEFAULT_PROPS;
@@ -260,6 +395,11 @@ export default function MapContainer() {
     [setCursor, map, hoveredStateIdProjectsCircle, hoveredStateIdProjectsFill]
   );
 
+  const handleUserDrawing = (event) => {
+    console.log(event, 'event');
+    return event
+  }
+
   return (
     <div className="relative left-0 top-0 h-screen w-screen">
       <Map
@@ -322,6 +462,15 @@ export default function MapContainer() {
             </Marker>
 
             <Legend />
+            <MapDraw displayControlsDefault={true} position="bottom-right"   onCreate={handleUserDrawing}
+      />
+            {/* <DrawControl
+              position="bottom-right"
+              controls={{
+                polygon: true,
+                trash: true,
+              }}
+            /> */}
 
             {locationPopUp.popup && (
               <PopupContainer
