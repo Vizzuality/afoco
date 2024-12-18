@@ -3,12 +3,12 @@
 import { useEffect } from 'react';
 
 import Markdown from 'react-markdown';
-import Flag from 'react-world-flags';
 
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound, useParams } from 'next/navigation';
 
+import getCountryIso2 from 'country-iso-3-to-2';
 import { useSetAtom } from 'jotai';
 import { X } from 'lucide-react';
 import { ArrowLeft, Download, ExternalLink, Info } from 'lucide-react';
@@ -37,6 +37,7 @@ import { usefulLinksCountry } from '@/containers/countries/detail/constants';
 import { COLUMNS, CSV_COLUMNS_ORDER } from '@/containers/countries/detail/constants';
 import Share from '@/containers/share';
 
+import CountryFlag from '@/components/flag';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogClose, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import ContentLoader from '@/components/ui/loader';
@@ -195,11 +196,13 @@ export default function CountryDetailPanel() {
             <ScrollArea className="h-full px-5">
               <div className="mt-16 flex items-center space-x-3 pt-7">
                 {data?.data?.attributes?.iso && (
-                  <Flag
-                    code={data?.data?.attributes.iso}
-                    height="40"
-                    width="48"
+                  <CountryFlag
+                    alt={data.data?.attributes.iso}
+                    countryCode={getCountryIso2(data.data?.attributes.iso || '') || ''}
+                    key={`${data.data?.attributes.iso}`}
                     className="rounded"
+                    width={48}
+                    height={32}
                   />
                 )}
                 <h2 className="text-xl" data-cy="country-detail-name">
@@ -220,11 +223,13 @@ export default function CountryDetailPanel() {
                   <div className="flex flex-col space-y-8 px-4">
                     <div className="mt-4 flex space-x-2">
                       {data?.data?.attributes?.iso && (
-                        <Flag
-                          code={data?.data?.attributes.iso}
-                          height="32"
-                          width="40"
+                        <CountryFlag
+                          alt={data.data?.attributes.iso}
+                          countryCode={getCountryIso2(data.data?.attributes.iso || '') || ''}
+                          key={`${data.data?.attributes.iso}`}
                           className="rounded"
+                          width={48}
+                          height={32}
                         />
                       )}
                       <p>{data?.data?.attributes?.name}</p>

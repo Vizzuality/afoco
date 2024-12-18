@@ -41,7 +41,7 @@ export default function Stats() {
       },
     }
   );
-  console.log(data);
+
   return (
     <ContentLoader
       data={data}

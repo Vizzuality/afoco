@@ -51,6 +51,7 @@ __metadata:
     class-variance-authority: ^0.6.0
     clsx: ^1.2.1
     cmdk: 0.2.1
+    country-iso-3-to-2: ^1.1.1
     cypress: 13.6.4
     d3-array: 3.2.4
     deck.gl: 8.9.19
@@ -7306,6 +7307,8 @@ __metadata:
 "afoco@workspace:.":
   version: 0.0.0-use.local
   resolution: "afoco@workspace:."
+  dependencies:
+    country-iso-3-to-2: ^1.1.1
   languageName: unknown
   linkType: soft
 
@@ -9385,6 +9388,13 @@ __metadata:
     path-type: ^4.0.0
     yaml: ^1.10.0
   checksum: c53bf7befc1591b2651a22414a5e786cd5f2eeaa87f3678a3d49d6069835a9d8d1aef223728e98aa8fec9a95bf831120d245096db12abe019fecb51f5696c96f
+  languageName: node
+  linkType: hard
+
+"country-iso-3-to-2@npm:^1.1.1":
+  version: 1.1.1
+  resolution: "country-iso-3-to-2@npm:1.1.1"
+  checksum: 2fca9f7beb384cbfa1eb68a8b7dabae03356456a33d15ba899475fb7f73e92e71cfa6907f57d552f47230bba25e053f4f0300d6fab9ccf2a95363f340b6bb925
   languageName: node
   linkType: hard
 

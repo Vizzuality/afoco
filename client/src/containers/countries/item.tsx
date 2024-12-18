@@ -1,13 +1,15 @@
 'use client';
 
-import Flag from 'react-world-flags';
-
 import Link from 'next/link';
+
+import getCountryIso2 from 'country-iso-3-to-2';
 
 import { useGetCountryIndicatorFields } from '@/types/generated/country-indicator-field';
 import { CountryListResponseDataItem } from '@/types/generated/strapi.schemas';
 
 import { useSyncQueryParams } from '@/hooks/datasets';
+
+import CountryFlag from '@/components/flag';
 
 export default function CountryItem({ data }: { data: CountryListResponseDataItem }) {
   const queryParams = useSyncQueryParams({ bbox: true });
@@ -35,7 +37,15 @@ export default function CountryItem({ data }: { data: CountryListResponseDataIte
     >
       <div className="flex items-center space-x-4">
         {data.attributes?.iso && (
-          <Flag code={data.attributes.iso} height="32" width="40" className="rounded" />
+          <CountryFlag
+            alt={data.attributes.iso}
+            countryCode={getCountryIso2(data.attributes.iso || '') || ''}
+            key={`${data.attributes.iso}`}
+            className="rounded"
+            style={{
+              fontSize: '3em',
+            }}
+          />
         )}
 
         <h3>{data.attributes?.name}</h3>
