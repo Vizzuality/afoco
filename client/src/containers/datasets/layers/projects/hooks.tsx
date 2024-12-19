@@ -142,13 +142,14 @@ export function useLayers({
 
   // Reactivity to Hover Events in the Sidebar:
   // Similarly, When a user hovers over the a project in the sidebar, both point and geometry representations within the layer are programmed to change in color and/or size.
+
   return [
     {
       id: 'projects_points_shadow',
       type: 'circle',
       filter: ['in', ['get', 'project_code'], ['literal', filteredProjects]],
       source: 'projects',
-      'source-layer': 'areas_centroids_c',
+      'source-layer': 'areas_centroids_c_v202410',
       paint: {
         'circle-radius': 16,
         'circle-color': '#ccc',
@@ -165,16 +166,16 @@ export function useLayers({
       type: 'circle',
       filter: ['in', ['get', 'project_code'], ['literal', filteredProjects]],
       source: 'projects',
-      'source-layer': 'areas_centroids_c',
+      'source-layer': 'areas_centroids_c_v202410',
       paint: {
         'circle-stroke-color': '#ffffff',
         'circle-stroke-width': [
           'case',
           ['boolean', ['feature-state', 'hover'], false],
           3,
-          ['==', ['get', 'project_code'], hoveredProject],
+          ['==', ['get', 'project_code'], hoveredProject?.[0]],
           7,
-          ['!=', ['get', 'project_code'], hoveredProject],
+          ['!=', ['get', 'project_code'], hoveredProject?.[0]],
           3,
           7,
         ],
@@ -193,9 +194,17 @@ export function useLayers({
           'case',
           ['boolean', ['feature-state', 'hover'], false],
           1,
-          ['all', ['to-boolean', hoveredProject], ['!=', ['get', 'project_code'], hoveredProject]],
+          [
+            'all',
+            ['to-boolean', hoveredProject?.[0]],
+            ['!=', ['get', 'project_code'], hoveredProject?.[0]],
+          ],
           0.2,
-          ['all', ['to-boolean', hoveredProject], ['==', ['get', 'project_code'], hoveredProject]],
+          [
+            'all',
+            ['to-boolean', hoveredProject?.[0]],
+            ['==', ['get', 'project_code'], hoveredProject?.[0]],
+          ],
           1,
           opacity,
         ],
@@ -203,9 +212,17 @@ export function useLayers({
           'case',
           ['boolean', ['feature-state', 'hover'], false],
           1,
-          ['all', ['to-boolean', hoveredProject], ['!=', ['get', 'project_code'], hoveredProject]],
+          [
+            'all',
+            ['to-boolean', hoveredProject?.[0]],
+            ['!=', ['get', 'project_code'], hoveredProject?.[0]],
+          ],
           0.2,
-          ['all', ['to-boolean', hoveredProject], ['==', ['get', 'project_code'], hoveredProject]],
+          [
+            'all',
+            ['to-boolean', hoveredProject?.[0]],
+            ['==', ['get', 'project_code'], hoveredProject?.[0]],
+          ],
           1,
           opacity,
         ],
@@ -220,16 +237,24 @@ export function useLayers({
       type: 'fill',
       filter: ['in', ['get', 'project_code'], ['literal', filteredProjects]],
       source: 'projects',
-      'source-layer': 'areas_centroids_l',
+      'source-layer': 'areas_centroids_l_v202410',
       paint: {
         'fill-color': '#176252',
         'fill-opacity': [
           'case',
           ['boolean', ['feature-state', 'hover'], false],
           0.7,
-          ['all', ['to-boolean', hoveredProject], ['!=', ['get', 'project_code'], hoveredProject]],
+          [
+            'all',
+            ['to-boolean', hoveredProject?.[0]],
+            ['!=', ['get', 'project_code'], hoveredProject?.[0]],
+          ],
           0.2,
-          ['all', ['to-boolean', hoveredProject], ['==', ['get', 'project_code'], hoveredProject]],
+          [
+            'all',
+            ['to-boolean', hoveredProject?.[0]],
+            ['==', ['get', 'project_code'], hoveredProject?.[0]],
+          ],
           0.7,
           opacity * 0.7,
         ],
@@ -244,7 +269,7 @@ export function useLayers({
       type: 'line',
       filter: ['in', ['get', 'project_code'], ['literal', filteredProjects]],
       source: 'projects',
-      'source-layer': 'areas_centroids_l',
+      'source-layer': 'areas_centroids_l_v202410',
       paint: {
         'line-color': '#B45F06',
         'line-opacity': opacity,

@@ -140,7 +140,9 @@ export default function ProjectsList() {
   const handleHover = useCallback(
     (e: MouseEvent<HTMLElement>) => {
       const currentValue = e.currentTarget.getAttribute('data-value');
-      setHoveredProjectList(currentValue);
+      if (currentValue) {
+        setHoveredProjectList([currentValue]);
+      }
     },
     [setHoveredProjectList]
   );

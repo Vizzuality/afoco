@@ -55,7 +55,7 @@ const DEFAULT_PROPS: CustomMapProps = {
 const INITIAL_PROJECTS_POPUP = {
   position: null,
   popup: null,
-  info: null,
+  info: [],
 };
 
 export default function MapContainer() {
@@ -64,7 +64,7 @@ export default function MapContainer() {
   const [locationPopUp, setLocationPopUp] = useState<{
     position: { x: number; y: number } | null;
     popup: number[] | null;
-    info: string | null;
+    info: string[] | null;
   }>(INITIAL_PROJECTS_POPUP);
 
   const { [id]: map } = useMap();
@@ -94,7 +94,7 @@ export default function MapContainer() {
     }
   }, [tmpBbox, sidebarOpen]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const { data: projectTitle } = useGetProjects(
+  const { data: ProjectInfo } = useGetProjects(
     {
       populate: 'name, project_code',
     },
@@ -103,7 +103,13 @@ export default function MapContainer() {
         select: (response) =>
           response?.data
             ?.map((project) => project.attributes)
-            .find((project) => project?.project_code === locationPopUp.info)?.name,
+            .filter((project) => {
+              return project?.project_code && locationPopUp.info?.includes(project.project_code);
+            })
+            ?.map((p) => ({
+              id: p?.project_code,
+              name: p?.name,
+            })),
       },
     }
   );
@@ -145,119 +151,111 @@ export default function MapContainer() {
     [map, push, queryParams, setTmpBbox]
   );
 
-  let hoveredStateIdProjectsCircle: string | null = null;
-  let hoveredStateIdProjectsFill: string | null = null;
-
+  const [ho] = useAtom(hoveredProjectMapAtom);
   const handleMouseMove = useCallback(
     (e: MapLayerMouseEvent) => {
+      // Track hovered features as arrays
+      let hoveredProjectsCircle = [];
+      let hoveredProjectsFill = [];
+
+      // Filter features by layer
       const ProjectsLayer =
-        e?.features && e?.features.find(({ layer }) => layer.id === 'projects_circle');
+        e?.features && e?.features.filter(({ layer }) => layer.id === 'projects_circle');
       const ProjectsFillLayer =
-        e?.features && e?.features.find(({ layer }) => layer.id === 'projects_fill');
-      // *ON MOUSE ENTER
-      if (e.features && map && ProjectsLayer) {
+        e?.features && e?.features.filter(({ layer }) => layer.id === 'projects_fill');
+
+      // ON MOUSE ENTER: Handle Projects Circle
+      if (e.features && map && ProjectsLayer?.length) {
+        hoveredProjectsCircle = ProjectsLayer.map((p) => p?.properties?.project_code);
+
         setCursor('pointer');
-        setHoveredProjectMap(ProjectsLayer.properties?.project_code);
+        setHoveredProjectMap(hoveredProjectsCircle);
         setLocationPopUp({
           popup: [e?.lngLat.lat, e?.lngLat.lng],
           position: {
             x: e.point.x,
             y: e.point.y,
           },
-          info: ProjectsLayer.properties?.project_code,
+          info: hoveredProjectsCircle,
+        });
+
+        // Reset all previous hovered states
+        hoveredProjectsCircle.forEach((id) => {
+          map?.setFeatureState(
+            {
+              sourceLayer: 'areas_centroids_c_v202410',
+              source: 'projects',
+              id,
+            },
+            { hover: true }
+          );
         });
       }
 
-      if (e.features && map && ProjectsFillLayer) {
+      // ON MOUSE ENTER: Handle Projects Fill
+      if (e.features && map && ProjectsFillLayer?.length) {
+        hoveredProjectsFill = ProjectsFillLayer.map((p) => p?.properties?.project_code);
         setCursor('pointer');
-        setHoveredProjectMap(ProjectsFillLayer.properties?.project_code);
+        setHoveredProjectMap(hoveredProjectsFill);
         setLocationPopUp({
           popup: [e?.lngLat.lat, e?.lngLat.lng],
           position: {
             x: e.point.x,
             y: e.point.y,
           },
-          info: ProjectsFillLayer.properties?.project_code,
+          info: hoveredProjectsFill,
+        });
+
+        // Reset all previous hovered states
+        hoveredProjectsFill.forEach((id) => {
+          map?.setFeatureState(
+            {
+              sourceLayer: 'areas_centroids_l_v202410',
+              source: 'projects',
+              id,
+            },
+            { hover: true }
+          );
         });
       }
 
-      if (ProjectsLayer && map) {
-        if (hoveredStateIdProjectsCircle !== null) {
+      // ON MOUSE LEAVE: Reset Feature States
+      if (!ProjectsLayer && map) {
+        hoveredProjectsCircle.forEach((id) => {
           map?.setFeatureState(
             {
-              sourceLayer: 'areas_centroids_c',
+              sourceLayer: 'areas_centroids_c_v202410',
               source: 'projects',
-              id: hoveredStateIdProjectsCircle,
+              id,
             },
             { hover: false }
           );
-        }
-
-        hoveredStateIdProjectsCircle = ProjectsLayer?.properties?.project_code as string;
-        map?.setFeatureState(
-          {
-            sourceLayer: 'areas_centroids_c',
-            source: 'projects',
-            id: hoveredStateIdProjectsCircle,
-          },
-          { hover: true }
-        );
+        });
+        hoveredProjectsCircle = [];
       }
-      if (ProjectsFillLayer && map) {
-        if (hoveredStateIdProjectsFill !== null) {
+
+      if (!ProjectsFillLayer && map) {
+        hoveredProjectsFill.forEach((id) => {
           map?.setFeatureState(
             {
-              sourceLayer: 'areas_centroids_l',
+              sourceLayer: 'areas_centroids_l_v202410',
               source: 'projects',
-              id: hoveredStateIdProjectsFill,
+              id,
             },
             { hover: false }
           );
-        }
-
-        hoveredStateIdProjectsFill = ProjectsFillLayer?.properties?.project_code as string;
-        map?.setFeatureState(
-          {
-            sourceLayer: 'areas_centroids_l',
-            source: 'projects',
-            id: hoveredStateIdProjectsFill,
-          },
-          { hover: true }
-        );
+        });
+        hoveredProjectsFill = [];
       }
 
-      // *ON MOUSE LEAVE
-
+      // Reset cursor and popup on empty features
       if (e.features?.length === 0) {
         setCursor('grab');
-        setHoveredProjectMap(null);
+        setHoveredProjectMap([]);
         setLocationPopUp(INITIAL_PROJECTS_POPUP);
       }
-
-      if (!ProjectsLayer && map && hoveredStateIdProjectsCircle) {
-        map?.setFeatureState(
-          {
-            sourceLayer: 'areas_centroids_c',
-            source: 'projects',
-            id: hoveredStateIdProjectsCircle,
-          },
-          { hover: false }
-        );
-        hoveredStateIdProjectsCircle = null;
-      }
-      if (!ProjectsFillLayer && map && hoveredStateIdProjectsFill) {
-        map?.setFeatureState(
-          {
-            sourceLayer: 'areas_centroids_l',
-            source: 'projects',
-            id: hoveredStateIdProjectsFill,
-          },
-          { hover: false }
-        );
-        hoveredStateIdProjectsFill = null;
-      }
     },
-    [setCursor, map, hoveredStateIdProjectsCircle, hoveredStateIdProjectsFill]
+    [setCursor, setHoveredProjectMap, setLocationPopUp, map]
   );
 
   return (
@@ -327,8 +325,8 @@ export default function MapContainer() {
               <PopupContainer
                 longitude={locationPopUp?.popup[1]}
                 latitude={locationPopUp?.popup[0]}
-                info={projectTitle}
-                header="Project"
+                info={ProjectInfo}
+                header={ProjectInfo?.length && ProjectInfo?.length > 1 ? 'Projects' : 'Project'}
               />
             )}
           </>
