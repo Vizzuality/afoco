@@ -1,6 +1,9 @@
 import { useEffect, useState, MouseEvent, useCallback } from 'react';
+
 import { useAtomValue } from 'jotai';
-import { hoveredProjectMapAtom, openAtom } from '@/store';
+
+import { hoveredProjectMapAtom } from '@/store';
+
 import { Popup } from 'react-map-gl';
 
 const PopupContainer = ({
@@ -11,7 +14,7 @@ const PopupContainer = ({
 }: {
   longitude: number;
   latitude: number;
-  info?:
+  info:
     | (
         | {
             id: string;
@@ -63,6 +66,7 @@ const PopupContainer = ({
       <div className="space-y-2">
         {info?.map((i) => (
           <p
+            key={i?.id}
             className="text-xs text-yellow-900"
             data-id={i?.id}
             onMouseEnter={handleScrollableArea}

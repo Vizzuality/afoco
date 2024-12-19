@@ -81,10 +81,6 @@ export default function ProjectDetailPanel() {
     }
   );
 
-  if (!params.id) {
-    return notFound();
-  }
-
   const headerRef = useRef<HTMLDivElement>(null); // Ref to measure the height of the Header
   const [headerHeight, setHeaderHeight] = useState(0); // State to store the height of the Header
 
@@ -98,6 +94,10 @@ export default function ProjectDetailPanel() {
       }, 0);
     }
   }, []); // Run once after initial render
+
+  if (!params.id) {
+    return notFound();
+  }
 
   return (
     <div className="relative flex h-full flex-col rounded-3xl bg-neutral-50">

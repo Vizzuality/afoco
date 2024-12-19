@@ -8,10 +8,8 @@ import { useSetAtom } from 'jotai';
 import { Search, X } from 'lucide-react';
 
 import { hoveredProjectMapAtom } from '@/store';
-import { tmpBboxAtom } from '@/store';
 
 import { useGetProjects } from '@/types/generated/project';
-import { Bbox } from '@/types/map';
 
 import { useSyncQueryParams } from '@/hooks/datasets';
 import { useSyncFilters } from '@/hooks/datasets/sync-query';
@@ -27,7 +25,6 @@ import FiltersSelected from '../filters/selected';
 
 export default function ProjectsList() {
   const [searchValue, setSearchValue] = useState<string | null>(null);
-  const setTempBbox = useSetAtom(tmpBboxAtom);
   const [filtersSettings] = useSyncFilters();
   const setHoveredProjectList = useSetAtom(hoveredProjectMapAtom);
   const queryParams = useSyncQueryParams({ bbox: true });

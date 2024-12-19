@@ -143,11 +143,18 @@ export function useLayers({
   // Reactivity to Hover Events in the Sidebar:
   // Similarly, When a user hovers over the a project in the sidebar, both point and geometry representations within the layer are programmed to change in color and/or size.
 
+  const sanitizedProjects = filteredProjects.filter((project) => project !== null);
+
+  const filter =
+    sanitizedProjects.length > 0
+      ? ['in', ['get', 'project_code'], ['literal', sanitizedProjects]]
+      : ['!=', ['get', 'project_code'], null];
+
   return [
     {
       id: 'projects_points_shadow',
       type: 'circle',
-      filter: ['in', ['get', 'project_code'], ['literal', filteredProjects]],
+      filter,
       source: 'projects',
       'source-layer': 'areas_centroids_c_v202410',
       paint: {
@@ -164,7 +171,7 @@ export function useLayers({
     {
       id: 'projects_circle',
       type: 'circle',
-      filter: ['in', ['get', 'project_code'], ['literal', filteredProjects]],
+      filter,
       source: 'projects',
       'source-layer': 'areas_centroids_c_v202410',
       paint: {
@@ -173,9 +180,9 @@ export function useLayers({
           'case',
           ['boolean', ['feature-state', 'hover'], false],
           3,
-          ['==', ['get', 'project_code'], hoveredProject?.[0]],
+          ['==', ['get', 'project_code'], hoveredProject?.[0] || null],
           7,
-          ['!=', ['get', 'project_code'], hoveredProject?.[0]],
+          ['!=', ['get', 'project_code'], hoveredProject?.[0] || null],
           3,
           7,
         ],
@@ -196,14 +203,14 @@ export function useLayers({
           1,
           [
             'all',
-            ['to-boolean', hoveredProject?.[0]],
-            ['!=', ['get', 'project_code'], hoveredProject?.[0]],
+            ['to-boolean', hoveredProject?.[0] || null],
+            ['!=', ['get', 'project_code'], hoveredProject?.[0] || null],
           ],
           0.2,
           [
             'all',
-            ['to-boolean', hoveredProject?.[0]],
-            ['==', ['get', 'project_code'], hoveredProject?.[0]],
+            ['to-boolean', hoveredProject?.[0] || null],
+            ['==', ['get', 'project_code'], hoveredProject?.[0] || null],
           ],
           1,
           opacity,
@@ -214,14 +221,14 @@ export function useLayers({
           1,
           [
             'all',
-            ['to-boolean', hoveredProject?.[0]],
-            ['!=', ['get', 'project_code'], hoveredProject?.[0]],
+            ['to-boolean', hoveredProject?.[0] || null],
+            ['!=', ['get', 'project_code'], hoveredProject?.[0] || null],
           ],
           0.2,
           [
             'all',
-            ['to-boolean', hoveredProject?.[0]],
-            ['==', ['get', 'project_code'], hoveredProject?.[0]],
+            ['to-boolean', hoveredProject?.[0] || null],
+            ['==', ['get', 'project_code'], hoveredProject?.[0] || null],
           ],
           1,
           opacity,
@@ -235,7 +242,7 @@ export function useLayers({
     {
       id: 'projects_fill',
       type: 'fill',
-      filter: ['in', ['get', 'project_code'], ['literal', filteredProjects]],
+      filter,
       source: 'projects',
       'source-layer': 'areas_centroids_l_v202410',
       paint: {
@@ -246,14 +253,14 @@ export function useLayers({
           0.7,
           [
             'all',
-            ['to-boolean', hoveredProject?.[0]],
-            ['!=', ['get', 'project_code'], hoveredProject?.[0]],
+            ['to-boolean', hoveredProject?.[0] || null],
+            ['!=', ['get', 'project_code'], hoveredProject?.[0] || null],
           ],
           0.2,
           [
             'all',
-            ['to-boolean', hoveredProject?.[0]],
-            ['==', ['get', 'project_code'], hoveredProject?.[0]],
+            ['to-boolean', hoveredProject?.[0] || null],
+            ['==', ['get', 'project_code'], hoveredProject?.[0] || null],
           ],
           0.7,
           opacity * 0.7,
@@ -267,7 +274,7 @@ export function useLayers({
     {
       id: 'projects_line',
       type: 'line',
-      filter: ['in', ['get', 'project_code'], ['literal', filteredProjects]],
+      filter,
       source: 'projects',
       'source-layer': 'areas_centroids_l_v202410',
       paint: {

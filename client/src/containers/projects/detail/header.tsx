@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useLayoutEffect, useState, useRef } from 'react';
+import { useEffect, useLayoutEffect, useRef } from 'react';
 
 import Image from 'next/image';
 import { notFound, useParams } from 'next/navigation';
@@ -104,17 +104,17 @@ export default function Header({
     a.click();
   };
 
-  if (!params.id) {
-    return notFound();
-  }
-
   useLayoutEffect(() => {
     if (h2Ref.current) {
       const h2Height = h2Ref.current.offsetHeight;
       const calculatedHeight = h2Height + 48 + 64;
       setDynamicHeight(Math.max(calculatedHeight, 208));
     }
-  }, [data?.name]);
+  }, [data?.name, setDynamicHeight]);
+
+  if (!params.id) {
+    return notFound();
+  }
 
   return (
     <div className="relative h-full rounded-3xl bg-neutral-50">

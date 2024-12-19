@@ -103,12 +103,15 @@ export default function MapContainer() {
         select: (response) =>
           response?.data
             ?.map((project) => project.attributes)
-            .filter((project) => {
-              return project?.project_code && locationPopUp.info?.includes(project.project_code);
-            })
+            .filter(
+              (project): project is { project_code: string; name: string } =>
+                !!project?.project_code &&
+                !!project?.name &&
+                !!locationPopUp.info?.includes(project.project_code ?? '')
+            )
             ?.map((p) => ({
-              id: p?.project_code,
-              name: p?.name,
+              id: p.project_code,
+              name: p.name,
             })),
       },
     }
@@ -151,7 +154,6 @@ export default function MapContainer() {
     [map, push, queryParams, setTmpBbox]
   );
 
-  const [ho] = useAtom(hoveredProjectMapAtom);
   const handleMouseMove = useCallback(
     (e: MapLayerMouseEvent) => {
       // Track hovered features as arrays

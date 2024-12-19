@@ -1,5 +1,5 @@
 'use client';
-import { useCallback, useMemo } from 'react';
+import { useMemo } from 'react';
 
 import { serialize } from './query-parsers';
 import {
