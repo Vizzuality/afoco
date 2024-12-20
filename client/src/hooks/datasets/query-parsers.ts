@@ -5,8 +5,6 @@ import type { MapSettings } from '@/types/map';
 
 import type { FilterSettings } from '@/containers/filters/types';
 
-import { DEFAULT_BBOX } from '@/components/map/constants';
-
 export type ProjectsTab = 'statistics' | 'list';
 
 export const filtersParser = parseAsJson<FilterSettings>().withDefault({});

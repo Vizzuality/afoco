@@ -87,6 +87,8 @@ export const COLUMNS = [
   'forest_area_pct',
   'intervention_area_total',
   'jobs',
+  'total_trainings',
+  'trainees',
   'jobs_total',
   'net_flux_co2e_year',
   'production_ntfp_total',

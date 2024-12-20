@@ -16,6 +16,7 @@ import { ProjectListResponseDataItem } from '@/types/generated/strapi.schemas';
 export default function ProjectItem({ data }: { data: ProjectListResponseDataItem }) {
   const hoveredProjectMap = useAtomValue(hoveredProjectMapAtom);
   // const queryParams = useSyncQueryParams({}, { bbox: data.attributes?.bbox });
+
   return (
     data && (
       <div
@@ -24,7 +25,9 @@ export default function ProjectItem({ data }: { data: ProjectListResponseDataIte
         className={cn({
           'flex space-x-4 rounded-lg border border-gray-100 bg-white py-2 pl-2 pr-4 shadow-sm transition-all duration-300 hover:border-yellow-500':
             true,
-          'border-yellow-500': hoveredProjectMap === data?.attributes?.project_code,
+          'border-yellow-500':
+            !!data?.attributes?.project_code &&
+            hoveredProjectMap?.includes(data?.attributes?.project_code),
         })}
         id={data?.attributes?.project_code}
       >
@@ -45,8 +48,9 @@ export default function ProjectItem({ data }: { data: ProjectListResponseDataIte
           >
             {data?.attributes?.name}
           </h3>
-          <div className="text-2xs flex space-x-6 pb-2.5 text-gray-500">
+          <div className="text-2xs flex justify-between pb-2.5 text-gray-500">
             <p>{data?.attributes?.status}</p>
+            <p>{data?.attributes?.project_code}</p>
           </div>
         </div>
       </div>
