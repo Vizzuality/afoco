@@ -47,7 +47,7 @@ export default function Filters({ nrResults = 0 }: { nrResults: number }) {
                   Clear all
                 </button>
                 <DialogClose>
-                  <Button variant="primary" size="base" onClick={close}>
+                  <Button variant="primary" size="base">
                     <p>
                       Show <span className="font-bold"> {nrResults} </span> results
                     </p>
