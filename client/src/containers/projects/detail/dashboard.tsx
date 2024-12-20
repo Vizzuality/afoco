@@ -92,7 +92,7 @@ export default function ProjectDashboard({ id }: { id: string }) {
                 <div className="flex items-center justify-between">
                   <h3 className="text-base text-green-800">
                     Total funding{' '}
-                    {data.project_funding.unit && <span>({data.project_funding.unit})</span>}
+                    {data.project_funding?.unit && <span>({data.project_funding?.unit})</span>}
                   </h3>
 
                   <Tooltip>
