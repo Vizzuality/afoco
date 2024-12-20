@@ -13,7 +13,6 @@ const TreeCoverLossSettings: React.FC<TreeCoverLossSettings> = ({
   description,
   startYear: startYearValue,
   endYear: endYearValue,
-  paramsConfig,
   onChangeSettings,
 }) => {
   // const startYear = useMemo(

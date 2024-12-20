@@ -15,5 +15,8 @@
   },
   "engines": {
     "node": ">= 18.17"
+  },
+  "dependencies": {
+    "country-iso-3-to-2": "^1.1.1"
   }
 }

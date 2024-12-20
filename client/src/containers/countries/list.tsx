@@ -3,16 +3,16 @@
 // import { useState } from 'react';
 
 // import { Search, X } from 'lucide-react';
+import { ExternalLink } from 'lucide-react';
 
 import { useGetCountries } from '@/types/generated/country';
 
-import CountryItem from '@/containers/countries/item';
 import { usefulLinksCountriesList } from '@/containers/countries/detail/constants';
+import CountryItem from '@/containers/countries/item';
 
 // import { Input } from '@/components/ui/input';
 import ContentLoader from '@/components/ui/loader';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { ExternalLink } from 'lucide-react';
 
 export default function CountriesList() {
   // const [searchValue, setSearchValue] = useState<string | null>(null);

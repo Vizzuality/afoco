@@ -18,7 +18,7 @@ export const layersInteractiveIdsAtom = atom<string[]>([]);
 export const popupAtom = atom<MapLayerMouseEvent | null>(null);
 
 // set project code when hovering a project in the map or over sidebar list
-export const hoveredProjectMapAtom = atom<string | null>(null);
+export const hoveredProjectMapAtom = atom<string[] | null>(null);
 
 export const DEFAULT_SETTINGS = {
   expand: true,
